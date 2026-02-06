@@ -17,21 +17,21 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- LOGIN SCREEN -->
+    <!-- TELA DE LOGIN -->
     <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4">
         <div class="glass-card max-w-md w-full p-10 rounded-[2.5rem] shadow-2xl text-center border-white/10">
-            <div class="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <div class="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-amber-500/20 text-3xl">
+                🔐
             </div>
             <h1 class="text-3xl font-bold mb-2 tracking-tight">Portal Acadêmico</h1>
-            <p class="text-slate-400 text-sm mb-8">Digite a senha do Plano de Aula</p>
+            <p class="text-slate-400 text-sm mb-8">Digite a senha para acessar o conteúdo</p>
             <input type="password" id="pass-input" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl p-4 text-white mb-4 focus:ring-2 focus:ring-amber-500 outline-none transition-all text-center tracking-[0.5em]" placeholder="••••••">
             <button onclick="handleLogin()" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 rounded-2xl transition-all shadow-lg shadow-amber-500/20 active:scale-95">Aceder ao Conteúdo</button>
             <p id="login-error" class="text-red-400 text-xs mt-4 hidden">Senha incorreta. Verifique o Contrato Pedagógico.</p>
         </div>
     </div>
 
-    <!-- MAIN APP -->
+    <!-- APP PRINCIPAL -->
     <div id="main-app" class="hidden">
         <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
             <div class="max-w-6xl mx-auto px-6 h-24 flex justify-between items-center">
@@ -48,68 +48,67 @@
         <main class="max-w-6xl mx-auto px-6 py-10">
             <!-- Navegação por Abas -->
             <div class="flex overflow-x-auto gap-3 mb-10 no-scrollbar">
-                <button onclick="showTab('aula')" id="btn-aula" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 tab-active">Aula 06/02</button>
+                <button onclick="showTab('aula')" id="btn-aula" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 tab-active">Início & Aula</button>
                 <button onclick="showTab('unidade')" id="btn-unidade" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10">Unidade I & Slides</button>
                 <button onclick="showTab('tde')" id="btn-tde" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10">TDE & Notas</button>
-                <button onclick="showTab('ia')" id="btn-ia" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10">Lab IA</button>
+                <button onclick="showTab('ia')" id="btn-ia" class="tab-btn px-6 py-3 rounded-2xl whitespace-nowrap transition-all bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10">Manual & Lab IA</button>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
                 <!-- Conteúdo Principal -->
                 <div class="lg:col-span-2 space-y-6" id="tab-container">
                     
-                    <!-- ABA: Aula de Hoje -->
+                    <!-- ABA: Início / Aula do Dia -->
                     <div id="sec-aula" class="animate-fade space-y-6">
                         <div class="glass-card p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-10">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                            </div>
-                            <span class="bg-amber-500/20 text-amber-500 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-500/20">Sessão Inaugural</span>
-                            <h2 class="text-3xl font-bold text-white mt-6 mb-3 tracking-tight">Bem-vindos ao Semestre 2026.1</h2>
-                            <p class="text-slate-400 leading-relaxed mb-8 max-w-xl">Iniciamos hoje a nossa jornada pelo Mercado de Capitais. Esta aula foca no contrato pedagógico e na introdução ao novo Sistema Financeiro Nacional.</p>
+                            <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl">📊</div>
+                            <span class="bg-amber-500/20 text-amber-500 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-500/20">Semestre 2026.1</span>
+                            <h2 class="text-3xl font-bold text-white mt-6 mb-3 tracking-tight">Bem-vindos à Disciplina</h2>
+                            <p class="text-slate-400 leading-relaxed mb-8 max-w-xl">Iniciamos hoje a nossa jornada. Explore o portal para acessar os slides da aula, o plano de ensino e o manual de navegação.</p>
                             
                             <div class="grid gap-4">
-                                <div onclick="showTab('ia')" class="flex items-center gap-5 p-5 bg-white/5 rounded-3xl border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 transition-all cursor-pointer group">
+                                <button onclick="showTab('ia')" class="flex items-center gap-5 p-5 bg-white/5 rounded-3xl border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 transition-all cursor-pointer group text-left">
                                     <div class="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center text-xl shadow-inner group-hover:bg-amber-500/20">🏠</div>
                                     <div>
                                         <h4 class="text-sm font-bold text-white group-hover:text-amber-500">Manual de Navegação</h4>
-                                        <p class="text-[11px] text-slate-500">Clique para aprender a usar os recursos deste portal.</p>
+                                        <p class="text-[11px] text-slate-500">Clique para aprender como aproveitar este portal.</p>
                                     </div>
-                                </div>
-                                <div onclick="openDocument('contrato')" class="flex items-center gap-5 p-5 bg-white/5 rounded-3xl border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 transition-all cursor-pointer group">
+                                </button>
+                                <button onclick="alert('Dica: O contrato pedagógico está detalhado no slide da Aula 01.')" class="flex items-center gap-5 p-5 bg-white/5 rounded-3xl border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 transition-all cursor-pointer group text-left">
                                     <div class="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center text-xl shadow-inner group-hover:bg-amber-500/20">📝</div>
                                     <div>
-                                        <h4 class="text-sm font-bold text-white group-hover:text-amber-500">Contrato Pedagógico</h4>
-                                        <p class="text-[11px] text-slate-500">Visualize as regras e critérios de avaliação.</p>
+                                        <h4 class="text-sm font-bold text-white group-hover:text-amber-500">Informações Importantes</h4>
+                                        <p class="text-[11px] text-slate-500">Critérios de avaliação e datas de provas.</p>
                                     </div>
-                                </div>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Card de Acesso Rápido aos Materiais -->
+                        <!-- Card de Materiais do Dia -->
                         <div class="glass-card p-8 rounded-[2rem] border-amber-500/10">
                             <h3 class="text-white font-bold mb-6 flex items-center gap-2">
                                 <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
-                                Material Disponível Hoje
+                                Material de Aula (06/02)
                             </h3>
                             <div class="grid sm:grid-cols-2 gap-4">
-                                <!-- LINK PARA aula01.html -->
+                                <!-- LINK PARA SLIDE -->
                                 <a href="aula01.html" class="flex items-center gap-4 p-5 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl transition-all shadow-lg shadow-blue-500/20 group">
                                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-bold">1</div>
                                     <div>
                                         <p class="text-xs font-bold leading-none">Slide Aula 01</p>
-                                        <p class="text-[10px] opacity-70 mt-1">O Novo SFN e Fintechs</p>
+                                        <p class="text-[10px] opacity-70 mt-1 italic">Ver apresentação interativa</p>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
                                 </a>
                                 
-                                <button onclick="openDocument('plano')" class="flex items-center gap-4 p-5 bg-white/5 border border-white/10 hover:border-amber-500/50 rounded-2xl transition-all group text-left">
+                                <!-- LINK DO GOOGLE DRIVE (ATUALIZADO) -->
+                                <a href="https://drive.google.com/file/d/1l74XAt73W_BjoiICCGVCBThz-BTIYcz8/view?usp=drive_link" target="_blank" class="flex items-center gap-4 p-5 bg-white/5 border border-white/10 hover:border-amber-500/50 rounded-2xl transition-all group text-left">
                                     <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 font-bold italic text-xs">PDF</div>
                                     <div>
                                         <p class="text-xs font-bold text-white leading-none">Plano de Ensino</p>
-                                        <p class="text-[10px] text-slate-500 mt-1 italic tracking-tighter">Baixar Cronograma</p>
+                                        <p class="text-[10px] text-slate-500 mt-1 italic tracking-tighter">Baixar do Drive</p>
                                     </div>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -119,64 +118,79 @@
                         <div class="glass-card p-10 rounded-[2.5rem]">
                             <h2 class="text-2xl font-bold text-white mb-6">Unidade I: O Novo SFN</h2>
                             <div class="p-6 bg-blue-500/5 border border-blue-500/10 rounded-3xl mb-8">
-                                <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
-                                    Ementa da Unidade
-                                </h3>
-                                <ul class="text-sm text-slate-400 space-y-3">
-                                    <li class="flex gap-2"><span class="text-blue-500">•</span> Desintermediação Financeira e Tecnologia.</li>
-                                    <li class="flex gap-2"><span class="text-blue-500">•</span> Fintechs e a evolução do crédito no Brasil.</li>
-                                    <li class="flex gap-2"><span class="text-blue-500">•</span> O impacto do Open Finance no Mercado de Capitais.</li>
+                                <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-2">📂 Conteúdo Programático</h3>
+                                <ul class="text-sm text-slate-400 space-y-4">
+                                    <li class="flex gap-2">
+                                        <span class="text-blue-500 font-bold">1.</span>
+                                        <span>Desintermediação Financeira e Tecnologia: O fim dos bancos como os conhecemos?</span>
+                                    </li>
+                                    <li class="flex gap-2">
+                                        <span class="text-blue-500 font-bold">2.</span>
+                                        <span>Fintechs e a evolução do crédito no Brasil.</span>
+                                    </li>
+                                    <li class="flex gap-2">
+                                        <span class="text-blue-500 font-bold">3.</span>
+                                        <span>O impacto do Open Finance no Mercado de Capitais.</span>
+                                    </li>
                                 </ul>
                             </div>
-                            <div class="flex flex-col gap-4">
-                                <a href="aula01.html" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center hover:bg-white/10 transition-all">
-                                    <span class="text-sm">Slide 01 - O Novo SFN</span>
-                                    <span class="text-[10px] bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full uppercase font-bold">Acessar</span>
-                                </a>
-                            </div>
+                            <h3 class="text-white font-bold mb-4">Slides da Unidade</h3>
+                            <a href="aula01.html" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center hover:bg-white/10 transition-all">
+                                <span class="text-sm font-medium">Slide 01 - O Novo SFN e Fintechs</span>
+                                <span class="text-[10px] bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full uppercase font-bold tracking-widest">Acessar</span>
+                            </a>
                         </div>
                     </div>
 
                     <!-- ABA: TDE -->
                     <div id="sec-tde" class="hidden animate-fade">
                         <div class="glass-card p-10 rounded-[2.5rem]">
-                            <h2 class="text-2xl font-bold text-white mb-8 text-center">Gestão de Notas</h2>
+                            <h2 class="text-2xl font-bold text-white mb-8 text-center tracking-tight">Gestão Acadêmica</h2>
                             <div class="grid md:grid-cols-2 gap-6">
-                                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/5 text-center relative overflow-hidden group">
-                                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl group-hover:scale-150 transition-all"></div>
-                                    <h3 class="text-blue-400 font-bold text-lg mb-1">NPC 1</h3>
-                                    <p class="text-3xl font-black text-white">5.0</p>
-                                    <p class="text-[10px] text-slate-500 mt-4 uppercase tracking-widest font-bold">Prova + TDEs</p>
+                                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/5 text-center group">
+                                    <h3 class="text-blue-400 font-bold text-lg mb-1 italic">NPC 1</h3>
+                                    <p class="text-4xl font-black text-white">5.0</p>
+                                    <div class="w-12 h-1 bg-blue-500/30 mx-auto my-4 rounded-full"></div>
+                                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Média: Prova + TDEs</p>
                                 </div>
-                                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/5 text-center relative overflow-hidden group">
-                                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl group-hover:scale-150 transition-all"></div>
-                                    <h3 class="text-amber-500 font-bold text-lg mb-1">NPC 2</h3>
-                                    <p class="text-3xl font-black text-white">5.0</p>
-                                    <p class="text-[10px] text-slate-500 mt-4 uppercase tracking-widest font-bold">Prova + Projeto</p>
+                                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/5 text-center group">
+                                    <h3 class="text-amber-500 font-bold text-lg mb-1 italic">NPC 2</h3>
+                                    <p class="text-4xl font-black text-white">5.0</p>
+                                    <div class="w-12 h-1 bg-amber-500/30 mx-auto my-4 rounded-full"></div>
+                                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Média: Prova + Projetos</p>
                                 </div>
+                            </div>
+                            <div class="mt-8 p-6 bg-amber-500/5 rounded-3xl border border-amber-500/10 text-center">
+                                <p class="text-xs text-amber-200 opacity-70 italic">"As notas serão lançadas conforme o cronograma oficial da faculdade."</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ABA: IA (Funciona como Manual de Navegação também) -->
+                    <!-- ABA: MANUAL E IA -->
                     <div id="sec-ia" class="hidden animate-fade">
                         <div class="glass-card p-10 rounded-[2.5rem] border-blue-500/20">
                             <div class="flex items-center gap-4 mb-8">
-                                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🤖</div>
-                                <h2 class="text-2xl font-bold text-white tracking-tight">Recursos do Portal</h2>
+                                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">💡</div>
+                                <h2 class="text-2xl font-bold text-white tracking-tight">Central de Recursos</h2>
                             </div>
                             
                             <div class="space-y-6">
+                                <!-- MANUAL -->
                                 <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                                    <h4 class="text-amber-500 font-bold text-sm mb-2 uppercase">Como Navegar?</h4>
-                                    <p class="text-xs text-slate-400 leading-relaxed">Este portal é dividido em abas. Na aba <strong>Aula</strong>, você encontra o material do dia. Em <strong>Unidade I</strong>, os slides acumulados. Em <strong>TDE</strong>, suas metas de nota.</p>
+                                    <h4 class="text-amber-500 font-bold text-sm mb-4 uppercase tracking-widest">📖 Manual de Navegação</h4>
+                                    <div class="space-y-4 text-xs text-slate-400 leading-relaxed">
+                                        <p><strong class="text-white">Acessando Materiais:</strong> Todos os slides ficam na aba "Unidade I". A aula mais recente sempre aparece na aba "Início".</p>
+                                        <p><strong class="text-white">Downloads:</strong> O Plano de Ensino está vinculado ao Google Drive. Clique e salve em seu dispositivo.</p>
+                                        <p><strong class="text-white">Interatividade:</strong> Os slides são responsivos. Você pode navegar neles pelo celular ou computador sem perder qualidade.</p>
+                                    </div>
                                 </div>
 
+                                <!-- IA -->
                                 <div class="p-6 bg-blue-500/10 rounded-3xl border border-blue-500/20 text-center">
-                                    <h4 class="text-white font-bold mb-4">Análise com IA Generativa</h4>
-                                    <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-bold transition-all active:scale-95">Gerar Insights da Disciplina</button>
-                                    <div id="ia-result" class="hidden mt-6 p-5 bg-black/40 rounded-2xl text-xs italic text-blue-100 text-left border border-white/5"></div>
+                                    <h4 class="text-white font-bold mb-4">Laboratório de IA</h4>
+                                    <p class="text-[11px] text-slate-400 mb-6">Clique abaixo para gerar uma análise do impacto tecnológico no Mercado de Capitais.</p>
+                                    <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-bold transition-all active:scale-95 shadow-xl shadow-blue-600/20">Analisar Contexto</button>
+                                    <div id="ia-result" class="hidden mt-6 p-5 bg-black/40 rounded-2xl text-xs italic text-blue-100 text-left border border-white/5 leading-relaxed"></div>
                                 </div>
                             </div>
                         </div>
@@ -184,34 +198,24 @@
 
                 </div>
 
-                <!-- Sidebar -->
+                <!-- Barra Lateral -->
                 <div class="space-y-6">
-                    <!-- Card de Alerta -->
-                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-8 rounded-[2rem] text-black shadow-xl shadow-amber-500/10 relative overflow-hidden">
-                        <div class="absolute -bottom-6 -right-6 opacity-20 rotate-12">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-                        </div>
-                        <h3 class="text-xl font-black mb-3 tracking-tighter uppercase italic">Lembrete</h3>
-                        <p class="text-sm font-semibold opacity-90 leading-snug">Entrega do TDE 1.1 até 20/02 via portal acadêmico oficial.</p>
+                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-8 rounded-[2rem] text-black shadow-xl relative overflow-hidden">
+                        <div class="absolute -bottom-6 -right-6 opacity-10 text-8xl">📅</div>
+                        <h3 class="text-xl font-black mb-3 tracking-tighter uppercase italic">Agenda</h3>
+                        <p class="text-sm font-semibold opacity-90 leading-snug">Próxima aula: Quinta-feira, 13/02. Tema: O Ecossistema Bancário vs Fintechs.</p>
                     </div>
 
-                    <!-- Card de Referências -->
                     <div class="glass-card p-8 rounded-[2rem] border-white/5">
-                        <h3 class="text-white font-bold mb-6 text-xs uppercase tracking-[0.2em] opacity-50">Bibliografia</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <span class="text-amber-500 mt-1">📚</span>
-                                <div>
-                                    <p class="text-[11px] font-bold text-white">Assaf Neto</p>
-                                    <p class="text-[10px] text-slate-500">Mercado Financeiro, 15ª Ed.</p>
-                                </div>
+                        <h3 class="text-white font-bold mb-6 text-xs uppercase tracking-[0.2em] opacity-50 italic">Dicas de Estudo</h3>
+                        <ul class="space-y-4 text-[11px] text-slate-400">
+                            <li class="flex gap-3">
+                                <span class="text-amber-500">✔</span>
+                                <span>Acompanhe o Boletim Focus semanalmente no site do BACEN.</span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="text-blue-500 mt-1">📈</span>
-                                <div>
-                                    <p class="text-[11px] font-bold text-white">Boletim Focus</p>
-                                    <p class="text-[10px] text-slate-500">Leitura Semanal Obrigatória</p>
-                                </div>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500">✔</span>
+                                <span>Revisite os slides da Unidade I para fixar conceitos de desintermediação.</span>
                             </li>
                         </ul>
                     </div>
@@ -223,33 +227,12 @@
     <script>
         const SENHA = "#2026.1";
 
-        // Gerenciamento de Documentos Simulado
-        function openDocument(type) {
-            const docs = {
-                'plano': 'Plano_de_Ensino_Renata_Novaes_2026.pdf',
-                'contrato': 'Contrato_Pedagogico_2026.pdf'
-            };
-            
-            // Simulação de download: Na prática, você subiria esses PDFs no GitHub e usaria o link direto.
-            const status = document.createElement('div');
-            status.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-amber-500 text-black px-6 py-3 rounded-full font-bold text-xs animate-bounce shadow-2xl z-[100]";
-            status.innerText = `Preparando download: ${docs[type]}...`;
-            document.body.appendChild(status);
-            
-            setTimeout(() => {
-                status.innerText = "Erro: Arquivo físico não encontrado no repositório. Verifique o SAG.";
-                status.classList.replace('bg-amber-500', 'bg-red-500');
-                status.classList.add('text-white');
-                setTimeout(() => status.remove(), 4000);
-            }, 2000);
-        }
-
         function handleLogin() {
             const val = document.getElementById('pass-input').value;
             if(val === SENHA) {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
-                localStorage.setItem('auth_mercadocap_2026', 'true');
+                localStorage.setItem('auth_mercado_cap_v1', 'true');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
                 document.getElementById('pass-input').value = '';
@@ -261,29 +244,30 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
             document.getElementById('sec-' + id).classList.remove('hidden');
             document.getElementById('btn-' + id).classList.add('tab-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function runIA() {
             const btn = document.getElementById('ia-btn');
             const res = document.getElementById('ia-result');
-            btn.innerText = "Sincronizando com o Mercado...";
+            btn.innerText = "Processando Dados...";
             btn.disabled = true;
             setTimeout(() => {
-                res.innerHTML = "<strong>Insight do Dia:</strong> A desintermediação financeira não é apenas tecnologia, é eficiência. O custo do capital para empresas cai quando o mercado de capitais amadurece. Foco em Debêntures e FIDCs este semestre.";
+                res.innerHTML = "<strong>Insight do Lab:</strong> O Mercado de Capitais brasileiro vive uma fase de democratização. O avanço das Fintechs não apenas reduz o spread bancário, mas força as instituições tradicionais a serem mais competitivas e transparentes. Este é o coração da Unidade I.";
                 res.classList.remove('hidden');
-                btn.innerText = "Gerar Novo Insight";
+                btn.innerText = "Gerar Nova Análise";
                 btn.disabled = false;
             }, 1800);
         }
 
         function logout() {
-            localStorage.removeItem('auth_mercadocap_2026');
+            localStorage.removeItem('auth_mercado_cap_v1');
             location.reload();
         }
 
-        // Auto-login ao carregar a página
         window.onload = () => {
-            if(localStorage.getItem('auth_mercadocap_2026') === 'true') {
+            // Auto-login se já autenticado
+            if(localStorage.getItem('auth_mercado_cap_v1') === 'true') {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
             }
