@@ -8,120 +8,69 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .slide-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
-        .accent-line { width: 4rem; height: 0.25rem; background: #f59e0b; border-radius: 1rem; }
-        .gradient-bg { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .slide-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .accent-line { width: 3rem; height: 0.3rem; background: #f59e0b; border-radius: 1rem; }
     </style>
 </head>
 <body class="p-6 md:p-12">
     <div class="max-w-4xl mx-auto">
         <header class="mb-12">
-            <!-- Link corrigido para a raiz do repositório -->
-            <a href="index.html" class="text-amber-600 font-bold text-sm flex items-center gap-2 mb-4 hover:underline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                Voltar ao Portal
+            <a href="index.html" class="text-amber-600 font-bold text-sm flex items-center gap-2 mb-6 hover:translate-x-[-4px] transition-transform">
+                ← Voltar ao Portal Principal
             </a>
             <div class="accent-line mb-4"></div>
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Aula 01: O Novo SFN</h1>
-            <p class="text-slate-500 mt-2 text-lg">Unidade I - Desintermediação e Fintechs (06/02/2026)</p>
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Slide Aula 01</h1>
+            <p class="text-slate-500 mt-2 text-lg">O Novo Sistema Financeiro Nacional e Fintechs</p>
         </header>
 
-        <section class="space-y-8">
-            <!-- Introdução -->
-            <div class="slide-card p-8">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-3">
-                    <span class="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold">01</span>
-                    Apresentação da Disciplina
+        <section class="space-y-10">
+            <!-- TÓPICO 1 -->
+            <div class="slide-card p-10">
+                <h2 class="text-xl font-black mb-6 flex items-center gap-3 text-slate-800">
+                    <span class="text-amber-500">01.</span> Introdução ao Semestre
                 </h2>
-                <div class="prose prose-slate max-w-none text-slate-600">
-                    <p>Bem-vindos à disciplina de <strong>Mercado de Capitais e Derivativos</strong>. Nesta jornada, exploraremos como o dinheiro flui no sistema moderno, saindo do modelo tradicional bancário para a inovação digital.</p>
-                    <ul class="mt-4 space-y-3">
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 font-bold">•</span>
-                            <span><strong>Foco:</strong> Prática de mercado, análise de ativos e gestão de risco.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 font-bold">•</span>
-                            <span><strong>Metodologia:</strong> Aulas ativas com uso de Inteligência Artificial Generativa.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Conteúdo Técnico -->
-            <div class="slide-card p-8 border-l-4 border-l-blue-500">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-3">
-                    <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">02</span>
-                    O Conceito de Desintermediação
-                </h2>
-                <p class="text-slate-600 mb-6 leading-relaxed">A desintermediação financeira é o fenómeno onde a tecnologia permite que poupadores e tomadores de recursos se encontrem sem a necessidade de um banco comercial tradicional como "pedágio".</p>
-                
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                        <h4 class="font-bold text-blue-600 mb-2 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
-                            Fintechs
-                        </h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Instituições que reduzem o "spread" bancário através da eficiência digital e algoritmos de crédito.</p>
-                    </div>
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                        <h4 class="font-bold text-blue-600 mb-2 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 19h6"/><path d="M19 16v6"/></svg>
-                            Open Finance
-                        </h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Ecossistema de partilha de dados que coloca o cliente no controlo da sua vida financeira.</p>
+                <div class="space-y-4 text-slate-600 leading-relaxed">
+                    <p>A disciplina de <strong>Mercado de Capitais e Derivativos</strong> visa capacitar o aluno a entender a dinâmica de captação de recursos e o gerenciamento de riscos financeiros no cenário contemporâneo.</p>
+                    <div class="p-5 bg-amber-50 rounded-2xl border border-amber-100 italic text-sm">
+                        "O mercado não é apenas sobre números, é sobre a confiança e a tecnologia que movem o capital."
                     </div>
                 </div>
             </div>
 
-            <!-- Gráfico/Imagem Conceitual (Placeholder) -->
-            <div class="slide-card p-8 bg-slate-50 border-dashed border-2 border-slate-200 text-center">
-                <p class="text-slate-400 text-sm font-medium mb-2 uppercase tracking-widest">Esquema Visual do SFN</p>
-                <div class="py-12 flex flex-col items-center">
-                    <div class="flex gap-8 items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-2xl">💰</div>
-                        <div class="h-px w-20 bg-slate-300 relative">
-                            <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-slate-300"></div>
-                        </div>
-                        <div class="w-16 h-16 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center text-2xl font-bold">IA</div>
-                        <div class="h-px w-20 bg-slate-300 relative">
-                            <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-slate-300"></div>
-                        </div>
-                        <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-2xl">📈</div>
+            <!-- TÓPICO 2 -->
+            <div class="slide-card p-10 border-l-8 border-l-blue-500">
+                <h2 class="text-xl font-black mb-6 flex items-center gap-3 text-slate-800">
+                    <span class="text-blue-500">02.</span> Desintermediação Financeira
+                </h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    A tecnologia permitiu o surgimento da <strong>Desintermediação</strong>: o processo pelo qual investidores e tomadores se conectam diretamente, reduzindo a dependência dos grandes bancos comerciais.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 mb-2">Impacto das Fintechs</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Agilidade na concessão de crédito, redução de taxas e melhor experiência do usuário final.</p>
                     </div>
-                    <p class="text-xs text-slate-500 italic max-w-xs">A tecnologia (IA/Fintechs) encurtando a distância entre o capital e o investimento.</p>
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 mb-2">SFN Moderno</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Regulação mais flexível e aberta (Sandbox Regulatório e Open Finance).</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Atividade -->
-            <div class="slide-card p-8 gradient-bg text-white">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-3 text-amber-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                    Desafio Onboarding
-                </h2>
-                <p class="text-slate-300 text-sm mb-6">Aceda ao Laboratório de IA no portal e gere o seu primeiro resumo de mercado. Compare com os dados do Boletim Focus de hoje.</p>
-                <div class="p-5 bg-white/5 border border-white/10 rounded-2xl">
-                    <p class="text-[10px] font-mono text-amber-200 uppercase tracking-widest mb-4">Checklist de Participação:</p>
-                    <div class="space-y-3">
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <div class="w-5 h-5 rounded border border-white/20 flex items-center justify-center group-hover:border-amber-500 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><path d="M20 6 9 17l-5-5"/></svg>
-                            </div>
-                            <span class="text-xs text-slate-300">Compreensão do Contrato Pedagógico</span>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <div class="w-5 h-5 rounded border border-white/20 flex items-center justify-center group-hover:border-amber-500 transition"></div>
-                            <span class="text-xs text-slate-300">Primeira interação com a IA do Portal</span>
-                        </label>
-                    </div>
+            <!-- TÓPICO 3 -->
+            <div class="slide-card p-10 bg-slate-900 text-white border-none shadow-2xl">
+                <h2 class="text-xl font-bold mb-6 text-amber-400">03. Atividade de Hoje</h2>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                    Acesse o Portal e use o <strong>Lab de IA</strong> para gerar um resumo crítico sobre como a tecnologia impactou o seu banco nos últimos 2 anos.
+                </p>
+                <div class="pt-6 border-t border-white/10 flex justify-between items-center">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500 italic">Aula 01 • Ma. Renata Novaes</span>
                 </div>
             </div>
         </section>
 
-        <footer class="mt-12 pt-8 border-t border-slate-200 text-center">
-            <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">
-                Mercado de Capitais e Derivativos © 2026.1
-            </p>
+        <footer class="mt-16 pb-10 text-center text-slate-400 text-[10px] uppercase tracking-[0.4em]">
+            © 2026.1 Mercado de Capitais
         </footer>
     </div>
 </body>
