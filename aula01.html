@@ -3,75 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 01 - Mercado de Capitais</title>
+    <title>Aula 01 - O Novo SFN: Agenda BC# e Tokenização</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .slide-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        .accent-line { width: 3rem; height: 0.3rem; background: #f59e0b; border-radius: 1rem; }
+        :root {
+            --primary: #0f172a;
+            --secondary: #f8fafc;
+            --accent: #fbbf24;
+            --blue-accent: #3b82f6;
+            --green-accent: #10b981;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--secondary);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 50px 60px;
+            box-sizing: border-box;
+        }
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 30px;
+            border-left: 10px solid var(--accent);
+            padding-left: 25px;
+            line-height: 1.1;
+        }
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            gap: 40px;
+            width: 100%;
+        }
+        p, li { font-size: 19px; line-height: 1.5; color: #475569; }
+        .highlight-box {
+            background-color: #f1f5f9;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--blue-accent);
+            color: white;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        .tech-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .tech-card:hover { border-color: var(--blue-accent); transform: translateY(-5px); }
+        .tech-card h4 { color: var(--primary); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; border-radius: 10px; overflow: hidden; }
+        th { background: var(--primary); color: white; padding: 12px; text-align: left; font-size: 14px; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .footer-note {
+            margin-top: auto;
+            font-size: 14px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-note a {
+            color: var(--blue-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
-<body class="p-6 md:p-12">
-    <div class="max-w-4xl mx-auto">
-        <header class="mb-12">
-            <a href="index.html" class="text-amber-600 font-bold text-sm flex items-center gap-2 mb-6 hover:translate-x-[-4px] transition-transform">
-                ← Voltar ao Portal Principal
-            </a>
-            <div class="accent-line mb-4"></div>
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Slide Aula 01</h1>
-            <p class="text-slate-500 mt-2 text-lg">O Novo Sistema Financeiro Nacional e Fintechs</p>
-        </header>
+<body>
 
-        <section class="space-y-10">
-            <!-- TÓPICO 1 -->
-            <div class="slide-card p-10">
-                <h2 class="text-xl font-black mb-6 flex items-center gap-3 text-slate-800">
-                    <span class="text-amber-500">01.</span> Introdução ao Semestre
-                </h2>
-                <div class="space-y-4 text-slate-600 leading-relaxed">
-                    <p>A disciplina de <strong>Mercado de Capitais e Derivativos</strong> visa capacitar o aluno a entender a dinâmica de captação de recursos e o gerenciamento de riscos financeiros no cenário contemporâneo.</p>
-                    <div class="p-5 bg-amber-50 rounded-2xl border border-amber-100 italic text-sm">
-                        "O mercado não é apenas sobre números, é sobre a confiança e a tecnologia que movem o capital."
-                    </div>
+    <a href="index.html" class="back-link">← Voltar ao Portal</a>
+
+    <!-- SLIDE 1: AGENDA BC# -->
+    <div class="slide-container">
+        <div class="badge">Agenda BC# - Inovação</div>
+        <h2 class="slide-title">A Nova Arquitetura do <br>Sistema Financeiro Nacional</h2>
+        <div class="content-area">
+            <div style="flex: 1;">
+                <p class="mb-6">O novo SFN não é apenas digital; ele é <strong>programável</strong>. A Agenda BC# foca em quatro dimensões: Inclusão, Competitividade, Transparência e Educação.</p>
+                <div class="highlight-box">
+                    <h4 class="font-bold mb-3 text-blue-600 uppercase text-sm tracking-widest">Principais Motores:</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3">🚀 <strong>Pix:</strong> Instantaneidade e segurança (MED).</li>
+                        <li class="flex gap-3">💎 <strong>Drex:</strong> A CBDC brasileira e a Tokenização.</li>
+                        <li class="flex gap-3">🔓 <strong>Open Finance:</strong> Portabilidade de dados.</li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- TÓPICO 2 -->
-            <div class="slide-card p-10 border-l-8 border-l-blue-500">
-                <h2 class="text-xl font-black mb-6 flex items-center gap-3 text-slate-800">
-                    <span class="text-blue-500">02.</span> Desintermediação Financeira
-                </h2>
-                <p class="text-slate-600 mb-6 leading-relaxed">
-                    A tecnologia permitiu o surgimento da <strong>Desintermediação</strong>: o processo pelo qual investidores e tomadores se conectam diretamente, reduzindo a dependência dos grandes bancos comerciais.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                        <h4 class="font-bold text-slate-900 mb-2">Impacto das Fintechs</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Agilidade na concessão de crédito, redução de taxas e melhor experiência do usuário final.</p>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                        <h4 class="font-bold text-slate-900 mb-2">SFN Moderno</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Regulação mais flexível e aberta (Sandbox Regulatório e Open Finance).</p>
-                    </div>
+            <div style="flex: 1;" class="flex items-center justify-center">
+                <div class="p-8 bg-slate-900 rounded-[2rem] text-white text-center shadow-2xl">
+                    <p class="text-amber-400 font-bold mb-2">Visão do Banco Central:</p>
+                    <h3 class="text-3xl font-black italic">"Integração entre criptoativos e finanças tradicionais."</h3>
                 </div>
             </div>
-
-            <!-- TÓPICO 3 -->
-            <div class="slide-card p-10 bg-slate-900 text-white border-none shadow-2xl">
-                <h2 class="text-xl font-bold mb-6 text-amber-400">03. Atividade de Hoje</h2>
-                <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                    Acesse o Portal e use o <strong>Lab de IA</strong> para gerar um resumo crítico sobre como a tecnologia impactou o seu banco nos últimos 2 anos.
-                </p>
-                <div class="pt-6 border-t border-white/10 flex justify-between items-center">
-                    <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500 italic">Aula 01 • Ma. Renata Novaes</span>
-                </div>
-            </div>
-        </section>
-
-        <footer class="mt-16 pb-10 text-center text-slate-400 text-[10px] uppercase tracking-[0.4em]">
-            © 2026.1 Mercado de Capitais
-        </footer>
+        </div>
+        <div class="footer-note">
+            <span>ℹ️ Para saber mais leia:</span>
+            <a href="https://www.bcb.gov.br/estabilidadefinanceira/fintechs" target="_blank">Portal de Fintechs do Banco Central do Brasil</a>
+        </div>
     </div>
+
+    <!-- SLIDE 2: PIX E SEGURANÇA -->
+    <div class="slide-container">
+        <h2 class="slide-title">Pix: Além da Transferência</h2>
+        <div class="content-area">
+            <div style="flex: 1;">
+                <p>O Pix revolucionou a liquidez imediata. Porém, para o Mercado de Capitais, a evolução está na <strong>segurança jurídica</strong> e funcional.</p>
+                <div class="mt-8 space-y-4">
+                    <div class="tech-card border-l-4 border-l-green-500">
+                        <h4>Mecanismo Especial de Devolução (MED)</h4>
+                        <p class="text-sm">Conjunto de regras e procedimentos operacionais para viabilizar a devolução de transações em casos de fraude ou falha operacional.</p>
+                    </div>
+                    <div class="tech-card border-l-4 border-l-blue-500">
+                        <h4>Disponibilidade 24/7</h4>
+                        <p class="text-sm">Redução do custo de oportunidade do capital parado e aumento da velocidade de giro da economia.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <!-- Placeholder para Imagem -->
+            </div>
+        </div>
+        <div class="footer-note">
+            <span>ℹ️ Para saber mais leia:</span>
+            <a href="https://www.bcb.gov.br/estabilidadefinanceira/pix" target="_blank">Tudo sobre o Pix - BCB</a>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: DREX E TOKENIZAÇÃO -->
+    <div class="slide-container">
+        <div class="badge">Futuro do Capital</div>
+        <h2 class="slide-title">Drex: Real Digital e Tokenização</h2>
+        <div class="content-area">
+            <div style="flex: 1;">
+                <p>O <strong>Drex</strong> (Central Bank Digital Currency - CBDC) é o Real em formato de token, operando em uma rede <em>Blockchain</em>.</p>
+                <div class="highlight-box mt-6">
+                    <h4 class="font-bold text-slate-800 mb-3 uppercase text-xs">Pilar: Smart Contracts</h4>
+                    <p class="text-sm">Contratos inteligentes que executam transações automaticamente quando condições são atingidas.</p>
+                </div>
+                <div class="mt-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
+                    <p class="text-xs font-bold text-amber-800">DVP (Delivery vs Payment):</p>
+                    <p class="text-[12px] text-amber-700">Garante que a entrega de um ativo (como um título público) e o pagamento ocorram simultaneamente, eliminando riscos de contraparte.</p>
+                </div>
+            </div>
+            <div style="flex: 1.2;">
+                 <h4 class="font-bold text-slate-900 mb-4 text-sm">Aplicações no Mercado de Capitais:</h4>
+                 <div class="grid-cards">
+                    <div class="tech-card">
+                        <span class="text-2xl">🧱</span>
+                        <h4 class="text-sm mt-2">Tokenização de Ativos</h4>
+                        <p class="text-[11px]">Fracionamento de títulos e ativos reais, aumentando a liquidez.</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="text-2xl">🛡️</span>
+                        <h4 class="text-sm mt-2">Segurança</h4>
+                        <p class="text-[11px]">Imutabilidade dos registros e redução de fraudes operacionais.</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="text-2xl">📉</span>
+                        <h4 class="text-sm mt-2">Menores Custos</h4>
+                        <p class="text-[11px]">Redução de intermediários nos processos de custódia e liquidação.</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="text-2xl">🌍</span>
+                        <h4 class="text-sm mt-2">Inclusão</h4>
+                        <p class="text-[11px]">Acesso de investidores menores a ativos antes restritos.</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="footer-note">
+            <span>ℹ️ Para saber mais leia:</span>
+            <a href="https://www.bcb.gov.br/estabilidadefinanceira/drex" target="_blank">Drex: O Real Digital - BCB</a>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: OPEN FINANCE -->
+    <div class="slide-container">
+        <h2 class="slide-title">Open Finance: Dados como Ativo</h2>
+        <div class="content-area">
+            <div style="flex: 1;">
+                <p>O <strong>Open Finance</strong> permite que o cliente seja o dono do seu histórico financeiro, podendo levá-lo para qualquer instituição.</p>
+                <ul class="mt-6 space-y-4">
+                    <li class="flex gap-3">✅ <strong>Concorrência:</strong> Fintechs podem oferecer taxas menores ao conhecerem o perfil real do cliente.</li>
+                    <li class="flex gap-3">✅ <strong>Personalização:</strong> Produtos de investimento sob medida.</li>
+                    <li class="flex gap-3">✅ <strong>Eficiência:</strong> Análise de crédito instantânea via APIs.</li>
+                </ul>
+            </div>
+            <div style="flex: 1;">
+                <div class="highlight-box bg-blue-50 border-blue-100">
+                    <h4 class="font-bold text-blue-900 mb-4 text-center">Impacto no Mercado de Capitais</h4>
+                    <p class="text-sm text-blue-800">Com o Open Finance, as corretoras e gestoras podem acessar os saldos bancários dos clientes (com permissão) para sugerir alocações automáticas, integrando o ecossistema bancário ao de investimentos de forma transparente.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-note">
+            <span>ℹ️ Para saber mais leia:</span>
+            <a href="https://www.bcb.gov.br/estabilidadefinanceira/openfinance" target="_blank">Open Finance Brasil - BCB</a>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: RESUMO TÉCNICO -->
+    <div class="slide-container">
+        <h2 class="slide-title">Resumo: SFN Tradicional vs. Novo SFN</h2>
+        <div class="content-area" style="flex-direction: column;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Modelo Tradicional</th>
+                        <th>Novo SFN (Agenda BC#)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Liquidação</strong></td>
+                        <td>Dias úteis (T+1, T+2)</td>
+                        <td>Instantânea (Pix / Drex)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermediação</strong></td>
+                        <td>Bancos Comerciais</td>
+                        <td>Fintechs, P2P e Tokenização</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contratos</strong></td>
+                        <td>Físicos / Digitais Simples</td>
+                        <td>Smart Contracts (Automáticos)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Propriedade de Dados</strong></td>
+                        <td>Retida pelo Banco</td>
+                        <td>Do Cliente (Open Finance)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moeda</strong></td>
+                        <td>Fiduciária Eletrônica</td>
+                        <td>Real Digital (CBDC / Tokenizada)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mt-10 p-6 bg-slate-900 rounded-2xl text-amber-500 font-bold text-center">
+                Desafio Acadêmico: Como o Drex pode reduzir o spread bancário nas operações de Mercado de Capitais?
+            </div>
+        </div>
+        <div class="footer-note">
+            <span>ℹ️ Para saber mais leia:</span>
+            <a href="https://www.bcb.gov.br/estabilidadefinanceira/agendabc" target="_blank">Agenda BC# - Sustentabilidade e Inovação</a>
+        </div>
+    </div>
+
 </body>
 </html>
