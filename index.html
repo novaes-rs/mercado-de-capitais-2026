@@ -3,253 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercado de Capitais e Derivativos - Ma. Renata Novaes</title>
+    <title>Mercado de Capitais - Ma. Renata Novaes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lucide-react@0.344.0/dist/lucide-react.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #020617;
-            color: #f8fafc;
-            scroll-behavior: smooth;
-        }
-
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .gold-gradient {
-            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
-        }
-
-        .input-field {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .chart-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)),
-                        url('data:image/svg+xml,<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M0 800 L 200 700 L 400 750 L 600 500 L 800 600 L 1000 200" fill="none" stroke="white" stroke-width="2"/></svg>');
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .tab-active { background-color: #f59e0b; color: #000; font-weight: 700; border-color: #f59e0b; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .animate-fade { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
-    <div class="chart-bg"></div>
+<body class="min-h-screen">
 
-    <!-- Login/Cadastro Screen -->
+    <!-- LOGIN SCREEN -->
     <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="glass-card max-w-md w-full p-8 rounded-2xl shadow-2xl">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold gold-gradient mb-2">Mercado de Capitais</h1>
-                <p class="text-slate-400 text-sm">Acesso ao Ambiente Digital</p>
+        <div class="glass-card max-w-md w-full p-8 rounded-3xl shadow-2xl text-center">
+            <div class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
-
-            <div id="password-step">
-                <label class="block text-sm font-medium mb-2">Senha de Acesso (Plano de Aula)</label>
-                <input type="password" id="initial-pass" class="input-field w-full p-3 rounded-lg mb-4" placeholder="Ex: #2026.1">
-                <button onclick="checkInitialPassword()" class="btn-primary w-full p-3 rounded-lg font-semibold">Validar Acesso</button>
-                <p id="error-msg" class="text-red-500 text-xs mt-3 hidden text-center">Senha incorreta. Verifique com o docente.</p>
-            </div>
-
-            <div id="register-step" class="hidden">
-                <h2 class="text-xl font-semibold mb-4 text-blue-400">Cadastro do Aluno</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium mb-1">Nome Completo</label>
-                        <input type="text" required class="input-field w-full p-3 rounded-lg" id="reg-name">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium mb-1">Número de Matrícula</label>
-                        <input type="text" required class="input-field w-full p-3 rounded-lg" id="reg-mat">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium mb-1">E-mail Acadêmico</label>
-                        <input type="email" required class="input-field w-full p-3 rounded-lg" id="reg-email">
-                    </div>
-                    <button type="submit" class="btn-primary w-full p-3 rounded-lg font-semibold">Entrar no Ambiente</button>
-                </form>
-            </div>
+            <h1 class="text-3xl font-bold mb-2">Mercado de Capitais</h1>
+            <p class="text-slate-400 text-sm mb-8">Acesse com a senha do Plano de Aula</p>
+            <input type="password" id="pass-input" class="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-white mb-4 focus:ring-2 focus:ring-amber-500 outline-none" placeholder="Digite a senha...">
+            <button onclick="handleLogin()" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 rounded-xl transition shadow-lg shadow-amber-500/20">Aceder ao Portal</button>
+            <p id="login-error" class="text-red-400 text-xs mt-4 hidden">Senha incorreta. Verifique o PDF.</p>
         </div>
     </div>
 
-    <!-- Main Dashboard -->
-    <div id="main-dashboard" class="hidden min-h-screen">
-        <header class="glass-card border-b border-white/10 p-6 sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- MAIN APP -->
+    <div id="main-app" class="hidden">
+        <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
+            <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-bold gold-gradient">Ma. Renata Novaes</h1>
-                    <p class="text-slate-400 text-xs uppercase tracking-widest">Doutoranda em Economia (UFPA) | Pós-graduanda em Finanças (UFF)</p>
+                    <h1 class="text-lg font-bold text-white leading-none">Ma. Renata Novaes</h1>
+                    <p class="text-[10px] text-amber-500 font-bold tracking-[0.2em] uppercase mt-1">Mercado de Capitais e Derivativos</p>
                 </div>
-                <div class="text-right flex items-center gap-4">
-                    <div class="text-sm">
-                        <span class="text-slate-400 block">7º Semestre - Administração</span>
-                        <span class="text-blue-400 font-medium">Mercado de Capitais e Derivativos</span>
-                    </div>
-                    <button onclick="logout()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1 rounded text-xs">Sair</button>
-                </div>
+                <button onclick="logout()" class="p-2 hover:bg-white/5 rounded-full text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                </button>
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto p-6">
-            <!-- Boas-vindas -->
-            <div id="welcome-msg" class="mb-8 p-6 rounded-xl bg-blue-900/20 border border-blue-500/30">
-                <h2 class="text-xl font-semibold mb-2">Bem-vindo(a), <span id="user-display-name">Gestor</span>!</h2>
-                <p class="text-slate-300 text-sm mb-4">Sua jornada no mercado financeiro começa aqui. Explore os recursos abaixo.</p>
-                <button onclick="showSection('onboarding')" class="text-xs font-bold text-blue-400 hover:underline">VER MANUAL DE USO DO SITE →</button>
+        <main class="max-w-6xl mx-auto px-6 py-8">
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto gap-2 mb-8 no-scrollbar pb-2">
+                <button onclick="showTab('aula')" id="btn-aula" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl whitespace-nowrap transition bg-slate-900 border border-white/5 tab-active">Aula 06/02</button>
+                <button onclick="showTab('unidade')" id="btn-unidade" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl whitespace-nowrap transition bg-slate-900 border border-white/5">Unidade I</button>
+                <button onclick="showTab('tde')" id="btn-tde" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl whitespace-nowrap transition bg-slate-900 border border-white/5">TDE & Notas</button>
+                <button onclick="showTab('ia')" id="btn-ia" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl whitespace-nowrap transition bg-slate-900 border border-white/5">Lab IA</button>
             </div>
 
-            <!-- Navegação Principal -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <button onclick="showSection('plano')" class="glass-card p-4 rounded-xl hover:bg-white/5 text-center transition">
-                    <span class="block text-2xl mb-2">📄</span>
-                    <span class="font-bold text-sm">Plano de Ensino</span>
-                </button>
-                <button onclick="showSection('materiais')" class="glass-card p-4 rounded-xl hover:bg-white/5 text-center transition">
-                    <span class="block text-2xl mb-2">📚</span>
-                    <span class="font-bold text-sm">Materiais de Aula</span>
-                </button>
-                <button onclick="showSection('simuladores')" class="glass-card p-4 rounded-xl hover:bg-white/5 text-center transition">
-                    <span class="block text-2xl mb-2">📊</span>
-                    <span class="font-bold text-sm">Simuladores</span>
-                </button>
-                <button onclick="showSection('tde')" class="glass-card p-4 rounded-xl hover:bg-white/5 text-center transition">
-                    <span class="block text-2xl mb-2">📝</span>
-                    <span class="font-bold text-sm">Trabalhos (TDE)</span>
-                </button>
-            </div>
-
-            <!-- Content Area -->
-            <div id="content-area">
-                
-                <!-- SECTION: PLANO DE ENSINO (CONTEÚDO DO PDF) -->
-                <div id="section-plano" class="section-content hidden space-y-6">
-                    <div class="glass-card p-8 rounded-2xl">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-2xl font-bold text-blue-400">Plano de Ensino 2026.1</h2>
-                            <a href="https://drive.google.com/file/d/1l74XAt73W_BjoiICCGVCBThz-BTIYcz8/view?usp=sharing" target="_blank" class="text-sm bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold transition">
-                                📥 Baixar PDF Original
-                            </a>
-                        </div>
-                        
-                        <!-- Conteúdo resumido para visualização rápida -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 border-b border-white/10 pb-6 text-sm">
-                            <div><span class="text-slate-500 block">Disciplina</span> <strong>Mercado de Capitais e Derivativos</strong></div>
-                            <div><span class="text-slate-500 block">Carga Horária</span> <strong>80h</strong></div>
-                            <div><span class="text-slate-500 block">Instituição</span> <strong>Faculdade Cosmopolita</strong></div>
-                        </div>
-
-                        <div class="space-y-8">
-                            <section>
-                                <h3 class="text-amber-400 font-bold mb-3 flex items-center"><span class="mr-2">🎯</span> Objetivos</h3>
-                                <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm ml-4">
-                                    <li>Identificar a estrutura do SFN e agentes reguladores.</li>
-                                    <li>Interpretar impactos macroeconômicos (Juros, Câmbio).</li>
-                                    <li>Avaliar ativos de Renda Fixa, Variável e Derivativos.</li>
-                                </ul>
-                            </section>
-
-                            <section>
-                                <h3 class="text-amber-400 font-bold mb-3 flex items-center"><span class="mr-2">📅</span> Unidades</h3>
-                                <div class="grid gap-2 text-sm">
-                                    <div class="bg-white/5 p-2 rounded">UNIDADE I: SFN e Tomada de Decisão</div>
-                                    <div class="bg-white/5 p-2 rounded">UNIDADE II: Renda Fixa e Variável</div>
-                                    <div class="bg-white/5 p-2 rounded">UNIDADE III: Derivativos e Hedge</div>
-                                    <div class="bg-white/5 p-2 rounded">UNIDADE IV: Gestão de Riscos</div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6" id="tab-content">
+                    
+                    <!-- Aba Aula Hoje -->
+                    <div id="sec-aula" class="animate-fade">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <span class="bg-amber-500/20 text-amber-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Sessão 01</span>
+                            <h2 class="text-2xl font-bold text-white mt-4 mb-2">Boas-vindas e Contrato Pedagógico</h2>
+                            <p class="text-slate-400 text-sm mb-6">Início do semestre 2026.1 - Administração 7º Semestre.</p>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">🏠</div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white">Navegação Guiada</h4>
+                                        <p class="text-xs text-slate-500">Exploração do portal digital e recursos integrados.</p>
+                                    </div>
                                 </div>
-                            </section>
+                                <div class="flex gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
+                                    <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">📝</div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white">Contrato Pedagógico</h4>
+                                        <p class="text-xs text-slate-500">Critérios de avaliação, prazos e objetivos.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Aba Unidade I -->
+                    <div id="sec-unidade" class="hidden animate-fade">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <h2 class="text-2xl font-bold text-white mb-6">Unidade I: O Novo SFN</h2>
+                            <div class="p-6 bg-amber-500/5 border border-amber-500/10 rounded-2xl mb-6">
+                                <h3 class="text-amber-500 font-bold mb-2">Conteúdo de Hoje:</h3>
+                                <ul class="text-sm text-slate-400 space-y-2 list-disc pl-5">
+                                    <li>Desintermediação Financeira e Tecnologia.</li>
+                                    <li>Fintechs e a evolução do crédito.</li>
+                                    <li>O impacto do Open Finance.</li>
+                                </ul>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed">O Sistema Financeiro Nacional (SFN) está em transformação. A tecnologia permite que a conexão entre poupadores e tomadores seja direta.</p>
+                        </div>
+                    </div>
+
+                    <!-- Aba TDE -->
+                    <div id="sec-tde" class="hidden animate-fade">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <h2 class="text-2xl font-bold text-white mb-6">Critérios de Avaliação</h2>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-6 bg-white/5 rounded-2xl border border-white/5 text-center">
+                                    <h3 class="text-blue-400 font-bold mb-1">NPC 1 (5.0 pts)</h3>
+                                    <p class="text-[10px] text-slate-500 italic">Prova + TDE 1.1 + TDE 1.2</p>
+                                </div>
+                                <div class="p-6 bg-white/5 rounded-2xl border border-white/5 text-center">
+                                    <h3 class="text-amber-500 font-bold mb-1">NPC 2 (5.0 pts)</h3>
+                                    <p class="text-[10px] text-slate-500 italic">Prova + Projeto Final</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aba IA -->
+                    <div id="sec-ia" class="hidden animate-fade">
+                        <div class="glass-card p-8 rounded-3xl text-center">
+                            <h2 class="text-2xl font-bold text-white mb-4">Laboratório de IA</h2>
+                            <p class="text-sm text-slate-400 mb-8">Teste o resumo automático de mercado para o Onboarding.</p>
+                            <button onclick="runIA()" id="ia-btn" class="bg-blue-600 px-8 py-4 rounded-2xl font-bold hover:bg-blue-500 transition">Gerar Resumo do Dia</button>
+                            <div id="ia-result" class="hidden mt-6 p-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl text-sm italic text-blue-100"></div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- SECTION: ONBOARDING / MANUAL -->
-                <div id="section-onboarding" class="section-content hidden">
-                    <div class="glass-card p-8 rounded-2xl max-w-3xl mx-auto">
-                        <h2 class="text-2xl font-bold text-gold-gradient mb-6 text-center">Manual do Aluno</h2>
-                        <div class="space-y-4 text-sm leading-relaxed">
-                            <p class="p-3 bg-blue-900/20 border-l-4 border-blue-400 rounded"><strong>Importante:</strong> Este site será nossa base para simulações e materiais complementares.</p>
-                            <ul class="space-y-3">
-                                <li>✅ <strong>Plano de Ensino:</strong> Confira ementa e datas de prova.</li>
-                                <li>✅ <strong>Materiais:</strong> Baixe os slides e textos das aulas.</li>
-                                <li>✅ <strong>Simuladores:</strong> Use a tecnologia para testar suas estratégias de mercado.</li>
-                                <li>✅ <strong>TDE:</strong> Monitore as atividades avaliativas (NPC 1 e 2).</li>
-                            </ul>
-                        </div>
-                        <button onclick="showSection('plano')" class="mt-8 btn-primary w-full py-3 rounded-lg font-bold">Entendido</button>
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-amber-500 p-8 rounded-3xl text-black">
+                        <h3 class="text-xl font-bold mb-2">Aviso</h3>
+                        <p class="text-sm font-medium opacity-80 leading-snug">Entrega do TDE 1.1 até 20/02 via portal.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl">
+                        <h3 class="text-white font-bold mb-4 text-sm">Leituras</h3>
+                        <ul class="text-xs space-y-3 text-slate-400">
+                            <li>• Assaf Neto: Mercado Financeiro</li>
+                            <li>• Boletim Focus: Semanal</li>
+                        </ul>
                     </div>
                 </div>
-
-                <!-- SECTIONS PLACEHOLDER -->
-                <div id="section-empty" class="text-center py-20">
-                    <p class="text-slate-500 italic">Esta seção será atualizada em breve.</p>
-                </div>
-
             </div>
         </main>
     </div>
 
     <script>
-        const INITIAL_PASSWORD = "#2026.1";
-        
-        function checkInitialPassword() {
-            const input = document.getElementById('initial-pass').value;
-            if(input === INITIAL_PASSWORD) {
-                document.getElementById('password-step').classList.add('hidden');
-                document.getElementById('register-step').classList.remove('hidden');
+        const SENHA = "#2026.1";
+
+        function handleLogin() {
+            const val = document.getElementById('pass-input').value;
+            if(val === SENHA) {
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                localStorage.setItem('auth_2026', 'true');
             } else {
-                document.getElementById('error-msg').classList.remove('hidden');
+                document.getElementById('login-error').classList.remove('hidden');
             }
         }
 
-        function handleRegister(event) {
-            event.preventDefault();
-            const name = document.getElementById('reg-name').value;
-            localStorage.setItem('student_name', name);
-            localStorage.setItem('logged_in', 'true');
-            enterDashboard(name);
+        function showTab(id) {
+            document.querySelectorAll('[id^="sec-"]').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+            document.getElementById('sec-' + id).classList.remove('hidden');
+            document.getElementById('btn-' + id).classList.add('tab-active');
         }
 
-        function enterDashboard(name) {
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('main-dashboard').classList.remove('hidden');
-            document.getElementById('user-display-name').innerText = name.split(' ')[0];
-            showSection('plano');
-        }
-
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(s => s.classList.add('hidden'));
-            document.getElementById('section-empty').classList.add('hidden');
-
-            const target = document.getElementById('section-' + sectionId);
-            if(target) {
-                target.classList.remove('hidden');
-                window.scrollTo(0, 0);
-            } else {
-                document.getElementById('section-empty').classList.remove('hidden');
-            }
+        function runIA() {
+            const btn = document.getElementById('ia-btn');
+            const res = document.getElementById('ia-result');
+            btn.innerText = "Processando...";
+            btn.disabled = true;
+            setTimeout(() => {
+                res.innerText = "Resumo 06/02: Mercado atento à Selic. Alta das Fintechs no SFN impacta desintermediação bancária.";
+                res.classList.remove('hidden');
+                btn.innerText = "Gerar Resumo do Dia";
+                btn.disabled = false;
+            }, 1500);
         }
 
         function logout() {
@@ -258,8 +186,9 @@
         }
 
         window.onload = () => {
-            if(localStorage.getItem('logged_in') === 'true') {
-                enterDashboard(localStorage.getItem('student_name'));
+            if(localStorage.getItem('auth_2026') === 'true') {
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
             }
         }
     </script>
