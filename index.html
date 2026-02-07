@@ -99,6 +99,7 @@
                     <!-- ABA: Boas-vindas -->
                     <div id="sec-aula" class="fade-in space-y-6 text-left">
                         <!-- TERMÔMETRO DE MERCADO - Componente para integrar na home page -->
+<!-- TERMÔMETRO DE MERCADO - Componente para integrar na home page -->
 <div id="market-thermometer" class="market-thermometer-container">
     <style>
         .market-thermometer-container {
@@ -175,6 +176,10 @@
             border-top-color: #f59e0b;
         }
 
+        .market-card.euro {
+            border-top-color: #06b6d4;
+        }
+
         .market-card.selic {
             border-top-color: #3b82f6;
         }
@@ -189,10 +194,6 @@
 
         .market-card.bitcoin {
             border-top-color: #f97316;
-        }
-
-        .market-card.drex {
-            border-top-color: #06b6d4;
         }
 
         .card-label {
@@ -266,277 +267,177 @@
             color: #ef4444;
         }
 
-        .status-badge {
-            display: inline-block;
-            background: rgba(6, 182, 212, 0.2);
-            color: #06b6d4;
-            padding: 0.35rem 0.75rem;
-            border-radius: 0.5rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
-        }
-
-        .status-badge.active::before {
-            content: '●';
-            margin-right: 0.4rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .loading-skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .error-message {
-            color: #ef4444;
-            font-size: 0.8rem;
-            padding: 0.5rem;
-            background: rgba(239, 68, 68, 0.1);
-            border-radius: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
         @media (max-width: 768px) {
             .market-thermometer-container {
                 padding: 1.5rem 1rem;
             }
-
             .thermometer-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                 gap: 0.75rem;
             }
-
             .market-card {
                 padding: 1rem;
             }
-
             .card-value {
                 font-size: 1.25rem;
-            }
-
-            .thermometer-title {
-                font-size: 0.65rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .thermometer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .market-card {
-                padding: 0.875rem;
-            }
-
-            .card-value {
-                font-size: 1.1rem;
-            }
-
-            .card-label {
-                font-size: 0.6rem;
             }
         }
     </style>
 
-    <!-- Cabeçalho com título e timestamp -->
     <div class="thermometer-header">
-        <h3 class="thermometer-title">🌡️ Termômetro de Mercado</h3>
+        <h3 class="thermometer-title">🌡️ Termômetro da Disciplina</h3>
         <span class="thermometer-timestamp" id="update-time">Sincronizado: --/--/---- --:--</span>
     </div>
 
-    <!-- Grid de cards de mercado -->
     <div class="thermometer-grid" id="market-cards-container">
-        <!-- Os cards serão preenchidos dinamicamente pelo JavaScript -->
+        <!-- Os cards serão preenchidos dinamicamente -->
     </div>
-</div>
 
-<script>
-// Configuração dos indicadores de mercado
-const MARKET_INDICATORS = {
-    dollar: {
-        label: 'Dólar Comercial',
-        symbol: 'USD',
-        icon: '💵',
-        class: 'dollar'
-    },
-    selic: {
-        label: 'Taxa Selic',
-        symbol: '%',
-        icon: '📊',
-        class: 'selic'
-    },
-    ipca: {
-        label: 'IPCA (12M)',
-        symbol: '%',
-        icon: '📈',
-        class: 'ipca'
-    },
-    ibovespa: {
-        label: 'Ibovespa',
-        symbol: 'pts',
-        icon: '📉',
-        class: 'ibovespa'
-    },
-    bitcoin: {
-        label: 'Bitcoin (BTC)',
-        symbol: 'BRL',
-        icon: '₿',
-        class: 'bitcoin'
-    },
-    drex: {
-        label: 'Drex Status',
-        symbol: '',
-        icon: '🔐',
-        class: 'drex',
-        isStatus: true
-    }
-};
+    <script>
+        // Configuração dos indicadores de mercado
+        // Ordem: Dólar, Euro, Selic, IPCA, Ibovespa, Bitcoin
+        const MARKET_INDICATORS = {
+            dollar: {
+                label: 'Dólar Comercial',
+                symbol: 'USD',
+                icon: '💵',
+                class: 'dollar',
+                order: 1
+            },
+            euro: {
+                label: 'Euro Comercial',
+                symbol: 'EUR',
+                icon: '€',
+                class: 'euro',
+                order: 2
+            },
+            selic: {
+                label: 'Taxa Selic',
+                symbol: '%',
+                icon: '📊',
+                class: 'selic',
+                order: 3
+            },
+            ipca: {
+                label: 'IPCA (12M)',
+                symbol: '%',
+                icon: '📈',
+                class: 'ipca',
+                order: 4
+            },
+            ibovespa: {
+                label: 'Ibovespa',
+                symbol: 'pts',
+                icon: '📉',
+                class: 'ibovespa',
+                order: 5
+            },
+            bitcoin: {
+                label: 'Bitcoin (BTC)',
+                symbol: 'BRL',
+                icon: '₿',
+                class: 'bitcoin',
+                order: 6
+            }
+        };
 
-/**
- * Formata um número para exibição
- */
-function formatNumber(value, decimals = 2) {
-    if (value === null || value === undefined) return '--';
-    return parseFloat(value).toLocaleString('pt-BR', {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals
-    });
-}
-
-/**
- * Cria um card de indicador de mercado
- */
-function createMarketCard(key, data, config) {
-    if (!data) {
-        return `
-            <div class="market-card ${config.class} loading-skeleton">
-                <span class="card-label">${config.label}</span>
-                <div style="height: 2rem; margin-top: 0.5rem;"></div>
-            </div>
-        `;
-    }
-
-    // Card para status (Drex)
-    if (config.isStatus) {
-        return `
-            <div class="market-card ${config.class}">
-                <span class="card-label">${config.label}</span>
-                <div class="card-value-container">
-                    <span class="card-value">${data.status || 'N/A'}</span>
-                </div>
-                <div class="status-badge active">${data.status_code === 'active' ? 'ATIVO' : 'INATIVO'}</div>
-            </div>
-        `;
-    }
-
-    // Cards normais com valor e variação
-    const value = data.value || 0;
-    const change = data.change || 0;
-    const isPositive = change >= 0;
-    const arrowClass = isPositive ? 'up' : 'down';
-    const arrowSymbol = isPositive ? '▲' : '▼';
-    const changeClass = isPositive ? 'up' : 'down';
-
-    let formattedValue = formatNumber(value, 2);
-    if (key === 'ibovespa') {
-        formattedValue = formatNumber(value, 0);
-    }
-
-    return `
-        <div class="market-card ${config.class}">
-            <span class="card-label">${config.icon} ${config.label}</span>
-            <div class="card-value-container">
-                <span class="card-value">${formattedValue}</span>
-                <span class="card-currency">${config.symbol}</span>
-            </div>
-            <div class="card-change">
-                <span class="change-arrow ${arrowClass}">${arrowSymbol}</span>
-                <span class="change-value ${changeClass}">${isPositive ? '+' : ''}${formatNumber(change, 2)}%</span>
-            </div>
-        </div>
-    `;
-}
-
-/**
- * Carrega dados de mercado do arquivo JSON
- */
-async function loadMarketData() {
-    try {
-        // Tenta carregar do arquivo market_data.json
-        const response = await fetch('market_data.json');
-        if (!response.ok) {
-            throw new Error('Arquivo não encontrado');
+        function formatNumber(value, decimals = 2) {
+            if (value === null || value === undefined) return '--';
+            return parseFloat(value).toLocaleString('pt-BR', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
         }
-        
-        const marketData = await response.json();
-        updateThermometer(marketData);
-    } catch (error) {
-        console.warn('Não foi possível carregar dados de mercado:', error);
-        // Exibe dados padrão ou mensagem
-        showPlaceholderData();
-    }
-}
 
-/**
- * Atualiza o termômetro com os dados
- */
-function updateThermometer(marketData) {
-    const container = document.getElementById('market-cards-container');
-    const timeElement = document.getElementById('update-time');
+        function createMarketCard(key, data, config) {
+            if (!data) {
+                return `
+                    <div class="market-card ${config.class}">
+                        <span class="card-label">${config.label}</span>
+                        <div style="height: 2rem; margin-top: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem;"></div>
+                    </div>
+                `;
+            }
 
-    // Atualiza timestamp
-    if (marketData.last_update) {
-        timeElement.textContent = `Sincronizado: ${marketData.last_update}`;
-    }
+            const value = data.value || 0;
+            const change = data.change || 0;
+            const isPositive = change >= 0;
+            const arrowClass = isPositive ? 'up' : 'down';
+            const arrowSymbol = isPositive ? '▲' : '▼';
+            const changeClass = isPositive ? 'up' : 'down';
 
-    // Gera cards para cada indicador
-    let html = '';
-    for (const [key, config] of Object.entries(MARKET_INDICATORS)) {
-        const data = marketData.data ? marketData.data[key] : null;
-        html += createMarketCard(key, data, config);
-    }
+            let formattedValue = formatNumber(value, 2);
+            if (key === 'ibovespa') {
+                formattedValue = formatNumber(value, 0);
+            }
 
-    container.innerHTML = html;
-}
+            return `
+                <div class="market-card ${config.class}">
+                    <span class="card-label">${config.icon} ${config.label}</span>
+                    <div class="card-value-container">
+                        <span class="card-value">${formattedValue}</span>
+                        <span class="card-currency">${config.symbol}</span>
+                    </div>
+                    <div class="card-change">
+                        <span class="change-arrow ${arrowClass}">${arrowSymbol}</span>
+                        <span class="change-value ${changeClass}">${isPositive ? '+' : ''}${formatNumber(change, 2)}%</span>
+                    </div>
+                </div>
+            `;
+        }
 
-/**
- * Exibe dados padrão quando não há dados disponíveis
- */
-function showPlaceholderData() {
-    const container = document.getElementById('market-cards-container');
-    let html = '';
-    
-    for (const [key, config] of Object.entries(MARKET_INDICATORS)) {
-        html += createMarketCard(key, null, config);
-    }
+        async function loadMarketData() {
+            try {
+                const response = await fetch('market_data.json');
+                if (!response.ok) throw new Error('Arquivo não encontrado');
+                
+                const marketData = await response.json();
+                updateThermometer(marketData);
+            } catch (error) {
+                console.warn('Não foi possível carregar dados:', error);
+                showPlaceholderData();
+            }
+        }
 
-    container.innerHTML = html;
-}
+        function updateThermometer(marketData) {
+            const container = document.getElementById('market-cards-container');
+            const timeElement = document.getElementById('update-time');
 
-/**
- * Inicializa o termômetro ao carregar a página
- */
-document.addEventListener('DOMContentLoaded', function() {
-    loadMarketData();
-    
-    // Recarrega dados a cada 5 minutos
-    setInterval(loadMarketData, 5 * 60 * 1000);
-});
-</script>
+            if (marketData.last_update) {
+                timeElement.textContent = `Sincronizado: ${marketData.last_update}`;
+            }
+
+            // Ordena os indicadores pela ordem definida
+            const sortedIndicators = Object.entries(MARKET_INDICATORS).sort((a, b) => a[1].order - b[1].order);
+
+            let html = '';
+            for (const [key, config] of sortedIndicators) {
+                const data = marketData.data ? marketData.data[key] : null;
+                html += createMarketCard(key, data, config);
+            }
+
+            container.innerHTML = html;
+        }
+
+        function showPlaceholderData() {
+            const container = document.getElementById('market-cards-container');
+            const sortedIndicators = Object.entries(MARKET_INDICATORS).sort((a, b) => a[1].order - b[1].order);
+            
+            let html = '';
+            for (const [key, config] of sortedIndicators) {
+                html += createMarketCard(key, null, config);
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Carrega dados ao inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarketData();
+            setInterval(loadMarketData, 5 * 60 * 1000); // Recarrega a cada 5 minutos
+        });
+    </script>
+</div>
                         <div class="glass-card p-6 md:p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl hidden md:block">🎓</div>
                             <span class="bg-amber-500/20 text-amber-500 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-amber-500/20">Semestre 2026.1</span>
@@ -829,6 +730,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
