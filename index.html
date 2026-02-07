@@ -458,6 +458,337 @@
         });
     </script>
 </div>
+                        <!-- ANÁLISE NARRATIVA DO MERCADO - COMO ÂNCORA DE TV -->
+<div id="market-analysis-wrapper"></div>
+
+<script>
+    // Script para análise narrativa e fluida do mercado
+    
+    const analysisHTML = `
+        <style>
+            .market-analysis-button {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                padding: 1rem 1.5rem;
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+                border: 2px solid rgba(59, 130, 246, 0.3);
+                border-radius: 1.25rem;
+                color: #60a5fa;
+                font-weight: 600;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-bottom: 1.5rem;
+                text-decoration: none;
+            }
+
+            .market-analysis-button:hover {
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+                border-color: rgba(59, 130, 246, 0.5);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            }
+
+            .button-chevron {
+                flex-shrink: 0;
+                transition: transform 0.3s ease;
+            }
+
+            .market-analysis-button.active .button-chevron {
+                transform: rotate(180deg);
+            }
+
+            .market-analysis-panel {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: all 0.4s ease;
+                margin-bottom: 0;
+            }
+
+            .market-analysis-panel.open {
+                max-height: 1500px;
+                opacity: 1;
+                margin-bottom: 1.5rem;
+            }
+
+            .market-analysis-container {
+                width: 100%;
+                background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-radius: 2rem;
+                padding: 2rem 1.5rem;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            }
+
+            .analysis-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .analysis-icon {
+                font-size: 1.75rem;
+            }
+
+            .analysis-title {
+                font-size: 0.75rem;
+                font-weight: 800;
+                letter-spacing: 0.15em;
+                color: #60a5fa;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .analysis-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .analysis-text {
+                font-size: 0.95rem;
+                line-height: 1.8;
+                color: #cbd5e1;
+                text-align: justify;
+            }
+
+            .analysis-text strong {
+                color: #f8fafc;
+                font-weight: 600;
+            }
+
+            .analysis-text em {
+                color: #60a5fa;
+                font-style: italic;
+            }
+
+            .highlight {
+                display: inline-block;
+                background: rgba(255, 255, 255, 0.05);
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.5rem;
+                font-weight: 600;
+                margin: 0 0.25rem;
+            }
+
+            .highlight.positive {
+                background: rgba(34, 197, 94, 0.15);
+                color: #22c55e;
+            }
+
+            .highlight.negative {
+                background: rgba(239, 68, 68, 0.15);
+                color: #ef4444;
+            }
+
+            .highlight.neutral {
+                background: rgba(59, 130, 246, 0.15);
+                color: #60a5fa;
+            }
+
+            .analysis-timestamp {
+                font-size: 0.7rem;
+                color: #64748b;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .loading-skeleton {
+                background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+                background-size: 200% 100%;
+                animation: loading 1.5s infinite;
+                border-radius: 0.5rem;
+                height: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            @keyframes loading {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+
+            @media (max-width: 768px) {
+                .market-analysis-container {
+                    padding: 1.5rem 1rem;
+                }
+                .analysis-text {
+                    font-size: 0.9rem;
+                    text-align: left;
+                }
+            }
+        </style>
+
+        <button id="market-analysis-toggle-btn" class="market-analysis-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                <path d="M3 3v18h18"/>
+                <path d="M18 17V9m-5 8V5m-5 12v-3"/>
+            </svg>
+            <span class="button-text">📊 Visão da Professora</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+
+        <div id="market-analysis-panel" class="market-analysis-panel">
+            <div class="market-analysis-container">
+                <div class="analysis-header">
+                    <span class="analysis-icon">👨‍🏫</span>
+                    <h3 class="analysis-title">Análise Geral do Mercado</h3>
+                </div>
+
+                <div class="analysis-content" id="analysis-content">
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                </div>
+
+                <div class="analysis-timestamp" id="analysis-timestamp"></div>
+            </div>
+        </div>
+    `;
+
+    // Função para gerar análise narrativa
+    async function generateMarketAnalysis() {
+        try {
+            const response = await fetch('market_data.json');
+            if (!response.ok) throw new Error('Arquivo não encontrado');
+            
+            const marketData = await response.json();
+            const data = marketData.data;
+
+            // Extrair dados
+            const dollarChange = data.dollar?.change || 0;
+            const dollarValue = data.dollar?.value || 0;
+            const euroChange = data.euro?.change || 0;
+            const selicValue = data.selic?.value || 0;
+            const ipcaValue = data.ipca?.value || 0;
+            const ipcaChange = data.ipca?.change || 0;
+            const ibovValue = data.ibovespa?.value || 0;
+            const ibovChange = data.ibovespa?.change || 0;
+            const btcValue = data.bitcoin?.value || 0;
+            const btcChange = data.bitcoin?.change || 0;
+
+            // Construir narrativa
+            let narrative = '';
+
+            // Abertura
+            narrative += `Acompanhando o desempenho do mercado financeiro brasileiro neste momento, `;
+
+            // Câmbio
+            if (dollarChange < -0.5) {
+                narrative += `observamos uma <strong>apreciação significativa do real</strong>, com o dólar recuando <span class="highlight positive">${Math.abs(dollarChange).toFixed(2)}%</span> para R$ ${dollarValue.toFixed(2)}. Este movimento reduz a pressão inflacionária sobre importações e é favorável para o consumidor. `;
+            } else if (dollarChange > 0.5) {
+                narrative += `vemos o dólar em <strong>alta</strong>, avançando <span class="highlight negative">${dollarChange.toFixed(2)}%</span> para R$ ${dollarValue.toFixed(2)}, o que aumenta a pressão sobre os preços das importações. `;
+            } else {
+                narrative += `o dólar mantém <strong>estabilidade relativa</strong>, operando em R$ ${dollarValue.toFixed(2)}. `;
+            }
+
+            // Inflação
+            if (ipcaValue > 5) {
+                narrative += `No frente inflacionária, o IPCA acumulado em 12 meses está em <span class="highlight negative">${ipcaValue.toFixed(2)}%</span>, acima da meta do Banco Central de 4,5%, sinalizando que a pressão de preços ainda é uma preocupação. `;
+            } else if (ipcaValue < 3.5) {
+                narrative += `A inflação, medida pelo IPCA, está controlada em <span class="highlight positive">${ipcaValue.toFixed(2)}%</span>, bem abaixo da meta de 4,5%, indicando um ambiente desinflacionário favorável. `;
+            } else {
+                narrative += `A inflação, medida pelo IPCA, está em <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span>, próxima à meta do Banco Central. `;
+            }
+
+            // Selic
+            if (selicValue > 12) {
+                narrative += `A taxa Selic, nosso principal instrumento de política monetária, encontra-se em <span class="highlight negative">${selicValue.toFixed(2)}%</span>, em patamar elevado. Este nível reflete o esforço do Banco Central em combater a inflação, mas também encarece o crédito e afeta o consumo das famílias. `;
+            } else if (selicValue < 10) {
+                narrative += `A taxa Selic está em <span class="highlight positive">${selicValue.toFixed(2)}%</span>, em nível reduzido, o que estimula o crédito e favorece os investimentos na economia. `;
+            } else {
+                narrative += `A taxa Selic está em <span class="highlight neutral">${selicValue.toFixed(2)}%</span>, em patamar moderado que equilibra o controle inflacionário com o estímulo econômico. `;
+            }
+
+            // Bolsa
+            if (ibovChange > 1) {
+                narrative += `No mercado de ações, o Ibovespa apresenta <strong>desempenho positivo</strong>, com alta de <span class="highlight positive">${ibovChange.toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. Este movimento reflete otimismo dos investidores e confiança na economia brasileira. `;
+            } else if (ibovChange < -1) {
+                narrative += `O Ibovespa registra <strong>queda</strong> de <span class="highlight negative">${Math.abs(ibovChange).toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos, sinalizando realização de lucros ou cautela dos investidores. `;
+            } else {
+                narrative += `O Ibovespa mantém <strong>estabilidade</strong>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. `;
+            }
+
+            // Criptomoedas
+            if (btcChange > 2) {
+                narrative += `No segmento de criptomoedas, o Bitcoin apresenta <strong>movimento de alta</strong> de <span class="highlight positive">${btcChange.toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}, refletindo apetite por risco dos investidores. `;
+            } else if (btcChange < -2) {
+                narrative += `O Bitcoin registra <strong>queda</strong> de <span class="highlight negative">${Math.abs(btcChange).toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}, sinalizando aversão ao risco no mercado. `;
+            } else {
+                narrative += `O Bitcoin mantém movimento lateral, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}. `;
+            }
+
+            // Conclusão
+            const positiveSignals = [
+                dollarChange < -0.5,
+                ipcaValue < 3.5,
+                selicValue < 10,
+                ibovChange > 1,
+                btcChange > 2
+            ].filter(Boolean).length;
+
+            const negativeSignals = [
+                dollarChange > 0.5,
+                ipcaValue > 5,
+                selicValue > 12,
+                ibovChange < -1,
+                btcChange < -2
+            ].filter(Boolean).length;
+
+            if (positiveSignals > negativeSignals) {
+                narrative += `Em síntese, o mercado apresenta <span class="highlight positive">sinais predominantemente positivos</span>, com estabilidade cambial, inflação controlada e otimismo dos investidores. Este cenário favorece estratégias de renda variável e aproveitamento de oportunidades de investimento.`;
+            } else if (negativeSignals > positiveSignals) {
+                narrative += `Em síntese, o mercado sinaliza <span class="highlight negative">cautela</span>, com pressões inflacionárias, taxa de juros elevada e pessimismo relativo dos investidores. Recomenda-se posições mais defensivas e acompanhamento próximo da evolução dos indicadores.`;
+            } else {
+                narrative += `Em síntese, o mercado encontra-se em <span class="highlight neutral">equilíbrio</span>, sem sinais muito claros de otimismo ou pessimismo. Recomenda-se diversificação de portfólio e gestão ativa de risco.`;
+            }
+
+            const html = `<div class="analysis-text">${narrative}</div>`;
+
+            document.getElementById('analysis-content').innerHTML = html;
+            document.getElementById('analysis-timestamp').innerHTML = `Análise gerada em: ${marketData.last_update}`;
+
+        } catch (error) {
+            console.warn('Erro ao gerar análise:', error);
+            document.getElementById('analysis-content').innerHTML = `
+                <div class="analysis-text">⚠️ Não foi possível carregar os dados de mercado. Tente novamente em alguns instantes.</div>
+            `;
+        }
+    }
+
+    // Toggle do botão
+    function toggleMarketAnalysis() {
+        const button = document.getElementById('market-analysis-toggle-btn');
+        const panel = document.getElementById('market-analysis-panel');
+        
+        button.classList.toggle('active');
+        panel.classList.toggle('open');
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function() {
+        // Injetar HTML
+        document.getElementById('market-analysis-wrapper').innerHTML = analysisHTML;
+        
+        // Adicionar event listener ao botão
+        document.getElementById('market-analysis-toggle-btn').addEventListener('click', toggleMarketAnalysis);
+        
+        // Gerar análise
+        generateMarketAnalysis();
+        
+        // Recarregar a cada 5 minutos
+        setInterval(generateMarketAnalysis, 5 * 60 * 1000);
+    });
+</script>
                         <div class="glass-card p-6 md:p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl hidden md:block">🎓</div>
                             <span class="bg-amber-500/20 text-amber-500 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-amber-500/20">Semestre 2026.1</span>
@@ -750,6 +1081,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
