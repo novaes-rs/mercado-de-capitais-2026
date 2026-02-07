@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-02-07T11:00:55.274083",
+  "last_update": "07/02/2026 11:00:55",
+  "data": {
+    "dollar": {
+      "value": 5.23,
+      "date": "07/02/2026",
+      "change": 0.45
+    },
+    "selic": {
+      "value": 15.0,
+      "date": "07/02/2026",
+      "change": 0.0
+    },
+    "ipca": {
+      "value": 4.26,
+      "date": "07/02/2026",
+      "change": -0.12
+    },
+    "ibovespa": {
+      "value": 131500,
+      "change": 1.23,
+      "currency": "BRL"
+    },
+    "bitcoin": {
+      "value": 245000,
+      "change": 2.45,
+      "currency": "BRL"
+    },
+    "drex": {
+      "status": "PILOTO ATIVO",
+      "status_code": "active"
+    }
+  }
+}
