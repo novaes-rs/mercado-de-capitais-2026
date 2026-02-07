@@ -626,7 +626,7 @@
                 <path d="M3 3v18h18"/>
                 <path d="M18 17V9m-5 8V5m-5 12v-3"/>
             </svg>
-            <span class="button-text">📊 Visão da Professora</span>
+            <span class="button-text">📊 Mercado: Resumo do Dia</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -636,7 +636,7 @@
             <div class="market-analysis-container">
                 <div class="analysis-header">
                     <span class="analysis-icon">👩‍💼</span>
-                    <h3 class="analysis-title">Análise Geral do Mercado</h3>
+                    <h3 class="analysis-title">Resumo Geral</h3>
                 </div>
 
                 <div id="analysis-content">
@@ -678,9 +678,9 @@
             narrative += `A Taxa Selic está em <span class="highlight neutral">${selicValue.toFixed(2)}%</span> com a inflação medida pelo IPCA em <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span>. `;
 
             if (dollarChange < 0) {
-                narrative += `O dólar apresenta queda de <span class="highlight positive">${Math.abs(dollarChange).toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
+                narrative += `O dólar apresenta queda de <span class="highlight negative">${Math.abs(dollarChange).toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
             } else if (dollarChange > 0) {
-                narrative += `O dólar apresenta alta de <span class="highlight negative">${dollarChange.toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
+                narrative += `O dólar apresenta alta de <span class="highlight positive">${dollarChange.toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
             } else {
                 narrative += `O dólar mantém estabilidade em R$ ${dollarValue.toFixed(2)}. `;
             }
@@ -1055,6 +1055,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
