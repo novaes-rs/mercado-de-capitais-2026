@@ -1013,32 +1013,56 @@
         const SENHA = "#2026.1";
         const apiKey = ""; 
 
-        // BASE DE CONHECIMENTO LOCAL (INSTANTÂNEA / OFFLINE)
+        // BASE DE CONHECIMENTO LOCAL ATUALIZADA (CORREÇÃO DAS CHAVES)
         const localKnowledge = {
+            pix: `
+### PIX e a Revolução dos Pagamentos
+O PIX é o pilar de **Inclusão** e **Competitividade** da Agenda BC#:
+
+* **Instantaneidade:** Liquidação em tempo real (D+0).
+* **Baixo Custo:** Redução drástica das taxas comparado a TED/DOC.
+* **Segurança e MED:** O **Mecanismo Especial de Devolução (MED)** permite o bloqueio de recursos em casos de fraude.`,
+
+            sfn: `
+### Estrutura do SFN
+O Sistema Financeiro Nacional é organizado em três níveis:
+
+1. **Normativos:** O **CMN (Conselho Monetário Nacional)** dita as diretrizes e metas.
+2. **Supervisores:** Banco Central (Bancos) e CVM (Mercado de Capitais).
+3. **Operadores:** Instituições que lidam com o público (Bancos, B3, Fintechs).`,
+
+            bc: `
+### Os 4 Pilares da Agenda BC#
+A modernização do sistema financeiro baseada em:
+
+1. **Inclusão:** Acesso democrático ao sistema (Ex: PIX).
+2. **Competitividade:** Redução de taxas via concorrência (Ex: Open Finance).
+3. **Transparência:** Melhor precificação de riscos e clareza de dados.
+4. **Educação:** Fomento à cidadania financeira.`,
+
             spread: `
-### O Impacto do DREX na Redução do Spread Bancário
-O spread bancário no Brasil atingiu **21,4 p.p. em janeiro de 2026**. O DREX atua diretamente nos seus 5 componentes:
+### Anatomia do Spread Bancário (2026)
+O spread no Brasil atingiu **21,4 p.p. em janeiro de 2026**. Seus componentes são:
 
-1. **Eficiência Operacional:** Reduz custos administrativos ao eliminar intermediários obsoletos e permitir liquidação **D+0** via Smart Contracts.
-2. **Mitigação de Inadimplência:** Aumenta a transparência e facilita a execução automática de garantias.
-3. **Redução de Impostos/Encargos:** Simplifica a conformidade e reduz custos regulatórios.
-4. **Competição:** Facilita a entrada de Fintechs (**SCD e SEP**), forçando os grandes bancos a reduzirem o lucro excessivo.
-5. **Menor Risco:** A liquidação atômica (**DvP**) elimina o risco de liquidação entre partes.`,
-            tokenizacao: `
-### Tokenização de Ativos no Mercado de Capitais
-A transformação de ativos reais em tokens digitais via DREX traz ganhos estruturais:
+1. **Inadimplência (37,5%):** O maior peso; risco de não pagamento.
+2. **Custos Administrativos (25,3%):** Despesas operacionais.
+3. **Impostos e Encargos (22,2%):** CSLL, IOF e compulsórios.
+4. **Margem de Lucro (15%):** Retorno da instituição.`,
 
-* **Redução de Custos:** Diminuição de até **70%** nos custos de emissão e estruturação.
-* **Liquidez:** Permite o fracionamento de ativos, atraindo pequenos investidores e aumentando o volume de negociação.
-* **Segurança:** Registro imutável em blockchain, garantindo rastreabilidade total.
-* **Agilidade:** Processos que levavam dias são executados em segundos via Smart Contracts.`,
-            open: `
-### Open Finance e a Agenda BC#
-O ecossistema de compartilhamento de dados é o pilar da competitividade:
+            drex: `
+### DREX e Tokenização de Ativos
+O DREX é a moeda digital focada no atacado e economia programável:
 
-* **Portabilidade:** O histórico de crédito pertence ao aluno/cliente, facilitando a troca por taxas menores.
-* **Personalização:** Permite que Fintechs ofereçam produtos de investimento específicos para o perfil do investidor.
-* **Desintermediação:** Reduz a dependência dos bancos tradicionais na originação de crédito.`
+* **Liquidação Atômica (DvP):** O ativo e o dinheiro trocam de mãos simultaneamente via Smart Contracts.
+* **Tokenização:** Reduz o custo de emissão e estruturação de ativos em até **70%**.
+* **Agilidade:** Processos que levavam dias são executados em segundos.`,
+
+            fintechs: `
+### SCD vs SEP: Fintechs de Crédito
+Figuras criadas pelo BC para aumentar a competição:
+
+* **SCD (Sociedade de Crédito Direto):** Empresta apenas **capital próprio**. Foco em tecnologia.
+* **SEP (Sociedade de Empréstimo entre Pessoas):** Realiza o **Peer-to-Peer (P2P)**, conectando credor e tomador diretamente.`
         };
 
         function handleLogin() {
@@ -1060,11 +1084,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function setIAPrompt(text) {
-            document.getElementById('ia-prompt').value = text;
-        }
-
-        // FUNÇÃO PARA RESPOSTA INSTANTÂNEA (LOCAL)
+        // FUNÇÃO PARA RESPOSTA INSTANTÂNEA (LOCAL) - CORRIGIDA
         function runLocalIA(topic) {
             const resultContainer = document.getElementById('ia-result-container');
             const resultDiv = document.getElementById('ia-result');
@@ -1074,70 +1094,17 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
             resultContainer.classList.add('hidden');
 
             setTimeout(() => {
-                resultDiv.innerHTML = marked.parse(localKnowledge[topic]);
+                // Se o tópico existir na base localKnowledge, processa. Caso contrário, avisa.
+                const content = localKnowledge[topic] || "Tópico técnico não localizado na base local.";
+                resultDiv.innerHTML = marked.parse(content);
                 loading.classList.add('hidden');
                 resultContainer.classList.remove('hidden');
-            }, 300);
-        }
-
-        // FUNÇÃO PARA IA ONLINE (COM FALLBACK)
-        async function runIA() {
-            const promptInput = document.getElementById('ia-prompt');
-            const userQuery = promptInput.value.trim();
-            if (!userQuery) return;
-
-            const btn = document.getElementById('ia-btn');
-            const loading = document.getElementById('ia-loading');
-            const resultContainer = document.getElementById('ia-result-container');
-            const resultDiv = document.getElementById('ia-result');
-
-            btn.disabled = true;
-            loading.classList.remove('hidden');
-            resultContainer.classList.add('hidden');
-
-            const systemPrompt = `Você é o Assistente da Profa. Renata Novaes. Responda de forma técnica e didática. Use os dados: Spread de 21,4 p.p. em Jan/2026. 5 componentes do spread: Inadimplência, Custos Adm, Impostos, Lucro, Risco. DREX reduz tokenização em 70%.`;
-
-            try {
-                // Timeout curto para não deixar o aluno esperando
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    }),
-                    signal: controller.signal
-                });
-
-                const data = await response.json();
-                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                
-                if (text) {
-                    resultDiv.innerHTML = marked.parse(text);
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                // FALLBACK: Se a IA falhar, mostra o resumo geral automaticamente
-                resultDiv.innerHTML = marked.parse(`### Análise Técnica (Modo de Segurança)\nDevido à instabilidade na rede local, apresentamos o resumo técnico de referência:\n\n` + localKnowledge.spread);
-            } finally {
-                loading.classList.add('hidden');
-                resultContainer.classList.remove('hidden');
-                btn.disabled = false;
-            }
+            }, 500);
         }
 
         function copyIAResult() {
             const text = document.getElementById('ia-result').innerText;
-            const temp = document.createElement('textarea');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
+            navigator.clipboard.writeText(text);
             alert("Conteúdo copiado!");
         }
 
@@ -1155,6 +1122,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
