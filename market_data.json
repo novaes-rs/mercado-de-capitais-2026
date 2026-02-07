@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-02-07T11:00:55.274083",
-  "last_update": "07/02/2026 11:00:55",
+  "timestamp": "2026-02-07T11:52:14.079840",
+  "last_update": "07/02/2026 11:52:14",
   "data": {
     "dollar": {
       "value": 5.23,
@@ -23,13 +23,14 @@
       "currency": "BRL"
     },
     "bitcoin": {
-      "value": 245000,
-      "change": 2.45,
+      "value": 359712,
+      "change": -3.6556494831438497,
       "currency": "BRL"
     },
-    "drex": {
-      "status": "PILOTO ATIVO",
-      "status_code": "active"
+    "euro": {
+      "value": 5.65,
+      "date": "07/02/2026",
+      "change": 0.32
     }
   }
 }
