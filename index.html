@@ -458,16 +458,22 @@
         });
     </script>
 </div>
-                       <!-- ANÁLISE DESCRITIVA PURA DO MERCADO - SEM RECOMENDAÇÕES -->
+                     <!-- ANÁLISE DESCRITIVA COM BOTÃO DE DISCLAIMER SEPARADO -->
 <div id="market-analysis-wrapper"></div>
 
 <script>
-    // Script para análise descritiva pura do mercado
+    // Script para análise descritiva com disclaimer em botão separado
     
     const analysisHTML = `
         <style>
+            .market-analysis-buttons-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
             .market-analysis-button {
-                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -481,7 +487,6 @@
                 font-size: 0.95rem;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                margin-bottom: 1.5rem;
                 text-decoration: none;
             }
 
@@ -490,6 +495,18 @@
                 border-color: rgba(59, 130, 246, 0.5);
                 transform: translateY(-2px);
                 box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            }
+
+            .disclaimer-button {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+                border-color: rgba(239, 68, 68, 0.3);
+                color: #f87171;
+            }
+
+            .disclaimer-button:hover {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
+                border-color: rgba(239, 68, 68, 0.5);
+                box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
             }
 
             .button-chevron {
@@ -525,6 +542,11 @@
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             }
 
+            .disclaimer-container {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.02) 100%);
+                border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+
             .analysis-header {
                 display: flex;
                 align-items: center;
@@ -547,11 +569,21 @@
                 margin: 0;
             }
 
+            .disclaimer-title {
+                color: #f87171;
+            }
+
             .analysis-text {
                 font-size: 0.95rem;
                 line-height: 1.8;
                 color: #cbd5e1;
                 text-align: justify;
+            }
+
+            .disclaimer-text {
+                font-size: 0.9rem;
+                line-height: 1.7;
+                color: #cbd5e1;
             }
 
             .analysis-text strong {
@@ -593,7 +625,7 @@
                 color: #64748b;
                 margin-top: 1rem;
                 padding-top: 1rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             .loading-skeleton {
@@ -611,9 +643,14 @@
             }
 
             @media (max-width: 768px) {
+                .market-analysis-buttons-container {
+                    grid-template-columns: 1fr;
+                }
+
                 .market-analysis-container {
                     padding: 1.5rem 1rem;
                 }
+
                 .analysis-text {
                     font-size: 0.9rem;
                     text-align: left;
@@ -621,22 +658,36 @@
             }
         </style>
 
-        <button id="market-analysis-toggle-btn" class="market-analysis-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-                <path d="M3 3v18h18"/>
-                <path d="M18 17V9m-5 8V5m-5 12v-3"/>
-            </svg>
-            <span class="button-text">📊 Mercado: Resumo do Dia</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </button>
+        <div class="market-analysis-buttons-container">
+            <button id="market-analysis-toggle-btn" class="market-analysis-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                    <path d="M3 3v18h18"/>
+                    <path d="M18 17V9m-5 8V5m-5 12v-3"/>
+                </svg>
+                <span class="button-text">📊 Resumo Geral</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+
+            <button id="disclaimer-toggle-btn" class="market-analysis-button disclaimer-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span class="button-text">⚠️ Disclaimer</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
 
         <div id="market-analysis-panel" class="market-analysis-panel">
             <div class="market-analysis-container">
                 <div class="analysis-header">
                     <span class="analysis-icon">👩‍💼</span>
-                    <h3 class="analysis-title">Resumo Geral</h3>
+                    <h3 class="analysis-title">Resumo Geral do Mercado</h3>
                 </div>
 
                 <div id="analysis-content">
@@ -645,6 +696,29 @@
                 </div>
 
                 <div class="analysis-timestamp" id="analysis-timestamp"></div>
+            </div>
+        </div>
+
+        <div id="disclaimer-panel" class="market-analysis-panel">
+            <div class="market-analysis-container disclaimer-container">
+                <div class="analysis-header">
+                    <span class="analysis-icon">⚠️</span>
+                    <h3 class="analysis-title disclaimer-title">Aviso Legal e Disclaimer</h3>
+                </div>
+
+                <div class="disclaimer-text">
+                    <p><strong>Caráter Informativo:</strong> Esta análise é de caráter informativo e educacional, baseada em dados públicos do mercado financeiro disponibilizados por fontes oficiais como Banco Central do Brasil (BCB) e B3.</p>
+
+                    <p><strong>Não é Consultoria Financeira:</strong> O conteúdo apresentado não constitui consultoria financeira pessoal, recomendação de investimento, oferta de serviços financeiros ou aconselhamento de investimento. Cada pessoa possui situação financeira única e necessidades específicas.</p>
+
+                    <p><strong>Fins Educacionais:</strong> O objetivo desta análise é exclusivamente educacional, para fins de aprendizado e compreensão do funcionamento do mercado financeiro brasileiro no contexto da disciplina de Mercado de Capitais.</p>
+
+                    <p><strong>Dados Observados:</strong> Os indicadores apresentados são apenas descrição de dados observados no momento da análise e não implicam em previsão de desempenho futuro ou garantia de resultados.</p>
+
+                    <p><strong>Responsabilidade Pessoal:</strong> Decisões de investimento devem ser tomadas com base em sua situação financeira pessoal, objetivos, horizonte de investimento e perfil de risco, com orientação de profissional qualificado e autorizado pela CVM (Comissão de Valores Mobiliários).</p>
+
+                    <p><strong>Sem Responsabilidade:</strong> A professora e a instituição não assumem responsabilidade por qualquer decisão de investimento tomada com base nesta análise ou por eventuais perdas financeiras resultantes de tais decisões.</p>
+                </div>
             </div>
         </div>
     `;
@@ -739,13 +813,35 @@
         }
     }
 
-    // Toggle do botão
+    // Toggle dos botões
     function toggleMarketAnalysis() {
         const button = document.getElementById('market-analysis-toggle-btn');
         const panel = document.getElementById('market-analysis-panel');
+        const disclaimerPanel = document.getElementById('disclaimer-panel');
         
         button.classList.toggle('active');
         panel.classList.toggle('open');
+        
+        // Fechar disclaimer se estiver aberto
+        if (disclaimerPanel.classList.contains('open')) {
+            document.getElementById('disclaimer-toggle-btn').classList.remove('active');
+            disclaimerPanel.classList.remove('open');
+        }
+    }
+
+    function toggleDisclaimer() {
+        const button = document.getElementById('disclaimer-toggle-btn');
+        const panel = document.getElementById('disclaimer-panel');
+        const analysisPanel = document.getElementById('market-analysis-panel');
+        
+        button.classList.toggle('active');
+        panel.classList.toggle('open');
+        
+        // Fechar análise se estiver aberta
+        if (analysisPanel.classList.contains('open')) {
+            document.getElementById('market-analysis-toggle-btn').classList.remove('active');
+            analysisPanel.classList.remove('open');
+        }
     }
 
     // Inicializar
@@ -753,8 +849,9 @@
         // Injetar HTML
         document.getElementById('market-analysis-wrapper').innerHTML = analysisHTML;
         
-        // Adicionar event listener ao botão
+        // Adicionar event listeners aos botões
         document.getElementById('market-analysis-toggle-btn').addEventListener('click', toggleMarketAnalysis);
+        document.getElementById('disclaimer-toggle-btn').addEventListener('click', toggleDisclaimer);
         
         // Gerar análise
         generateMarketAnalysis();
@@ -1055,6 +1152,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
