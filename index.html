@@ -118,15 +118,742 @@
                     
                     <!-- ABA: Boas-vindas -->
                     <div id="sec-aula" class="fade-in space-y-6 text-left">
-                        <!-- TERMÔMETRO DE MERCADO -->
-                        <div id="market-thermometer" class="market-thermometer-container">
-                            <!-- Termômetro será renderizado aqui -->
-                        </div>
+                        <!-- TERMÔMETRO DE MERCADO - Componente para integrar na home page -->
+<!-- TERMÔMETRO DE MERCADO - Componente para integrar na home page -->
+<div id="market-thermometer" class="market-thermometer-container">
+    <style>
+        .market-thermometer-container {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
 
-                        <!-- ANÁLISE DE MERCADO -->
-                        <div id="market-analysis-wrapper"></div>
+        .thermometer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-                        <!-- SEÇÃO DE BOAS-VINDAS COM SLIDE MAIS RECENTE -->
+        .thermometer-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: #f59e0b;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .thermometer-timestamp {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .thermometer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .market-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .market-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .market-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .market-card.dollar {
+            border-top-color: #f59e0b;
+        }
+
+        .market-card.euro {
+            border-top-color: #06b6d4;
+        }
+
+        .market-card.selic {
+            border-top-color: #3b82f6;
+        }
+
+        .market-card.ipca {
+            border-top-color: #a855f7;
+        }
+
+        .market-card.ibovespa {
+            border-top-color: #10b981;
+        }
+
+        .market-card.bitcoin {
+            border-top-color: #f97316;
+        }
+
+        .card-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .card-value-container {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .card-currency {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .card-change {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .change-arrow {
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 0.4rem;
+        }
+
+        .change-arrow.up {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .change-arrow.down {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .change-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .change-value.up {
+            color: #22c55e;
+        }
+
+        .change-value.down {
+            color: #ef4444;
+        }
+
+        @media (max-width: 768px) {
+            .market-thermometer-container {
+                padding: 1.5rem 1rem;
+            }
+            .thermometer-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.75rem;
+            }
+            .market-card {
+                padding: 1rem;
+            }
+            .card-value {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+
+    <div class="thermometer-header">
+        <h3 class="thermometer-title">🌡️ Termômetro de Mercado</h3>
+        <span class="thermometer-timestamp" id="update-time">Sincronizado: --/--/---- --:--</span>
+    </div>
+
+    <div class="thermometer-grid" id="market-cards-container">
+        <!-- Os cards serão preenchidos dinamicamente -->
+    </div>
+
+    <script>
+        // Configuração dos indicadores de mercado
+        // Ordem: Dólar, Euro, Selic, IPCA, Ibovespa, Bitcoin
+        const MARKET_INDICATORS = {
+            dollar: {
+                label: 'Dólar Comercial',
+                symbol: 'USD',
+                icon: '💵',
+                class: 'dollar',
+                order: 1
+            },
+            euro: {
+                label: 'Euro Comercial',
+                symbol: 'EUR',
+                icon: '€',
+                class: 'euro',
+                order: 2
+            },
+            selic: {
+                label: 'Taxa Selic',
+                symbol: '%',
+                icon: '📊',
+                class: 'selic',
+                order: 3
+            },
+            ipca: {
+                label: 'IPCA (12M)',
+                symbol: '%',
+                icon: '📈',
+                class: 'ipca',
+                order: 4
+            },
+            ibovespa: {
+                label: 'Ibovespa',
+                symbol: 'pts',
+                icon: '📉',
+                class: 'ibovespa',
+                order: 5
+            },
+            bitcoin: {
+                label: 'Bitcoin (BTC)',
+                symbol: 'BRL',
+                icon: '₿',
+                class: 'bitcoin',
+                order: 6
+            }
+        };
+
+        function formatNumber(value, decimals = 2) {
+            if (value === null || value === undefined) return '--';
+            return parseFloat(value).toLocaleString('pt-BR', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function createMarketCard(key, data, config) {
+            if (!data) {
+                return `
+                    <div class="market-card ${config.class}">
+                        <span class="card-label">${config.label}</span>
+                        <div style="height: 2rem; margin-top: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem;"></div>
+                    </div>
+                `;
+            }
+
+            const value = data.value || 0;
+            const change = data.change || 0;
+            const isPositive = change >= 0;
+            const arrowClass = isPositive ? 'up' : 'down';
+            const arrowSymbol = isPositive ? '▲' : '▼';
+            const changeClass = isPositive ? 'up' : 'down';
+
+            let formattedValue = formatNumber(value, 2);
+            if (key === 'ibovespa') {
+                formattedValue = formatNumber(value, 0);
+            }
+
+            return `
+                <div class="market-card ${config.class}">
+                    <span class="card-label">${config.icon} ${config.label}</span>
+                    <div class="card-value-container">
+                        <span class="card-value">${formattedValue}</span>
+                        <span class="card-currency">${config.symbol}</span>
+                    </div>
+                    <div class="card-change">
+                        <span class="change-arrow ${arrowClass}">${arrowSymbol}</span>
+                        <span class="change-value ${changeClass}">${isPositive ? '+' : ''}${formatNumber(change, 2)}%</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadMarketData() {
+            try {
+                const response = await fetch('market_data.json');
+                if (!response.ok) throw new Error('Arquivo não encontrado');
+                
+                const marketData = await response.json();
+                updateThermometer(marketData);
+            } catch (error) {
+                console.warn('Não foi possível carregar dados:', error);
+                showPlaceholderData();
+            }
+        }
+
+        function updateThermometer(marketData) {
+            const container = document.getElementById('market-cards-container');
+            const timeElement = document.getElementById('update-time');
+
+            if (marketData.last_update) {
+                timeElement.textContent = `Sincronizado: ${marketData.last_update}`;
+            }
+
+            // Ordena os indicadores pela ordem definida
+            const sortedIndicators = Object.entries(MARKET_INDICATORS).sort((a, b) => a[1].order - b[1].order);
+
+            let html = '';
+            for (const [key, config] of sortedIndicators) {
+                const data = marketData.data ? marketData.data[key] : null;
+                html += createMarketCard(key, data, config);
+            }
+
+            container.innerHTML = html;
+        }
+
+        function showPlaceholderData() {
+            const container = document.getElementById('market-cards-container');
+            const sortedIndicators = Object.entries(MARKET_INDICATORS).sort((a, b) => a[1].order - b[1].order);
+            
+            let html = '';
+            for (const [key, config] of sortedIndicators) {
+                html += createMarketCard(key, null, config);
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Carrega dados ao inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarketData();
+            setInterval(loadMarketData, 5 * 60 * 1000); // Recarrega a cada 5 minutos
+        });
+    </script>
+</div>
+                     <!-- ANÁLISE DESCRITIVA COM BOTÃO DE DISCLAIMER SEPARADO -->
+<div id="market-analysis-wrapper"></div>
+
+<script>
+    // Script para análise descritiva com disclaimer em botão separado
+    
+    const analysisHTML = `
+        <style>
+            .market-analysis-buttons-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .market-analysis-button {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                padding: 1rem 1.5rem;
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+                border: 2px solid rgba(59, 130, 246, 0.3);
+                border-radius: 1.25rem;
+                color: #60a5fa;
+                font-weight: 600;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+
+            .market-analysis-button:hover {
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+                border-color: rgba(59, 130, 246, 0.5);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            }
+
+            .disclaimer-button {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+                border-color: rgba(239, 68, 68, 0.3);
+                color: #f87171;
+            }
+
+            .disclaimer-button:hover {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
+                border-color: rgba(239, 68, 68, 0.5);
+                box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+            }
+
+            .button-chevron {
+                flex-shrink: 0;
+                transition: transform 0.3s ease;
+            }
+
+            .market-analysis-button.active .button-chevron {
+                transform: rotate(180deg);
+            }
+
+            .market-analysis-panel {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: all 0.4s ease;
+                margin-bottom: 0;
+            }
+
+            .market-analysis-panel.open {
+                max-height: 1500px;
+                opacity: 1;
+                margin-bottom: 1.5rem;
+            }
+
+            .market-analysis-container {
+                width: 100%;
+                background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-radius: 2rem;
+                padding: 2rem 1.5rem;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            }
+
+            .disclaimer-container {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.02) 100%);
+                border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+
+            .analysis-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .analysis-icon {
+                font-size: 1.75rem;
+            }
+
+            .analysis-title {
+                font-size: 0.75rem;
+                font-weight: 800;
+                letter-spacing: 0.15em;
+                color: #60a5fa;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .disclaimer-title {
+                color: #f87171;
+            }
+
+            .analysis-text {
+                font-size: 0.95rem;
+                line-height: 1.8;
+                color: #cbd5e1;
+                text-align: justify;
+            }
+
+            .disclaimer-text {
+                font-size: 0.9rem;
+                line-height: 1.7;
+                color: #cbd5e1;
+            }
+
+            .analysis-text strong {
+                color: #f8fafc;
+                font-weight: 600;
+            }
+
+            .analysis-text em {
+                color: #60a5fa;
+                font-style: italic;
+            }
+
+            .highlight {
+                display: inline-block;
+                background: rgba(255, 255, 255, 0.05);
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.5rem;
+                font-weight: 600;
+                margin: 0 0.25rem;
+            }
+
+            .highlight.positive {
+                background: rgba(34, 197, 94, 0.15);
+                color: #22c55e;
+            }
+
+            .highlight.negative {
+                background: rgba(239, 68, 68, 0.15);
+                color: #ef4444;
+            }
+
+            .highlight.neutral {
+                background: rgba(59, 130, 246, 0.15);
+                color: #60a5fa;
+            }
+
+            .analysis-timestamp {
+                font-size: 0.7rem;
+                color: #64748b;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .loading-skeleton {
+                background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+                background-size: 200% 100%;
+                animation: loading 1.5s infinite;
+                border-radius: 0.5rem;
+                height: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            @keyframes loading {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+
+            @media (max-width: 768px) {
+                .market-analysis-buttons-container {
+                    grid-template-columns: 1fr;
+                }
+
+                .market-analysis-container {
+                    padding: 1.5rem 1rem;
+                }
+
+                .analysis-text {
+                    font-size: 0.9rem;
+                    text-align: left;
+                }
+            }
+        </style>
+
+        <div class="market-analysis-buttons-container">
+            <button id="market-analysis-toggle-btn" class="market-analysis-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                    <path d="M3 3v18h18"/>
+                    <path d="M18 17V9m-5 8V5m-5 12v-3"/>
+                </svg>
+                <span class="button-text">📊 Resumo Geral</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+
+            <button id="disclaimer-toggle-btn" class="market-analysis-button disclaimer-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span class="button-text">⚠️ Aviso</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-chevron">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div id="market-analysis-panel" class="market-analysis-panel">
+            <div class="market-analysis-container">
+                <div class="analysis-header">
+                    <span class="analysis-icon">👩‍💼</span>
+                    <h3 class="analysis-title">Resumo Geral do Mercado</h3>
+                </div>
+
+                <div id="analysis-content">
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                </div>
+
+                <div class="analysis-timestamp" id="analysis-timestamp"></div>
+            </div>
+        </div>
+
+        <div id="disclaimer-panel" class="market-analysis-panel">
+            <div class="market-analysis-container disclaimer-container">
+                <div class="analysis-header">
+                    <span class="analysis-icon">⚠️</span>
+                    <h3 class="analysis-title disclaimer-title">Aviso Legal e Disclaimer</h3>
+                </div>
+
+                <div class="disclaimer-text">
+                    <p><strong>Caráter Informativo:</strong> O Termômetro de Mercado e o Resumo Geral possuem caráter estritamente informativo e educacional, para fins de aprendizado e compreensão do funcionamento do mercado financeiro brasileiro no contexto da disciplina de Mercado de Capitais e Derivativos.</p>
+
+                    <p><strong>Dados Observados:</strong> Os indicadores apresentados são extraídos diretamente do Bacen e da B3 e não implicam em previsão de desempenho futuro ou garantia de resultados.</p>
+                    
+                    <p><strong>Não é Consultoria Financeira:</strong> O conteúdo apresentado não constitui consultoria financeira pessoal, recomendação de investimento, oferta de serviços financeiros, promessas de ganhos/rendimentos ou aconselhamento de investimento.</p>
+
+                    <p><strong>Responsabilidade Pessoal:</strong> Decisões de investimento devem ser tomadas com base em sua situação financeira pessoal, objetivos, horizonte de investimento e perfil de risco, com orientação de profissional qualificado e autorizado pela CVM (Comissão de Valores Mobiliários).</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Função para gerar análise descritiva pura
+    async function generateMarketAnalysis() {
+        try {
+            const response = await fetch('market_data.json');
+            if (!response.ok) throw new Error('Arquivo não encontrado');
+            
+            const marketData = await response.json();
+            const data = marketData.data;
+
+            // Extrair dados
+            const dollarChange = data.dollar?.change || 0;
+            const dollarValue = data.dollar?.value || 0;
+            const selicValue = data.selic?.value || 0;
+            const ipcaValue = data.ipca?.value || 0;
+            const ibovValue = data.ibovespa?.value || 0;
+            const ibovChange = data.ibovespa?.change || 0;
+            const btcValue = data.bitcoin?.value || 0;
+            const btcChange = data.bitcoin?.change || 0;
+
+            // Construir narrativa descritiva pura
+            let narrative = '';
+
+            
+            // Descrição de juros e câmbio
+            narrative += `A Taxa Selic está em <span class="highlight neutral">${selicValue.toFixed(2)}%</span> com a inflação medida pelo IPCA em <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span>. `;
+
+            if (dollarChange < 0) {
+                narrative += `O dólar apresenta queda de <span class="highlight negative">${Math.abs(dollarChange).toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
+            } else if (dollarChange > 0) {
+                narrative += `O dólar apresenta alta de <span class="highlight positive">${dollarChange.toFixed(2)}%</span>, operando em R$ ${dollarValue.toFixed(2)}. `;
+            } else {
+                narrative += `O dólar mantém estabilidade em R$ ${dollarValue.toFixed(2)}. `;
+            }
+
+            // Descrição do Ibovespa
+            if (ibovChange > 0) {
+                narrative += `No mercado de ações, o Ibovespa registra alta de <span class="highlight positive">${ibovChange.toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. `;
+            } else if (ibovChange < 0) {
+                narrative += `No mercado de ações, o Ibovespa registra queda de <span class="highlight negative">${Math.abs(ibovChange).toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. `;
+            } else {
+                narrative += `No mercado de ações, o Ibovespa mantém estabilidade em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. `;
+            }
+
+            // Descrição do Bitcoin
+            if (btcChange > 0) {
+                narrative += `O Bitcoin apresenta alta de <span class="highlight positive">${btcChange.toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}. `;
+            } else if (btcChange < 0) {
+                narrative += `O Bitcoin apresenta queda de <span class="highlight negative">${Math.abs(btcChange).toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}. `;
+            } else {
+                narrative += `O Bitcoin mantém estabilidade em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}. `;
+            }
+
+            // Descrição de relações entre indicadores
+            if (dollarChange < -0.3 && ibovChange > 0.5) {
+                narrative += `Observa-se que a apreciação do real coincide com a valorização da bolsa. `;
+            } else if (dollarChange > 0.3 && ibovChange < -0.5) {
+                narrative += `Observa-se que a desvalorização do real coincide com a queda da bolsa. `;
+            } else if (ibovChange > 0.5 && btcChange < -2) {
+                narrative += `Observa-se que a valorização da bolsa ocorre simultaneamente à queda do Bitcoin. `;
+            } else if (ibovChange < -0.5 && btcChange > 2) {
+                narrative += `Observa-se que a queda da bolsa ocorre simultaneamente à valorização do Bitcoin. `;
+            }
+
+            // Descrição do contexto de juros
+            if (selicValue > 12) {
+                narrative += `A taxa de juros em patamar elevado reflete esforço de controle da inflação. `;
+            } else if (selicValue < 10) {
+                narrative += `A taxa de juros em nível reduzido reflete ambiente de estímulo econômico. `;
+            } else {
+                narrative += `A taxa de juros em patamar moderado reflete equilíbrio entre controle inflacionário e estímulo. `;
+            }
+
+            // Fechamento descritivo
+            narrative += `Estes são os indicadores observados no momento da análise.`;
+
+            const html = `<div class="analysis-text">${narrative}</div>`;
+
+            document.getElementById('analysis-content').innerHTML = html;
+            document.getElementById('analysis-timestamp').innerHTML = `Resumo atualizado em: ${marketData.last_update}`;
+
+        } catch (error) {
+            console.warn('Erro ao gerar análise:', error);
+            document.getElementById('analysis-content').innerHTML = `
+                <div class="analysis-text">⚠️ Não foi possível carregar os dados de mercado. Tente novamente em alguns instantes.</div>
+            `;
+        }
+    }
+
+    // Toggle dos botões
+    function toggleMarketAnalysis() {
+        const button = document.getElementById('market-analysis-toggle-btn');
+        const panel = document.getElementById('market-analysis-panel');
+        const disclaimerPanel = document.getElementById('disclaimer-panel');
+        
+        button.classList.toggle('active');
+        panel.classList.toggle('open');
+        
+        // Fechar disclaimer se estiver aberto
+        if (disclaimerPanel.classList.contains('open')) {
+            document.getElementById('disclaimer-toggle-btn').classList.remove('active');
+            disclaimerPanel.classList.remove('open');
+        }
+    }
+
+    function toggleDisclaimer() {
+        const button = document.getElementById('disclaimer-toggle-btn');
+        const panel = document.getElementById('disclaimer-panel');
+        const analysisPanel = document.getElementById('market-analysis-panel');
+        
+        button.classList.toggle('active');
+        panel.classList.toggle('open');
+        
+        // Fechar análise se estiver aberta
+        if (analysisPanel.classList.contains('open')) {
+            document.getElementById('market-analysis-toggle-btn').classList.remove('active');
+            analysisPanel.classList.remove('open');
+        }
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function() {
+        // Injetar HTML
+        document.getElementById('market-analysis-wrapper').innerHTML = analysisHTML;
+        
+        // Adicionar event listeners aos botões
+        document.getElementById('market-analysis-toggle-btn').addEventListener('click', toggleMarketAnalysis);
+        document.getElementById('disclaimer-toggle-btn').addEventListener('click', toggleDisclaimer);
+        
+        // Gerar análise
+        generateMarketAnalysis();
+        
+        // Recarregar a cada 5 minutos
+        setInterval(generateMarketAnalysis, 5 * 60 * 1000);
+    });
+</script>
                         <div class="glass-card p-6 md:p-10 rounded-[2.5rem] border-white/10 relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl hidden md:block">🎓</div>
                             <span class="bg-amber-500/20 text-amber-500 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-amber-500/20">Semestre 2026.1</span>
@@ -140,15 +867,15 @@
                             </div>
                             
                             <div class="grid grid-cols-1 gap-3 mt-8">
-                                <a href="aula01.html" class="flex items-center gap-4 p-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl transition-all shadow-lg shadow-blue-500/20 group text-left">
-                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-bold">01</div>
+                                <a href="aula02.html" class="flex items-center gap-4 p-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl transition-all shadow-lg shadow-blue-500/20 group text-left">
+                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-bold">02</div>
                                     <div class="flex-grow">
-                                        <p class="text-xs font-bold">Slide Aula 01</p>
-                                        <p class="text-[10px] opacity-70 italic">O Novo SFN e Fintechs</p>
+                                        <p class="text-xs font-bold">Slide Aula 02</p>
+                                        <p class="text-[10px] opacity-70 italic">Selic, IPCA e a mecânica das taxas de juros</p>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
                                 </a>
-                                <!-- PLANO DE ENSINO -->
+                                <!-- REINTEGRAÇÃO DO PLANO DE ENSINO -->
                                 <a href="https://drive.google.com/file/d/1l74XAt73W_BjoiICCGVCBThz-BTIYcz8/view?usp=drive_link" target="_blank" class="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/40 transition-all group text-left">
                                     <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 text-xs font-bold italic">PDF</div>
                                     <div class="flex-grow">
@@ -170,18 +897,11 @@
                                     <span class="text-sm font-medium text-slate-200">Aula 01: O Novo SFN e Fintechs</span>
                                     <span class="text-[10px] text-slate-500">06/02</span>
                                 </a>
+                                <a href="aula02.html" class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10">
+                                    <span class="text-sm font-medium text-slate-200">Aula 02: Selic, IPCA e a mecânica das taxas de juros</span>
+                                    <span class="text-[10px] text-slate-500">13/02</span>
+                                </a>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- ABA: TDE & NOTAS -->
-                    <div id="sec-tde" class="hidden fade-in space-y-6 text-left">
-                        <div class="glass-card p-6 md:p-10 rounded-[2rem] border-blue-500/20 shadow-2xl shadow-blue-900/10">
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">📋</div>
-                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">TDE & Notas</h2>
-                            </div>
-                            <p class="text-slate-400 mb-6">Seção de Trabalhos, Desafios e Notas em desenvolvimento...</p>
                         </div>
                     </div>
 
@@ -192,16 +912,89 @@
                                 <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🤖</div>
                                 <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório de Conhecimento</h2>
                             </div>
-                            <p class="text-slate-400 mb-6">Seção de IA Avançada em desenvolvimento...</p>
+                            
+                            <p class="text-xs md:text-sm text-slate-400 mb-6 leading-relaxed">Selecione um tema para análise instantânea ou digite sua dúvida. <strong>Funciona mesmo sem internet estável.</strong></p>
+                            
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+                                    <button onclick="runLocalIA('spread')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: DREX & Spread</button>
+                                    <button onclick="runLocalIA('tokenizacao')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Tokenização</button>
+                                    <button onclick="runLocalIA('open')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Open Finance</button>
+                                </div>
+                                
+                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600 transition-all" placeholder="Digite uma dúvida específica aqui..."></textarea>
+                                
+                                <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3">
+                                    <span>Consultar IA (Online)</span>
+                                </button>
+                            </div>
+
+                            <div id="ia-loading" class="hidden mt-8 text-center py-10">
+                                <div class="inline-block w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
+                                <p class="text-sm text-slate-400 mt-4 loading-dots font-semibold">Processando análise técnica</p>
+                            </div>
+                            
+                            <div id="ia-result-container" class="hidden mt-8 fade-in">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">Análise Técnica do Mercado</span>
+                                    <button onclick="copyIAResult()" class="text-[10px] text-slate-500 hover:text-white flex items-center gap-1 border border-white/10 px-3 py-1 rounded-lg hover:bg-white/5">
+                                        Copiar
+                                    </button>
+                                </div>
+                                <div id="ia-result" class="p-6 bg-slate-900/50 rounded-2xl text-slate-200 border border-white/5 shadow-inner"></div>
+                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte: Base Técnica da Disciplina (Relatório Jan/2026).</p>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- ABA: TDE -->
+                    <div id="sec-tde" class="hidden fade-in text-left">
+                        <div class="glass-card p-6 md:p-10 rounded-[2rem]">
+                            <h2 class="text-xl font-bold text-white mb-6 text-center tracking-tight">Gestão Acadêmica</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                                <div class="p-6 bg-white/5 rounded-2xl border border-white/5">
+                                    <h3 class="text-blue-400 font-bold mb-1">1º NPC (10.0)</h3>
+                                    <p class="text-[10px] text-slate-500 uppercase">Prova + TDEs</p>
+                                </div>
+                                <div class="p-6 bg-white/5 rounded-2xl border border-white/5">
+                                    <h3 class="text-amber-500 font-bold mb-1">2º NPC (10.0)</h3>
+                                    <p class="text-[10px] text-slate-500 uppercase">Prova + TDEs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- SIDEBAR -->
-                <div class="space-y-6">
-                    <div class="glass-card p-6 rounded-[2rem] border-white/10">
-                        <h3 class="text-white font-bold mb-4">📌 Avisos</h3>
-                        <p class="text-slate-400 text-sm">Nenhum aviso no momento.</p>
+                <!-- Sidebar -->
+                <div class="space-y-6 text-left">
+                    <!-- Agenda / Próxima Aula -->
+                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-6 md:p-8 rounded-[2rem] text-black shadow-xl relative overflow-hidden">
+                        <div class="absolute -bottom-6 -right-6 opacity-10 text-8xl">📅</div>
+                        <h3 class="text-lg font-black mb-2 uppercase italic tracking-tighter">Agenda</h3>
+                        <p class="text-xs font-semibold opacity-90 leading-snug">Próxima aula: 13/02. Tema: Selic, IPCA e a mecânica das taxas de juros.</p>
+                    </div>
+
+                    <!-- Próxima Entrega -->
+                    <div class="glass-card p-6 md:p-8 rounded-[2rem] border-white/10">
+                        <h3 class="text-lg font-black mb-2 uppercase italic tracking-tighter text-amber-500">Próxima Entrega</h3>
+                        <p class="text-xs font-semibold opacity-90 leading-snug">Carta de Conjuntura (TDE 1.1) até 20/02 via Portal Oficial.</p>
+                    </div>
+                    
+                    <!-- Dicas de Estudo -->
+                    <div class="glass-card p-6 rounded-[2rem] border-white/5">
+                        <h3 class="text-white font-bold mb-4 text-[10px] uppercase tracking-widest opacity-50 italic">Dicas de Estudo</h3>
+                        <ul class="space-y-4 text-[11px] text-slate-400">
+                            <li class="flex gap-3">
+                                <span class="text-amber-500">✔</span>
+                                <span>Acompanhe o Boletim Focus semanalmente no site do BACEN.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500">✔</span>
+                                <span>Revisite os slides de aula para fixar conceitos.</span>
+                                <span>Explore o recurso Lab IA.</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -209,67 +1002,148 @@
     </div>
 
     <script>
-        // ===== FUNÇÕES DE AUTENTICAÇÃO =====
-        const PASSWORD = '#2026.1';
+        const SENHA = "#2026.1";
+        const apiKey = ""; 
+
+        // BASE DE CONHECIMENTO LOCAL (INSTANTÂNEA / OFFLINE)
+        const localKnowledge = {
+            spread: `
+### O Impacto do DREX na Redução do Spread Bancário
+O spread bancário no Brasil atingiu **21,4 p.p. em janeiro de 2026**. O DREX atua diretamente nos seus 5 componentes:
+
+1. **Eficiência Operacional:** Reduz custos administrativos ao eliminar intermediários obsoletos e permitir liquidação **D+0** via Smart Contracts.
+2. **Mitigação de Inadimplência:** Aumenta a transparência e facilita a execução automática de garantias.
+3. **Redução de Impostos/Encargos:** Simplifica a conformidade e reduz custos regulatórios.
+4. **Competição:** Facilita a entrada de Fintechs (**SCD e SEP**), forçando os grandes bancos a reduzirem o lucro excessivo.
+5. **Menor Risco:** A liquidação atômica (**DvP**) elimina o risco de liquidação entre partes.`,
+            tokenizacao: `
+### Tokenização de Ativos no Mercado de Capitais
+A transformação de ativos reais em tokens digitais via DREX traz ganhos estruturais:
+
+* **Redução de Custos:** Diminuição de até **70%** nos custos de emissão e estruturação.
+* **Liquidez:** Permite o fracionamento de ativos, atraindo pequenos investidores e aumentando o volume de negociação.
+* **Segurança:** Registro imutável em blockchain, garantindo rastreabilidade total.
+* **Agilidade:** Processos que levavam dias são executados em segundos via Smart Contracts.`,
+            open: `
+### Open Finance e a Agenda BC#
+O ecossistema de compartilhamento de dados é o pilar da competitividade:
+
+* **Portabilidade:** O histórico de crédito pertence ao aluno/cliente, facilitando a troca por taxas menores.
+* **Personalização:** Permite que Fintechs ofereçam produtos de investimento específicos para o perfil do investidor.
+* **Desintermediação:** Reduz a dependência dos bancos tradicionais na originação de crédito.`
+        };
 
         function handleLogin() {
-            const input = document.getElementById('pass-input');
-            if (input.value === PASSWORD) {
+            const val = document.getElementById('pass-input').value;
+            if(val === SENHA) {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
-                localStorage.setItem('logged_in', 'true');
+                localStorage.setItem('auth_mercado_v6', 'true');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
-                setTimeout(() => document.getElementById('login-error').classList.add('hidden'), 3000);
             }
+        }
+
+        function showTab(id) {
+            document.querySelectorAll('[id^="sec-"]').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+            document.getElementById('sec-' + id).classList.remove('hidden');
+            document.getElementById('btn-' + id).classList.add('tab-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setIAPrompt(text) {
+            document.getElementById('ia-prompt').value = text;
+        }
+
+        // FUNÇÃO PARA RESPOSTA INSTANTÂNEA (LOCAL)
+        function runLocalIA(topic) {
+            const resultContainer = document.getElementById('ia-result-container');
+            const resultDiv = document.getElementById('ia-result');
+            const loading = document.getElementById('ia-loading');
+            
+            loading.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+
+            setTimeout(() => {
+                resultDiv.innerHTML = marked.parse(localKnowledge[topic]);
+                loading.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+            }, 300);
+        }
+
+        // FUNÇÃO PARA IA ONLINE (COM FALLBACK)
+        async function runIA() {
+            const promptInput = document.getElementById('ia-prompt');
+            const userQuery = promptInput.value.trim();
+            if (!userQuery) return;
+
+            const btn = document.getElementById('ia-btn');
+            const loading = document.getElementById('ia-loading');
+            const resultContainer = document.getElementById('ia-result-container');
+            const resultDiv = document.getElementById('ia-result');
+
+            btn.disabled = true;
+            loading.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+
+            const systemPrompt = `Você é o Assistente da Profa. Renata Novaes. Responda de forma técnica e didática. Use os dados: Spread de 21,4 p.p. em Jan/2026. 5 componentes do spread: Inadimplência, Custos Adm, Impostos, Lucro, Risco. DREX reduz tokenização em 70%.`;
+
+            try {
+                // Timeout curto para não deixar o aluno esperando
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    }),
+                    signal: controller.signal
+                });
+
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    resultDiv.innerHTML = marked.parse(text);
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                // FALLBACK: Se a IA falhar, mostra o resumo geral automaticamente
+                resultDiv.innerHTML = marked.parse(`### Análise Técnica (Modo de Segurança)\nDevido à instabilidade na rede local, apresentamos o resumo técnico de referência:\n\n` + localKnowledge.spread);
+            } finally {
+                loading.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+                btn.disabled = false;
+            }
+        }
+
+        function copyIAResult() {
+            const text = document.getElementById('ia-result').innerText;
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert("Conteúdo copiado!");
         }
 
         function logout() {
-            localStorage.removeItem('logged_in');
-            document.getElementById('main-app').classList.add('hidden');
-            document.getElementById('auth-screen').classList.remove('hidden');
-            document.getElementById('pass-input').value = '';
+            localStorage.removeItem('auth_mercado_v6');
+            location.reload();
         }
 
-        // Verificar login ao carregar
-        window.addEventListener('load', () => {
-            if (localStorage.getItem('logged_in') === 'true') {
+        window.onload = () => {
+            if(localStorage.getItem('auth_mercado_v6') === 'true') {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
             }
-        });
-
-        // ===== FUNÇÕES DE NAVEGAÇÃO =====
-        function showTab(tabName) {
-            // Esconder todas as abas
-            document.querySelectorAll('#tab-container > div').forEach(el => el.classList.add('hidden'));
-            
-            // Remover classe ativa de todos os botões
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
-            
-            // Mostrar aba selecionada
-            const tabId = `sec-${tabName}`;
-            const tab = document.getElementById(tabId);
-            if (tab) {
-                tab.classList.remove('hidden');
-            }
-            
-            // Adicionar classe ativa ao botão
-            const btnId = `btn-${tabName}`;
-            const btn = document.getElementById(btnId);
-            if (btn) {
-                btn.classList.add('tab-active');
-            }
         }
-
-        // Enter para login
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('pass-input')?.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleLogin();
-            });
-        });
     </script>
 </body>
 </html>
-
-
