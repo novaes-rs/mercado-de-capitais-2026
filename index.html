@@ -895,47 +895,65 @@
                         </div>
                     </div>
 
-                    <!-- ABA: IA AVANÇADA -->
-                    <div id="sec-ia" class="hidden fade-in space-y-6 text-left">
-                        <div class="glass-card p-6 md:p-10 rounded-[2rem] border-blue-500/20 shadow-2xl shadow-blue-900/10">
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🤖</div>
-                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório de Conhecimento</h2>
+                   <!-- ABA: LAB IA GUIADA (OFFLINE/LOCAL) -->
+                    <div id="sec-ia" class="hidden fade-in space-y-6">
+                        <div class="glass-card p-8 md:p-12 rounded-[2.5rem] border-blue-500/20 shadow-2xl">
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🔬</div>
+                                <div>
+                                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório Aula 01 (Ampliada)</h2>
+                                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Base de Conhecimento Local</p>
+                                </div>
                             </div>
                             
-                            <p class="text-xs md:text-sm text-slate-400 mb-6 leading-relaxed">Selecione um tema para análise instantânea ou digite sua dúvida. <strong>Funciona mesmo sem internet estável.</strong></p>
+                            <p class="text-sm text-slate-400 mb-8 leading-relaxed">Selecione um tópico abaixo para gerar um resumo técnico instantâneo. Este laboratório utiliza uma base de dados local, garantindo funcionamento estável em sala de aula.</p>
                             
-                            <div class="space-y-4">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
-                                    <button onclick="runLocalIA('spread')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: DREX & Spread</button>
-                                    <button onclick="runLocalIA('tokenizacao')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Tokenização</button>
-                                    <button onclick="runLocalIA('open')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Open Finance</button>
-                                </div>
-                                
-                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600 transition-all" placeholder="Digite uma dúvida específica aqui..."></textarea>
-                                
-                                <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3">
-                                    <span>Consultar IA (Online)</span>
+                            <!-- Grade de Botões de Tópicos Ampliados -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                                <button onclick="runLocalIA('pix')" class="flex items-center gap-3 p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl text-left hover:bg-amber-500/10 transition-all group">
+                                    <span class="text-amber-500 group-hover:scale-110 transition-transform">📱</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">PIX & Meios de Pagamento</span>
+                                </button>
+                                <button onclick="runLocalIA('sfn')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">🏛️</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Estrutura do SFN</span>
+                                </button>
+                                <button onclick="runLocalIA('bc')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">📅</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Agenda BC# (4 Pilares)</span>
+                                </button>
+                                <button onclick="runLocalIA('spread')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">📉</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Anatomia do Spread (2026)</span>
+                                </button>
+                                <button onclick="runLocalIA('drex')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">💎</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">DREX & Tokenização</span>
+                                </button>
+                                <button onclick="runLocalIA('fintechs')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">🏢</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Fintechs: SCD vs SEP</span>
                                 </button>
                             </div>
 
-                            <div id="ia-loading" class="hidden mt-8 text-center py-10">
-                                <div class="inline-block w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
-                                <p class="text-sm text-slate-400 mt-4 loading-dots font-semibold">Processando análise técnica</p>
+                            <!-- Área de Resultado -->
+                            <div id="ia-loading" class="hidden py-10 text-center">
+                                <div class="inline-block w-8 h-8 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
+                                <p class="text-xs text-slate-500 mt-4 uppercase font-bold tracking-widest loading-dots">Processando Conteúdo</p>
                             </div>
                             
-                            <div id="ia-result-container" class="hidden mt-8 fade-in">
-                                <div class="flex items-center justify-between mb-4">
-                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">Análise Técnica do Mercado</span>
-                                    <button onclick="copyIAResult()" class="text-[10px] text-slate-500 hover:text-white flex items-center gap-1 border border-white/10 px-3 py-1 rounded-lg hover:bg-white/5">
-                                        Copiar
+                            <div id="ia-result-container" class="hidden fade-in border-t border-white/10 pt-8">
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="text-[9px] uppercase font-black text-blue-400 tracking-[0.2em] bg-blue-500/10 px-4 py-1.5 rounded-full border border-blue-500/20">Análise Técnica Gerada</span>
+                                    <button onclick="copyIAResult()" class="text-[9px] font-bold uppercase text-slate-500 hover:text-white flex items-center gap-2">
+                                        <i class="fa-solid fa-copy"></i> Copiar
                                     </button>
                                 </div>
-                                <div id="ia-result" class="p-6 bg-slate-900/50 rounded-2xl text-slate-200 border border-white/5 shadow-inner"></div>
-                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte: Base Técnica da Disciplina (Relatório Jan/2026).</p>
+                                <div id="ia-result" class="text-slate-200 leading-relaxed bg-slate-900/40 p-8 rounded-3xl border border-white/5"></div>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- ABA: TDE -->
                     <div id="sec-tde" class="hidden fade-in text-left">
@@ -1137,5 +1155,6 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
