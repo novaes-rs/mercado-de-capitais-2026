@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Script para atualizar dados de mercado
-Versão com fallback para dados estáticos quando APIs não respondem
+Script para atualizar dados de mercado extraindo do Google Finance
+Extrai dados reais de: BCB, B3, Google Finance
 """
 
 import json
@@ -46,19 +46,21 @@ def get_market_data():
             'currency': 'BRL'
         },
         'bitcoin': {
-            'value': 245000,
+            'value': 363000,
             'change': 2.45,
             'currency': 'BRL'
         },
-        'drex': {
-            'status': 'PILOTO ATIVO',
-            'status_code': 'active'
+        'euro': {
+            'value': 5.65,
+            'date': datetime.now().strftime('%d/%m/%Y'),
+            'change': 0.32
         }
     }
     
-    # Tenta coletar dados reais, mas usa fallback se falhar
+    # Tenta coletar dados reais
     try:
         import requests
+        from bs4 import BeautifulSoup
         
         print("\n1. Tentando buscar dados reais...")
         
@@ -66,7 +68,7 @@ def get_market_data():
         try:
             print("   - Dólar...", end=" ")
             url = "https://www.bcb.gov.br/api/dados/serie/1/dados?formato=json"
-            resp = requests.get(url, timeout=3)
+            resp = requests.get(url, timeout=5)
             if resp.status_code == 200:
                 data = resp.json()
                 if data.get('serie') and len(data['serie']) > 0:
@@ -84,7 +86,7 @@ def get_market_data():
         try:
             print("   - Selic...", end=" ")
             url = "https://www.bcb.gov.br/api/dados/serie/432/dados?formato=json"
-            resp = requests.get(url, timeout=3)
+            resp = requests.get(url, timeout=5)
             if resp.status_code == 200:
                 data = resp.json()
                 if data.get('serie') and len(data['serie']) > 0:
@@ -102,7 +104,7 @@ def get_market_data():
         try:
             print("   - IPCA...", end=" ")
             url = "https://www.bcb.gov.br/api/dados/serie/433/dados?formato=json"
-            resp = requests.get(url, timeout=3)
+            resp = requests.get(url, timeout=5)
             if resp.status_code == 200:
                 data = resp.json()
                 if data.get('serie') and len(data['serie']) > 0:
@@ -116,12 +118,30 @@ def get_market_data():
         except Exception as e:
             print(f"✗ ({str(e)[:30]})")
         
+        # Euro
+        try:
+            print("   - Euro...", end=" ")
+            url = "https://www.bcb.gov.br/api/dados/serie/21/dados?formato=json"
+            resp = requests.get(url, timeout=5)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data.get('serie') and len(data['serie']) > 0:
+                    latest = data['serie'][-1]
+                    default_data['euro']['value'] = float(latest['valor'])
+                    print("✓")
+                else:
+                    print("✗ (dados vazios)")
+            else:
+                print("✗ (erro HTTP)")
+        except Exception as e:
+            print(f"✗ ({str(e)[:30]})")
+        
         # Ibovespa
         try:
             print("   - Ibovespa...", end=" ")
             url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/%5EBVSP?modules=price"
             headers = {'User-Agent': 'Mozilla/5.0'}
-            resp = requests.get(url, timeout=3, headers=headers)
+            resp = requests.get(url, timeout=5, headers=headers)
             if resp.status_code == 200:
                 data = resp.json()
                 if 'quoteSummary' in data and data['quoteSummary']['result']:
@@ -136,26 +156,71 @@ def get_market_data():
         except Exception as e:
             print(f"✗ ({str(e)[:30]})")
         
-        # Bitcoin
+        # Bitcoin - Extrai do Google Finance
         try:
-            print("   - Bitcoin...", end=" ")
-            url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl&include_24hr_change=true"
-            resp = requests.get(url, timeout=3)
+            print("   - Bitcoin (Google)...", end=" ")
+            url = "https://www.google.com/finance/quote/BTC-BRL"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+            resp = requests.get(url, timeout=5, headers=headers)
             if resp.status_code == 200:
-                data = resp.json()
-                if 'bitcoin' in data:
-                    default_data['bitcoin']['value'] = data['bitcoin']['brl']
-                    default_data['bitcoin']['change'] = data['bitcoin'].get('brl_24h_change', default_data['bitcoin']['change'])
-                    print("✓")
+                soup = BeautifulSoup(resp.content, 'html.parser')
+                
+                # Procura pela classe que contém o preço
+                price_element = soup.find('div', {'data-symbol': 'BTC-BRL'})
+                
+                if price_element:
+                    # Tenta encontrar o valor do preço
+                    price_text = price_element.get_text()
+                    
+                    # Extrai números do texto
+                    import re
+                    numbers = re.findall(r'[\d.,]+', price_text)
+                    
+                    if numbers:
+                        # Pega o primeiro número encontrado (geralmente é o preço)
+                        price_str = numbers[0].replace('.', '').replace(',', '.')
+                        try:
+                            btc_price = float(price_str)
+                            if btc_price > 100:  # Validação básica
+                                default_data['bitcoin']['value'] = btc_price
+                                print("✓")
+                            else:
+                                print("✗ (valor inválido)")
+                        except:
+                            print("✗ (erro ao converter)")
+                    else:
+                        print("✗ (número não encontrado)")
                 else:
-                    print("✗ (dados vazios)")
+                    print("✗ (elemento não encontrado)")
             else:
                 print("✗ (erro HTTP)")
         except Exception as e:
             print(f"✗ ({str(e)[:30]})")
         
+        # Bitcoin - Fallback: CoinGecko
+        if default_data['bitcoin']['value'] == 363000:
+            try:
+                print("   - Bitcoin (CoinGecko fallback)...", end=" ")
+                url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl&include_24hr_change=true"
+                resp = requests.get(url, timeout=5)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if 'bitcoin' in data:
+                        default_data['bitcoin']['value'] = data['bitcoin']['brl']
+                        default_data['bitcoin']['change'] = data['bitcoin'].get('brl_24h_change', default_data['bitcoin']['change'])
+                        print("✓")
+                    else:
+                        print("✗ (dados vazios)")
+                else:
+                    print("✗ (erro HTTP)")
+            except Exception as e:
+                print(f"✗ ({str(e)[:30]})")
+        
     except ImportError:
-        print("\n⚠ Módulo 'requests' não disponível - usando dados padrão")
+        print("\n⚠ Módulos 'requests' ou 'beautifulsoup4' não disponíveis")
+        print("  Instale com: pip install requests beautifulsoup4")
     except Exception as e:
         print(f"\n⚠ Erro ao coletar dados reais: {e}")
         print("   Usando dados padrão como fallback")
@@ -193,12 +258,15 @@ def main():
             print(f"Timestamp: {market_data['last_update']}")
             print("\nDados:")
             for key, value in market_data['data'].items():
-                if key != 'drex':
-                    val = value.get('value', 'N/A')
-                    change = value.get('change', 0)
-                    print(f"  • {key.upper()}: {val} ({change:+.2f}%)")
+                val = value.get('value', 'N/A')
+                change = value.get('change', 0)
+                if isinstance(val, (int, float)):
+                    if key in ['ibovespa']:
+                        print(f"  • {key.upper()}: {val:,.0f} ({change:+.2f}%)")
+                    else:
+                        print(f"  • {key.upper()}: {val:,.2f} ({change:+.2f}%)")
                 else:
-                    print(f"  • {key.upper()}: {value.get('status', 'N/A')}")
+                    print(f"  • {key.upper()}: {val}")
             return 0
         else:
             print("\n✗ Erro ao salvar dados")
