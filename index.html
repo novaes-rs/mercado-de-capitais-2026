@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercado de Capitais e Derivativos - Profa. Renata Novaes</title>
+    <title>Mercado de Capitais - Ma. Renata Novaes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -145,40 +145,39 @@
                         <div class="glass-card p-6 md:p-10 rounded-[2rem] border-blue-500/20 shadow-2xl shadow-blue-900/10">
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🤖</div>
-                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Cérebro Digital: Mercado de Capitais</h2>
+                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório de Conhecimento</h2>
                             </div>
                             
-                            <p class="text-xs md:text-sm text-slate-400 mb-6 leading-relaxed">Analise os impactos do <strong>DREX</strong> e da <strong>Agenda BC#</strong>. Pergunte sobre a redução do spread bancário ou novos modelos de crédito (SCD/SEP).</p>
+                            <p class="text-xs md:text-sm text-slate-400 mb-6 leading-relaxed">Selecione um tema para análise instantânea ou digite sua dúvida. <strong>Funciona mesmo sem internet estável.</strong></p>
                             
                             <div class="space-y-4">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
-                                    <button onclick="setIAPrompt('Explique como o Drex atua na redução do spread bancário através dos seus 5 componentes.')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Drex & Spread</button>
-                                    <button onclick="setIAPrompt('Como a tokenização de ativos reduz o custo de emissão em 70%?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Tokenização</button>
-                                    <button onclick="setIAPrompt('Qual o impacto do Open Finance na competição bancária brasileira?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Open Finance</button>
+                                    <button onclick="runLocalIA('spread')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: DREX & Spread</button>
+                                    <button onclick="runLocalIA('tokenizacao')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Tokenização</button>
+                                    <button onclick="runLocalIA('open')" class="text-[10px] p-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-200 hover:bg-blue-500/20 transition font-bold">Resumo: Open Finance</button>
                                 </div>
                                 
-                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600 transition-all" placeholder="Digite sua dúvida técnica para uma análise robusta..."></textarea>
+                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600 transition-all" placeholder="Digite uma dúvida específica aqui..."></textarea>
                                 
                                 <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3">
-                                    <span>Consultar Assistente de IA</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="12" x="2" y="10" rx="2"/><path d="M7 15h.01"/><path d="M17 15h.01"/></svg>
+                                    <span>Consultar IA (Online)</span>
                                 </button>
                             </div>
 
                             <div id="ia-loading" class="hidden mt-8 text-center py-10">
                                 <div class="inline-block w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
-                                <p class="text-sm text-slate-400 mt-4 loading-dots font-semibold">Analisando dados do Banco Central</p>
+                                <p class="text-sm text-slate-400 mt-4 loading-dots font-semibold">Processando análise técnica</p>
                             </div>
                             
                             <div id="ia-result-container" class="hidden mt-8 fade-in">
                                 <div class="flex items-center justify-between mb-4">
-                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">Resultado da Análise Técnica</span>
+                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">Análise Técnica do Mercado</span>
                                     <button onclick="copyIAResult()" class="text-[10px] text-slate-500 hover:text-white flex items-center gap-1 border border-white/10 px-3 py-1 rounded-lg hover:bg-white/5">
-                                        Copiar Texto
+                                        Copiar
                                     </button>
                                 </div>
                                 <div id="ia-result" class="p-6 bg-slate-900/50 rounded-2xl text-slate-200 border border-white/5 shadow-inner"></div>
-                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte: Base de Dados da Disciplina - Ma. Renata Novaes (Dados Jan/2026).</p>
+                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte: Base Técnica da Disciplina (Relatório Jan/2026).</p>
                             </div>
                         </div>
                     </div>
@@ -208,14 +207,6 @@
                         <h3 class="text-lg font-black mb-2 uppercase italic tracking-tighter">Próxima Entrega</h3>
                         <p class="text-xs font-semibold opacity-90">Carta de Conjuntura (TDE 1.1) até 20/02 via Portal Oficial.</p>
                     </div>
-                    
-                    <div class="glass-card p-6 rounded-[2rem] border-white/5">
-                        <h3 class="text-white font-bold mb-4 text-[10px] uppercase tracking-widest opacity-50">Bibliografia Recomendada</h3>
-                        <ul class="space-y-3 text-[11px] text-slate-400">
-                            <li><span class="text-amber-500 font-bold">•</span> Assaf Neto: Mercado Financeiro</li>
-                            <li><span class="text-amber-500 font-bold">•</span> Relatórios Agenda BC# (BCB)</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </main>
@@ -223,7 +214,35 @@
 
     <script>
         const SENHA = "#2026.1";
-        const apiKey = ""; // API Key fornecida pelo ambiente
+        const apiKey = ""; 
+
+        // BASE DE CONHECIMENTO LOCAL (INSTANTÂNEA / OFFLINE)
+        const localKnowledge = {
+            spread: `
+### O Impacto do DREX na Redução do Spread Bancário
+O spread bancário no Brasil atingiu **21,4 p.p. em janeiro de 2026**. O DREX atua diretamente nos seus 5 componentes:
+
+1. **Eficiência Operacional:** Reduz custos administrativos ao eliminar intermediários obsoletos e permitir liquidação **D+0** via Smart Contracts.
+2. **Mitigação de Inadimplência:** Aumenta a transparência e facilita a execução automática de garantias.
+3. **Redução de Impostos/Encargos:** Simplifica a conformidade e reduz custos regulatórios.
+4. **Competição:** Facilita a entrada de Fintechs (**SCD e SEP**), forçando os grandes bancos a reduzirem o lucro excessivo.
+5. **Menor Risco:** A liquidação atômica (**DvP**) elimina o risco de liquidação entre partes.`,
+            tokenizacao: `
+### Tokenização de Ativos no Mercado de Capitais
+A transformação de ativos reais em tokens digitais via DREX traz ganhos estruturais:
+
+* **Redução de Custos:** Diminuição de até **70%** nos custos de emissão e estruturação.
+* **Liquidez:** Permite o fracionamento de ativos, atraindo pequenos investidores e aumentando o volume de negociação.
+* **Segurança:** Registro imutável em blockchain, garantindo rastreabilidade total.
+* **Agilidade:** Processos que levavam dias são executados em segundos via Smart Contracts.`,
+            open: `
+### Open Finance e a Agenda BC#
+O ecossistema de compartilhamento de dados é o pilar da competitividade:
+
+* **Portabilidade:** O histórico de crédito pertence ao aluno/cliente, facilitando a troca por taxas menores.
+* **Personalização:** Permite que Fintechs ofereçam produtos de investimento específicos para o perfil do investidor.
+* **Desintermediação:** Reduz a dependência dos bancos tradicionais na originação de crédito.`
+        };
 
         function handleLogin() {
             const val = document.getElementById('pass-input').value;
@@ -248,24 +267,23 @@
             document.getElementById('ia-prompt').value = text;
         }
 
-        // Sistema de Retry com Backoff Exponencial
-        async function fetchAI(url, body, retries = 5, delay = 1000) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    return await response.json();
-                } catch (err) {
-                    if (i === retries - 1) throw err;
-                    await new Promise(r => setTimeout(r, delay * Math.pow(2, i)));
-                }
-            }
+        // FUNÇÃO PARA RESPOSTA INSTANTÂNEA (LOCAL)
+        function runLocalIA(topic) {
+            const resultContainer = document.getElementById('ia-result-container');
+            const resultDiv = document.getElementById('ia-result');
+            const loading = document.getElementById('ia-loading');
+            
+            loading.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+
+            setTimeout(() => {
+                resultDiv.innerHTML = marked.parse(localKnowledge[topic]);
+                loading.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+            }, 300);
         }
 
+        // FUNÇÃO PARA IA ONLINE (COM FALLBACK)
         async function runIA() {
             const promptInput = document.getElementById('ia-prompt');
             const userQuery = promptInput.value.trim();
@@ -280,53 +298,44 @@
             loading.classList.remove('hidden');
             resultContainer.classList.add('hidden');
 
-            const systemPrompt = `Você é o Assistente Virtual da Profa. Ma. Renata Novaes. Sua função é responder dúvidas técnicas para alunos de Administração (7º semestre).
-            DADOS TÉCNICOS OBRIGATÓRIOS:
-            - Spread Bancário no Brasil (Jan/2026): 21,4 p.p.
-            - 5 Componentes do Spread: Inadimplência, Custos Administrativos, Impostos/Encargos, Lucro Bancário e Risco/Incerteza.
-            - Drex (Real Digital): Reduz custos de tokenização em até 70%, permite liquidação atômica (DvP) e D+0 via Smart Contracts.
-            INSTRUÇÕES: Responda sempre em Português do Brasil, de forma robusta, usando Markdown (tópicos, negrito e tabelas se necessário). Seja profissional e acadêmico.`;
-
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const body = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
+            const systemPrompt = `Você é o Assistente da Profa. Renata Novaes. Responda de forma técnica e didática. Use os dados: Spread de 21,4 p.p. em Jan/2026. 5 componentes do spread: Inadimplência, Custos Adm, Impostos, Lucro, Risco. DREX reduz tokenização em 70%.`;
 
             try {
-                const data = await fetchAI(url, body);
+                // Timeout curto para não deixar o aluno esperando
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    }),
+                    signal: controller.signal
+                });
+
+                const data = await response.json();
                 const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
                 
                 if (text) {
                     resultDiv.innerHTML = marked.parse(text);
-                    resultContainer.classList.remove('hidden');
                 } else {
-                    throw new Error("Resposta Vazia");
+                    throw new Error();
                 }
             } catch (error) {
-                console.error("Erro IA:", error);
-                resultDiv.innerHTML = `
-                    <div class="p-6 bg-red-900/20 border border-red-500/30 rounded-2xl text-red-200">
-                        <p class="font-bold mb-2">⚠️ Instabilidade Temporária na Rede</p>
-                        <p class="text-xs opacity-80">A análise técnica robusta não pôde ser concluída. Isso pode ocorrer devido a filtros de rede da instituição ou congestionamento na API do Google. Por favor, tente novamente agora.</p>
-                        <button onclick="runIA()" class="mt-4 bg-red-500/20 px-4 py-2 rounded-lg text-xs font-bold border border-red-500/30">Tentar Novamente</button>
-                    </div>`;
-                resultContainer.classList.remove('hidden');
+                // FALLBACK: Se a IA falhar, mostra o resumo geral automaticamente
+                resultDiv.innerHTML = marked.parse(`### Análise Técnica (Modo de Segurança)\nDevido à instabilidade na rede local, apresentamos o resumo técnico de referência:\n\n` + localKnowledge.spread);
             } finally {
-                btn.disabled = false;
                 loading.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+                btn.disabled = false;
             }
         }
 
         function copyIAResult() {
             const text = document.getElementById('ia-result').innerText;
-            const temp = document.createElement('textarea');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            alert("Conteúdo copiado!");
+            navigator.clipboard.writeText(text).then(() => alert("Copiado!"));
         }
 
         function logout() {
@@ -343,4 +352,3 @@
     </script>
 </body>
 </html>
-
