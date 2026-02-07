@@ -203,7 +203,6 @@
                             
                             <p class="text-xs md:text-sm text-slate-400 mb-6">Analise cenários complexos de Mercado de Capitais. Pergunte sobre a Agenda BC#, impactos do Drex ou modelos de desintermediação.</p>
                             
-                            <!-- Interface de Chat/Perguntas -->
                             <div class="space-y-4">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
                                     <button onclick="setIAPrompt('Qual o papel do Drex na redução do spread bancário?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Drex & Spread</button>
@@ -219,7 +218,6 @@
                                 </button>
                             </div>
 
-                            <!-- Resultado Robusto -->
                             <div id="ia-loading" class="hidden mt-8 text-center py-10">
                                 <div class="inline-block w-8 h-8 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
                                 <p class="text-sm text-slate-400 mt-4 loading-dots">Analisando dados do Banco Central</p>
@@ -233,8 +231,7 @@
                                         Copiar
                                     </button>
                                 </div>
-                                <div id="ia-result" class="p-6 bg-blue-900/20 rounded-2xl text-xs md:text-sm text-blue-50 border border-blue-500/20 leading-relaxed whitespace-pre-wrap"></div>
-                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Nota: Esta resposta é gerada via IA integrada e deve ser cruzada com as referências bibliográficas da Profa. Renata Novaes.</p>
+                                <div id="ia-result" class="p-6 bg-blue-900/20 rounded-2xl text-xs md:text-sm text-blue-50 border border-blue-500/20 leading-relaxed whitespace-pre-wrap text-left"></div>
                             </div>
                         </div>
                     </div>
@@ -317,6 +314,7 @@
     </script>
 </body>
 </html>
+
 
 
 
