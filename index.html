@@ -1189,6 +1189,89 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
             }
         }
     </script>
+<!-- SCRIPT PARA DETECTAR AUTOMATICAMENTE O ARQUIVO DE AULA MAIS RECENTE -->
+<!-- Adicione este script NO FINAL do seu index.html, logo antes de </body> -->
+
+<script>
+    // Função para extrair o número da aula do nome do arquivo
+    function extractAulaNumber(filename) {
+        const match = filename.match(/aula(\d+)\.html/i);
+        return match ? parseInt(match[1]) : null;
+    }
+
+    // Função para obter o título baseado no número da aula
+    function getAulaTitle(numero) {
+        const titles = {
+            1: 'O Novo SFN e Fintechs',
+            2: 'Selic, IPCA e a mecânica das taxas de juros',
+            3: 'Mercado de Derivativos',
+            4: 'Operações com Futuros',
+            5: 'Opções e Estratégias',
+            // Adicione mais títulos conforme criar novas aulas
+        };
+        return titles[numero] || `Aula ${numero}`;
+    }
+
+    // Função para atualizar o slide mais recente
+    function updateLatestSlide() {
+        // Procura por todos os links que apontam para arquivos aula*.html
+        const allAulaLinks = Array.from(document.querySelectorAll('a[href*="aula"][href$=".html"]'));
+        
+        if (allAulaLinks.length === 0) {
+            console.warn('Nenhum arquivo de aula encontrado');
+            return;
+        }
+
+        // Extrai os números das aulas
+        const aulaNumbers = allAulaLinks
+            .map(link => extractAulaNumber(link.href))
+            .filter(num => num !== null);
+
+        if (aulaNumbers.length === 0) {
+            console.warn('Nenhuma aula com formato válido encontrada');
+            return;
+        }
+
+        // Encontra o maior número (aula mais recente)
+        const latestNumber = Math.max(...aulaNumbers);
+        const latestFilename = `aula${String(latestNumber).padStart(2, '0')}.html`;
+        const latestTitle = getAulaTitle(latestNumber);
+
+        // Procura pelo link do slide na página inicial (dentro de #sec-aula)
+        const slideLink = document.querySelector('#sec-aula a[href*="aula"][href$=".html"]');
+        
+        if (slideLink) {
+            // Atualiza o href
+            slideLink.href = latestFilename;
+            
+            // Atualiza o número da aula
+            const numberDiv = slideLink.querySelector('.w-10.h-10');
+            if (numberDiv) {
+                numberDiv.textContent = String(latestNumber).padStart(2, '0');
+            }
+            
+            // Atualiza o título
+            const titleP = slideLink.querySelector('p:first-of-type');
+            if (titleP) {
+                titleP.textContent = `Slide Aula ${String(latestNumber).padStart(2, '0')}`;
+            }
+            
+            // Atualiza a descrição
+            const descP = slideLink.querySelector('p:last-of-type');
+            if (descP) {
+                descP.textContent = latestTitle;
+            }
+
+            console.log(`✅ Slide atualizado: Aula ${latestNumber} - ${latestTitle}`);
+        }
+    }
+
+    // Executar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        updateLatestSlide();
+    });
+</script>
 </body>
 </html>
+
 
