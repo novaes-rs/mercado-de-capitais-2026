@@ -43,9 +43,14 @@
         }
 
         /* Estilização para o Markdown da IA */
-        #ia-result h3 { font-weight: bold; color: #60a5fa; margin-top: 10px; font-size: 1.1em; }
-        #ia-result ul { list-style-type: disc; padding-left: 20px; margin: 10px 0; }
-        #ia-result strong { color: #fbbf24; }
+        #ia-result h3 { font-weight: bold; color: #60a5fa; margin-top: 15px; margin-bottom: 10px; font-size: 1.2em; border-left: 4px solid #f59e0b; padding-left: 10px; }
+        #ia-result p { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.6; }
+        #ia-result ul { list-style-type: disc; padding-left: 25px; margin: 12px 0; }
+        #ia-result li { margin-bottom: 8px; font-size: 0.9rem; }
+        #ia-result strong { color: #fbbf24; font-weight: 700; }
+        #ia-result table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85em; background: rgba(255,255,255,0.02); }
+        #ia-result th { background: rgba(255,255,255,0.1); padding: 10px; text-align: left; color: #f59e0b; }
+        #ia-result td { border: 1px solid rgba(255,255,255,0.05); padding: 10px; color: #cbd5e1; }
     </style>
 </head>
 <body class="min-h-screen pb-10">
@@ -57,10 +62,10 @@
                 🔐
             </div>
             <h1 class="text-2xl md:text-3xl font-bold mb-2 tracking-tight text-white">Portal Acadêmico</h1>
-            <p class="text-slate-400 text-sm mb-8">Digite a senha para acessar o conteúdo</p>
+            <p class="text-slate-400 text-sm mb-8">Acesso exclusivo à disciplina</p>
             <input type="password" id="pass-input" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white mb-4 focus:ring-2 focus:ring-amber-500 outline-none text-center tracking-[0.5em] text-lg" placeholder="••••••">
             <button onclick="handleLogin()" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 rounded-2xl transition-all active:scale-95 text-lg shadow-lg shadow-amber-500/20">Entrar</button>
-            <p id="login-error" class="text-red-400 text-xs mt-4 hidden">Senha incorreta. Verifique o Contrato Pedagógico.</p>
+            <p id="login-error" class="text-red-400 text-xs mt-4 hidden">Senha incorreta. Verifique com a professora.</p>
         </div>
     </div>
 
@@ -100,9 +105,9 @@
                             <h2 class="text-2xl md:text-4xl font-bold text-white mt-6 mb-4 tracking-tight text-left">Sejam muito bem-vindos!</h2>
                             
                             <div class="space-y-4 text-slate-300 text-sm md:text-base leading-relaxed text-left">
-                                <p>Olá, pessoal! Eu sou a <strong>Profa. Renata Novaes</strong> e é um prazer iniciar esta jornada com vocês.</p>
-                                <p>Desenvolvi este espaço digital especialmente para atender à dinâmica e à interatividade que a nossa disciplina de <em>Mercado de Capitais e Derivativos</em> exige. Este não é apenas um repositório de arquivos, mas um recurso adicional criado para potencializar a performance e o aprendizado de cada um de vocês.</p>
-                                <p class="text-amber-500 font-semibold italic">Explorem cada recurso e vamos transformar conhecimento em valor!</p>
+                                <p>Olá, pessoal! Eu sou a <strong>Profa. Renata Novaes</strong>.</p>
+                                <p>Este portal foi desenvolvido por mim especialmente para atender à dinâmica e interatividade que a disciplina de <em>Mercado de Capitais</em> precisa. É um recurso adicional para ajudar na performance de vocês ao longo do semestre.</p>
+                                <p class="text-amber-500 font-semibold italic">Explorem o laboratório de IA e os materiais técnicos exclusivos!</p>
                             </div>
                             
                             <div class="grid grid-cols-1 gap-3 mt-8">
@@ -110,23 +115,15 @@
                                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-bold">02</div>
                                     <div class="flex-grow">
                                         <p class="text-xs font-bold">Slide Aula 02</p>
-                                        <p class="text-[10px] opacity-70 italic">Acessar conteúdo atualizado</p>
+                                        <p class="text-[10px] opacity-70 italic">Drex & Spread Bancário</p>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
-                                </a>
-                                <a href="https://drive.google.com/file/d/1l74XAt73W_BjoiICCGVCBThz-BTIYcz8/view?usp=drive_link" target="_blank" class="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/40 transition-all group text-left">
-                                    <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 text-xs font-bold italic">PDF</div>
-                                    <div class="flex-grow">
-                                        <p class="text-xs font-bold text-white">Plano de Ensino</p>
-                                        <p class="text-[10px] text-slate-500 italic">Cronograma completo no Drive</p>
-                                    </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-600"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ABA: Unidade (Lista de Slides) -->
+                    <!-- ABA: Slides -->
                     <div id="sec-unidade" class="hidden fade-in space-y-4 text-left">
                         <div class="glass-card p-6 md:p-8 rounded-[2rem]">
                             <h3 class="text-white font-bold mb-4">Repositório de Slides</h3>
@@ -145,43 +142,43 @@
 
                     <!-- ABA: IA AVANÇADA -->
                     <div id="sec-ia" class="hidden fade-in space-y-6 text-left">
-                        <div class="glass-card p-6 md:p-10 rounded-[2rem] border-blue-500/20">
+                        <div class="glass-card p-6 md:p-10 rounded-[2rem] border-blue-500/20 shadow-2xl shadow-blue-900/10">
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🤖</div>
-                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório de IA Avançado</h2>
+                                <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Cérebro Digital: Mercado de Capitais</h2>
                             </div>
                             
-                            <p class="text-xs md:text-sm text-slate-400 mb-6">Analise cenários complexos do Mercado de Capitais Brasileiro. Pergunte sobre a Agenda BC#, Drex ou desintermediação.</p>
+                            <p class="text-xs md:text-sm text-slate-400 mb-6 leading-relaxed">Analise os impactos do <strong>DREX</strong> e da <strong>Agenda BC#</strong>. Pergunte sobre a redução do spread bancário ou novos modelos de crédito (SCD/SEP).</p>
                             
                             <div class="space-y-4">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
-                                    <button onclick="setIAPrompt('Explique detalhadamente como o Drex reduz o spread bancário baseado nos 5 componentes.')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Drex & Spread</button>
-                                    <button onclick="setIAPrompt('Qual a diferença entre SCD e SEP e como elas aumentam a competição?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">SCD vs SEP</button>
-                                    <button onclick="setIAPrompt('Como a tokenização de ativos reais impacta a liquidez do mercado secundário?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Tokenização</button>
+                                    <button onclick="setIAPrompt('Explique como o Drex atua na redução do spread bancário através dos seus 5 componentes.')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Drex & Spread</button>
+                                    <button onclick="setIAPrompt('Como a tokenização de ativos reduz o custo de emissão em 70%?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Tokenização</button>
+                                    <button onclick="setIAPrompt('Qual o impacto do Open Finance na competição bancária brasileira?')" class="text-[10px] p-2 bg-white/5 border border-white/10 rounded-lg text-slate-400 hover:bg-blue-500/20 hover:text-white transition">Open Finance</button>
                                 </div>
                                 
-                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600" placeholder="Digite sua dúvida técnica para análise profunda..."></textarea>
+                                <textarea id="ia-prompt" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-600 transition-all" placeholder="Digite sua dúvida técnica para uma análise robusta..."></textarea>
                                 
-                                <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-2">
+                                <button onclick="runIA()" id="ia-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3">
                                     <span>Consultar Assistente de IA</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="12" x="2" y="10" rx="2"/><path d="M7 15h.01"/><path d="M17 15h.01"/></svg>
                                 </button>
                             </div>
 
                             <div id="ia-loading" class="hidden mt-8 text-center py-10">
-                                <div class="inline-block w-8 h-8 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
-                                <p class="text-sm text-slate-400 mt-4 loading-dots">Analisando dados do Banco Central e Mercado de Capitais</p>
+                                <div class="inline-block w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
+                                <p class="text-sm text-slate-400 mt-4 loading-dots font-semibold">Analisando dados do Banco Central</p>
                             </div>
                             
-                            <div id="ia-result-container" class="hidden mt-8">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest">Análise Técnica Robusta</span>
-                                    <button onclick="copyIAResult()" class="text-[10px] text-slate-500 hover:text-white flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                        Copiar
+                            <div id="ia-result-container" class="hidden mt-8 fade-in">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-[10px] uppercase font-bold text-blue-400 tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">Resultado da Análise Técnica</span>
+                                    <button onclick="copyIAResult()" class="text-[10px] text-slate-500 hover:text-white flex items-center gap-1 border border-white/10 px-3 py-1 rounded-lg hover:bg-white/5">
+                                        Copiar Texto
                                     </button>
                                 </div>
-                                <div id="ia-result" class="p-6 bg-blue-900/20 rounded-2xl text-xs md:text-sm text-blue-50 border border-blue-500/20 leading-relaxed whitespace-pre-wrap text-left"></div>
-                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte dos dados: Banco Central do Brasil (Agenda BC#) e Relatório de Spread Bancário (Jan/2026).</p>
+                                <div id="ia-result" class="p-6 bg-slate-900/50 rounded-2xl text-slate-200 border border-white/5 shadow-inner"></div>
+                                <p class="text-[9px] text-slate-500 mt-4 italic text-center">Fonte: Base de Dados da Disciplina - Ma. Renata Novaes (Dados Jan/2026).</p>
                             </div>
                         </div>
                     </div>
@@ -193,11 +190,11 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                                 <div class="p-6 bg-white/5 rounded-2xl border border-white/5">
                                     <h3 class="text-blue-400 font-bold mb-1">NPC 1 (5.0)</h3>
-                                    <p class="text-[10px] text-slate-500 uppercase">Média: Prova + TDEs</p>
+                                    <p class="text-[10px] text-slate-500 uppercase">Provas e TDEs</p>
                                 </div>
                                 <div class="p-6 bg-white/5 rounded-2xl border border-white/5">
                                     <h3 class="text-amber-500 font-bold mb-1">NPC 2 (5.0)</h3>
-                                    <p class="text-[10px] text-slate-500 uppercase">Média: Prova + Projeto</p>
+                                    <p class="text-[10px] text-slate-500 uppercase">Provas e Projeto</p>
                                 </div>
                             </div>
                         </div>
@@ -208,15 +205,15 @@
                 <!-- Sidebar -->
                 <div class="space-y-6 text-left">
                     <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-6 md:p-8 rounded-[2rem] text-black shadow-xl">
-                        <h3 class="text-lg font-black mb-2 uppercase italic tracking-tighter">Agenda Ativa</h3>
-                        <p class="text-xs font-semibold opacity-90">Próxima aula: 13/02. Tema: Selic, IPCA e a mecânica das taxas de juros.</p>
+                        <h3 class="text-lg font-black mb-2 uppercase italic tracking-tighter">Próxima Entrega</h3>
+                        <p class="text-xs font-semibold opacity-90">Carta de Conjuntura (TDE 1.1) até 20/02 via Portal Oficial.</p>
                     </div>
                     
                     <div class="glass-card p-6 rounded-[2rem] border-white/5">
-                        <h3 class="text-white font-bold mb-4 text-[10px] uppercase tracking-widest opacity-50">Bibliografia</h3>
+                        <h3 class="text-white font-bold mb-4 text-[10px] uppercase tracking-widest opacity-50">Bibliografia Recomendada</h3>
                         <ul class="space-y-3 text-[11px] text-slate-400">
-                            <li><span class="text-amber-500">•</span> Assaf Neto: Mercado Financeiro</li>
-                            <li><span class="text-amber-500">•</span> Agenda BC# (Banco Central)</li>
+                            <li><span class="text-amber-500 font-bold">•</span> Assaf Neto: Mercado Financeiro</li>
+                            <li><span class="text-amber-500 font-bold">•</span> Relatórios Agenda BC# (BCB)</li>
                         </ul>
                     </div>
                 </div>
@@ -226,14 +223,14 @@
 
     <script>
         const SENHA = "#2026.1";
-        const apiKey = ""; 
+        const apiKey = ""; // API Key fornecida pelo ambiente
 
         function handleLogin() {
             const val = document.getElementById('pass-input').value;
             if(val === SENHA) {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
-                localStorage.setItem('auth_mercado_v5', 'true');
+                localStorage.setItem('auth_mercado_v6', 'true');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
@@ -251,16 +248,20 @@
             document.getElementById('ia-prompt').value = text;
         }
 
-        async function fetchWithRetry(url, options, retries = 5, backoff = 1000) {
+        // Sistema de Retry com Backoff Exponencial
+        async function fetchAI(url, body, retries = 5, delay = 1000) {
             for (let i = 0; i < retries; i++) {
                 try {
-                    const response = await fetch(url, options);
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     return await response.json();
                 } catch (err) {
                     if (i === retries - 1) throw err;
-                    // Exponential backoff: 1s, 2s, 4s, 8s, 16s
-                    await new Promise(resolve => setTimeout(resolve, backoff * Math.pow(2, i)));
+                    await new Promise(r => setTimeout(r, delay * Math.pow(2, i)));
                 }
             }
         }
@@ -279,46 +280,37 @@
             loading.classList.remove('hidden');
             resultContainer.classList.add('hidden');
 
-            const systemPrompt = `Você é o Assistente Virtual da Profa. Ma. Renata Novaes no portal de Mercado de Capitais. 
-            Sua missão é fornecer resumos robustos, técnicos e altamente didáticos para alunos do 7º semestre de Administração.
-            Utilize obrigatoriamente os seguintes dados oficiais para basear suas respostas:
-            - Cenário de Spread: Em janeiro de 2026, o spread bancário médio no Brasil atingiu 21,4 p.p.
-            - Os 5 componentes do spread são: Inadimplência (72,89M inadimplentes em Mar/2024), Custos Administrativos, Impostos/Encargos, Lucro dos Bancos e Risco/Incerteza.
-            - Impacto do Drex: 
-                1. Eficiência Operacional: Elimina intermediários obsoletos, permitindo liquidação 24/7 e D+0 via Smart Contracts.
-                2. Mitigação de Riscos: Transparência da blockchain e automação na execução de garantias via DvP (Delivery versus Payment).
-                3. Tokenização: Reduz custos de emissão e estruturação de ativos em até 70%.
-                4. Competição: Reduz barreiras de entrada para Fintechs (SCD e SEP).
-            Estrutura da resposta: Use Markdown (tópicos, negrito). Seja uma autoridade acadêmica.`;
+            const systemPrompt = `Você é o Assistente Virtual da Profa. Ma. Renata Novaes. Sua função é responder dúvidas técnicas para alunos de Administração (7º semestre).
+            DADOS TÉCNICOS OBRIGATÓRIOS:
+            - Spread Bancário no Brasil (Jan/2026): 21,4 p.p.
+            - 5 Componentes do Spread: Inadimplência, Custos Administrativos, Impostos/Encargos, Lucro Bancário e Risco/Incerteza.
+            - Drex (Real Digital): Reduz custos de tokenização em até 70%, permite liquidação atômica (DvP) e D+0 via Smart Contracts.
+            INSTRUÇÕES: Responda sempre em Português do Brasil, de forma robusta, usando Markdown (tópicos, negrito e tabelas se necessário). Seja profissional e acadêmico.`;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const body = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
 
             try {
-                const responseData = await fetchWithRetry(
-                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
-                    {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: userQuery }] }],
-                            systemInstruction: { parts: [{ text: systemPrompt }] }
-                        })
-                    }
-                );
-
-                const textResult = responseData.candidates?.[0]?.content?.parts?.[0]?.text;
+                const data = await fetchAI(url, body);
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
                 
-                if (textResult) {
-                    // Renderiza o markdown para HTML usando a biblioteca marked
-                    resultDiv.innerHTML = marked.parse(textResult);
+                if (text) {
+                    resultDiv.innerHTML = marked.parse(text);
                     resultContainer.classList.remove('hidden');
                 } else {
-                    throw new Error("Resposta vazia da IA");
+                    throw new Error("Resposta Vazia");
                 }
             } catch (error) {
                 console.error("Erro IA:", error);
-                resultDiv.innerHTML = `<div class="p-4 bg-red-900/20 border border-red-500/30 rounded-xl text-red-200">
-                    <strong>Sistema Indisponível:</strong> Não foi possível processar a análise técnica agora. 
-                    Por favor, tente novamente ou verifique se há bloqueios de rede na instituição.
-                </div>`;
+                resultDiv.innerHTML = `
+                    <div class="p-6 bg-red-900/20 border border-red-500/30 rounded-2xl text-red-200">
+                        <p class="font-bold mb-2">⚠️ Instabilidade Temporária na Rede</p>
+                        <p class="text-xs opacity-80">A análise técnica robusta não pôde ser concluída. Isso pode ocorrer devido a filtros de rede da instituição ou congestionamento na API do Google. Por favor, tente novamente agora.</p>
+                        <button onclick="runIA()" class="mt-4 bg-red-500/20 px-4 py-2 rounded-lg text-xs font-bold border border-red-500/30">Tentar Novamente</button>
+                    </div>`;
                 resultContainer.classList.remove('hidden');
             } finally {
                 btn.disabled = false;
@@ -328,29 +320,22 @@
 
         function copyIAResult() {
             const text = document.getElementById('ia-result').innerText;
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                const btn = event.currentTarget;
-                const originalContent = btn.innerHTML;
-                btn.innerHTML = "Copiado!";
-                setTimeout(() => btn.innerHTML = originalContent, 2000);
-            } catch (err) {
-                console.error('Erro ao copiar', err);
-            }
-            document.body.removeChild(textArea);
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert("Conteúdo copiado!");
         }
 
         function logout() {
-            localStorage.removeItem('auth_mercado_v5');
+            localStorage.removeItem('auth_mercado_v6');
             location.reload();
         }
 
         window.onload = () => {
-            if(localStorage.getItem('auth_mercado_v5') === 'true') {
+            if(localStorage.getItem('auth_mercado_v6') === 'true') {
                 document.getElementById('auth-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
             }
