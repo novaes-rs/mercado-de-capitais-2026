@@ -119,6 +119,15 @@
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
                                 </a>
+                                <!-- REINTEGRAÇÃO DO PLANO DE ENSINO -->
+                                <a href="https://drive.google.com/file/d/1l74XAt73W_BjoiICCGVCBThz-BTIYcz8/view?usp=drive_link" target="_blank" class="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/40 transition-all group text-left">
+                                    <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 text-xs font-bold italic">PDF</div>
+                                    <div class="flex-grow">
+                                        <p class="text-xs font-bold text-white">Plano de Ensino</p>
+                                        <p class="text-[10px] text-slate-500 italic">Cronograma completo no Drive</p>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-600"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1 2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -335,7 +344,13 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
 
         function copyIAResult() {
             const text = document.getElementById('ia-result').innerText;
-            navigator.clipboard.writeText(text).then(() => alert("Copiado!"));
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert("Conteúdo copiado!");
         }
 
         function logout() {
