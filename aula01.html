@@ -3,500 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 01 - O Novo SFN - Profa. Renata Novaes</title>
+    <title>Aula 01 - SFN e Inovação - Profa. Ma. Renata Novaes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        :root { --accent: #f59e0b; --bg: #020617; --card-bg: rgba(15, 23, 42, 0.98); }
+        
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #020617; 
+            background-color: var(--bg); 
             color: #f8fafc; 
+            margin: 0; 
             overflow: hidden;
-            margin: 0;
         }
+
+        /* Estrutura de Slides */
         .slide { 
             display: none; 
             height: 100vh; 
             width: 100vw; 
-            padding: 1.5rem;
+            padding: 1rem;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
         }
-        .slide.active { display: flex; animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        
+        .slide.active { display: flex; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
         .content-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 2.5rem;
-            padding: 2.5rem;
+            border-radius: 2rem;
+            padding: 2rem;
             max-width: 1200px;
             width: 100%;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            max-height: 88vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
-        .content-card::-webkit-scrollbar { width: 4px; }
-        .content-card::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 10px; }
 
-        .highlight { color: #f59e0b; font-weight: 800; }
-        
-        /* Botão de Voltar Flutuante */
-        .back-to-portal {
-            position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.6rem 1.2rem;
-            border-radius: 1rem;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            text-decoration: none;
+        @media (min-width: 768px) { .content-card { padding: 3rem; border-radius: 3rem; } }
+
+        /* Componentes Visuais */
+        .highlight { color: var(--accent); font-weight: 800; }
+        .tag { 
+            display: inline-block; padding: 0.2rem 0.8rem; border-radius: 0.5rem; 
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+            background: rgba(245, 158, 11, 0.1); color: var(--accent); margin-bottom: 1rem;
         }
-        .back-to-portal:hover {
-            background: #f59e0b;
-            color: black;
-            border-color: #f59e0b;
-            transform: scale(1.05);
+        .grid-box {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            padding: 1.5rem; border-radius: 1.5rem; text-align: left;
         }
+
+        /* Tabelas */
+        table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin-top: 1rem; }
+        th { background: rgba(245, 158, 11, 0.1); color: var(--accent); padding: 12px; text-align: left; border-bottom: 2px solid rgba(245, 158, 11, 0.2); }
+        td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+        /* Navegação */
+        .top-nav {
+            position: fixed; top: 1.5rem; left: 1.5rem; right: 1.5rem;
+            z-index: 1000; display: flex; justify-content: space-between; pointer-events: none;
+        }
+        .nav-pill {
+            pointer-events: auto; background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.7rem 1.5rem; border-radius: 1rem; color: white;
+            font-size: 0.8rem; font-weight: 700; transition: all 0.2s; cursor: pointer;
+        }
+        .nav-pill:hover { background: var(--accent); color: black; }
 
         .nav-container {
-            position: fixed;
-            bottom: 1.5rem;
-            display: flex;
-            gap: 1rem;
-            z-index: 100;
+            position: fixed; bottom: 1.5rem; display: flex; gap: 1rem;
+            z-index: 100; width: 100%; justify-content: center;
         }
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.6rem 1.5rem;
-            border-radius: 1rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            color: white;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem; border-radius: 1rem; color: white;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; min-width: 120px;
         }
-        .nav-btn:hover { background: #f59e0b; color: #000; border-color: #f59e0b; transform: translateY(-2px); }
-        
+        .nav-btn:hover { background: var(--accent); color: black; }
+
         .progress-bar {
-            position: fixed;
-            top: 0; left: 0; height: 5px;
-            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
-            background-size: 200% 100%;
-            animation: gradientMove 3s linear infinite;
-            transition: width 0.3s;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; height: 5px;
+            background: var(--accent); z-index: 2000; transition: width 0.3s;
         }
-        @keyframes gradientMove { 0% { background-position: 100% 0%; } 100% { background-position: 0% 0%; } }
 
-        .grid-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 1.25rem;
-            border-radius: 1.5rem;
-            text-align: left;
-            transition: transform 0.2s;
+        /* Estilos de Impressão (PDF Fiel) */
+        @media print {
+            body { overflow: visible; background: white; color: black; }
+            .slide { display: block !important; position: relative !important; height: auto !important; page-break-after: always; padding: 20mm; }
+            .content-card { background: white !important; color: black !important; box-shadow: none !important; border: 1px solid #eee !important; max-height: none !important; }
+            .top-nav, .nav-container, .progress-bar { display: none !important; }
+            .highlight, .tag, h1, h2, h3, h4 { color: #f59e0b !important; }
+            .grid-box { border: 1px solid #ddd !important; background: #fafafa !important; color: black !important; }
+            td, th { border: 1px solid #ddd !important; color: black !important; }
         }
-        .grid-box:hover { transform: scale(1.02); background: rgba(255,255,255,0.04); }
-
-        ul { text-align: left; list-style-type: none; }
-        li::before { content: "→"; color: #f59e0b; margin-right: 10px; font-weight: bold; }
-        
-        .ref-text { font-size: 0.8rem; line-height: 1.6; text-align: left; color: #cbd5e1; margin-bottom: 1rem; border-left: 3px solid #f59e0b; padding-left: 1rem; }
-        
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-        }
-        table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin-top: 1rem; }
-        th { background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 12px; text-align: left; border-bottom: 2px solid rgba(245, 158, 11, 0.2); }
-        td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body>
 
     <div class="progress-bar" id="progress"></div>
 
-    <!-- BOTÃO VOLTAR FLUTUANTE -->
-    <a href="index.html" class="back-to-portal">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        Voltar ao Portal
-    </a>
+    <div class="top-nav">
+        <button onclick="window.location.assign('index.html')" class="nav-pill">Sair</button>
+        <button onclick="window.print()" class="nav-pill">Imprimir Material (23 Slides)</button>
+    </div>
 
-    <!-- SLIDE 1: CAPA -->
-    <div class="slide active">
-        <div class="content-card">
-            <div class="tag bg-amber-500/20 text-amber-500 border border-amber-500/30">Mercado de Capitais - 2026.1</div>
-            <h1 class="text-4xl md:text-6xl font-black mt-4 mb-8 leading-tight tracking-tighter uppercase">Sistema Financeiro Nacional <br> <span class="highlight">& Inovação Tecnológica</span></h1>
-            
-            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 text-left">
-                <div class="p-6 bg-white/5 rounded-3xl border border-white/10">
-                     <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-1">Docente</p>
-                     <p class="text-xl font-bold">Profa. Ma. Renata Novaes</p>
-                     <p class="text-slate-400 text-xs mt-2 italic">Análise da estrutura, órgãos e o impacto da Agenda BC# no spread bancário.</p>
-                </div>
-                <div class="p-6 bg-amber-500 rounded-3xl text-black flex items-center justify-center font-black text-center text-lg">
-                    CONCEITOS CHAVE:<br>Intermediação, CMN, BCB, CVM, DREX e Spread.
+    <div id="viewport">
+        
+        <!-- Slide 1: Capa -->
+        <div class="slide active">
+            <div class="content-card text-center">
+                <div class="tag">Unidade I • Mercado de Capitais</div>
+                <h1 class="text-4xl md:text-7xl font-black mb-8 leading-tight uppercase tracking-tighter">O Sistema Financeiro Nacional <br> <span class="highlight">& Inovação Tecnológica</span></h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="grid-box border-amber-500/20">
+                        <p class="text-[10px] font-bold text-amber-500 uppercase mb-1">Docente Responsável</p>
+                        <p class="text-2xl font-bold">Profa. Ma. Renata Novaes</p>
+                    </div>
+                    <div class="grid-box bg-amber-500 text-black flex items-center justify-center font-black uppercase text-center">Conteúdo Robusto • 7º Semestre</div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SLIDE 2: REFERÊNCIAS ABNT -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-2xl font-bold mb-10 highlight uppercase tracking-widest text-left border-b border-white/10 pb-4">Referências Bibliográficas</h2>
-            <div class="space-y-4">
-                <p class="ref-text">BANCO CENTRAL DO BRASIL. <b>O Sistema Financeiro Nacional</b>. Brasília, DF: BCB, 2024. Disponível em: https://www.bcb.gov.br/estabilidadefinanceira/sfn. Acesso em: 07 fev. 2026.</p>
-                <p class="ref-text">FEBRABAN. <b>O Sistema Financeiro Nacional</b>. São Paulo: FEBRABAN, 2018. Disponível em: https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/SFN_atualizado_jul18_port2.pdf. Acesso em: 07 fev. 2026.</p>
-                <p class="ref-text">ANBIMA. <b>CPA-10: Capítulo 1 - Sistema Financeiro Nacional</b>. São Paulo: ANBIMA, 2024. Disponível em: https://www.anbima.com.br/data/files/FD/30/F3/33/466A4810EA926748882BA2A8/CPA-10-Cap1.pdf. Acesso em: 07 fev. 2026.</p>
-                <p class="ref-text">BANCO CENTRAL DO BRASIL. <b>Apresentação: SFN em Transformação</b>. Brasília, DF: BCB, 2023. Disponível em: https://www.bcb.gov.br/conteudo/home-ptbr/TextosApresentacoes/Apresenta%C3%A7%C3%A3o%20SFN%20em%20transforma%C3%A7%C3%A3o.pptx.pdf. Acesso em: 07 fev. 2026.</p>
-                <p class="ref-text">AL, Manus. <b>O Impacto do DREX na Redução do Spread Bancário no Mercado de Capitais</b>. Relatório Técnico, Fev. 2026.</p>
+        <!-- Slide 2: Referências NBR 6023 -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl font-bold mb-6 highlight uppercase border-b border-white/10 pb-4">Referências Bibliográficas (NBR 6023)</h2>
+                <div class="space-y-4 text-xs text-slate-300">
+                    <p class="border-l-4 border-amber-500 pl-4 py-1">BANCO CENTRAL DO BRASIL. <b>O Sistema Financeiro Nacional</b>. Brasília, DF: BCB, 2024. Disponível em: https://www.bcb.gov.br/estabilidadefinanceira/sfn.</p>
+                    <p class="border-l-4 border-amber-500 pl-4 py-1">FEBRABAN. <b>O Sistema Financeiro Nacional</b>. São Paulo, SP: FEBRABAN, 2018. Disponível em: https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/SFN_atualizado_jul18_port2.pdf.</p>
+                    <p class="border-l-4 border-amber-500 pl-4 py-1">ANBIMA. <b>CPA-10: Capítulo 1 - Sistema Financeiro Nacional</b>. São Paulo, SP: ANBIMA, 2024. Disponível em: https://www.anbima.com.br/data/files/FD/30/F3/33/466A4810EA926748882BA2A8/CPA-10-Cap1.pdf.</p>
+                    <p class="border-l-4 border-amber-500 pl-4 py-1 text-amber-500">BANCO CENTRAL DO BRASIL. <b>SFN em Transformação</b>. Brasília, DF: BCB, 2023. Disponível em: https://www.bcb.gov.br/conteudo/home-ptbr/TextosApresentacoes/Apresenta%C3%A7%C3%A3o%20SFN%20em%20transforma%C3%A7%C3%A3o.pptx.pdf.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- SLIDE 3: O QUE É O SFN? -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-bold mb-6 highlight uppercase">O que é o SFN?</h2>
-            <div class="grid md:grid-cols-2 gap-8 text-left">
-                <div class="space-y-4">
-                    <p class="text-sm leading-relaxed text-slate-300">
-                        O Sistema Financeiro Nacional (SFN) é formado por um conjunto de entidades e instituições que promovem a <b>intermediação financeira</b>: o encontro entre poupadores e tomadores de recursos.
-                    </p>
-                    <div class="grid-box border-l-4 border-amber-500">
-                        <h4 class="font-bold text-amber-500 mb-1">Missão do SFN</h4>
-                        <p class="text-xs text-slate-400">Garantir que os recursos circulem com segurança, eficiência e baixo risco, impulsionando o crescimento econômico e o mercado de capitais.</p>
+        <!-- Slide 3: Conceito -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-3xl font-black mb-6 highlight uppercase">1. O Conceito de SFN</h2>
+                <p class="text-slate-300 mb-8 leading-relaxed text-justify">O SFN é a arquitetura que permite a <b>Intermediação Financeira</b>: o processo de canalizar poupança para investimento produtivo.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid-box border-l-4 border-green-500">
+                        <h4 class="font-bold text-green-500 uppercase text-xs">Agentes Superavitários</h4>
+                        <p class="text-xs text-slate-400">Poupadores. Detêm excedente de caixa e buscam rentabilidade.</p>
                     </div>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="font-bold text-white uppercase text-xs">Agentes da Intermediação:</h3>
-                    <div class="p-4 bg-green-500/10 rounded-xl border border-green-500/20">
-                        <p class="text-xs"><b>Superavitários:</b> Poupadores. Têm sobra de caixa e buscam rentabilidade para seus ativos.</p>
-                    </div>
-                    <div class="p-4 bg-red-500/10 rounded-xl border border-red-500/20">
-                        <p class="text-xs"><b>Deficitários:</b> Tomadores. Precisam de crédito para investir, produzir ou consumir.</p>
+                    <div class="grid-box border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-400 uppercase text-xs">Agentes Deficitários</h4>
+                        <p class="text-xs text-slate-400">Tomadores. Necessitam de capital para produzir ou consumir.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SLIDE 4: ESTRUTURA E TRÍADE -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-bold mb-8 highlight uppercase tracking-tighter">Estrutura Hierárquica</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                <div class="grid-box border-t-4 border-purple-500">
-                    <div class="tag bg-purple-500 text-white">1. Normativos</div>
-                    <h3 class="text-lg font-bold text-white mt-2">Conselhos</h3>
-                    <p class="text-[11px] text-slate-400 mb-4 italic">"Ditam as regras e diretrizes."</p>
-                    <ul class="text-[11px] space-y-2 text-slate-300">
-                        <li><b>CMN:</b> Moeda e Crédito.</li>
-                        <li><b>CNSP:</b> Seguros Privados.</li>
-                        <li><b>CNPC:</b> Previdência Fechada.</li>
-                    </ul>
-                </div>
-                <div class="grid-box border-t-4 border-blue-500">
-                    <div class="tag bg-blue-500 text-white">2. Supervisores</div>
-                    <h3 class="text-lg font-bold text-white mt-2">Fiscais</h3>
-                    <p class="text-[11px] text-slate-400 mb-4 italic">"Fiscalizam e executam."</p>
-                    <ul class="text-[11px] space-y-2 text-slate-300">
-                        <li><b>BCB:</b> Bancos e Câmbio.</li>
-                        <li><b>CVM:</b> Mercado de Capitais.</li>
-                        <li><b>SUSEP / PREVIC:</b> Seguros e Pensão.</li>
-                    </ul>
-                </div>
-                <div class="grid-box border-t-4 border-amber-500">
-                    <div class="tag bg-amber-500 text-black">3. Operadores</div>
-                    <h3 class="text-lg font-bold text-white mt-2">Executores</h3>
-                    <p class="text-[11px] text-slate-400 mb-4 italic">"Lidam com os clientes."</p>
-                    <ul class="text-[11px] space-y-2 text-slate-300">
-                        <li>Bancos, Cooperativas.</li>
-                        <li>Bolsa (B3), Corretoras.</li>
-                        <li>Fintechs (SCD/SEP).</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 5: CMN (EXPANDIDO) -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-2xl md:text-3xl font-black mb-8 highlight uppercase text-left">CMN: Conselho Monetário Nacional</h2>
-            <div class="grid md:grid-cols-2 gap-10 text-left">
-                <div class="space-y-6">
-                    <div class="p-6 bg-amber-500/10 rounded-3xl border border-amber-500/30">
-                        <h3 class="text-xl font-bold text-amber-500 mb-4 italic">O Órgão de Cúpula</h3>
-                        <p class="text-sm text-slate-200 leading-relaxed">
-                            O <b>CMN</b> é o responsável por formular a política da moeda e do crédito. Ele não fiscaliza ninguém; ele <b>manda</b>. Suas decisões são publicadas através das <b>Resoluções CMN</b>.
-                        </p>
+        <!-- Slide 4: Desintermediação -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">2. Desintermediação Financeira</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 text-justify leading-relaxed">É a migração do financiamento via bancos (empréstimos) para o financiamento via <b>Mercado de Capitais</b> (emissão de ativos).</p>
+                        <div class="tag bg-green-500/20 text-green-500 uppercase">Fator de Eficiência</div>
                     </div>
-                    <div class="grid-box bg-slate-900">
-                        <h4 class="font-bold text-xs text-amber-500 uppercase mb-2 tracking-widest">Composição (Lei 4.595/64):</h4>
-                        <ol class="text-xs space-y-2 text-slate-300">
-                            <li>1. Ministro da Fazenda (Presidente)</li>
-                            <li>2. Ministro do Planejamento e Orçamento</li>
-                            <li>3. Presidente do Banco Central</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="font-bold text-amber-500 uppercase text-xs">Principais Atribuições:</h4>
-                    <ul class="text-xs space-y-3 text-slate-300">
-                        <li>Fixar a <b>Meta de Inflação</b> (IPCA).</li>
-                        <li>Regular as diretrizes do crédito e câmbio.</li>
-                        <li>Orientar a aplicação dos recursos das I.F.s.</li>
-                        <li>Zelar pela liquidez e solvência do sistema.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 6: BCB VS CVM -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-bold mb-8 highlight uppercase text-center">Os Braços da Supervisão</h2>
-            <div class="grid md:grid-cols-2 gap-10 text-left">
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center font-black">BC</div>
-                        <h3 class="text-2xl font-bold text-blue-400">Banco Central</h3>
-                    </div>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Xerife dos Bancos e Câmbio</p>
-                    <ul class="text-xs space-y-3 text-slate-300">
-                        <li>Mantém a estabilidade de preços (Inflação).</li>
-                        <li>Fiscaliza bancos e cooperativas.</li>
-                        <li>Gere as reservas internacionais.</li>
-                        <li>Regula o sistema de pagamentos (PIX).</li>
-                    </ul>
-                </div>
-                <div class="space-y-6 border-l border-white/10 pl-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center font-black text-black">CVM</div>
-                        <h3 class="text-2xl font-bold text-amber-500 uppercase">CVM</h3>
-                    </div>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Guardiã do Mercado de Capitais</p>
-                    <ul class="text-xs space-y-3 text-slate-300">
-                        <li>Fiscaliza o mercado de <b>Valores Mobiliários</b>.</li>
-                        <li>Regula Ações, Debêntures e Fundos.</li>
-                        <li>Protege os investidores contra fraudes.</li>
-                        <li>Garante a transparência de informações.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 7: O NOVO SFN (AGENDA BC#) -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-4 highlight uppercase tracking-tighter text-left">O "Novo SFN": Agenda BC#</h2>
-            <p class="text-sm text-slate-400 mb-8 italic text-left">Saindo do modelo burocrático para a economia programável.</p>
-            <div class="grid md:grid-cols-2 gap-8 text-left">
-                <div class="space-y-6">
-                    <h3 class="text-lg font-bold text-blue-400">Os 4 Pilares da Transformação:</h3>
-                    <div class="grid grid-cols-2 gap-3 text-[10px]">
-                        <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-green-500"><b>Inclusão:</b> Acesso democratizado.</div>
-                        <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-blue-500"><b>Competitividade:</b> Fim do oligopólio.</div>
-                        <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-purple-500"><b>Transparência:</b> Dados do cliente.</div>
-                        <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-amber-500"><b>Educação:</b> Cidadania financeira.</div>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="grid-box border-b-2 border-amber-500">
-                        <h4 class="font-bold text-amber-500 text-xs uppercase mb-1">Desintermediação Financeira:</h4>
-                        <p class="text-[10px] text-slate-400 leading-relaxed">Redução da dependência bancária. O mercado de capitais e as fintechs conectam o capital diretamente ao projeto produtivo.</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="p-3 bg-blue-600 rounded-xl text-center font-bold text-[10px]">PIX (Imediatez)</div>
-                        <div class="p-3 bg-purple-600 rounded-xl text-center font-bold text-[10px]">DREX (Tokens)</div>
+                    <div class="grid-box border-amber-500/20">
+                        <p class="text-xs text-slate-400 leading-relaxed italic">"Empresas emitem Debêntures diretamente para investidores, contornando o spread elevado dos bancos comerciais."</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SLIDE 8: O DESAFIO DO SPREAD -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-6 highlight uppercase">O Custo do Crédito: Spread</h2>
-            <div class="grid md:grid-cols-2 gap-8 text-left">
-                <div class="space-y-4">
-                    <div class="p-6 bg-red-500/10 rounded-3xl border border-red-500/30">
-                        <h3 class="text-lg font-bold text-red-400 mb-2">Realidade Brasileira</h3>
-                        <p class="text-xs text-slate-300">Em <b>Janeiro de 2026</b>, o spread bancário médio no Brasil atingiu <b>21,4 p.p.</b>, um dos maiores entraves ao PIB nacional.</p>
+        <!-- Slide 5: Hierarquia -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="text-2xl md:text-3xl font-black mb-8 highlight uppercase text-left">3. Estrutura do SFN</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                    <div class="grid-box border-t-4 border-purple-500">
+                        <h3 class="font-bold text-white mb-2 uppercase text-sm">Normativos</h3>
+                        <ul class="text-[10px] space-y-1 text-slate-300">
+                            <li>• CMN (Órgão Máximo)</li>
+                            <li>• CNSP</li>
+                        </ul>
                     </div>
-                    <table class="text-[9px]">
-                        <thead><tr><th>Componente</th><th>% Impacto</th></tr></thead>
+                    <div class="grid-box border-t-4 border-blue-500">
+                        <h3 class="font-bold text-white mb-2 uppercase text-sm">Supervisores</h3>
+                        <ul class="text-[10px] space-y-1 text-slate-300">
+                            <li>• Banco Central</li>
+                            <li>• CVM</li>
+                        </ul>
+                    </div>
+                    <div class="grid-box border-t-4 border-amber-500">
+                        <h3 class="font-bold text-white mb-2 uppercase text-sm">Operadores</h3>
+                        <ul class="text-[10px] space-y-1 text-slate-300">
+                            <li>• Bancos, B3</li>
+                            <li>• Fintechs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CMN Detalhado -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">4. CMN: Conselho Monetário Nacional</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <div class="p-6 bg-amber-500/10 rounded-3xl border border-amber-500/20">
+                            <h3 class="text-lg font-bold text-amber-500 mb-2 uppercase italic">O Cérebro</h3>
+                            <p class="text-xs md:text-sm text-slate-200 text-justify">Define as "leis" do mercado: meta de inflação, diretrizes cambiais e regras de crédito bancário.</p>
+                        </div>
+                    </div>
+                    <div class="grid-box text-xs">
+                        <strong class="text-amber-500 uppercase text-[10px]">Composição:</strong><br><br>
+                        1. Ministro da Fazenda (Presidente)<br>
+                        2. Ministro do Planejamento<br>
+                        3. Presidente do Banco Central
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: BCB -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-blue-400">5. Xerife: Banco Central (BCB)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4 text-sm text-slate-300">
+                        <p>Autarquia responsável por garantir o poder de compra da moeda e a solidez do sistema bancário.</p>
+                        <ul class="text-[11px] space-y-2 text-slate-400">
+                            <li>• Execução da Selic.</li>
+                            <li>• Fiscalização de Bancos.</li>
+                            <li>• Monopólio da Moeda.</li>
+                            <li>• Gestão do PIX.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-blue-500/5 rounded-3xl border border-blue-500/10 flex items-center justify-center italic text-xs text-blue-400">
+                        "O BC dita a saúde do crédito bancário."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CVM -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-blue-300">6. CVM: Mercado de Capitais</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 bg-blue-300/5 rounded-3xl text-xs text-blue-300 italic leading-relaxed">
+                        A Comissão de Valores Mobiliários fiscaliza Ações, Debêntures e Fundos. Sua missão é proteger o investidor e assegurar transparência das S.A.s.
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-blue-300 uppercase text-xs">Foco CVM:</h4>
+                        <ul class="text-[11px] space-y-2 text-slate-400">
+                            <li>• Fiscalização da B3.</li>
+                            <li>• Auditoria de balanços.</li>
+                            <li>• Registro de Ofertas Públicas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Agenda BC# -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-4 highlight uppercase text-center">7. Agenda BC#</h2>
+                <p class="text-sm text-slate-300 mb-8 text-center">O DNA da modernização financeira brasileira baseia-se em 4 dimensões:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid-box border-b-4 border-green-500 text-center font-bold text-[10px] uppercase">Inclusão</div>
+                    <div class="grid-box border-b-4 border-blue-500 text-center font-bold text-[10px] uppercase">Competição</div>
+                    <div class="grid-box border-b-4 border-purple-500 text-center font-bold text-[10px] uppercase">Transparência</div>
+                    <div class="grid-box border-b-4 border-amber-500 text-center font-bold text-[10px] uppercase">Educação</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Dimensão Inclusão -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-green-500">8. Dimensão: INCLUSÃO</h2>
+                <p class="text-sm text-slate-300 leading-relaxed text-justify mb-4">Garante que microempreendedores e a população de baixa renda tenham acesso pleno a serviços financeiros digitais.</p>
+                <div class="grid-box bg-green-900/5 italic text-xs text-slate-500">"Redução das barreiras físicas de entrada."</div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Dimensão Competição -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-blue-500">9. Dimensão: COMPETIÇÃO</h2>
+                <p class="text-sm text-slate-300 leading-relaxed text-justify mb-4">Redução da concentração bancária através do incentivo às Fintechs e da portabilidade real de crédito e dados.</p>
+                <div class="grid-box bg-blue-900/5 italic text-xs text-slate-500">"Quebra do oligopólio para derrubar taxas."</div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Dimensão Transparência -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-purple-500">10. Dimensão: TRANSPARÊNCIA</h2>
+                <p class="text-sm text-slate-300 leading-relaxed text-justify mb-4">Combate à assimetria de informação. O mercado deve conhecer os riscos reais para precificar juros de forma justa.</p>
+                <div class="grid-box bg-purple-900/5 italic text-xs text-slate-500">"O histórico de crédito pertence ao cliente."</div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Dimensão Educação -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-amber-500">11. Dimensão: EDUCAÇÃO</h2>
+                <p class="text-sm text-slate-300 leading-relaxed text-justify mb-4">Promoção da Cidadania Financeira para reduzir inadimplência e melhorar a alocação de poupança no país.</p>
+                <div class="grid-box bg-amber-900/5 italic text-xs text-slate-500">"Um mercado educado é um mercado estável."</div>
+            </div>
+        </div>
+
+        <!-- Slide 14: PIX -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-green-400">12. PIX e o MED</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-300">
+                    <div class="space-y-4">
+                        <p>A liquidez instantânea 24/7 exigiu novos protocolos de segurança como o <b>MED</b>.</p>
+                        <div class="p-5 bg-green-500/10 border border-green-500/20 rounded-2xl text-[11px]">
+                            <b>MED (Mecanismo Especial de Devolução):</b> Bloqueio e estorno automático em casos de fraude comprovada via PIX.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: DREX -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-blue-400">13. DREX: Economia Programável</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 text-justify leading-relaxed italic">A CBDC brasileira permite tokenização de ativos em Blockchain com segurança jurídica total.</p>
+                        <div class="grid-box border-l-4 border-amber-500 text-[11px]">
+                            <b>DvP (Delivery vs Payment):</b> Liquidação atômica: o ativo e o dinheiro trocam de mãos no mesmo milissegundo via Smart Contracts.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Open Finance -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-purple-400">14. Open Finance</h2>
+                <p class="text-sm text-slate-300 italic text-justify leading-relaxed mb-6">"O dado bancário é um ativo do cliente. A portabilidade é total através de APIs seguras."</p>
+                <div class="grid-box text-xs text-slate-400">Permite que Fintechs "enxerguem" o perfil real do cliente para ofertar juros menores que os bancos tradicionais.</div>
+            </div>
+        </div>
+
+        <!-- Slide 17: SCD -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">15. A Nova Era: SCD</h2>
+                <div class="grid-box border-l-8 border-amber-500">
+                    <h3 class="text-xl font-bold text-amber-500 mb-2">SCD (Sociedade de Crédito Direto)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed text-justify italic">Instituição 100% digital que opera crédito apenas com <b>capital próprio</b>. Não capta depósitos. Foco em automação total de processos e baixíssimo custo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: SEP -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">16. A Nova Era: SEP</h2>
+                <div class="grid-box border-l-8 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-500 mb-2">SEP (Sociedade de Empréstimo entre Pessoas)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed text-justify italic">Viabiliza o <b>Peer-to-Peer (P2P)</b>. Conecta investidores diretamente aos tomadores sem o spread comercial clássico. O banco é apenas o elo tecnológico.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Quadro Comparativo -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase text-center">17. Evolução do Sistema</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>Característica</th><th>SFN Tradicional</th><th>Novo SFN (Agenda BC#)</th></tr>
+                        </thead>
                         <tbody>
-                            <tr><td>Inadimplência (Risco)</td><td>37,5%</td></tr>
-                            <tr><td>Custos Administrativos</td><td>25,3%</td></tr>
-                            <tr><td>Impostos e Encargos</td><td>22,2%</td></tr>
-                            <tr><td>Margem de Lucro</td><td>15,0%</td></tr>
+                            <tr><td><b>Liquidação</b></td><td>Dias Úteis (T+1, T+2)</td><td>Instantânea (D+0 / 24/7)</td></tr>
+                            <tr><td><b>Intermediação</b></td><td>Bancos Múltiplos</td><td>Mercado de Capitais / Fintechs</td></tr>
+                            <tr><td><b>Contratos</b></td><td>Físicos / Digitais Simples</td><td>Smart Contracts (Automáticos)</td></tr>
+                            <tr><td><b>Ativos</b></td><td>Custódia Física/Escritural</td><td>Tokenizados em Blockchain</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="font-bold text-amber-500 uppercase text-xs">Entraves Estruturais:</h4>
-                    <ul class="text-[11px] space-y-2 text-slate-400">
-                        <li><b>Concentração Bancária:</b> Baixa competitividade.</li>
-                        <li><b>Incerteza Jurídica:</b> Dificuldade em recuperar garantias.</li>
-                        <li><b>Sistemas Legados:</b> Alta burocracia operacional.</li>
-                        <li><b>Assimetria de Dados:</b> Risco de crédito subestimado.</li>
-                    </ul>
-                </div>
             </div>
         </div>
-    </div>
 
-    <!-- SLIDE 9: O DREX COMO SOLUÇÃO -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-8 highlight uppercase">DREX: Reduzindo o Spread</h2>
-            <p class="text-sm text-slate-400 mb-8 text-left">Como a CBDC brasileira ataca os componentes do spread bancário:</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-                <div class="grid-box border-t-2 border-blue-500">
-                    <h4 class="font-bold text-blue-400 text-xs mb-2 uppercase">1. Eficiência Operacional</h4>
-                    <p class="text-[10px] text-slate-400">Uso de <b>Smart Contracts</b> elimina intermediários e reduz custos administrativos em até <b>70%</b> na estruturação de ativos.</p>
-                </div>
-                <div class="grid-box border-t-2 border-green-500">
-                    <h4 class="font-bold text-green-400 text-xs mb-2 uppercase">2. Mitigação de Risco</h4>
-                    <p class="text-[10px] text-slate-400">Liquidação Atômica (**DvP**): A entrega do ativo é simultânea ao pagamento. Fim do risco de contraparte.</p>
-                </div>
-                <div class="grid-box border-t-2 border-purple-500">
-                    <h4 class="font-bold text-purple-400 text-xs mb-2 uppercase">3. Competição</h4>
-                    <p class="text-[10px] text-slate-400">Redução de barreiras para <b>Fintechs</b>. Novos players pressionam as margens dos bancos tradicionais.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 10: NOVOS OPERADORES: SCD E SEP -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-8 highlight uppercase">A Nova Era dos Operadores</h2>
-            <div class="grid md:grid-cols-2 gap-8 text-left">
-                <div class="p-6 bg-white/5 rounded-3xl border-l-4 border-amber-500">
-                    <h3 class="text-xl font-bold text-amber-500 mb-2 uppercase">SCD</h3>
-                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest text-[9px]">Sociedade de Crédito Direto</p>
-                    <p class="text-sm text-slate-300 leading-relaxed">Empresta recursos **próprios** via plataforma digital. Foco em eficiência e automação total de processos.</p>
-                </div>
-                <div class="p-6 bg-white/5 rounded-3xl border-l-4 border-blue-500">
-                    <h3 class="text-xl font-bold text-blue-500 mb-2 uppercase">SEP</h3>
-                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest text-[9px]">Sociedade de Empréstimo entre Pessoas</p>
-                    <p class="text-sm text-slate-300 leading-relaxed">Viabiliza o **Peer-to-Peer (P2P)**. Conecta investidores diretamente a tomadores sem o spread bancário tradicional.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 11: QUADRO COMPARATIVO -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-8 highlight uppercase">Evolução do Sistema</h2>
-            <table class="text-[11px]">
-                <thead>
-                    <tr>
-                        <th>Característica</th>
-                        <th>SFN Tradicional</th>
-                        <th>Novo SFN (Agenda BC#)</th>
-                    </tr>
-                </thead>
-                <tbody class="text-slate-300">
-                    <tr><td><b>Liquidação</b></td><td>Dias Úteis (T+1, T+2)</td><td>Instantânea (D+0 / 24/7)</td></tr>
-                    <tr><td><b>Intermediação</b></td><td>Foco em Bancos Múltiplos</td><td>Mercado de Capitais / Fintechs</td></tr>
-                    <tr><td><b>Contratos</b></td><td>Físicos / Digitais Simples</td><td>Smart Contracts (Automáticos)</td></tr>
-                    <tr><td><b>Dados</b></td><td>Retidos pela Instituição</td><td>Open Finance (Dono é o Cliente)</td></tr>
-                    <tr><td><b>Ativos</b></td><td>Papéis / Custódia Física</td><td>Tokenizados em Blockchain</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- SLIDE 12: DESAFIO ACADÊMICO -->
-    <div class="slide">
-        <div class="content-card text-center">
-            <h2 class="text-3xl font-black mb-8 highlight uppercase">Desafio de Performance</h2>
-            <div class="p-10 bg-blue-600 rounded-[3rem] shadow-2xl shadow-blue-500/20">
-                <p class="text-2xl font-bold text-white leading-tight">
-                    "Como o DREX e a Tokenização de ativos reais podem democratizar o acesso ao mercado secundário para o investidor pessoa física?"
-                </p>
-                <div class="mt-8 flex justify-center gap-4">
-                    <button onclick="goToIA()" class="px-8 py-4 bg-white text-blue-600 font-black rounded-full hover:scale-105 transition flex items-center gap-3 shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="12" x="2" y="10" rx="2"/></svg>
-                        Debater com a IA no Lab
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 13: SAIBA MAIS -->
-    <div class="slide">
-        <div class="content-card">
-            <h2 class="text-3xl font-black mb-4 highlight uppercase">Recursos de Apoio</h2>
-            <p class="text-sm text-slate-400 mb-8">Links diretos para as fontes oficiais da Unidade I:</p>
-            
-            <div class="grid gap-3 max-w-2xl mx-auto">
-                <a href="https://www.bcb.gov.br/estabilidadefinanceira/sfn" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-amber-500/10 transition flex items-center justify-between group">
-                    <div class="text-left">
-                        <p class="text-sm font-bold">Página Oficial do SFN (Banco Central)</p>
-                        <p class="text-[10px] text-slate-500 text-left">Definições oficiais e composição atualizada.</p>
+        <!-- Slide 20: Spread -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">18. Anatomia do Spread</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 bg-red-500/10 rounded-3xl border border-red-500/30">
+                        <p class="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-1">Estatística Jan/2026</p>
+                        <p class="text-4xl md:text-5xl font-black text-white leading-none">21,4 p.p.</p>
+                        <p class="text-xs text-slate-400 mt-4 text-justify italic">Inadimplência e Adm representam 62,8% do spread total.</p>
                     </div>
-                    <span class="text-amber-500 group-hover:translate-x-2 transition">→</span>
-                </a>
-                <a href="https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/SFN_atualizado_jul18_port2.pdf" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-amber-500/10 transition flex items-center justify-between group">
-                    <div class="text-left">
-                        <p class="text-sm font-bold">Manual FEBRABAN do SFN</p>
-                        <p class="text-[10px] text-slate-500 text-left">Esquema estrutural detalhado do sistema.</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Componente</th><th>% Peso</th></tr></thead>
+                            <tbody>
+                                <tr><td>Inadimplência</td><td>37,5%</td></tr>
+                                <tr><td>Custos Adm</td><td>25,3%</td></tr>
+                                <tr><td>Margem Lucro</td><td>15,0%</td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <span class="text-amber-500 group-hover:translate-x-2 transition">→</span>
-                </a>
-            </div>
-            
-            <div class="mt-10 border-t border-white/5 pt-6 text-xs text-slate-500 text-center">
-                <p>Docente: <b>Ma. Renata Novaes</b> | Próxima Aula: Unidade II - Crédito e Juros.</p>
+                </div>
             </div>
         </div>
+
+        <!-- Slide 21: Desafio -->
+        <div class="slide">
+            <div class="content-card text-center">
+                <h2 class="text-2xl font-black mb-8 highlight uppercase">Laboratório Acadêmico</h2>
+                <div class="p-10 bg-blue-600 rounded-[3rem] shadow-2xl">
+                    <p class="text-xl md:text-2xl font-bold text-white mb-8 leading-tight italic">"Como a redução de 70% nos custos via DREX pode extinguir os bancões?"</p>
+                    <button onclick="window.location.assign('index.html#ia')" class="px-8 py-4 bg-white text-blue-600 font-black rounded-xl uppercase text-sm hover:scale-105 transition-all">Debater no Lab IA →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: Links Completos -->
+        <div class="slide">
+            <div class="content-card text-left">
+                <h2 class="text-2xl md:text-3xl font-black mb-6 highlight uppercase">Recursos Oficiais</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="https://www.bcb.gov.br/estabilidadefinanceira/sfn" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group">
+                        <span class="text-xs font-bold uppercase">Portal SFN (BCB)</span><span class="text-amber-500">→</span>
+                    </a>
+                    <a href="https://www.bcb.gov.br/conteudo/home-ptbr/TextosApresentacoes/Apresenta%C3%A7%C3%A3o%20SFN%20em%20transforma%C3%A7%C3%A3o.pptx.pdf" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group">
+                        <span class="text-xs font-bold uppercase">SFN em Transformação (BCB)</span><span class="text-amber-500">→</span>
+                    </a>
+                    <a href="https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/SFN_atualizado_jul18_port2.pdf" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group">
+                        <span class="text-xs font-bold uppercase">Manual Estrutural (FEBRABAN)</span><span class="text-amber-500">→</span>
+                    </a>
+                    <a href="https://www.anbima.com.br/data/files/FD/30/F3/33/466A4810EA926748882BA2A8/CPA-10-Cap1.pdf" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group">
+                        <span class="text-xs font-bold uppercase">CPA-10 Cap 1 (ANBIMA)</span><span class="text-amber-500">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23: Encerramento -->
+        <div class="slide">
+            <div class="content-card text-center">
+                <h2 class="text-3xl font-black mb-8 highlight uppercase tracking-widest">Final da Aula 01</h2>
+                <p class="text-lg text-slate-400 mb-10 italic">"Excelência acadêmica e rigor técnico para o mercado financeiro."</p>
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/10 inline-block uppercase text-xs font-bold text-amber-500 tracking-widest">Profa. Ma. Renata Novaes</div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- NAVEGAÇÃO INFERIOR -->
     <div class="nav-container">
         <button class="nav-btn" onclick="prevSlide()">Anterior</button>
-        <a href="index.html" class="nav-btn">
-             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-             Início
-        </a>
         <button class="nav-btn" onclick="nextSlide()">Próximo</button>
     </div>
 
@@ -514,28 +488,21 @@
             progress.style.width = percent + '%';
         }
 
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        }
+        function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); } }
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        }
-
-        function goToIA() {
-            window.location.href = "index.html#ia";
-        }
-
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === 'Escape') window.location.href = "index.html";
+        });
+
+        // Swipe Mobile
+        let touchstartX = 0;
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide();
+            if (touchendX - touchstartX > 50) prevSlide();
         });
 
         showSlide(0);
