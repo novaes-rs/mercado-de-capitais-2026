@@ -458,11 +458,11 @@
         });
     </script>
 </div>
-                        <!-- ANÁLISE NARRATIVA DO MERCADO - COMO ÂNCORA DE TV -->
+                       <!-- ANÁLISE HOLÍSTICA E INTEGRADA DO MERCADO -->
 <div id="market-analysis-wrapper"></div>
 
 <script>
-    // Script para análise narrativa e fluida do mercado
+    // Script para análise holística e integrada do mercado
     
     const analysisHTML = `
         <style>
@@ -510,7 +510,7 @@
             }
 
             .market-analysis-panel.open {
-                max-height: 1500px;
+                max-height: 2000px;
                 opacity: 1;
                 margin-bottom: 1.5rem;
             }
@@ -550,7 +550,20 @@
             .analysis-content {
                 display: grid;
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+
+            .analysis-section {
+                padding: 0;
+            }
+
+            .section-title {
+                font-size: 0.85rem;
+                font-weight: 700;
+                color: #f8fafc;
+                margin-bottom: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
             }
 
             .analysis-text {
@@ -655,7 +668,7 @@
         </div>
     `;
 
-    // Função para gerar análise narrativa
+    // Função para gerar análise holística
     async function generateMarketAnalysis() {
         try {
             const response = await fetch('market_data.json');
@@ -668,7 +681,9 @@
             const dollarChange = data.dollar?.change || 0;
             const dollarValue = data.dollar?.value || 0;
             const euroChange = data.euro?.change || 0;
+            const euroValue = data.euro?.value || 0;
             const selicValue = data.selic?.value || 0;
+            const selicChange = data.selic?.change || 0;
             const ipcaValue = data.ipca?.value || 0;
             const ipcaChange = data.ipca?.change || 0;
             const ibovValue = data.ibovespa?.value || 0;
@@ -676,85 +691,141 @@
             const btcValue = data.bitcoin?.value || 0;
             const btcChange = data.bitcoin?.change || 0;
 
-            // Construir narrativa
-            let narrative = '';
+            // Análise holística e integrada
+            let analysis = '';
 
-            // Abertura
-            narrative += `Acompanhando o desempenho do mercado financeiro brasileiro neste momento, `;
+            // 1. CENÁRIO GERAL - Identificar o tipo de mercado
+            let scenarioType = '';
+            let scenarioDescription = '';
 
-            // Câmbio
-            if (dollarChange < -0.5) {
-                narrative += `observamos uma <strong>apreciação significativa do real</strong>, com o dólar recuando <span class="highlight positive">${Math.abs(dollarChange).toFixed(2)}%</span> para R$ ${dollarValue.toFixed(2)}. Este movimento reduz a pressão inflacionária sobre importações e é favorável para o consumidor. `;
-            } else if (dollarChange > 0.5) {
-                narrative += `vemos o dólar em <strong>alta</strong>, avançando <span class="highlight negative">${dollarChange.toFixed(2)}%</span> para R$ ${dollarValue.toFixed(2)}, o que aumenta a pressão sobre os preços das importações. `;
-            } else {
-                narrative += `o dólar mantém <strong>estabilidade relativa</strong>, operando em R$ ${dollarValue.toFixed(2)}. `;
-            }
-
-            // Inflação
-            if (ipcaValue > 5) {
-                narrative += `No frente inflacionária, o IPCA acumulado em 12 meses está em <span class="highlight negative">${ipcaValue.toFixed(2)}%</span>, acima da meta do Banco Central de 4,5%, sinalizando que a pressão de preços ainda é uma preocupação. `;
-            } else if (ipcaValue < 3.5) {
-                narrative += `A inflação, medida pelo IPCA, está controlada em <span class="highlight positive">${ipcaValue.toFixed(2)}%</span>, bem abaixo da meta de 4,5%, indicando um ambiente desinflacionário favorável. `;
-            } else {
-                narrative += `A inflação, medida pelo IPCA, está em <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span>, próxima à meta do Banco Central. `;
-            }
-
-            // Selic
-            if (selicValue > 12) {
-                narrative += `A taxa Selic, nosso principal instrumento de política monetária, encontra-se em <span class="highlight negative">${selicValue.toFixed(2)}%</span>, em patamar elevado. Este nível reflete o esforço do Banco Central em combater a inflação, mas também encarece o crédito e afeta o consumo das famílias. `;
-            } else if (selicValue < 10) {
-                narrative += `A taxa Selic está em <span class="highlight positive">${selicValue.toFixed(2)}%</span>, em nível reduzido, o que estimula o crédito e favorece os investimentos na economia. `;
-            } else {
-                narrative += `A taxa Selic está em <span class="highlight neutral">${selicValue.toFixed(2)}%</span>, em patamar moderado que equilibra o controle inflacionário com o estímulo econômico. `;
-            }
-
-            // Bolsa
-            if (ibovChange > 1) {
-                narrative += `No mercado de ações, o Ibovespa apresenta <strong>desempenho positivo</strong>, com alta de <span class="highlight positive">${ibovChange.toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. Este movimento reflete otimismo dos investidores e confiança na economia brasileira. `;
-            } else if (ibovChange < -1) {
-                narrative += `O Ibovespa registra <strong>queda</strong> de <span class="highlight negative">${Math.abs(ibovChange).toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos, sinalizando realização de lucros ou cautela dos investidores. `;
-            } else {
-                narrative += `O Ibovespa mantém <strong>estabilidade</strong>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. `;
-            }
-
-            // Criptomoedas
-            if (btcChange > 2) {
-                narrative += `No segmento de criptomoedas, o Bitcoin apresenta <strong>movimento de alta</strong> de <span class="highlight positive">${btcChange.toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}, refletindo apetite por risco dos investidores. `;
-            } else if (btcChange < -2) {
-                narrative += `O Bitcoin registra <strong>queda</strong> de <span class="highlight negative">${Math.abs(btcChange).toFixed(2)}%</span>, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}, sinalizando aversão ao risco no mercado. `;
-            } else {
-                narrative += `O Bitcoin mantém movimento lateral, cotado em R$ ${btcValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})}. `;
-            }
-
-            // Conclusão
-            const positiveSignals = [
-                dollarChange < -0.5,
-                ipcaValue < 3.5,
-                selicValue < 10,
-                ibovChange > 1,
-                btcChange > 2
+            const positiveIndicators = [
+                dollarChange < -0.3,
+                ipcaValue < 4.5,
+                ibovChange > 0.5,
+                selicChange <= 0
             ].filter(Boolean).length;
 
-            const negativeSignals = [
+            const negativeIndicators = [
                 dollarChange > 0.5,
                 ipcaValue > 5,
-                selicValue > 12,
-                ibovChange < -1,
-                btcChange < -2
+                ibovChange < -0.5,
+                selicValue > 13
             ].filter(Boolean).length;
 
-            if (positiveSignals > negativeSignals) {
-                narrative += `Em síntese, o mercado apresenta <span class="highlight positive">sinais predominantemente positivos</span>, com estabilidade cambial, inflação controlada e otimismo dos investidores. Este cenário favorece estratégias de renda variável e aproveitamento de oportunidades de investimento.`;
-            } else if (negativeSignals > positiveSignals) {
-                narrative += `Em síntese, o mercado sinaliza <span class="highlight negative">cautela</span>, com pressões inflacionárias, taxa de juros elevada e postura mais seletiva dos investidores. Recomenda-se posições mais defensivas e acompanhamento próximo da evolução dos indicadores.`;
+            const riskIndicators = [
+                btcChange < -2,
+                selicValue > 12,
+                dollarChange > 0.3
+            ].filter(Boolean).length;
+
+            // Classificar cenário
+            if (positiveIndicators >= 3 && riskIndicators <= 1) {
+                scenarioType = 'otimismo generalizado';
+                scenarioDescription = 'O mercado opera em ambiente de confiança elevada, com estímulos econômicos e apetite por risco bem distribuído.';
+            } else if (positiveIndicators >= 2 && riskIndicators >= 2) {
+                scenarioType = 'otimismo seletivo';
+                scenarioDescription = 'O mercado apresenta sinais positivos em alguns segmentos, mas com cautela em ativos de risco. Há divergência entre investidores.';
+            } else if (negativeIndicators >= 2 || riskIndicators >= 3) {
+                scenarioType = 'cautela predominante';
+                scenarioDescription = 'O mercado sinaliza preocupações com inflação, juros elevados ou volatilidade cambial. Investidores buscam segurança.';
             } else {
-                narrative += `Em síntese, o mercado encontra-se em <span class="highlight neutral">equilíbrio</span>, sem sinais muito claros de otimismo ou pessimismo. Recomenda-se diversificação de portfólio e gestão ativa de risco.`;
+                scenarioType = 'equilíbrio dinâmico';
+                scenarioDescription = 'O mercado encontra-se em transição, sem sinais muito claros. Há oportunidades e riscos equilibrados.';
             }
 
-            const html = `<div class="analysis-text">${narrative}</div>`;
+            // 2. ANÁLISE INTEGRADA - Conexões entre indicadores
+            analysis += `<div class="analysis-section">
+                <div class="section-title">📊 Panorama Geral</div>
+                <div class="analysis-text">
+                    O mercado financeiro opera em um cenário de <strong>${scenarioType}</strong>. ${scenarioDescription}
+                </div>
+            </div>`;
 
-            document.getElementById('analysis-content').innerHTML = html;
+            // 3. DINÂMICA DE JUROS E CÂMBIO
+            let jurosAnalysis = '';
+            if (selicValue > 12) {
+                jurosAnalysis = `A Taxa Selic mantida em <span class="highlight neutral">${selicValue.toFixed(2)}%</span> reflete o esforço do Banco Central em ancorar a inflação de <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span> à meta de 4,5%. Este patamar elevado deveria fortalecer o real e pressionar o dólar, `;
+            } else {
+                jurosAnalysis = `A Taxa Selic em <span class="highlight positive">${selicValue.toFixed(2)}%</span> está em nível moderado, permitindo que a inflação de <span class="highlight neutral">${ipcaValue.toFixed(2)}%</span> se mantenha controlada. `;
+            }
+
+            if (dollarChange < -0.3) {
+                jurosAnalysis += `o que se confirma com o real em apreciação (dólar -${Math.abs(dollarChange).toFixed(2)}% para R$ ${dollarValue.toFixed(2)}). Este movimento é favorável para importadores e reduz pressão de custos.`;
+            } else if (dollarChange > 0.3) {
+                jurosAnalysis += `porém o dólar permanece em alta (+${dollarChange.toFixed(2)}% para R$ ${dollarValue.toFixed(2)}), sugerindo que fatores de risco externo ou fluxo de capital superam o diferencial de juros.`;
+            } else {
+                jurosAnalysis += `mantendo o dólar estável em R$ ${dollarValue.toFixed(2)}, equilibrando o diferencial de juros com incertezas externas.`;
+            }
+
+            analysis += `<div class="analysis-section">
+                <div class="section-title">💱 Dinâmica de Juros e Câmbio</div>
+                <div class="analysis-text">${jurosAnalysis}</div>
+            </div>`;
+
+            // 4. COMPORTAMENTO DO MERCADO DE AÇÕES
+            let equityAnalysis = '';
+            if (ibovChange > 0.5) {
+                equityAnalysis = `O Ibovespa apresenta movimento de alta de <span class="highlight positive">${ibovChange.toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. Este desempenho é particularmente relevante considerando o patamar elevado da Selic, sugerindo que `;
+                
+                if (selicValue > 12) {
+                    equityAnalysis += `os investidores já precificam uma futura queda da taxa de juros e um cenário econômico mais favorável. A bolsa ignora os juros altos e aposta em recuperação.`;
+                } else {
+                    equityAnalysis += `há confiança na sustentabilidade do crescimento econômico e nas margens corporativas.`;
+                }
+            } else if (ibovChange < -0.5) {
+                equityAnalysis = `O Ibovespa registra queda de <span class="highlight negative">${Math.abs(ibovChange).toFixed(2)}%</span>, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos. Este movimento sugere realização de lucros ou preocupações com o cenário macroeconômico, apesar `;
+                
+                if (selicValue > 12) {
+                    equityAnalysis += `da Selic elevada em ${selicValue.toFixed(2)}%.`;
+                } else {
+                    equityAnalysis += `de condições de juros mais favoráveis.`;
+                }
+            } else {
+                equityAnalysis = `O Ibovespa mantém estabilidade, operando em ${ibovValue.toLocaleString('pt-BR', {maximumFractionDigits: 0})} pontos, refletindo equilíbrio entre otimismo corporativo e cautela macroeconômica.`;
+            }
+
+            analysis += `<div class="analysis-section">
+                <div class="section-title">📈 Mercado de Ações</div>
+                <div class="analysis-text">${equityAnalysis}</div>
+            </div>`;
+
+            // 5. APETITE POR RISCO
+            let riskAnalysis = '';
+            if (btcChange > 2 && ibovChange > 0.5) {
+                riskAnalysis = `Tanto o Bitcoin quanto o Ibovespa em alta indicam que o apetite por risco é <strong>generalizado</strong>. Investidores buscam ganhos em ativos de maior volatilidade.`;
+            } else if (btcChange < -2 && ibovChange > 0.5) {
+                riskAnalysis = `O Bitcoin em queda de <span class="highlight negative">${Math.abs(btcChange).toFixed(2)}%</span> enquanto o Ibovespa sobe sugere que o apetite por risco é <strong>seletivo</strong>. Investidores preferem a segurança relativa da renda fixa ou a aposta em ações de valor, evitando criptomoedas.`;
+            } else if (btcChange > 2 && ibovChange < -0.5) {
+                riskAnalysis = `O Bitcoin em alta enquanto o Ibovespa cai indica movimento de rotação: investidores saem de ações tradicionais e buscam ativos alternativos.`;
+            } else if (btcChange < -2 && ibovChange < -0.5) {
+                riskAnalysis = `Tanto Bitcoin quanto Ibovespa em queda sinalizam <strong>aversão generalizada ao risco</strong>. Investidores buscam segurança em renda fixa ou dólar.`;
+            } else {
+                riskAnalysis = `O comportamento do Bitcoin (${btcChange > 0 ? '+' : ''}${btcChange.toFixed(2)}%) e do Ibovespa (${ibovChange > 0 ? '+' : ''}${ibovChange.toFixed(2)}%) sugere apetite por risco <strong>moderado</strong>, sem movimentos extremos.`;
+            }
+
+            analysis += `<div class="analysis-section">
+                <div class="section-title">⚡ Apetite por Risco</div>
+                <div class="analysis-text">${riskAnalysis}</div>
+            </div>`;
+
+            // 6. CONCLUSÃO E RECOMENDAÇÃO
+            let conclusion = '';
+            if (scenarioType === 'otimismo seletivo') {
+                conclusion = `O cenário recomenda <strong>cautela estratégica</strong>, mas com atenção às oportunidades na bolsa. Considere aumentar exposição em ações de valor e reduzir posições em ativos de risco extremo como criptomoedas.`;
+            } else if (scenarioType === 'otimismo generalizado') {
+                conclusion = `O cenário favorece estratégias de renda variável. Há espaço para aumentar exposição em ações e ativos de risco, aproveitando a confiança do mercado.`;
+            } else if (scenarioType === 'cautela predominante') {
+                conclusion = `O cenário recomenda posições defensivas. Priorize renda fixa, ações defensivas e reduza exposição a ativos de risco. Acompanhe de perto a evolução da inflação e taxa de câmbio.`;
+            } else {
+                conclusion = `O cenário recomenda diversificação equilibrada. Mantenha posições em renda fixa, ações selecionadas e reduza exposição a ativos de risco extremo. Aguarde sinais mais claros do mercado.`;
+            }
+
+            analysis += `<div class="analysis-section">
+                <div class="section-title">🎯 Conclusão e Recomendação</div>
+                <div class="analysis-text">${conclusion}</div>
+            </div>`;
+
+            document.getElementById('analysis-content').innerHTML = analysis;
             document.getElementById('analysis-timestamp').innerHTML = `Análise gerada em: ${marketData.last_update}`;
 
         } catch (error) {
@@ -1081,6 +1152,7 @@ O ecossistema de compartilhamento de dados é o pilar da competitividade:
     </script>
 </body>
 </html>
+
 
 
 
