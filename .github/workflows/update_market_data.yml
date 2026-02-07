@@ -1,0 +1,61 @@
+name: Atualizar Dados de Mercado Diariamente
+
+on:
+  schedule:
+    # Executa todos os dias às 18:30 (horário de Brasília = UTC-3)
+    # Usa 21:30 UTC para corresponder a 18:30 BRT
+    - cron: '30 21 * * *'
+  
+  # Permite execução manual
+  workflow_dispatch:
+
+jobs:
+  update-market-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+      
+      - name: Executar script de coleta de dados
+        run: |
+          python market_data_fetcher.py
+      
+      - name: Configurar Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Fazer commit e push dos dados atualizados
+        run: |
+          if git diff --quiet; then
+            echo "Nenhuma mudança nos dados"
+          else
+            git add market_data.json
+            git commit -m "Atualizar dados de mercado - $(date '+%d/%m/%Y %H:%M:%S')"
+            git push
+          fi
+      
+      - name: Notificar sucesso
+        if: success()
+        run: |
+          echo "✅ Dados de mercado atualizados com sucesso!"
+          echo "Timestamp: $(date '+%d/%m/%Y %H:%M:%S')"
+      
+      - name: Notificar erro
+        if: failure()
+        run: |
+          echo "❌ Erro ao atualizar dados de mercado"
+          exit 1
