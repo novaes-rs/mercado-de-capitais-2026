@@ -287,6 +287,15 @@
         .change-value.down {
             color: #ef4444;
         }
+        .change-arrow.neutral {
+    background: rgba(251, 146, 60, 0.2);
+    color: #fb923c;
+}
+
+.change-value.neutral {
+    color: #fb923c;
+}
+
 
         @media (max-width: 768px) {
             .market-thermometer-container {
@@ -380,12 +389,21 @@
                 `;
             }
 
-            const value = data.value || 0;
-            const change = data.change || 0;
-            const isPositive = change >= 0;
-            const arrowClass = isPositive ? 'up' : 'down';
-            const arrowSymbol = isPositive ? '▲' : '▼';
-            const changeClass = isPositive ? 'up' : 'down';
+            let arrowClass, arrowSymbol, changeClass;
+
+if (change > 0) {
+    arrowClass = 'up';
+    arrowSymbol = '▲';
+    changeClass = 'up';
+} else if (change < 0) {
+    arrowClass = 'down';
+    arrowSymbol = '▼';
+    changeClass = 'down';
+} else {
+    arrowClass = 'neutral';
+    arrowSymbol = '➖';
+    changeClass = 'neutral';
+}
 
             let formattedValue = formatNumber(value, 2);
             if (key === 'ibovespa') {
@@ -1126,6 +1144,7 @@ Figuras criadas pelo BC para aumentar a competição:
     </script>
 </body>
 </html>
+
 
 
 
