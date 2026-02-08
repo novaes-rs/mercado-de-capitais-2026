@@ -7,16 +7,20 @@ Versão CORRIGIDA - Remove web scraping do Google (não funciona em GitHub Actio
 """
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import sys
 
 def get_market_data():
     """
     Coleta dados de mercado com fallback para valores estáticos
     """
+    # Timezone BRT (UTC-3)
+    brt = timezone(timedelta(hours=-3))
+    now_brt = datetime.now(brt)
+    
     market_data = {
-        'timestamp': datetime.now().isoformat(),
-        'last_update': datetime.now().strftime('%d/%m/%Y %H:%M:%S'),
+        'timestamp': now_brt.isoformat(),
+        'last_update': now_brt.strftime('%d/%m/%Y %H:%M:%S'),
         'data': {}
     }
     
@@ -28,17 +32,17 @@ def get_market_data():
     default_data = {
         'dollar': {
             'value': 5.23,
-            'date': datetime.now().strftime('%d/%m/%Y'),
+            'date': now_brt.strftime('%d/%m/%Y'),
             'change': 0.45
         },
         'selic': {
             'value': 15.00,
-            'date': datetime.now().strftime('%d/%m/%Y'),
+            'date': now_brt.strftime('%d/%m/%Y'),
             'change': 0.0
         },
         'ipca': {
             'value': 4.26,
-            'date': datetime.now().strftime('%d/%m/%Y'),
+            'date': now_brt.strftime('%d/%m/%Y'),
             'change': -0.12
         },
         'ibovespa': {
@@ -53,7 +57,7 @@ def get_market_data():
         },
         'euro': {
             'value': 5.65,
-            'date': datetime.now().strftime('%d/%m/%Y'),
+            'date': now_brt.strftime('%d/%m/%Y'),
             'change': 0.32
         }
     }
