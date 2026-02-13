@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 02 - Macroeconomia e Valor | Material de Estudo Detalhado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@700;800&display=swap');
+        
+        :root {
+            --bg: #020617;
+            --card: #0f172a;
+            --accent: #f59e0b;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #f8fafc;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            display: flex;
+            width: 1100vw; /* 11 slides */
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 2rem;
+        }
+
+        .canvas-16-9 {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--card);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-header {
+            border-left: 6px solid var(--accent);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-title { font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1.2; }
+        .slide-subtitle { color: var(--accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; }
+
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; flex-grow: 1; align-items: start; overflow-y: auto; }
+        .content-grid::-webkit-scrollbar { width: 4px; }
+        .content-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        
+        .theory-box { background: rgba(255, 255, 255, 0.02); border-radius: 1rem; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .theory-box p { font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 0.8rem; text-align: justify; }
+        .theory-box strong { color: #fff; }
+
+        .ref-tag {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .nav-ui {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover { background: var(--accent); color: #000; }
+
+        .chart-wrapper { position: relative; width: 100%; height: 280px; }
+
+        mjx-container { font-size: 1.1rem !important; color: var(--accent) !important; }
+        
+        .exercise-input { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem; color: #fff; width: 100%; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container" id="presentation">
+        
+        <!-- SLIDE 1: CAPA -->
+        <section class="slide">
+            <div class="canvas-16-9 justify-center items-center text-center">
+                <p class="slide-subtitle mb-4 tracking-[0.5em]">Mercado de Capitais • Aula 02</p>
+                <h1 class="text-7xl font-black mb-8 leading-tight">Macroeconomia <br> & Valor</h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 italic">"O valor de um ativo é a soma dos seus fluxos de caixa descontados pelo custo da incerteza."</p>
+                <div class="flex gap-6 items-center justify-center text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                    <span>Profa. Ma. Renata Novaes</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    <span>Unidade I</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    <span>2026.1</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: MACRO E VALOR -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Fundamentação</p>
+                    <h2 class="slide-title">Interdependência Macro-Financeira</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>O Mercado de Capitais atua como um sistema de vasos comunicantes com a macroeconomia. Segundo **Assaf Neto (2021)**, as decisões de investimento no mercado financeiro são pautadas por um tripé: **Rentabilidade, Risco e Liquidez**.</p>
+                        <p>Variáveis macroeconômicas como inflação e juros alteram diretamente a "barra" da rentabilidade mínima exigida. Em momentos de stress fiscal ou incerteza política, o prêmio de risco sobe, forçando a desvalorização dos ativos para equilibrar a equação de valor.</p>
+                        <span class="ref-tag">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021. p. 42-45.</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-6 border border-white/5 rounded-2xl bg-white/5">
+                            <h3 class="text-sm font-bold text-amber-500 mb-2 uppercase tracking-widest">Conceito Chave</h3>
+                            <p class="text-sm italic">"Os preços dos títulos no mercado de capitais refletem a avaliação contínua dos agentes sobre as condições macroeconômicas futuras."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: SELIC A 15% -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Aperto Monetário</p>
+                    <h2 class="slide-title">O impacto da Selic a 15,00%</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>A Taxa Selic é o principal instrumento de política monetária para o controle inflacionário. Quando o Banco Central fixa a taxa em **15,00%**, ele estabelece um novo patamar para o **Custo de Oportunidade**.</p>
+                        <p>Conforme **Fortuna (2018)**, taxas elevadas reduzem o consumo das famílias e o investimento das empresas, visando arrefecer a demanda agregada. No mercado de capitais, isso gera uma migração de liquidez dos ativos de risco (Equity) para a segurança do Tesouro Nacional.</p>
+                        <span class="ref-tag">FORTUNA, Eduardo. Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018. p. 112.</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartComparison"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: IPCA E PODER DE COMPRA -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Inflação</p>
+                    <h2 class="slide-title">IPCA: O Balizador da Realidade</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>O Índice Nacional de Preços ao Consumidor Amplo (IPCA) mede a variação de preços de um conjunto de bens e serviços consumidos pelas famílias. Para o mercado, o IPCA é o indicador que determina se houve **ganho de capital** ou apenas **reposição de valor**.</p>
+                        <p>Investir sem considerar a inflação é cair na **"Ilusão Monetária"**. Em 2026, com uma inflação projetada de 4,50%, um retorno nominal de 10% já não é suficiente para manter o patrimônio crescendo em termos reais.</p>
+                        <span class="ref-tag">IBGE. Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</span>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="p-5 bg-white/5 border border-white/5 rounded-2xl">
+                            <h4 class="text-[10px] font-black text-slate-500 uppercase mb-2">Meta COPOM 2026</h4>
+                            <p class="text-3xl font-bold">3,00% <span class="text-sm font-normal opacity-50">+/- 1,5%</span></p>
+                        </div>
+                        <div class="p-5 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+                            <h4 class="text-[10px] font-black text-amber-500 uppercase mb-2">IPCA Real (12m)</h4>
+                            <p class="text-3xl font-bold text-white">4,50%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: EQUAÇÃO DE FISHER -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Cálculo Financeiro</p>
+                    <h2 class="slide-title">Equação de Fisher: Taxa Real</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>A Equação de Fisher é fundamental para separar o **Juro Nominal** do **Juro Real**. Segundo **Bodie et al. (2014)**, o juro nominal é composto pelo juro real e por um prêmio pela inflação esperada.</p>
+                        <div class="p-4 bg-slate-950 rounded-xl my-4 text-center">
+                            \[ (1 + i) = (1 + r) \cdot (1 + \pi) \]
+                        </div>
+                        <p class="text-xs text-slate-500 italic">Onde \(i\) é a taxa nominal (Selic), \(r\) é a taxa real e \(\pi\) é a inflação (IPCA).</p>
+                        <span class="ref-tag">BODIE, Zvi; KANE, Alex; MARCUS, Alan J. Investimentos. 10. ed. Porto Alegre: AMGH, 2014. p. 128.</span>
+                    </div>
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 p-8 rounded-3xl flex flex-col justify-center items-center text-center">
+                        <h4 class="text-emerald-500 font-bold mb-4 uppercase text-xs tracking-widest">Resultado do Cenário</h4>
+                        <p class="text-sm text-slate-300 mb-2">Com Selic 15% e IPCA 4,5%:</p>
+                        <p class="text-5xl font-black">10,05%</p>
+                        <p class="text-xs text-slate-500 mt-2 uppercase tracking-tighter">Taxa de Juros Real ao Ano</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: TAXA LIVRE DE RISCO -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Gestão de Risco</p>
+                    <h2 class="slide-title">Risk-Free Rate (\(R_f\))</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>A taxa livre de risco é a rentabilidade teórica de um ativo com risco de inadimplência nulo. No Brasil, os títulos públicos federais (Selic) são o referencial.</p>
+                        <p>Para **Ross et al. (2015)**, o \(R_f\) é o ponto de partida para qualquer modelo de precificação. Se o investidor consegue 15% ao ano no Tesouro, ele exigirá um prêmio adicional substancial para investir em ativos voláteis.</p>
+                        <span class="ref-tag">ROSS, Stephen A.; WESTERFIELD, Randolph W.; JAFFE, Jeffrey. Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</span>
+                    </div>
+                    <div class="flex items-center justify-center p-10">
+                        <div class="text-center">
+                            <i class="fa-solid fa-shield-halved text-6xl text-amber-500 mb-6 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]"></i>
+                            <h4 class="font-bold text-white mb-2">Selic = Porto Seguro</h4>
+                            <p class="text-xs text-slate-500 max-w-xs mx-auto">Em tempos de juros a 15%, o capital especulativo se torna capital conservador.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: MECÂNICA DO VALUATION -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Valuation</p>
+                    <h2 class="slide-title">O Valor Presente dos Fluxos</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>Segundo **Aswath Damodaran (2007)**, a base da avaliação de ativos é o Fluxo de Caixa Descontado (DCF). O valor de uma empresa hoje é o somatório de toda a geração de caixa futura, trazida ao presente por uma taxa que reflita o risco.</p>
+                        <div class="p-5 bg-slate-950 rounded-xl my-4 text-center">
+                            \[ PV = \sum_{t=1}^{n} \frac{CF_t}{(1 + k)^t} \]
+                        </div>
+                        <p class="text-xs italic text-slate-500">\(CF\) = Fluxo de Caixa; \(k\) = Taxa de Desconto; \(PV\) = Valor Presente.</p>
+                        <span class="ref-tag">DAMODARAN, Aswath. Avaliação de Investimentos. São Paulo: Qualitymark, 2007. p. 8-12.</span>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 p-8 rounded-3xl">
+                        <h4 class="text-red-400 font-bold mb-4 text-xs uppercase italic">A Matemática Pura</h4>
+                        <p class="text-sm leading-relaxed mb-4">Como a taxa de juros (\(k\)) está no **denominador**, um aumento na Selic de 10% para 15% reduz drasticamente o resultado final (\(PV\)). </p>
+                        <p class="text-sm font-bold text-white">"Juros altos são a gravidade para os preços das ações."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: POR QUE A BOLSA CAI? -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Dinâmica de Mercado</p>
+                    <h2 class="slide-title">Correlação Inversa: Selic x Ibov</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>Historicamente, observamos uma correlação negativa entre a taxa de juros e o índice de ações. Entender essa dinâmica é vital para o gestor de portfólio.</p>
+                        <p><strong>Fatores de Queda:</strong></p>
+                        <ul class="text-sm space-y-3">
+                            <li><span class="text-amber-500">●</span> <strong>Endividamento:</strong> Aumento das despesas financeiras das empresas.</li>
+                            <li><span class="text-amber-500">●</span> <strong>Consumo:</strong> Queda no varejo devido ao crédito caro.</li>
+                            <li><span class="text-amber-500">●</span> <strong>Fluxo:</strong> Retirada de capital estrangeiro em busca de prêmio de risco.</li>
+                        </ul>
+                        <span class="ref-tag">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</span>
+                    </div>
+                    <div class="flex items-center justify-center">
+                         <div class="relative w-48 h-48 border-4 border-white/5 rounded-full flex items-center justify-center">
+                             <div class="absolute inset-0 border-t-4 border-amber-500 rounded-full animate-spin"></div>
+                             <i class="fa-solid fa-arrows-up-down text-5xl text-slate-700"></i>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: BITCOIN E O RISK-OFF -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Criptoativos</p>
+                    <h2 class="slide-title">Bitcoin: O Ativo de Beta Alto</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <p>Embora o Bitcoin tenha sido proposto por **Satoshi Nakamoto (2008)** como um sistema de dinheiro eletrônico *peer-to-peer*, no mercado atual ele atua como um termômetro de liquidez.</p>
+                        <p>Em cenários de **Risk-Off** (Aversão ao Risco), ativos com volatilidade extrema são os primeiros a serem liquidados. Com a Selic a 15%, o "porto seguro" se torna tão rentável que a tese de investimento em cripto perde força no curto prazo.</p>
+                        <span class="ref-tag">NAKAMOTO, Satoshi. Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</span>
+                    </div>
+                    <div class="p-8 bg-orange-500/5 border border-orange-500/20 rounded-[3rem] text-center">
+                        <i class="fa-brands fa-bitcoin text-7xl text-orange-500 mb-4"></i>
+                        <h4 class="font-bold mb-2">Correlação com a Liquidez</h4>
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Menos liquidez global = Queda em ativos de Beta Alto</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: EXERCÍCIO DE FIXAÇÃO -->
+        <section class="slide">
+            <div class="canvas-16-9 border-blue-500/20">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Workshop</p>
+                    <h2 class="slide-title">Exercício de Fixação - Aula 02</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box">
+                        <h4 class="text-amber-500 font-bold mb-3 uppercase text-xs">Cenário para Cálculo</h4>
+                        <p class="text-xs">Um investidor possui R$ 100.000,00 aplicados no Tesouro Direto (Selic 15%). O IPCA projetado é de 4,5%.</p>
+                        <div class="space-y-4 mt-6">
+                            <div>
+                                <label class="text-[10px] text-slate-500 font-bold uppercase">1. Qual a taxa real exata deste investimento?</label>
+                                <input type="text" class="exercise-input mt-1" placeholder="Resposta...">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-500 font-bold uppercase">2. Se o IPCA subir para 7%, o que ocorre com o retorno real?</label>
+                                <input type="text" class="exercise-input mt-1" placeholder="Resposta...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-blue-500/5 border border-blue-500/10 rounded-2xl flex flex-col justify-center">
+                        <h4 class="text-blue-400 font-bold mb-3 uppercase text-xs">Análise de Valuation</h4>
+                        <p class="text-xs mb-4 italic">"Uma empresa de tecnologia tem lucro zero hoje, mas espera fluxos gigantescos daqui a 10 anos. Uma empresa de transmissão elétrica paga dividendos constantes agora."</p>
+                        <p class="text-[10px] font-bold text-white uppercase mb-2">Quem sofre mais com a alta da Selic de 15%?</p>
+                        <textarea class="exercise-input h-24" placeholder="Fundamente sua resposta com base no modelo DCF..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: REFERÊNCIAS CONSOLIDADAS -->
+        <section class="slide">
+            <div class="canvas-16-9">
+                <div class="slide-header">
+                    <p class="slide-subtitle">Academicismo</p>
+                    <h2 class="slide-title">Referências Bibliográficas</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="theory-box col-span-2 overflow-y-auto no-scrollbar">
+                        <ul class="text-[10px] space-y-4 text-slate-400">
+                            <li><strong>ASSAF NETO, Alexandre.</strong> Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</li>
+                            <li><strong>BODIE, Zvi; KANE, Alex; MARCUS, Alan J.</strong> Investimentos. 10. ed. Porto Alegre: AMGH, 2014.</li>
+                            <li><strong>DAMODARAN, Aswath.</strong> Avaliação de Investimentos: Ferramentas e Técnicas para a Determinação do Valor de Qualquer Ativo. Rio de Janeiro: Qualitymark, 2007.</li>
+                            <li><strong>FORTUNA, Eduardo.</strong> Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018.</li>
+                            <li><strong>ROSS, Stephen A.; WESTERFIELD, Randolph W.; JAFFE, Jeffrey.</strong> Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</li>
+                            <li><strong>NAKAMOTO, Satoshi.</strong> Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</li>
+                            <li><strong>IBGE.</strong> Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</li>
+                            <li><strong>BCB.</strong> Atas do Comitê de Política Monetária (COPOM). Brasília, 2026.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center pt-6">
+                    <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.4em]">novaes-rs.github.io • Profa. Renata Novaes</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- UI DE NAVEGAÇÃO -->
+    <div class="nav-ui">
+        <button class="btn-nav" onclick="navSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="text-[10px] font-black text-slate-500 tracking-widest uppercase" id="slideCount">01 / 11</div>
+        <button class="btn-nav" onclick="navSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 11;
+        const pres = document.getElementById('presentation');
+        const count = document.getElementById('slideCount');
+
+        function navSlide(dir) {
+            currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
+            pres.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            count.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${totalSlides}`;
+            
+            // Re-render math
+            if (window.MathJax) MathJax.typeset();
+            
+            // Render chart if on slide 3
+            if (currentIdx() === 2) renderChart();
+        }
+
+        function currentIdx() { return currentSlide; }
+
+        function renderChart() {
+            const ctx = document.getElementById('chartComparison');
+            if (!ctx) return;
+            if (window.myChart) window.myChart.destroy();
+
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Selic Nominal', 'IPCA (Inf.)', 'Juro Real'],
+                    datasets: [{
+                        label: 'Taxas (%)',
+                        data: [15.00, 4.50, 10.05],
+                        backgroundColor: ['#f59e0b', '#94a3b8', '#10b981'],
+                        borderRadius: 12
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b' } },
+                        x: { grid: { display: false }, ticks: { color: '#cbd5e1' } }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') navSlide(1);
+            if (e.key === 'ArrowLeft') navSlide(-1);
+        });
+
+        window.onload = () => {
+            renderChart();
+        };
+    </script>
+</body>
+</html>
