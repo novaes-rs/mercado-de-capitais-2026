@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px; font-weight: 700; color: #FFFFFF; margin-bottom: 40px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 60px; z-index: 1; height: 100%;
+        }
+
+        .pyramid-col {
+            flex: 0.5;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+
+        .pyramid-level {
+            width: 100%; text-align: center; padding: 15px; border-radius: 6px;
+            font-weight: 700; font-size: 18px; color: #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .level-1 { background-color: #00E676; width: 100%; z-index: 4; } /* Real */
+        .level-2 { background-color: #69F0AE; width: 90%; z-index: 3; } /* Flutuante */
+        .level-3 { background-color: #FFFF00; width: 80%; z-index: 2; } /* Quirografária */
+        .level-4 { background-color: #FF5252; width: 70%; color: #FFF; z-index: 1; } /* Subordinada */
+
+        .info-col {
+            flex: 0.5; display: flex; flex-direction: column; justify-content: center; gap: 20px;
+        }
+
+        .info-card {
+            background-color: rgba(30, 41, 59, 0.6); padding: 20px; border-radius: 8px; border-left: 4px solid #888;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-title { font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 5px; }
+        .info-desc { font-size: 16px; color: #B0C4DE; line-height: 1.4; }
+
+        .arrow-down {
+            color: #666; font-size: 24px; margin: 5px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Garantias e Hierarquia de Pagamento</h1>
+
+        <div class="content-wrapper">
+            <!-- Left: Pyramid -->
+            <div class="pyramid-col">
+                <div style="font-size: 14px; color: #B0C4DE; margin-bottom: 10px; width: 100%; text-align: left;">
+                    <i class="fas fa-arrow-up"></i> Prioridade no Recebimento
+                </div>
+
+                <div class="pyramid-level level-1">
+                    1. Garantia Real
+                    <div style="font-size: 12px; font-weight: 400;">Bens Específicos</div>
+                </div>
+                <div class="arrow-down"><i class="fas fa-arrow-down"></i></div>
+
+                <div class="pyramid-level level-2">
+                    2. Garantia Flutuante
+                    <div style="font-size: 12px; font-weight: 400;">Ativo Geral</div>
+                </div>
+                <div class="arrow-down"><i class="fas fa-arrow-down"></i></div>
+
+                <div class="pyramid-level level-3">
+                    3. Quirografária
+                    <div style="font-size: 12px; font-weight: 400;">Sem Garantia (Credor Comum)</div>
+                </div>
+                <div class="arrow-down"><i class="fas fa-arrow-down"></i></div>
+
+                <div class="pyramid-level level-4">
+                    4. Subordinada
+                    <div style="font-size: 12px; font-weight: 400;">Última Instância</div>
+                </div>
+
+                <div style="font-size: 14px; color: #B0C4DE; margin-top: 10px; width: 100%; text-align: right;">
+                    Maior Risco / Maior Retorno <i class="fas fa-arrow-down"></i>
+                </div>
+            </div>
+
+            <!-- Right: Explanations -->
+            <div class="info-col">
+                <div class="info-card" style="border-color: #00E676;">
+                    <div class="info-title" style="color: #00E676;">Garantia Real</div>
+                    <div class="info-desc">
+                        Lastreada em ativos tangíveis (imóveis, terrenos, máquinas) que ficam alienados fiduciariamente. Em caso de falência, o bem é vendido para pagar esses debenturistas primeiro.
+                    </div>
+                </div>
+
+                <div class="info-card" style="border-color: #FFFF00;">
+                    <div class="info-title" style="color: #FFFF00;">Quirografária</div>
+                    <div class="info-desc">
+                        É a modalidade mais comum. O investidor não tem garantia específica e concorre com fornecedores e outros credores na massa falida.
+                    </div>
+                </div>
+
+                <div class="info-card" style="border-color: #FF5252;">
+                    <div class="info-title" style="color: #FF5252;">Subordinada</div>
+                    <div class="info-desc">
+                        Só recebe após todos os outros credores serem pagos. Funciona quase como capital próprio (equity), por isso oferece as maiores taxas de retorno.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

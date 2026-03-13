@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px; font-weight: 700; color: #FFFFFF; margin-bottom: 40px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .table-container {
+            z-index: 1; flex: 1;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .comparison-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 20px;
+        }
+
+        .comparison-table th {
+            text-align: left; padding: 12px 16px;
+            background-color: rgba(30, 41, 59, 0.8); color: #00C853;
+            border-bottom: 2px solid #555; font-weight: 700;
+        }
+
+        .comparison-table td {
+            padding: 12px 16px; border-bottom: 1px solid #444;
+            color: #E0E0E0; vertical-align: middle;
+            background-color: rgba(30, 41, 59, 0.3);
+        }
+
+        .comparison-table tr:hover td { background-color: rgba(100, 255, 218, 0.05); }
+
+        .advantage { color: #00E676; font-weight: 600; }
+        .disadvantage { color: #FF5252; }
+
+        .concept-box {
+            background-color: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; /* reduced padding */
+            border-left: 6px solid #2979FF; display: flex; flex-direction: column; gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .concept-title { font-size: 22px; font-weight: 700; color: #2979FF; }
+        .concept-desc { font-size: 18px; color: #B0C4DE; line-height: 1.4; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Estudo de Caso: Por que emitir Debêntures?</h1>
+
+        <div class="table-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Critério</th>
+                        <th width="40%">Empréstimo Bancário (Dívida Tradicional)</th>
+                        <th width="40%">Emissão de Debêntures (Mercado de Capitais)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Custo (Taxa)</strong></td>
+                        <td class="disadvantage">Alto (Spread Bancário + Taxas Adm.)</td>
+                        <td class="advantage">Menor (Captação Direta com Investidor)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prazo (Maturity)</strong></td>
+                        <td>Curto / Médio (1 a 5 anos)</td>
+                        <td class="advantage">Longo Prazo (5, 7, 10+ anos)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flexibilidade</strong></td>
+                        <td>Baixa (Contratos Padronizados)</td>
+                        <td class="advantage">Alta (Customizável via Escritura)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exigências</strong></td>
+                        <td>Garantias Reais (Imóveis, Recebíveis)</td>
+                        <td>Auditoria, Rating, Governança (Covenants)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Volume</strong></td>
+                        <td>Limitado pelo Limite de Crédito do Banco</td>
+                        <td class="advantage">Alto (Capacidade de Absorção do Mercado)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="concept-box">
+                <div class="concept-title">Desintermediação Bancária</div>
+                <div class="concept-desc">
+                    Ao emitir debêntures, a empresa elimina o intermediário (banco), acessando diretamente a poupança dos investidores. Isso reduz o custo de capital (WACC) e permite estruturar dívidas de longo prazo mais adequadas ao fluxo de caixa de grandes projetos.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

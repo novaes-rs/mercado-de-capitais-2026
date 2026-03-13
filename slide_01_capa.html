@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            display: flex;
+            /* keep top padding (title consistency) at 50px, reduce bottom padding to lower height */
+            padding: 50px 40px 10px 50px;
+            gap: 30px;
+            position: relative;
+        }
+
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        .content-pane {
+            flex: 1.5; display: flex; flex-direction: column; justify-content: center; z-index: 1;
+        }
+
+        .course-tag {
+            font-family: 'Roboto Mono', monospace;
+            color: #00C853; font-size: 32px; font-weight: 700;
+            margin-bottom: 25px; display: flex; align-items: center; gap: 15px;
+        }
+
+        .course-tag::before {
+            content: ''; width: 20px; height: 20px; background-color: #00C853; border-radius: 50%; display: inline-block;
+        }
+
+        h1 {
+            font-size: 80px; line-height: 1.1; font-weight: 700; margin-bottom: 40px;
+            color: #FFFFFF; text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .divider {
+            width: 150px; height: 8px; background-color: #00C853; margin-bottom: 20px; border-radius: 5px;
+        }
+
+        .info-grid {
+            display: grid; grid-template-columns: auto 1fr; gap: 20px 40px;
+            font-family: 'Roboto Mono', monospace; font-size: 32px; color: #E0E0E0;
+            background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 20px;
+            border-left: 8px solid #00C853; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            width: fit-content; backdrop-filter: blur(10px);
+        }
+
+        .info-label { color: #94A3B8; font-weight: 700; }
+
+        .image-pane { flex: 0.5; display: flex; align-items: center; justify-content: center; z-index: 1; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+        <div class="content-pane">
+            <div class="course-tag">MERCADO DE CAPITAIS</div>
+            <h1>Renda Fixa Privada: Debêntures e Captação</h1>
+            <div class="divider"></div>
+            <div class="info-grid">
+                <div class="info-label">TURMA:</div><div>7º Sem - ADM</div>
+                <div class="info-label">DATA:</div><div>27/02/2026</div>
+                <div class="info-label">PROF:</div><div>Renata Novaes</div>
+            </div>
+        </div>
+        <div class="image-pane"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px; font-weight: 700; color: #FFFFFF; margin-bottom: 40px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .columns-container {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;
+            z-index: 1; margin-bottom: 30px;
+        }
+
+        .type-col {
+            background-color: rgba(30, 41, 59, 0.6); border-radius: 8px;
+            padding: 25px; display: flex; flex-direction: column; gap: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-top: 4px solid #555;
+            backdrop-filter: blur(10px);
+        }
+
+        .type-header {
+            font-size: 22px; font-weight: 700; color: #FFFFFF;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .type-desc {
+            font-size: 16px; color: #B0C4DE; line-height: 1.5; flex-grow: 1;
+        }
+
+        .example-box {
+            background-color: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 6px;
+            text-align: center;
+        }
+
+        .example-label { font-size: 12px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .example-val { font-family: 'Roboto Mono', monospace; font-size: 20px; font-weight: 700; }
+
+        .chart-placeholder {
+            height: 60px; background-color: rgba(100, 255, 218, 0.05);
+            border-radius: 4px; display: flex; align-items: flex-end; justify-content: space-around;
+            padding-bottom: 5px;
+        }
+        
+        .bar { width: 15px; background-color: #555; border-radius: 2px 2px 0 0; }
+
+        .insight-box {
+            z-index: 1; background-color: rgba(30, 41, 59, 0.6); border-left: 4px solid #00C853;
+            padding: 20px; border-radius: 8px; margin-top: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .insight-text { font-size: 18px; color: #E0E0E0; font-style: italic; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Estrutura de Remuneração</h1>
+
+        <div class="columns-container">
+            <!-- Prefixada -->
+            <div class="type-col" style="border-top-color: #FFD600;">
+                <div class="type-header">
+                    <i class="fas fa-lock" style="color: #FFD600;"></i> Prefixada
+                </div>
+                <div class="type-desc">
+                    Taxa de juros definida no momento da emissão. O investidor sabe exatamente o valor nominal que receberá no vencimento, independente da economia.
+                </div>
+                <div class="chart-placeholder">
+                    <div class="bar" style="height: 40%; background-color: #FFD600;"></div>
+                    <div class="bar" style="height: 40%; background-color: #FFD600;"></div>
+                    <div class="bar" style="height: 40%; background-color: #FFD600;"></div>
+                    <div class="bar" style="height: 40%; background-color: #FFD600;"></div>
+                </div>
+                <div class="example-box">
+                    <div class="example-label">Exemplo</div>
+                    <div class="example-val" style="color: #FFD600;">12,5% a.a.</div>
+                </div>
+            </div>
+
+            <!-- Pós-fixada -->
+            <div class="type-col" style="border-top-color: #2979FF;">
+                <div class="type-header">
+                    <i class="fas fa-chart-line" style="color: #2979FF;"></i> Pós-fixada
+                </div>
+                <div class="type-desc">
+                    Rentabilidade atrelada a um indexador, geralmente o DI (CDI). Acompanha a flutuação da taxa básica de juros (Selic). Ideal para cenários de alta de juros.
+                </div>
+                <div class="chart-placeholder">
+                    <div class="bar" style="height: 20%; background-color: #2979FF;"></div>
+                    <div class="bar" style="height: 35%; background-color: #2979FF;"></div>
+                    <div class="bar" style="height: 50%; background-color: #2979FF;"></div>
+                    <div class="bar" style="height: 30%; background-color: #2979FF;"></div>
+                </div>
+                <div class="example-box">
+                    <div class="example-label">Exemplo</div>
+                    <div class="example-val" style="color: #2979FF;">CDI + 2,0%</div>
+                </div>
+            </div>
+
+            <!-- Híbrida -->
+            <div class="type-col" style="border-top-color: #FF5252;">
+                <div class="type-header">
+                    <i class="fas fa-balance-scale" style="color: #FF5252;"></i> Híbrida
+                </div>
+                <div class="type-desc">
+                    Combina uma parte fixa (juro real) com a correção pela inflação (IPCA). Garante a manutenção do poder de compra mais um ganho real.
+                </div>
+                <div class="chart-placeholder">
+                    <div class="bar" style="height: 25%; background-color: #FF5252;"></div>
+                    <div class="bar" style="height: 30%; background-color: #FF5252;"></div>
+                    <div class="bar" style="height: 45%; background-color: #FF5252;"></div>
+                    <div class="bar" style="height: 60%; background-color: #FF5252;"></div>
+                </div>
+                <div class="example-box">
+                    <div class="example-label">Exemplo</div>
+                    <div class="example-val" style="color: #FF5252;">IPCA + 6,0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-text">
+                "A escolha do indexador deve refletir a expectativa do investidor para a economia: proteger-se da inflação (IPCA), aproveitar juros altos (CDI) ou travar uma taxa atrativa (Pré)."
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px; font-weight: 700; color: #FFFFFF; margin-bottom: 40px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 60px; z-index: 1; height: 100%;
+        }
+
+        .rating-col {
+            flex: 0.4;
+            display: flex; flex-direction: column; gap: 5px;
+            background-color: rgba(30, 41, 59, 0.6); padding: 20px; border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .rating-level {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 15px; border-radius: 4px;
+            font-family: 'Roboto Mono', monospace; font-weight: 700; font-size: 18px;
+            color: #000;
+        }
+
+        .inv-grade { background: linear-gradient(90deg, #00C853, #69F0AE); }
+        .spec-grade { background: linear-gradient(90deg, #FFD600, #FFFF8D); }
+        .junk-grade { background: linear-gradient(90deg, #FF5252, #FF8A80); }
+
+        .grade-label {
+            font-size: 12px; text-transform: uppercase; color: #B0C4DE; margin-top: 15px; margin-bottom: 5px; letter-spacing: 1px;
+        }
+
+        .info-col {
+            flex: 0.6; display: flex; flex-direction: column; gap: 30px; justify-content: center;
+        }
+
+        .concept-box {
+            border-left: 4px solid #2979FF; padding-left: 20px;
+        }
+
+        .concept-title { font-size: 24px; font-weight: 700; color: #2979FF; margin-bottom: 10px; }
+        .concept-desc { font-size: 18px; color: #B0C4DE; line-height: 1.5; }
+
+        .spread-chart {
+            background-color: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 8px; border: 1px solid #444;
+            display: flex; align-items: flex-end; gap: 20px; height: 200px;
+        }
+
+        .chart-bar-group {
+            display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1;
+        }
+
+        .chart-bar {
+            width: 40px; border-radius: 4px 4px 0 0; transition: height 0.5s;
+        }
+
+        .bar-label { font-size: 14px; color: #888; font-family: 'Roboto Mono'; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Análise de Risco: Rating e Spread</h1>
+
+        <div class="content-wrapper">
+            <!-- Left: Rating Scale -->
+            <div class="rating-col">
+                <div class="grade-label">Grau de Investimento (Seguro)</div>
+                <div class="rating-level inv-grade" style="width: 100%;">AAA <span style="font-size: 12px; opacity: 0.7;">Risco Mínimo</span></div>
+                <div class="rating-level inv-grade" style="width: 95%; opacity: 0.9;">AA</div>
+                <div class="rating-level inv-grade" style="width: 90%; opacity: 0.8;">A</div>
+                <div class="rating-level inv-grade" style="width: 85%; opacity: 0.7;">BBB</div>
+
+                <div class="grade-label" style="margin-top: 20px; color: #FFD600;">Grau Especulativo (Alto Risco)</div>
+                <div class="rating-level spec-grade" style="width: 80%;">BB</div>
+                <div class="rating-level spec-grade" style="width: 75%; opacity: 0.9;">B</div>
+                <div class="rating-level junk-grade" style="width: 70%;">CCC</div>
+                <div class="rating-level junk-grade" style="width: 65%; opacity: 0.9;">D <span style="font-size: 12px; opacity: 0.7;">Default</span></div>
+            </div>
+
+            <!-- Right: Concepts -->
+            <div class="info-col">
+                <div class="concept-box">
+                    <div class="concept-title">Rating de Crédito</div>
+                    <div class="concept-desc">
+                        Nota atribuída por agências (S&P, Moody's, Fitch) que avalia a capacidade da empresa de honrar suas dívidas.
+                    </div>
+                </div>
+
+                <div class="concept-box" style="border-color: #FF5252;">
+                    <div class="concept-title" style="color: #FF5252;">Spread de Crédito</div>
+                    <div class="concept-desc">
+                        Prêmio de risco exigido pelo investidor. Quanto pior o rating, maior o risco de calote, e consequentemente, maior a taxa de juros (spread) exigida.
+                    </div>
+                </div>
+
+                <div style="font-size: 16px; color: #888; font-style: italic; margin-top: 10px;">
+                    "Risco e Retorno andam juntos: High Grade (Segurança) paga menos; High Yield (Risco) paga mais."
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

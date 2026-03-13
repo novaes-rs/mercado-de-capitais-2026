@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #2C2C2C;
+            font-family: 'Montserrat', sans-serif;
+            color: #F0F0F0;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            z-index: 1;
+            margin-bottom: 40px;
+            border-left: 6px solid #2979FF;
+            padding-left: 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 20px;
+            color: #AAAAAA;
+            font-weight: 400;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        /* Steps Column */
+        .steps-col {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background-color: #2979FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #FFF;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(41, 121, 255, 0.3);
+        }
+
+        .step-content {
+            padding-top: 5px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #CCC;
+            line-height: 1.4;
+        }
+
+        /* Deliverable Column */
+        .deliverable-col {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .deliverable-card {
+            background-color: #3E3E3E;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            color: #00C853;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFF;
+            text-transform: uppercase;
+        }
+
+        .req-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: #E0E0E0;
+        }
+
+        .req-item i {
+            color: #00C853;
+            font-size: 12px;
+        }
+
+        .warning-box {
+            background-color: rgba(255, 82, 82, 0.1);
+            border: 1px solid #FF5252;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .warning-icon {
+            color: #FF5252;
+            font-size: 24px;
+        }
+
+        .warning-text {
+            font-size: 14px;
+            color: #FFCDD2;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <header>
+            <h1>Atividade Prática: Simulador de Análise</h1>
+            <h2>Selecione e Justifique sua Tese de Investimento</h2>
+        </header>
+
+        <div class="task-grid">
+            <!-- Steps -->
+            <div class="steps-col">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Acesse a Plataforma</div>
+                        <div class="step-desc">Utilize o simulador da B3 ou o site da ANBIMA para buscar debêntures disponíveis no mercado secundário.</div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Selecione 2 Ativos</div>
+                        <div class="step-desc">Escolha uma debênture <strong>High Grade</strong> (Rating AAA/AA) e uma <strong>High Yield</strong> (Rating BBB ou inferior) de setores diferentes.</div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Compare os Indicadores</div>
+                        <div class="step-desc">Analise o Spread de Crédito (Taxa vs. CDI/IPCA), Duration (Prazo Médio) e Liquidez.</div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Tome a Decisão</div>
+                        <div class="step-desc">Qual das duas oferece a melhor relação risco-retorno para um investidor moderado? Justifique.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deliverable -->
+            <div class="deliverable-col">
+                <div class="deliverable-card">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt card-icon"></i>
+                        <span class="card-title">Entregável</span>
+                    </div>
+                    <ul class="req-list">
+                        <li class="req-item">
+                            <i class="fas fa-check"></i> Relatório Executivo (1 Página)
+                        </li>
+                        <li class="req-item">
+                            <i class="fas fa-check"></i> Tabela Comparativa dos Ativos
+                        </li>
+                        <li class="req-item">
+                            <i class="fas fa-check"></i> Parecer Final: COMPRA ou VENDA
+                        </li>
+                        <li class="req-item">
+                            <i class="fas fa-check"></i> Envio via Portal Acadêmico até 06/03
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle warning-icon"></i>
+                    <div class="warning-text">
+                        <strong>Atenção:</strong> Verifique se a debênture possui isenção fiscal (Incentivada) ao calcular o retorno líquido.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

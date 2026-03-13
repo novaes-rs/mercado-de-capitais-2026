@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #2C2C2C;
+            font-family: 'Montserrat', sans-serif;
+            color: #F0F0F0;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            z-index: 1;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 20px;
+            color: #00C853;
+            font-weight: 400;
+        }
+
+        .pillars-container {
+            display: flex;
+            gap: 40px;
+            z-index: 1;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .pillar-card {
+            flex: 1;
+            background-color: #3E3E3E;
+            border-radius: 12px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        .pillar-1::before { background-color: #2979FF; }
+        .pillar-2::before { background-color: #FFC107; }
+        .pillar-3::before { background-color: #00C853; }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #2C2C2C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 32px;
+        }
+
+        .pillar-1 .icon-circle { color: #2979FF; border: 2px solid #2979FF; }
+        .pillar-2 .icon-circle { color: #FFC107; border: 2px solid #FFC107; }
+        .pillar-3 .icon-circle { color: #00C853; border: 2px solid #00C853; }
+
+        .pillar-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 15px;
+        }
+
+        .pillar-text {
+            font-size: 16px;
+            color: #CCC;
+            line-height: 1.5;
+        }
+
+        .bottom-line {
+            margin-top: 40px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            color: #888;
+            font-size: 14px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <header>
+            <h1>Resumo e Pontos-Chave</h1>
+            <h2>O Que Você Precisa Lembrar</h2>
+        </header>
+
+        <div class="pillars-container">
+            <!-- Pillar 1 -->
+            <div class="pillar-card pillar-1">
+                <div class="icon-circle"><i class="fas fa-building"></i></div>
+                <div class="pillar-title">O Instrumento</div>
+                <div class="pillar-text">
+                    Debêntures são títulos de dívida corporativa de médio/longo prazo. Alternativa vital ao crédito bancário para financiar expansão e CAPEX.
+                </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-card pillar-2">
+                <div class="icon-circle"><i class="fas fa-layer-group"></i></div>
+                <div class="pillar-title">A Estrutura</div>
+                <div class="pillar-text">
+                    Alta flexibilidade: Conversíveis vs. Simples; Garantias Reais vs. Quirografárias; Incentivadas (Isentas de IR) vs. Comuns.
+                </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-card pillar-3">
+                <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+                <div class="pillar-title">O Risco/Retorno</div>
+                <div class="pillar-text">
+                    Oferecem prêmio sobre a Selic/CDI, mas carregam risco de crédito (default) e liquidez. A análise de Rating e Spread é fundamental.
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-line">
+            // CONCLUSÃO: Debêntures conectam a necessidade de capital das empresas à busca por rendimento dos investidores.
+        </div>
+    </div>
+</body>
+</html>

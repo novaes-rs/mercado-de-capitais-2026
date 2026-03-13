@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px; font-weight: 700; color: #FFFFFF; margin-bottom: 40px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 50px; z-index: 1; height: 100%;
+        }
+
+        .left-col { flex: 1; display: flex; flex-direction: column; gap: 30px; }
+        .right-col { flex: 0.8; display: flex; flex-direction: column; gap: 20px; }
+
+        .law-box {
+            background-color: rgba(30, 41, 59, 0.6); padding: 20px; border-radius: 8px;
+            border-left: 4px solid #00C853;
+            backdrop-filter: blur(10px);
+        }
+
+        .law-title { font-size: 20px; font-weight: 700; color: #00C853; margin-bottom: 5px; }
+        .law-desc { font-size: 16px; color: #B0C4DE; line-height: 1.4; }
+
+        .sectors-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+
+        .sector-card {
+            background-color: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 8px;
+            display: flex; align-items: center; gap: 15px;
+            transition: transform 0.2s;
+        }
+
+        .sector-icon {
+            font-size: 24px; color: #00E676; width: 40px; text-align: center;
+        }
+
+        .sector-name { font-size: 18px; font-weight: 600; color: #FFFFFF; }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.2) 0%, rgba(46, 125, 50, 0.2) 100%);
+            border-radius: 12px; padding: 30px; text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; justify-content: center; height: 100%;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+        }
+
+        .benefit-icon { font-size: 48px; color: #00C853; margin-bottom: 20px; }
+        .benefit-title { font-size: 28px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px; }
+        .benefit-value { font-size: 64px; font-weight: 800; color: #00E676; line-height: 1; margin: 10px 0; }
+        .benefit-subtitle { font-size: 18px; color: #B0C4DE; }
+
+        .pj-info {
+            background-color: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 6px;
+            text-align: center; font-size: 14px; color: #888; margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Debêntures Incentivadas (Lei 12.431)</h1>
+
+        <div class="content-wrapper">
+            <!-- Left Column: Context & Sectors -->
+            <div class="left-col">
+                <div class="law-box">
+                    <div class="law-title">Objetivo Estratégico</div>
+                    <div class="law-desc">
+                        Criadas para financiar grandes projetos de infraestrutura no Brasil, oferecendo incentivos fiscais para atrair investidores e alongar o perfil da dívida nacional.
+                    </div>
+                </div>
+
+                <h3 style="color: #FFFFFF; font-size: 22px; margin-bottom: 10px;">Setores Elegíveis</h3>
+                <div class="sectors-grid">
+                    <div class="sector-card">
+                        <i class="fas fa-bolt sector-icon"></i>
+                        <span class="sector-name">Energia</span>
+                    </div>
+                    <div class="sector-card">
+                        <i class="fas fa-road sector-icon"></i>
+                        <span class="sector-name">Logística</span>
+                    </div>
+                    <div class="sector-card">
+                        <i class="fas fa-tint sector-icon"></i>
+                        <span class="sector-name">Saneamento</span>
+                    </div>
+                    <div class="sector-card">
+                        <i class="fas fa-wifi sector-icon"></i>
+                        <span class="sector-name">Telecom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Tax Benefit -->
+            <div class="right-col">
+                <div class="benefit-card">
+                    <i class="fas fa-hand-holding-usd benefit-icon"></i>
+                    <div class="benefit-title">ISENÇÃO DE IR</div>
+                    <div class="benefit-value">0%</div>
+                    <div class="benefit-subtitle">Para Pessoa Física</div>
+                </div>
+
+                <div class="pj-info">
+                    Para Pessoa Jurídica, a alíquota é reduzida para <strong>15%</strong>.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

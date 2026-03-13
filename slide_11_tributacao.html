@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #2C2C2C;
+            font-family: 'Montserrat', sans-serif;
+            color: #F0F0F0;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            z-index: 1;
+            border-left: 6px solid #00C853;
+            padding-left: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 50px;
+            z-index: 1;
+            height: 100%;
+        }
+
+        /* Left Column: Tax Table */
+        .left-col {
+            flex: 0.45;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .table-card {
+            background-color: #3E3E3E;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tax-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .tax-table th {
+            text-align: left;
+            color: #888;
+            font-size: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #555;
+            text-transform: uppercase;
+        }
+
+        .tax-table td {
+            padding: 15px 0;
+            border-bottom: 1px solid #444;
+            font-size: 18px;
+            color: #E0E0E0;
+        }
+
+        .tax-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tax-rate {
+            color: #FF5252;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .insight-box {
+            background-color: #252525;
+            border-left: 4px solid #00C853;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            color: #CCCCCC;
+            line-height: 1.4;
+        }
+
+        /* Right Column: Comparison */
+        .right-col {
+            flex: 0.55;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comparison-terminal {
+            background-color: #1E1E1E;
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 30px;
+            font-family: 'Roboto Mono', monospace;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .terminal-header {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #444;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .scenario-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .scenario-label {
+            font-size: 16px;
+            color: #AAA;
+        }
+
+        .scenario-val {
+            font-size: 18px;
+            color: #FFF;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #444;
+            margin: 20px 0;
+        }
+
+        .result-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .result-box {
+            background-color: #2A2A2A;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .result-title {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .common-val { color: #FFBD2E; } /* Yellow/Orange for standard */
+        .incentivized-val { color: #00C853; } /* Green for better */
+
+        .diff-badge {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: #00C853;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-top: 10px;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Imposto de Renda: Como Afeta o Retorno Líquido?</h1>
+
+        <div class="content-wrapper">
+            <!-- Left Column -->
+            <div class="left-col">
+                <div class="table-card">
+                    <div class="section-title">
+                        <i class="fas fa-table"></i>
+                        Tabela Regressiva (Comuns)
+                    </div>
+                    <table class="tax-table">
+                        <thead>
+                            <tr>
+                                <th>Prazo de Aplicação</th>
+                                <th style="text-align: right;">Alíquota IR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Até 180 dias</td>
+                                <td class="tax-rate">22,5%</td>
+                            </tr>
+                            <tr>
+                                <td>181 a 360 dias</td>
+                                <td class="tax-rate">20,0%</td>
+                            </tr>
+                            <tr>
+                                <td>361 a 720 dias</td>
+                                <td class="tax-rate">17,5%</td>
+                            </tr>
+                            <tr>
+                                <td>Acima de 720 dias</td>
+                                <td class="tax-rate">15,0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-text">
+                        <strong style="color: #FFF;">Insight:</strong> A tributação regressiva incentiva o investimento de longo prazo. Quanto mais tempo o dinheiro fica aplicado, menor a mordida do Leão.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col">
+                <div class="comparison-terminal">
+                    <div class="terminal-header">
+                        <span>// SIMULAÇÃO COMPARATIVA</span>
+                        <span>CENÁRIO: 2 ANOS (730 DIAS)</span>
+                    </div>
+
+                    <div class="scenario-row">
+                        <span class="scenario-label">Rendimento Bruto (a.a.)</span>
+                        <span class="scenario-val">8,00%</span>
+                    </div>
+                    <div class="scenario-row">
+                        <span class="scenario-label">Prazo da Aplicação</span>
+                        <span class="scenario-val">2 Anos</span>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="result-group">
+                        <!-- Common Debenture -->
+                        <div class="result-box">
+                            <div class="result-title">Debênture Comum</div>
+                            <div class="scenario-row" style="margin-bottom: 5px;">
+                                <span class="scenario-label" style="font-size: 12px;">IR (15%)</span>
+                                <span class="scenario-val" style="font-size: 14px; color: #FF5252;">-1,20%</span>
+                            </div>
+                            <div class="result-value common-val">6,80%</div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">Líquido a.a.</div>
+                        </div>
+
+                        <!-- Incentivized Debenture -->
+                        <div class="result-box" style="border-color: #00C853;">
+                            <div class="result-title" style="color: #00C853;">Debênture Incentivada</div>
+                            <div class="scenario-row" style="margin-bottom: 5px;">
+                                <span class="scenario-label" style="font-size: 12px;">IR (0%)</span>
+                                <span class="scenario-val" style="font-size: 14px; color: #00C853;">ISENTO</span>
+                            </div>
+                            <div class="result-value incentivized-val">8,00%</div>
+                            <div class="diff-badge">+1,20% a.a. de Ganho Real</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: auto; color: #888; font-size: 14px; font-style: italic;">
+                        "A isenção fiscal pode tornar uma debênture incentivada com taxa nominal menor mais atrativa que uma comum com taxa maior."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #2C2C2C;
+            font-family: 'Montserrat', sans-serif;
+            color: #F0F0F0;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            z-index: 1;
+            border-left: 6px solid #00C853;
+            padding-left: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 60px;
+            z-index: 1;
+            flex: 1;
+            height: 100%;
+        }
+
+        /* Left Column */
+        .left-col {
+            flex: 0.35;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .intro-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #CCCCCC;
+        }
+
+        .reg-box {
+            background-color: #252525;
+            border: 1px solid #444;
+            border-left: 4px solid #00C853;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .reg-title {
+            font-family: 'Roboto Mono', monospace;
+            color: #00C853;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reg-text {
+            font-size: 16px;
+            color: #E0E0E0;
+            line-height: 1.4;
+        }
+
+        /* Right Column: Timeline */
+        .right-col {
+            flex: 0.65;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        /* Timeline Line */
+        .timeline-line {
+            position: absolute;
+            left: 29px; /* Center of the 60px icon box roughly */
+            top: 30px;
+            bottom: 30px;
+            width: 2px;
+            background-color: #444;
+            z-index: 0;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            z-index: 1;
+        }
+
+        .step-marker {
+            width: 60px;
+            height: 60px;
+            background-color: #3E3E3E;
+            border: 2px solid #00C853;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: #00C853;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.2);
+        }
+
+        .step-card {
+            flex: 1;
+            background-color: #3E3E3E;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #BBBBBB;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Processo de Emissão de Debêntures</h1>
+
+        <div class="content-wrapper">
+            <div class="left-col">
+                <div class="intro-text">
+                    A emissão de debêntures é um processo estruturado que envolve governança corporativa, conformidade legal e interação com o mercado.
+                </div>
+
+                <div class="reg-box">
+                    <div class="reg-title">
+                        <i class="fas fa-gavel"></i> Regulação
+                    </div>
+                    <p class="reg-text">
+                        Todo o processo é fiscalizado pela <strong>CVM</strong> (Comissão de Valores Mobiliários) para garantir transparência e proteger os investidores.
+                    </p>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="timeline-line"></div>
+                
+                <div class="steps-container">
+                    <!-- Step 1 -->
+                    <div class="step-item">
+                        <div class="step-marker">01</div>
+                        <div class="step-card">
+                            <div class="step-title">Aprovação em Assembleia</div>
+                            <div class="step-desc">Acionistas deliberam e aprovam o montante, prazos e condições da emissão.</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-item">
+                        <div class="step-marker">02</div>
+                        <div class="step-card">
+                            <div class="step-title">Escritura de Emissão</div>
+                            <div class="step-desc">Elaboração do documento legal que define todos os direitos e deveres das partes.</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-item">
+                        <div class="step-marker">03</div>
+                        <div class="step-card">
+                            <div class="step-title">Registro na CVM</div>
+                            <div class="step-desc">Envio da documentação para análise e aprovação regulatória do órgão fiscalizador.</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-item">
+                        <div class="step-marker">04</div>
+                        <div class="step-card">
+                            <div class="step-title">Distribuição</div>
+                            <div class="step-desc">Oferta pública (mercado geral) ou privada (investidores qualificados) via intermediários.</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-item">
+                        <div class="step-marker">05</div>
+                        <div class="step-card">
+                            <div class="step-title">Negociação Secundária</div>
+                            <div class="step-desc">Títulos passam a ser negociados entre investidores na B3 (liquidez).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
