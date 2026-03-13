@@ -1,0 +1,4024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Background Grid/Radar Effect */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        .radar-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .radar-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+        }
+        .radar-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+        }
+
+        /* Content Styling */
+        .content-wrapper {
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            background: rgba(10, 25, 47, 0.7);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            backdrop-filter: blur(5px);
+            max-width: 900px;
+            position: relative;
+        }
+
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #FFD700;
+            border-left: 2px solid #FFD700;
+        }
+        .content-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #FFD700;
+            border-right: 2px solid #FFD700;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 300;
+            color: #E6F1FF;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            height: 2px;
+            width: 100px;
+            background: #64FFDA;
+            margin: 0 auto 40px auto;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            border-left: 3px solid #64FFDA;
+            padding-left: 15px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #64FFDA;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .info-value {
+            font-size: 18px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .bottom-bar {
+            position: absolute;
+            bottom: 30px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: rgba(230, 241, 255, 0.6);
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            padding-top: 10px;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+        <div class="radar-circle"></div>
+
+        <div class="content-wrapper">
+            <h1>Renda Variável em Tempos de Crise</h1>
+            <h2>O Conflito EUA-Irã e Seus Impactos no Mercado</h2>
+            
+            <div class="divider"></div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Disciplina</div>
+                    <div class="info-value">Mercado de Capitais e Derivativos</div>
+                    <div class="info-value" style="font-size: 14px; margin-top: 5px;">Administração — 7º Semestre</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Professora</div>
+                    <div class="info-value">Renata Novaes da Silva</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <div>Faculdade Cosmopolita</div>
+            <div>07 de março de 2026</div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #64FFDA;
+            margin-bottom: 40px;
+            z-index: 1;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            z-index: 1;
+            height: 100%;
+        }
+
+        /* Market Data Table */
+        .market-panel {
+            flex: 3;
+            background: rgba(16, 33, 60, 0.8);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #8892b0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .market-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.05);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .market-row:last-child {
+            border-bottom: none;
+        }
+
+        .indicator-name {
+            font-size: 20px;
+            color: #E6F1FF;
+            font-weight: 700;
+            width: 40%;
+        }
+
+        .indicator-value {
+            font-size: 20px;
+            color: #E6F1FF;
+            width: 30%;
+            text-align: right;
+        }
+
+        .indicator-change {
+            font-size: 20px;
+            width: 30%;
+            text-align: right;
+            font-weight: 700;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .positive { color: #4CAF50; } /* Green */
+        .negative { color: #FF5252; } /* Red */
+        .warning { color: #FFC107; }  /* Amber */
+
+        /* Question Box */
+        .question-panel {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .question-panel::before {
+            content: 'DECISÃO CRÍTICA';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0A192F;
+            color: #FFD700;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .big-question {
+            font-size: 32px;
+            font-weight: 700;
+            color: #E6F1FF;
+            line-height: 1.4;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-size: 42px;
+            display: block;
+            margin: 20px 0;
+        }
+
+        .timer-hint {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #64FFDA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>E Agora? O Que Você Faz?</h1>
+        <div class="subtitle">Painel de Mercado — 07/03/2026 — 08h00</div>
+
+        <div class="dashboard-container">
+            <!-- Market Data Panel -->
+            <div class="market-panel">
+                <div class="market-header">
+                    <span style="width: 40%">Indicador</span>
+                    <span style="width: 30%; text-align: right">Valor</span>
+                    <span style="width: 30%; text-align: right">Variação</span>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">IBOVESPA</div>
+                    <div class="indicator-value">118.450</div>
+                    <div class="indicator-change negative">
+                        <i class="fas fa-arrow-down"></i> 3,2%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">DÓLAR (Ptax)</div>
+                    <div class="indicator-value">R$ 6,15</div>
+                    <div class="indicator-change negative">
+                        <i class="fas fa-arrow-up"></i> 2,8%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">PETRÓLEO (Brent)</div>
+                    <div class="indicator-value">US$ 91,40</div>
+                    <div class="indicator-change positive">
+                        <i class="fas fa-arrow-up"></i> 6,9%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">OURO (Oz)</div>
+                    <div class="indicator-value">US$ 2.980</div>
+                    <div class="indicator-change positive">
+                        <i class="fas fa-arrow-up"></i> 1,5%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">VIX (Medo)</div>
+                    <div class="indicator-value">38,5</div>
+                    <div class="indicator-change warning">
+                        <i class="fas fa-exclamation-triangle"></i> 45%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decision Panel -->
+            <div class="question-panel">
+                <div class="big-question">
+                    Você tem <span class="highlight">R$ 10 Milhões</span> investidos em ações.
+                </div>
+                <div style="font-size: 24px; margin-top: 20px; color: #E6F1FF;">
+                    O que você faz nos próximos 30 minutos?
+                </div>
+                <div class="timer-hint">
+                    <i class="fas fa-stopwatch"></i> Tempo para decisão: 30 min
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Container */
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        /* Visual Metaphor */
+        .visual-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-circle {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64FFDA;
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .visual-icon {
+            font-size: 100px;
+            color: #64FFDA;
+        }
+
+        .slice-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 50px;
+            color: #FFD700;
+            transform: rotate(-15deg);
+        }
+
+        /* Definition Text */
+        .text-box {
+            max-width: 600px;
+        }
+
+        .definition {
+            font-size: 32px;
+            color: #E6F1FF;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: 700;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0 10px;
+            border-radius: 4px;
+        }
+
+        .mindset-box {
+            background: rgba(16, 33, 60, 0.8);
+            border-left: 4px solid #FFD700;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .mindset-text {
+            font-size: 20px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Que é uma Ação?</h1>
+
+        <div class="content-container">
+            <div class="visual-box">
+                <div class="icon-circle">
+                    <i class="fas fa-chart-pie visual-icon"></i>
+                    <i class="fas fa-puzzle-piece slice-icon"></i>
+                </div>
+                <div style="font-size: 18px; color: #64FFDA; text-transform: uppercase; font-weight: 700;">Menor Fração do Capital</div>
+            </div>
+
+            <div class="text-box">
+                <div class="definition">
+                    Uma ação representa um pedaço real de uma empresa. Ao comprar, você se torna <span class="highlight">SÓCIO</span>.
+                </div>
+                
+                <div class="mindset-box">
+                    <div class="mindset-text">
+                        "Você não compra um bilhete de loteria que sobe ou desce aleatoriamente. Você compra participação nos lucros, nos riscos e no patrimônio de um negócio real."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Split Container */
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .type-card {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            border-top: 4px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .on-card { border-color: #64FFDA; }
+        .pn-card { border-color: #FFD700; }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .on-title { color: #64FFDA; }
+        .pn-title { color: #FFD700; }
+
+        .code-box {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 36px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: #E6F1FF;
+        }
+
+        .code-highlight { font-weight: 700; }
+        .on-highlight { color: #64FFDA; }
+        .pn-highlight { color: #FFD700; }
+
+        .feature-list {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .feature-item {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        /* Example Box */
+        .example-box {
+            margin-top: 30px;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            color: #8892b0;
+            z-index: 1;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Tipos de Ações e Códigos</h1>
+
+        <div class="split-container">
+            <!-- ON Card -->
+            <div class="type-card on-card">
+                <div class="card-title on-title">Ordinárias (ON)</div>
+                <div class="code-box">XXXX<span class="code-highlight on-highlight">3</span></div>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <i class="fas fa-vote-yea feature-icon on-title"></i>
+                        Direito a VOTO nas assembleias
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-user-shield feature-icon on-title"></i>
+                        Tag Along (Proteção na venda da empresa)
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-crown feature-icon on-title"></i>
+                        Foco: Controle e Longo Prazo
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PN Card -->
+            <div class="type-card pn-card">
+                <div class="card-title pn-title">Preferenciais (PN)</div>
+                <div class="code-box">XXXX<span class="code-highlight pn-highlight">4</span></div>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <i class="fas fa-hand-holding-usd feature-icon pn-title"></i>
+                        Preferência nos DIVIDENDOS
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-ban feature-icon pn-title"></i>
+                        Sem direito a voto
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-chart-line feature-icon pn-title"></i>
+                        Foco: Renda e Liquidez
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="example-box">
+            Exemplo Prático: <strong>PETR3</strong> (Voto) vs <strong>PETR4</strong> (Dividendos)
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Comparison Container */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .side-box {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-top: 4px solid;
+        }
+
+        .rf-box { border-color: #64FFDA; }
+        .rv-box { border-color: #FF5252; }
+
+        .side-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .rf-title { color: #64FFDA; }
+        .rv-title { color: #FF5252; }
+
+        .concept-text {
+            font-size: 18px;
+            color: #E6F1FF;
+            margin-bottom: 30px;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        .highlight { font-weight: 700; }
+        .rf-highlight { color: #64FFDA; }
+        .rv-highlight { color: #FF5252; }
+
+        .icon-box {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Trade-off Bar */
+        .tradeoff-bar {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            z-index: 1;
+            font-family: 'Lato', sans-serif;
+            color: #8892b0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Renda Fixa vs Renda Variável</h1>
+
+        <div class="comparison-container">
+            <!-- Renda Fixa -->
+            <div class="side-box rf-box">
+                <i class="fas fa-piggy-bank icon-box rf-title"></i>
+                <div class="side-title rf-title">Renda Fixa</div>
+                <div class="concept-text">
+                    Você <span class="highlight rf-highlight">EMPRESTA</span> dinheiro para o banco ou governo em troca de juros.
+                </div>
+                <div class="concept-text" style="font-size: 16px;">
+                    Retorno Previsível • Baixo Risco • Segurança
+                </div>
+            </div>
+
+            <!-- Renda Variável -->
+            <div class="side-box rv-box">
+                <i class="fas fa-chart-line icon-box rv-title"></i>
+                <div class="side-title rv-title">Renda Variável</div>
+                <div class="concept-text">
+                    Você se torna <span class="highlight rv-highlight">SÓCIO</span> do negócio, participando dos lucros e prejuízos.
+                </div>
+                <div class="concept-text" style="font-size: 16px;">
+                    Retorno Ilimitado • Alto Risco • Volatilidade
+                </div>
+            </div>
+        </div>
+
+        <div class="tradeoff-bar">
+            Regra de Ouro: Maior Risco = Maior Potencial de Retorno (no longo prazo)
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        /* The Line */
+        .timeline-line {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: rgba(100, 255, 218, 0.3);
+            z-index: -1;
+        }
+
+        .timeline-event {
+            width: 22%;
+            position: relative;
+            text-align: center;
+        }
+
+        .event-icon-box {
+            width: 80px;
+            height: 80px;
+            background: #0A192F;
+            border: 2px solid #64FFDA;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .event-icon-box i {
+            font-size: 32px;
+            color: #FFD700;
+        }
+
+        .event-date {
+            font-size: 18px;
+            color: #64FFDA;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .event-title {
+            font-size: 20px;
+            color: #E6F1FF;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .event-desc {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Status Box */
+        .status-box {
+            margin-top: auto;
+            background: rgba(255, 82, 82, 0.1);
+            border: 1px solid #FF5252;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-label {
+            font-size: 12px;
+            color: #FF5252;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .status-value {
+            font-size: 24px;
+            color: #E6F1FF;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>De Tensão a Guerra: A Escalada</h1>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-fighter-jet"></i>
+                </div>
+                <div class="event-date">28 Fev</div>
+                <div class="event-title">O Estopim</div>
+                <div class="event-desc">Ataques coordenados de EUA e Israel. Morte do líder supremo Ali Khamenei.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-oil-can"></i>
+                </div>
+                <div class="event-date">01-03 Mar</div>
+                <div class="event-title">Choque do Petróleo</div>
+                <div class="event-desc">Retaliações contra bases americanas. Preço do barril dispara.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <div class="event-date">04-05 Mar</div>
+                <div class="event-title">Expansão Naval</div>
+                <div class="event-desc">Submarino dos EUA atingido. Tensão chega ao Mediterrâneo.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-radiation-alt"></i>
+                </div>
+                <div class="event-date">06 Mar</div>
+                <div class="event-title">Nova Fase</div>
+                <div class="event-desc">Anúncio de aumento drástico do poder de fogo. Risco sistêmico global.</div>
+            </div>
+        </div>
+
+        <div class="status-box">
+            <div class="status-item">
+                <div class="status-label">Dias de Conflito</div>
+                <div class="status-value">06 Dias</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Nível de Ameaça</div>
+                <div class="status-value">CRÍTICO (DEFCON 3)</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Impacto Econômico</div>
+                <div class="status-value">ALTO RISCO SISTÊMICO</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* 3-Column Layout */
+        .reasons-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            z-index: 1;
+            height: 400px;
+        }
+
+        .reason-card {
+            background: rgba(16, 33, 60, 0.6);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 4px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #64FFDA;
+        }
+
+        .icon-circle {
+            width: 100px;
+            height: 100px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .icon-circle i {
+            font-size: 40px;
+            color: #FFD700;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #E6F1FF;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            color: #8892b0;
+            line-height: 1.6;
+        }
+
+        .highlight-text {
+            color: #64FFDA;
+            font-weight: 700;
+        }
+
+        /* Bottom Insight */
+        .insight-box {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            z-index: 1;
+        }
+
+        .insight-text {
+            font-size: 20px;
+            color: #E6F1FF;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Por Que o Irã Importa?</h1>
+
+        <div class="reasons-container">
+            <!-- Reason 1 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+                <h3>Gigante do Petróleo</h3>
+                <p>
+                    Membro chave da <span class="highlight-text">OPEP</span>. 
+                    Qualquer interrupção na sua produção reduz a oferta global, pressionando preços instantaneamente.
+                </p>
+            </div>
+
+            <!-- Reason 2 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Estreito de Ormuz</h3>
+                <p>
+                    O gargalo mais crítico do mundo. 
+                    <span class="highlight-text">20% do comércio global</span> de petróleo passa por aqui. 
+                    Bloqueio = Choque de Oferta Global.
+                </p>
+            </div>
+
+            <!-- Reason 3 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Parceiro da China</h3>
+                <p>
+                    Fornecedor vital de energia para a "fábrica do mundo" e grande produtor de 
+                    <span class="highlight-text">ureia e fertilizantes</span>, essenciais para o agronegócio.
+                </p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <p class="insight-text">"O Irã não é apenas um país, é um nó crítico na infraestrutura energética global."</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Diagram Container */
+        .diagram-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Trigger Box */
+        .trigger-box {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 82, 82, 0.1);
+            border: 2px solid #FF5252;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(255, 82, 82, 0.2);
+            position: relative;
+        }
+
+        .trigger-box::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            width: 50px;
+            height: 2px;
+            background: #FF5252;
+        }
+
+        .trigger-icon {
+            font-size: 60px;
+            color: #FF5252;
+            margin-bottom: 20px;
+        }
+
+        .trigger-title {
+            font-size: 24px;
+            color: #E6F1FF;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Channels List */
+        .channels-list {
+            flex: 1;
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 450px;
+        }
+
+        .channel-item {
+            background: rgba(16, 33, 60, 0.8);
+            border-left: 4px solid #64FFDA;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .channel-icon {
+            width: 50px;
+            font-size: 24px;
+            color: #64FFDA;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .channel-content {
+            flex: 1;
+        }
+
+        .channel-title {
+            font-size: 18px;
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .channel-desc {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Canais de Transmissão</h1>
+
+        <div class="diagram-container">
+            <!-- Trigger -->
+            <div class="trigger-box">
+                <i class="fas fa-bomb trigger-icon"></i>
+                <div class="trigger-title">Conflito Geopolítico</div>
+            </div>
+
+            <!-- Channels -->
+            <div class="channels-list">
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-oil-can"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">1. Choque de Oferta</div>
+                        <div class="channel-desc">Petróleo dispara > Custos de energia sobem globalmente.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">2. Aversão ao Risco</div>
+                        <div class="channel-desc">Flight to Quality: Saída de Bolsa > Entrada em Dólar/Ouro.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">3. Pressão Inflacionária</div>
+                        <div class="channel-desc">Custos maiores > Inflação sobe > Juros se mantêm altos.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">4. Câmbio</div>
+                        <div class="channel-desc">Dólar se fortalece > Moedas emergentes (Real) desvalorizam.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">5. Cadeia de Suprimentos</div>
+                        <div class="channel-desc">Frete marítimo encarece > Atrasos e custos logísticos.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Split Layout */
+        .split-container {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            gap: 60px;
+            z-index: 1;
+        }
+
+        .column {
+            flex: 1;
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .column-header {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid;
+        }
+
+        .winners-header {
+            color: #64FFDA;
+            border-color: #64FFDA;
+        }
+
+        .losers-header {
+            color: #FF5252;
+            border-color: #FF5252;
+        }
+
+        .item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .item-icon {
+            width: 40px;
+            font-size: 20px;
+            margin-right: 15px;
+            text-align: center;
+        }
+
+        .winners-icon { color: #64FFDA; }
+        .losers-icon { color: #FF5252; }
+
+        .item-content h3 {
+            font-size: 20px;
+            color: #E6F1FF;
+            margin-bottom: 5px;
+        }
+
+        .item-content p {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ganhadores e Perdedores</h1>
+
+        <div class="split-container">
+            <!-- Winners Column -->
+            <div class="column">
+                <div class="column-header winners-header">
+                    <i class="fas fa-arrow-up"></i> Ganhadores
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-gas-pump"></i></div>
+                    <div class="item-content">
+                        <h3>Exportadores de Energia</h3>
+                        <p>Brasil (Petrobras), Canadá, Noruega. Receitas explodem com barril > US$ 90.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="item-content">
+                        <h3>Indústria de Defesa</h3>
+                        <p>Lockheed Martin, Raytheon. Aumento imediato na demanda por tecnologia militar.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-gem"></i></div>
+                    <div class="item-content">
+                        <h3>Ativos de Refúgio</h3>
+                        <p>Dólar e Ouro. Capital global busca segurança e liquidez imediata.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Losers Column -->
+            <div class="column">
+                <div class="column-header losers-header">
+                    <i class="fas fa-arrow-down"></i> Perdedores
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-industry"></i></div>
+                    <div class="item-content">
+                        <h3>Importadores de Energia</h3>
+                        <p>China, Japão, Europa. Custos industriais disparam, margens encolhem.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-plane"></i></div>
+                    <div class="item-content">
+                        <h3>Aviação e Logística</h3>
+                        <p>Combustível é 30-40% do custo. Margens operacionais viram negativas.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="item-content">
+                        <h3>Emergentes Frágeis</h3>
+                        <p>Turquia, Argentina. Dólar alto torna dívida externa impagável.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Analysis Container */
+        .analysis-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .panel {
+            flex: 1;
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 25px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .opp-header { color: #64FFDA; border-color: #64FFDA; }
+        .risk-header { color: #FF5252; border-color: #FF5252; }
+
+        .point {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .point-title {
+            font-size: 18px;
+            color: #E6F1FF;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .point-desc {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.4;
+        }
+
+        /* Scenario Box */
+        .scenario-box {
+            margin-top: 30px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #FFD700;
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .scenario-label {
+            font-size: 16px;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .scenario-text {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Brasil em Foco</h1>
+
+        <div class="analysis-container">
+            <!-- Opportunities -->
+            <div class="panel">
+                <div class="panel-header opp-header">
+                    <i class="fas fa-chart-line"></i> Oportunidades
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Exportador Líquido de Petróleo</div>
+                    <div class="point-desc">Petrobras e Junior Oils (PRIO, Brava) aumentam margem de lucro com Brent > US$ 80.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Balança Comercial</div>
+                    <div class="point-desc">Superávit comercial tende a crescer com valorização das commodities energéticas.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Fluxo de Investimento</div>
+                    <div class="point-desc">Brasil visto como emergente "longe do conflito", atraindo capital especulativo.</div>
+                </div>
+            </div>
+
+            <!-- Risks -->
+            <div class="panel">
+                <div class="panel-header risk-header">
+                    <i class="fas fa-exclamation-triangle"></i> Riscos
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Dependência de Fertilizantes</div>
+                    <div class="point-desc">Irã é grande fornecedor de ureia. Risco de custo alto para o agronegócio (safra 2026/27).</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Inflação (IPCA)</div>
+                    <div class="point-desc">Combustíveis + Alimentos mais caros pressionam a meta de inflação.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Juros (Selic)</div>
+                    <div class="point-desc">Banco Central pode manter Selic alta por mais tempo para conter câmbio e inflação.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario-box">
+            <div class="scenario-label">Cenário Base (60% Probabilidade)</div>
+            <div class="scenario-text">
+                Conflito curto. Petróleo estabiliza em US$ 85. Petrobras lucra, mas inflação de alimentos é moderada. Dólar recua gradualmente.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64FFDA;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formula {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 36px;
+            color: #E6F1FF;
+            margin-bottom: 15px;
+        }
+
+        .formula span { color: #FFD700; }
+
+        .definition {
+            font-size: 16px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Interpretation List */
+        .interpretation-box {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .interp-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .interp-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .low { color: #64FFDA; }
+        .high { color: #FF5252; }
+        .mod { color: #FFD700; }
+
+        .interp-desc {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .case-title {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 30%;
+        }
+
+        .case-data {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            color: #E6F1FF;
+            width: 40%;
+            text-align: center;
+        }
+
+        .case-result {
+            font-size: 32px;
+            color: #64FFDA;
+            font-weight: 700;
+            width: 30%;
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #1: Preço/Lucro (P/L)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    P/L = <span>Preço Ação</span> / <span>LPA</span>
+                </div>
+                <div class="definition">
+                    Indica quantos anos de lucro atual seriam necessários para recuperar o capital investido.
+                </div>
+            </div>
+
+            <!-- Interpretation -->
+            <div class="interpretation-box">
+                <div class="interp-item">
+                    <div class="interp-title low">P/L Baixo (< 12)</div>
+                    <div class="interp-desc">Pode indicar oportunidade (barato) OU risco (mercado prevê queda de lucro).</div>
+                </div>
+                <div class="interp-item">
+                    <div class="interp-title mod">P/L Moderado (12-20)</div>
+                    <div class="interp-desc">Faixa típica de empresas maduras e rentáveis.</div>
+                </div>
+                <div class="interp-item">
+                    <div class="interp-title high">P/L Alto (> 20)</div>
+                    <div class="interp-desc">Expectativa de alto crescimento futuro OU sobrevalorização (caro).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras (PETR4)
+            </div>
+            <div class="case-data">
+                Preço: R$ 28,50<br>
+                LPA (12m): R$ 2,10
+            </div>
+            <div class="case-result">
+                13,6x
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">P/L Atual</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64FFDA;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formula {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 32px;
+            color: #E6F1FF;
+            margin-bottom: 15px;
+        }
+
+        .formula span { color: #FFD700; }
+
+        .definition {
+            font-size: 16px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Quality Meter */
+        .quality-meter {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .meter-bar {
+            height: 40px;
+            width: 100%;
+            background: #0A192F;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fill-low { width: 33%; background: #FF5252; height: 100%; position: absolute; }
+        .fill-mid { width: 66%; background: #FFD700; height: 100%; position: absolute; }
+        .fill-high { width: 100%; background: #64FFDA; height: 100%; position: absolute; }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            margin-top: 5px;
+        }
+
+        .quality-text {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .case-title {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 30%;
+        }
+
+        .case-data {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            color: #E6F1FF;
+            width: 40%;
+            text-align: center;
+        }
+
+        .case-result {
+            font-size: 32px;
+            color: #64FFDA;
+            font-weight: 700;
+            width: 30%;
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #2: ROE (Retorno s/ Patrimônio)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    ROE = <span>Lucro Líquido</span> / <span>Patrimônio Líquido</span>
+                </div>
+                <div class="definition">
+                    Mede a eficiência da gestão em gerar retorno com o capital dos acionistas. É o indicador de <strong>QUALIDADE</strong>.
+                </div>
+            </div>
+
+            <!-- Quality Levels -->
+            <div class="quality-meter">
+                <div class="quality-text">Níveis de Eficiência</div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="color: #FF5252; font-weight: 700;">&lt; 10% (Baixa Eficiência)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 30%; height: 100%; background: #FF5252; border-radius: 5px;"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="color: #FFD700; font-weight: 700;">10% - 15% (Média de Mercado)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 60%; height: 100%; background: #FFD700; border-radius: 5px;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="color: #64FFDA; font-weight: 700;">&gt; 15% (Alta Qualidade / Vantagem Competitiva)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 90%; height: 100%; background: #64FFDA; border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras
+            </div>
+            <div class="case-data">
+                Setor de Energia<br>
+                Média Global: ~12%
+            </div>
+            <div class="case-result">
+                ~18%
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">ROE Atual (Alta Qualidade)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64FFDA;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formula {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 32px;
+            color: #E6F1FF;
+            margin-bottom: 15px;
+        }
+
+        .formula span { color: #FFD700; }
+
+        .definition {
+            font-size: 16px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Strategy Box */
+        .strategy-box {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 4px solid #FFD700;
+        }
+
+        .strategy-title {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .strategy-desc {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+        }
+
+        .strategy-icon {
+            font-size: 40px;
+            color: #FFD700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .case-title {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 30%;
+        }
+
+        .case-data {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            color: #E6F1FF;
+            width: 40%;
+            text-align: center;
+        }
+
+        .case-result {
+            font-size: 32px;
+            color: #64FFDA;
+            font-weight: 700;
+            width: 30%;
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #3: Dividend Yield (DY)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    DY = <span>Dividendo Anual</span> / <span>Preço Ação</span>
+                </div>
+                <div class="definition">
+                    Retorno percentual pago em dinheiro ao acionista. É o "aluguel" que você recebe por ser sócio.
+                </div>
+            </div>
+
+            <!-- Strategy -->
+            <div class="strategy-box">
+                <div class="strategy-icon"><i class="fas fa-anchor"></i></div>
+                <div class="strategy-title">Estratégia "Porto Seguro"</div>
+                <div class="strategy-desc">
+                    Em tempos de crise e queda nas bolsas, empresas que pagam bons dividendos (DY > 6%) oferecem uma <strong>proteção psicológica e financeira</strong>. O preço da ação pode cair, mas o dividendo continua caindo na conta.
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras
+            </div>
+            <div class="case-data">
+                Dividendo/Ação: R$ 1,50<br>
+                Preço: R$ 28,50
+            </div>
+            <div class="case-result">
+                5,26%
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">DY Anual (Atrativo)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Layout */
+        .content-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+            z-index: 1;
+            height: 100%;
+        }
+
+        /* Left Column: Definition */
+        .left-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ri-definition {
+            font-size: 24px;
+            color: #E6F1FF;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            border-left: 4px solid #64FFDA;
+            padding-left: 20px;
+        }
+
+        .ri-icon {
+            font-size: 80px;
+            color: #64FFDA;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        /* Right Column: Checklist */
+        .right-col {
+            flex: 1;
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .checklist-title {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .check-icon {
+            color: #64FFDA;
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .check-text h3 {
+            font-size: 18px;
+            color: #E6F1FF;
+            margin-bottom: 5px;
+        }
+
+        .check-text p {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.4;
+        }
+
+        /* Bottom Example */
+        .example-box {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-left: 4px solid #FFD700;
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            color: #E6F1FF;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Papel do RI na Guerra</h1>
+
+        <div class="content-layout">
+            <div class="left-col">
+                <i class="fas fa-bullhorn ri-icon"></i>
+                <div class="ri-definition">
+                    Relações com Investidores (RI) é a ponte estratégica entre a empresa e o mercado de capitais.
+                </div>
+                <div style="font-size: 18px; color: #8892b0;">
+                    Em tempos de crise, o silêncio custa caro. A incerteza destrói valor mais rápido que a má notícia.
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="checklist-title">Protocolo de Comunicação</div>
+                
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Transparência Radical</h3>
+                        <p>Não esconda riscos. O mercado precifica o que conhece e pune o que desconhece.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Velocidade</h3>
+                        <p>Fatos Relevantes devem sair antes dos rumores de WhatsApp.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Plano de Mitigação</h3>
+                        <p>Não diga apenas "temos um problema". Diga "estamos fazendo X, Y e Z para resolver".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            "A Petrobras informa que monitora os desdobramentos no Oriente Médio e reafirma que suas operações não foram afetadas. Possuímos hedge cambial para proteger 40% da receita..."
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Pillars Container */
+        .pillars-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            z-index: 1;
+            height: 400px;
+        }
+
+        .pillar-card {
+            background: rgba(16, 33, 60, 0.6);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-top: 4px solid #64FFDA;
+            border-radius: 4px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box i {
+            font-size: 32px;
+            color: #FFD700;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #E6F1FF;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            color: #8892b0;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #64FFDA;
+            font-weight: 700;
+        }
+
+        /* Bottom Quote */
+        .quote-box {
+            margin-top: auto;
+            text-align: center;
+            font-style: italic;
+            color: #E6F1FF;
+            font-size: 20px;
+            z-index: 1;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>3 Princípios para Sobreviver</h1>
+
+        <div class="pillars-container">
+            <!-- Pillar 1 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Diversificação</h3>
+                <p>
+                    A única "almoço grátis" do mercado. Ter ativos com <span class="highlight">correlação negativa</span> (ex: Ações caem, Dólar sobe) suaviza a volatilidade da carteira.
+                </p>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Qualidade</h3>
+                <p>
+                    Em crises, o mercado pune promessas e premia realidades. Busque empresas com <span class="highlight">caixa forte, baixo endividamento e lucro real</span>.
+                </p>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <h3>Horizonte</h3>
+                <p>
+                    Volatilidade é ruído de curto prazo. Quem tem visão de longo prazo vê <span class="highlight">oportunidade de compra</span> onde outros veem pânico.
+                </p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "O mercado de ações é um dispositivo para transferir dinheiro dos impacientes para os pacientes." — Warren Buffett
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Sectors Grid */
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            z-index: 1;
+            height: 400px;
+        }
+
+        .sector-col {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-header {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            text-align: center;
+        }
+
+        .win-head { color: #64FFDA; border-color: #64FFDA; }
+        .lose-head { color: #FF5252; border-color: #FF5252; }
+        .neu-head { color: #FFD700; border-color: #FFD700; }
+
+        .sector-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sector-icon {
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .sector-name {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-weight: 700;
+        }
+
+        .sector-reason {
+            font-size: 12px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            margin-left: 40px;
+            margin-top: 3px;
+        }
+
+        /* Recommendation Box */
+        .rec-box {
+            margin-top: auto;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid #64FFDA;
+            padding: 15px;
+            border-radius: 4px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .rec-text {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Quem Ganha e Quem Perde</h1>
+
+        <div class="sectors-grid">
+            <!-- Winners -->
+            <div class="sector-col">
+                <div class="col-header win-head"><i class="fas fa-arrow-up"></i> Ganhadores</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-oil-can sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Petróleo e Gás</div>
+                </div>
+                <div class="sector-reason">Receitas sobem com barril caro. (Petrobras, PRIO)</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-shield-alt sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Defesa</div>
+                </div>
+                <div class="sector-reason">Demanda por armamentos e tecnologia.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-gem sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Ouro e Metais</div>
+                </div>
+                <div class="sector-reason">Refúgio clássico contra incerteza.</div>
+            </div>
+
+            <!-- Losers -->
+            <div class="sector-col">
+                <div class="col-header lose-head"><i class="fas fa-arrow-down"></i> Perdedores</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-plane sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Aviação</div>
+                </div>
+                <div class="sector-reason">Combustível (QAV) é 40% do custo.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-shopping-cart sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Varejo</div>
+                </div>
+                <div class="sector-reason">Inflação corrói poder de compra.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-hard-hat sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Construção</div>
+                </div>
+                <div class="sector-reason">Juros altos encarecem financiamento.</div>
+            </div>
+
+            <!-- Neutral -->
+            <div class="sector-col">
+                <div class="col-header neu-head"><i class="fas fa-minus"></i> Ambíguos</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-university sector-icon" style="color: #FFD700;"></i>
+                    <div class="sector-name">Bancos</div>
+                </div>
+                <div class="sector-reason">Ganham com juros (spread), perdem com inadimplência.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-hammer sector-icon" style="color: #FFD700;"></i>
+                    <div class="sector-name">Mineração</div>
+                </div>
+                <div class="sector-reason">Dólar ajuda receita, mas China desacelera demanda.</div>
+            </div>
+        </div>
+
+        <div class="rec-box">
+            <div class="rec-text">
+                <strong>Recomendação Prática:</strong> Aumentar exposição em Energia/Bancos de Qualidade. Reduzir Varejo/Aéreas. Manter Ouro como seguro.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Scenarios Container */
+        .scenarios-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .scenario-card {
+            display: flex;
+            align-items: stretch;
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .prob-box {
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .prob-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #E6F1FF;
+        }
+
+        .prob-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+
+        .scenario-content {
+            flex: 1;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .scenario-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scenario-desc {
+            font-size: 16px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.4;
+        }
+
+        /* Scenario Colors */
+        .base .prob-box { background: rgba(100, 255, 218, 0.2); border-right: 4px solid #64FFDA; }
+        .base .scenario-title { color: #64FFDA; }
+
+        .pessimistic .prob-box { background: rgba(255, 82, 82, 0.2); border-right: 4px solid #FF5252; }
+        .pessimistic .scenario-title { color: #FF5252; }
+
+        .optimistic .prob-box { background: rgba(255, 215, 0, 0.2); border-right: 4px solid #FFD700; }
+        .optimistic .scenario-title { color: #FFD700; }
+
+        /* Recommendation Box */
+        .rec-box {
+            margin-top: 20px;
+            background: #0A192F;
+            border: 1px solid #64FFDA;
+            padding: 15px;
+            text-align: center;
+            z-index: 1;
+            border-radius: 4px;
+        }
+
+        .rec-text {
+            font-size: 18px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>3 Cenários para os Próximos Meses</h1>
+
+        <div class="scenarios-container">
+            <!-- Base Scenario -->
+            <div class="scenario-card base">
+                <div class="prob-box">
+                    <div class="prob-value">60%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-balance-scale"></i> Cenário Base (Estagnação)</div>
+                    <div class="scenario-desc">
+                        Conflito curto mas tenso. Petróleo estabiliza em US$ 80-90. Bolsas recuperam lentamente. Inflação moderada.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pessimistic Scenario -->
+            <div class="scenario-card pessimistic">
+                <div class="prob-box">
+                    <div class="prob-value">25%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-exclamation-triangle"></i> Cenário Pessimista (Bloqueio)</div>
+                    <div class="scenario-desc">
+                        Bloqueio total de Ormuz. Petróleo > US$ 120. Recessão global. Bolsas caem 20%+. Inflação dispara.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optimistic Scenario -->
+            <div class="scenario-card optimistic">
+                <div class="prob-box">
+                    <div class="prob-value">15%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-dove"></i> Cenário Otimista (Acordo)</div>
+                    <div class="scenario-desc">
+                        Cessar-fogo rápido. Petróleo volta a US$ 70-75. Recuperação em V dos mercados. Dólar cai.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rec-box">
+            <div class="rec-text">
+                <strong>Estratégia:</strong> Monte a carteira para o Cenário Base, mas faça proteção (Hedge) para o Pessimista.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Mission Briefing */
+        .briefing-container {
+            display: flex;
+            gap: 50px;
+            z-index: 1;
+            height: 100%;
+        }
+
+        /* Left Column: Mission */
+        .mission-col {
+            flex: 1;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .mission-icon {
+            font-size: 60px;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .mission-title {
+            font-size: 28px;
+            color: #E6F1FF;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .mission-desc {
+            font-size: 18px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Right Column: Steps */
+        .steps-col {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .step-item {
+            background: rgba(16, 33, 60, 0.6);
+            border-left: 4px solid #64FFDA;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: rgba(100, 255, 218, 0.2);
+            margin-right: 20px;
+        }
+
+        .step-content h3 {
+            font-size: 20px;
+            color: #64FFDA;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Bottom Criteria */
+        .criteria-box {
+            margin-top: 30px;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            padding-top: 15px;
+            font-size: 14px;
+            color: #8892b0;
+            text-align: center;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Atividade: Sala de Situação</h1>
+
+        <div class="briefing-container">
+            <!-- Mission -->
+            <div class="mission-col">
+                <i class="fas fa-user-tie mission-icon"></i>
+                <div class="mission-title">Sua Missão</div>
+                <div class="mission-desc">
+                    Você é Gestor(a) de um fundo com <strong>R$ 10 Milhões</strong>. O mercado está em pânico. Você tem 30 minutos para salvar o patrimônio dos seus clientes.
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="steps-col">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Análise (10 min)</h3>
+                        <p>Identifique quais ativos da sua carteira estão em risco crítico e onde estão as oportunidades.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Decisão (10 min)</h3>
+                        <p>Realocar a carteira. Comprar? Vender? Fazer Hedge? Justifique com P/L, ROE ou DY.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Comunicação (10 min)</h3>
+                        <p>Redija um Fato Relevante de 5 linhas explicando sua estratégia para acalmar os investidores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="criteria-box">
+            Critérios de Avaliação: Fundamentação Técnica (Uso de Indicadores) • Coerência com Perfil • Clareza na Comunicação
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px; /* keep as required */
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 40px 20px; /* keep top padding 60px, reduce sides and bottom to save height */
+            overflow: hidden;
+        }
+/* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+/* Takeaways List */
+        .takeaways-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* reduced gap to save vertical space */
+            z-index: 1;
+            flex: 1;
+        }
+.takeaway-item {
+            display: flex;
+            align-items: center;
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 12px; /* reduced padding to save height */
+            transition: transform 0.3s ease;
+        }
+.takeaway-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: rgba(100, 255, 218, 0.2);
+            margin-right: 20px; /* slightly smaller gap */
+            width: 60px;
+            text-align: center;
+        }
+.takeaway-content h3 {
+            font-size: 20px;
+            color: #64FFDA;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+.takeaway-content p {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+/* Next Class Box */
+        .next-class-box {
+            margin-top: 20px; /* reduced to save space */
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #FFD700;
+            padding: 12px; /* slightly reduced */
+            text-align: center;
+            z-index: 1;
+            border-radius: 4px;
+        }
+.next-class-text {
+            font-size: 18px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+</style>
+</head>
+<body><div class="slide-container">
+        <div class="grid-background"></div>
+<h1>O Que Aprendemos Hoje</h1>
+<div class="takeaways-list">
+            <div class="takeaway-item">
+                <div class="takeaway-number">01</div>
+                <div class="takeaway-content">
+                    <h3>Velocidade de Transmissão</h3>
+                    <p>Eventos geopolíticos impactam seu portfólio em horas, via Petróleo, Câmbio e Aversão ao Risco.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">02</div>
+                <div class="takeaway-content">
+                    <h3>Fundamentos são a Bússola</h3>
+                    <p>Em crises, use P/L, ROE e DY para separar "oportunidade" de "armadilha". Qualidade vence.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">03</div>
+                <div class="takeaway-content">
+                    <h3>Diversificação é Defesa</h3>
+                    <p>Não coloque todos os ovos na mesma cesta. Correlação negativa protege o patrimônio.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">04</div>
+                <div class="takeaway-content">
+                    <h3>Comunicação Gera Confiança</h3>
+                    <p>O papel do RI é vital para reduzir a assimetria de informação e acalmar o mercado.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">05</div>
+                <div class="takeaway-content">
+                    <h3>Crise = Oportunidade</h3>
+                    <p>Para o investidor de longo prazo, o pânico de curto prazo é o melhor momento de compra.</p>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .section-box {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 25px;
+            border-top: 4px solid #64FFDA;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #64FFDA;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ref-list {
+            list-style: none;
+        }
+
+        .ref-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ref-title {
+            font-size: 16px;
+            color: #E6F1FF;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .ref-author {
+            font-size: 14px;
+            color: #8892b0;
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+        }
+
+        /* Tools Bar */
+        .tools-bar {
+            margin-top: 30px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .tools-title {
+            font-size: 18px;
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .tools-grid {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Onde Aprender Mais</h1>
+
+        <div class="content-grid">
+            <!-- Bibliography -->
+            <div class="section-box">
+                <div class="section-title"><i class="fas fa-book"></i> Bibliografia Básica</div>
+                <ul class="ref-list">
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado de Capitais</div>
+                        <div class="ref-author">SANTOS, A. P. dos. Saraiva, 2012.</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado de Capitais</div>
+                        <div class="ref-author">PINHEIRO, J. L. Atlas, 2019.</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado Financeiro: produtos e serviços</div>
+                        <div class="ref-author">FORTUNA, E. Qualitymark, 2013.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Articles -->
+            <div class="section-box">
+                <div class="section-title"><i class="fas fa-newspaper"></i> Leituras Recomendadas</div>
+                <ul class="ref-list">
+                    <li class="ref-item">
+                        <div class="ref-title">"Como a tensão entre EUA e Irã pode afetar dólar e petróleo"</div>
+                        <div class="ref-author">G1 Globo (26/02/2026)</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">"Quem Ganha e Quem Perde com a Escalada no Oriente Médio"</div>
+                        <div class="ref-author">Forbes Brasil (04/03/2026)</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">"Guerra contra o Irã: entenda a mudança nas relações internacionais"</div>
+                        <div class="ref-author">The Conversation (03/03/2026)</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="tools-bar">
+            <div class="tools-title">Ferramentas de Monitoramento</div>
+            <div class="tools-grid">
+                <div class="tool-item"><i class="fas fa-chart-bar"></i> B3 (b3.com.br)</div>
+                <div class="tool-item"><i class="fas fa-globe"></i> Investing.com</div>
+                <div class="tool-item"><i class="fas fa-money-bill-wave"></i> Yahoo Finance</div>
+                <div class="tool-item"><i class="fas fa-building"></i> Sites de RI das Empresas</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #E6F1FF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow: hidden;
+        }
+/* Background Grid */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+h1 {
+            font-size: 48px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+/* Questions Box */
+        .questions-box {
+            background: rgba(16, 33, 60, 0.6);
+            border-radius: 8px;
+            padding: 40px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            margin-bottom: 40px;
+            z-index: 1;
+            flex: 1;
+        }
+.question-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+.q-icon {
+            color: #64FFDA;
+            font-size: 24px;
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+.q-text {
+            font-size: 20px;
+            color: #E6F1FF;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.5;
+        }
+/* Contact Bar */
+        .contact-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            z-index: 1;
+        }
+.contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: #8892b0;
+        }
+.contact-icon { color: #FFD700; }
+</style>
+</head>
+<body><div class="slide-container">
+        <div class="grid-background"></div>
+<h1>Perguntas e Discussão</h1>
+<div class="questions-box">
+            <div class="question-item">
+                <i class="fas fa-question-circle q-icon"></i>
+                <div class="q-text">
+                    Se você fosse analista, qual seria sua recomendação para um cliente conservador hoje?
+                </div>
+            </div>
+<div class="question-item">
+                <i class="fas fa-question-circle q-icon"></i>
+                <div class="q-text">
+                    Por que o bloqueio do Estreito de Ormuz afeta o preço da gasolina no Brasil?
+                </div>
+            </div>
+<div class="question-item">
+                <i class="fas fa-question-circle q-icon"></i>
+                <div class="q-text">
+                    Qual é o maior risco que a Petrobras enfrenta neste cenário de guerra?
+                </div>
+            </div>
+<div class="question-item">
+                <i class="fas fa-question-circle q-icon"></i>
+                <div class="q-text">
+                    Como diferenciar "queda de preço" de "oportunidade de compra"?
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>
