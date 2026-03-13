@@ -3,10 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 03 — Renda Variável em Tempos de Crise | Mercado de Capitais 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* ========== LAYOUT DE APRESENTAÇÃO ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020617;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .presentation-wrapper {
+            display: flex;
+            width: 2100vw;
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-page {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Garantir que o slide-container de cada slide ocupe corretamente */
+        .slide-page .slide-container {
+            flex-shrink: 0;
+        }
+
+        /* ========== NAVEGAÇÃO ========== */
+        .nav-ui {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            z-index: 9999;
+            background: rgba(2, 6, 23, 0.8);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-nav:hover { background: #f59e0b; color: #000; border-color: #f59e0b; }
+        .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn-nav:disabled:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+
+        #slide-counter {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Roboto Mono', monospace;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ========== ESTILOS DOS SLIDES ========== */
+        
+/* === SLIDE 1 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -170,52 +250,8 @@
             z-index: 1;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-        <div class="radar-circle"></div>
-
-        <div class="content-wrapper">
-            <h1>Renda Variável em Tempos de Crise</h1>
-            <h2>O Conflito EUA-Irã e Seus Impactos no Mercado</h2>
-            
-            <div class="divider"></div>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">Disciplina</div>
-                    <div class="info-value">Mercado de Capitais e Derivativos</div>
-                    <div class="info-value" style="font-size: 14px; margin-top: 5px;">Administração — 7º Semestre</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Professora</div>
-                    <div class="info-value">Renata Novaes da Silva</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bottom-bar">
-            <div>Faculdade Cosmopolita</div>
-            <div>07 de março de 2026</div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 2 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -387,94 +423,8 @@
             gap: 10px;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>E Agora? O Que Você Faz?</h1>
-        <div class="subtitle">Painel de Mercado — 07/03/2026 — 08h00</div>
-
-        <div class="dashboard-container">
-            <!-- Market Data Panel -->
-            <div class="market-panel">
-                <div class="market-header">
-                    <span style="width: 40%">Indicador</span>
-                    <span style="width: 30%; text-align: right">Valor</span>
-                    <span style="width: 30%; text-align: right">Variação</span>
-                </div>
-
-                <div class="market-row">
-                    <div class="indicator-name">IBOVESPA</div>
-                    <div class="indicator-value">118.450</div>
-                    <div class="indicator-change negative">
-                        <i class="fas fa-arrow-down"></i> 3,2%
-                    </div>
-                </div>
-
-                <div class="market-row">
-                    <div class="indicator-name">DÓLAR (Ptax)</div>
-                    <div class="indicator-value">R$ 6,15</div>
-                    <div class="indicator-change negative">
-                        <i class="fas fa-arrow-up"></i> 2,8%
-                    </div>
-                </div>
-
-                <div class="market-row">
-                    <div class="indicator-name">PETRÓLEO (Brent)</div>
-                    <div class="indicator-value">US$ 91,40</div>
-                    <div class="indicator-change positive">
-                        <i class="fas fa-arrow-up"></i> 6,9%
-                    </div>
-                </div>
-
-                <div class="market-row">
-                    <div class="indicator-name">OURO (Oz)</div>
-                    <div class="indicator-value">US$ 2.980</div>
-                    <div class="indicator-change positive">
-                        <i class="fas fa-arrow-up"></i> 1,5%
-                    </div>
-                </div>
-
-                <div class="market-row">
-                    <div class="indicator-name">VIX (Medo)</div>
-                    <div class="indicator-value">38,5</div>
-                    <div class="indicator-change warning">
-                        <i class="fas fa-exclamation-triangle"></i> 45%
-                    </div>
-                </div>
-            </div>
-
-            <!-- Decision Panel -->
-            <div class="question-panel">
-                <div class="big-question">
-                    Você tem <span class="highlight">R$ 10 Milhões</span> investidos em ações.
-                </div>
-                <div style="font-size: 24px; margin-top: 20px; color: #E6F1FF;">
-                    O que você faz nos próximos 30 minutos?
-                </div>
-                <div class="timer-hint">
-                    <i class="fas fa-stopwatch"></i> Tempo para decisão: 30 min
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 3 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -593,51 +543,8 @@
             line-height: 1.5;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>O Que é uma Ação?</h1>
-
-        <div class="content-container">
-            <div class="visual-box">
-                <div class="icon-circle">
-                    <i class="fas fa-chart-pie visual-icon"></i>
-                    <i class="fas fa-puzzle-piece slice-icon"></i>
-                </div>
-                <div style="font-size: 18px; color: #64FFDA; text-transform: uppercase; font-weight: 700;">Menor Fração do Capital</div>
-            </div>
-
-            <div class="text-box">
-                <div class="definition">
-                    Uma ação representa um pedaço real de uma empresa. Ao comprar, você se torna <span class="highlight">SÓCIO</span>.
-                </div>
-                
-                <div class="mindset-box">
-                    <div class="mindset-text">
-                        "Você não compra um bilhete de loteria que sobe ou desce aleatoriamente. Você compra participação nos lucros, nos riscos e no patrimônio de um negócio real."
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 4 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -753,77 +660,8 @@
             font-size: 16px;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Tipos de Ações e Códigos</h1>
-
-        <div class="split-container">
-            <!-- ON Card -->
-            <div class="type-card on-card">
-                <div class="card-title on-title">Ordinárias (ON)</div>
-                <div class="code-box">XXXX<span class="code-highlight on-highlight">3</span></div>
-                
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <i class="fas fa-vote-yea feature-icon on-title"></i>
-                        Direito a VOTO nas assembleias
-                    </li>
-                    <li class="feature-item">
-                        <i class="fas fa-user-shield feature-icon on-title"></i>
-                        Tag Along (Proteção na venda da empresa)
-                    </li>
-                    <li class="feature-item">
-                        <i class="fas fa-crown feature-icon on-title"></i>
-                        Foco: Controle e Longo Prazo
-                    </li>
-                </ul>
-            </div>
-
-            <!-- PN Card -->
-            <div class="type-card pn-card">
-                <div class="card-title pn-title">Preferenciais (PN)</div>
-                <div class="code-box">XXXX<span class="code-highlight pn-highlight">4</span></div>
-                
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <i class="fas fa-hand-holding-usd feature-icon pn-title"></i>
-                        Preferência nos DIVIDENDOS
-                    </li>
-                    <li class="feature-item">
-                        <i class="fas fa-ban feature-icon pn-title"></i>
-                        Sem direito a voto
-                    </li>
-                    <li class="feature-item">
-                        <i class="fas fa-chart-line feature-icon pn-title"></i>
-                        Foco: Renda e Liquidez
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="example-box">
-            Exemplo Prático: <strong>PETR3</strong> (Voto) vs <strong>PETR4</strong> (Dividendos)
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 5 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -925,59 +763,8 @@
             color: #8892b0;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Renda Fixa vs Renda Variável</h1>
-
-        <div class="comparison-container">
-            <!-- Renda Fixa -->
-            <div class="side-box rf-box">
-                <i class="fas fa-piggy-bank icon-box rf-title"></i>
-                <div class="side-title rf-title">Renda Fixa</div>
-                <div class="concept-text">
-                    Você <span class="highlight rf-highlight">EMPRESTA</span> dinheiro para o banco ou governo em troca de juros.
-                </div>
-                <div class="concept-text" style="font-size: 16px;">
-                    Retorno Previsível • Baixo Risco • Segurança
-                </div>
-            </div>
-
-            <!-- Renda Variável -->
-            <div class="side-box rv-box">
-                <i class="fas fa-chart-line icon-box rv-title"></i>
-                <div class="side-title rv-title">Renda Variável</div>
-                <div class="concept-text">
-                    Você se torna <span class="highlight rv-highlight">SÓCIO</span> do negócio, participando dos lucros e prejuízos.
-                </div>
-                <div class="concept-text" style="font-size: 16px;">
-                    Retorno Ilimitado • Alto Risco • Volatilidade
-                </div>
-            </div>
-        </div>
-
-        <div class="tradeoff-bar">
-            Regra de Ouro: Maior Risco = Maior Potencial de Retorno (no longo prazo)
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 6 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -1115,84 +902,8 @@
             font-weight: 700;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>De Tensão a Guerra: A Escalada</h1>
-
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
-
-            <div class="timeline-event">
-                <div class="event-icon-box">
-                    <i class="fas fa-fighter-jet"></i>
-                </div>
-                <div class="event-date">28 Fev</div>
-                <div class="event-title">O Estopim</div>
-                <div class="event-desc">Ataques coordenados de EUA e Israel. Morte do líder supremo Ali Khamenei.</div>
-            </div>
-
-            <div class="timeline-event">
-                <div class="event-icon-box">
-                    <i class="fas fa-oil-can"></i>
-                </div>
-                <div class="event-date">01-03 Mar</div>
-                <div class="event-title">Choque do Petróleo</div>
-                <div class="event-desc">Retaliações contra bases americanas. Preço do barril dispara.</div>
-            </div>
-
-            <div class="timeline-event">
-                <div class="event-icon-box">
-                    <i class="fas fa-ship"></i>
-                </div>
-                <div class="event-date">04-05 Mar</div>
-                <div class="event-title">Expansão Naval</div>
-                <div class="event-desc">Submarino dos EUA atingido. Tensão chega ao Mediterrâneo.</div>
-            </div>
-
-            <div class="timeline-event">
-                <div class="event-icon-box">
-                    <i class="fas fa-radiation-alt"></i>
-                </div>
-                <div class="event-date">06 Mar</div>
-                <div class="event-title">Nova Fase</div>
-                <div class="event-desc">Anúncio de aumento drástico do poder de fogo. Risco sistêmico global.</div>
-            </div>
-        </div>
-
-        <div class="status-box">
-            <div class="status-item">
-                <div class="status-label">Dias de Conflito</div>
-                <div class="status-value">06 Dias</div>
-            </div>
-            <div class="status-item">
-                <div class="status-label">Nível de Ameaça</div>
-                <div class="status-value">CRÍTICO (DEFCON 3)</div>
-            </div>
-            <div class="status-item">
-                <div class="status-label">Impacto Econômico</div>
-                <div class="status-value">ALTO RISCO SISTÊMICO</div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 7 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -1311,72 +1022,8 @@
             font-style: italic;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Por Que o Irã Importa?</h1>
-
-        <div class="reasons-container">
-            <!-- Reason 1 -->
-            <div class="reason-card">
-                <div class="icon-circle">
-                    <i class="fas fa-gas-pump"></i>
-                </div>
-                <h3>Gigante do Petróleo</h3>
-                <p>
-                    Membro chave da <span class="highlight-text">OPEP</span>. 
-                    Qualquer interrupção na sua produção reduz a oferta global, pressionando preços instantaneamente.
-                </p>
-            </div>
-
-            <!-- Reason 2 -->
-            <div class="reason-card">
-                <div class="icon-circle">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3>Estreito de Ormuz</h3>
-                <p>
-                    O gargalo mais crítico do mundo. 
-                    <span class="highlight-text">20% do comércio global</span> de petróleo passa por aqui. 
-                    Bloqueio = Choque de Oferta Global.
-                </p>
-            </div>
-
-            <!-- Reason 3 -->
-            <div class="reason-card">
-                <div class="icon-circle">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h3>Parceiro da China</h3>
-                <p>
-                    Fornecedor vital de energia para a "fábrica do mundo" e grande produtor de 
-                    <span class="highlight-text">ureia e fertilizantes</span>, essenciais para o agronegócio.
-                </p>
-            </div>
-        </div>
-
-        <div class="insight-box">
-            <p class="insight-text">"O Irã não é apenas um país, é um nó crítico na infraestrutura energética global."</p>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 8 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -1509,80 +1156,8 @@
             font-family: 'Lato', sans-serif;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Canais de Transmissão</h1>
-
-        <div class="diagram-container">
-            <!-- Trigger -->
-            <div class="trigger-box">
-                <i class="fas fa-bomb trigger-icon"></i>
-                <div class="trigger-title">Conflito Geopolítico</div>
-            </div>
-
-            <!-- Channels -->
-            <div class="channels-list">
-                <div class="channel-item">
-                    <div class="channel-icon"><i class="fas fa-oil-can"></i></div>
-                    <div class="channel-content">
-                        <div class="channel-title">1. Choque de Oferta</div>
-                        <div class="channel-desc">Petróleo dispara > Custos de energia sobem globalmente.</div>
-                    </div>
-                </div>
-
-                <div class="channel-item">
-                    <div class="channel-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="channel-content">
-                        <div class="channel-title">2. Aversão ao Risco</div>
-                        <div class="channel-desc">Flight to Quality: Saída de Bolsa > Entrada em Dólar/Ouro.</div>
-                    </div>
-                </div>
-
-                <div class="channel-item">
-                    <div class="channel-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <div class="channel-content">
-                        <div class="channel-title">3. Pressão Inflacionária</div>
-                        <div class="channel-desc">Custos maiores > Inflação sobe > Juros se mantêm altos.</div>
-                    </div>
-                </div>
-
-                <div class="channel-item">
-                    <div class="channel-icon"><i class="fas fa-exchange-alt"></i></div>
-                    <div class="channel-content">
-                        <div class="channel-title">4. Câmbio</div>
-                        <div class="channel-desc">Dólar se fortalece > Moedas emergentes (Real) desvalorizam.</div>
-                    </div>
-                </div>
-
-                <div class="channel-item">
-                    <div class="channel-icon"><i class="fas fa-shipping-fast"></i></div>
-                    <div class="channel-content">
-                        <div class="channel-title">5. Cadeia de Suprimentos</div>
-                        <div class="channel-desc">Frete marítimo encarece > Atrasos e custos logísticos.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 9 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -1687,93 +1262,8 @@
             line-height: 1.4;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Ganhadores e Perdedores</h1>
-
-        <div class="split-container">
-            <!-- Winners Column -->
-            <div class="column">
-                <div class="column-header winners-header">
-                    <i class="fas fa-arrow-up"></i> Ganhadores
-                </div>
-
-                <div class="item">
-                    <div class="item-icon winners-icon"><i class="fas fa-gas-pump"></i></div>
-                    <div class="item-content">
-                        <h3>Exportadores de Energia</h3>
-                        <p>Brasil (Petrobras), Canadá, Noruega. Receitas explodem com barril > US$ 90.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-icon winners-icon"><i class="fas fa-shield-alt"></i></div>
-                    <div class="item-content">
-                        <h3>Indústria de Defesa</h3>
-                        <p>Lockheed Martin, Raytheon. Aumento imediato na demanda por tecnologia militar.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-icon winners-icon"><i class="fas fa-gem"></i></div>
-                    <div class="item-content">
-                        <h3>Ativos de Refúgio</h3>
-                        <p>Dólar e Ouro. Capital global busca segurança e liquidez imediata.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Losers Column -->
-            <div class="column">
-                <div class="column-header losers-header">
-                    <i class="fas fa-arrow-down"></i> Perdedores
-                </div>
-
-                <div class="item">
-                    <div class="item-icon losers-icon"><i class="fas fa-industry"></i></div>
-                    <div class="item-content">
-                        <h3>Importadores de Energia</h3>
-                        <p>China, Japão, Europa. Custos industriais disparam, margens encolhem.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-icon losers-icon"><i class="fas fa-plane"></i></div>
-                    <div class="item-content">
-                        <h3>Aviação e Logística</h3>
-                        <p>Combustível é 30-40% do custo. Margens operacionais viram negativas.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-icon losers-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="item-content">
-                        <h3>Emergentes Frágeis</h3>
-                        <p>Turquia, Argentina. Dólar alto torna dívida externa impagável.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 10 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -1893,82 +1383,8 @@
             font-family: 'Lato', sans-serif;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>O Brasil em Foco</h1>
-
-        <div class="analysis-container">
-            <!-- Opportunities -->
-            <div class="panel">
-                <div class="panel-header opp-header">
-                    <i class="fas fa-chart-line"></i> Oportunidades
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Exportador Líquido de Petróleo</div>
-                    <div class="point-desc">Petrobras e Junior Oils (PRIO, Brava) aumentam margem de lucro com Brent > US$ 80.</div>
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Balança Comercial</div>
-                    <div class="point-desc">Superávit comercial tende a crescer com valorização das commodities energéticas.</div>
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Fluxo de Investimento</div>
-                    <div class="point-desc">Brasil visto como emergente "longe do conflito", atraindo capital especulativo.</div>
-                </div>
-            </div>
-
-            <!-- Risks -->
-            <div class="panel">
-                <div class="panel-header risk-header">
-                    <i class="fas fa-exclamation-triangle"></i> Riscos
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Dependência de Fertilizantes</div>
-                    <div class="point-desc">Irã é grande fornecedor de ureia. Risco de custo alto para o agronegócio (safra 2026/27).</div>
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Inflação (IPCA)</div>
-                    <div class="point-desc">Combustíveis + Alimentos mais caros pressionam a meta de inflação.</div>
-                </div>
-
-                <div class="point">
-                    <div class="point-title">Juros (Selic)</div>
-                    <div class="point-desc">Banco Central pode manter Selic alta por mais tempo para conter câmbio e inflação.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scenario-box">
-            <div class="scenario-label">Cenário Base (60% Probabilidade)</div>
-            <div class="scenario-text">
-                Conflito curto. Petróleo estabiliza em US$ 85. Petrobras lucra, mas inflação de alimentos é moderada. Dólar recua gradualmente.
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 11 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -2110,72 +1526,8 @@
             text-align: right;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Ferramenta #1: Preço/Lucro (P/L)</h1>
-
-        <div class="content-grid">
-            <!-- Formula -->
-            <div class="formula-box">
-                <div class="formula">
-                    P/L = <span>Preço Ação</span> / <span>LPA</span>
-                </div>
-                <div class="definition">
-                    Indica quantos anos de lucro atual seriam necessários para recuperar o capital investido.
-                </div>
-            </div>
-
-            <!-- Interpretation -->
-            <div class="interpretation-box">
-                <div class="interp-item">
-                    <div class="interp-title low">P/L Baixo (< 12)</div>
-                    <div class="interp-desc">Pode indicar oportunidade (barato) OU risco (mercado prevê queda de lucro).</div>
-                </div>
-                <div class="interp-item">
-                    <div class="interp-title mod">P/L Moderado (12-20)</div>
-                    <div class="interp-desc">Faixa típica de empresas maduras e rentáveis.</div>
-                </div>
-                <div class="interp-item">
-                    <div class="interp-title high">P/L Alto (> 20)</div>
-                    <div class="interp-desc">Expectativa de alto crescimento futuro OU sobrevalorização (caro).</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Study -->
-        <div class="case-study">
-            <div class="case-title">
-                <i class="fas fa-search"></i> Caso Real: Petrobras (PETR4)
-            </div>
-            <div class="case-data">
-                Preço: R$ 28,50<br>
-                LPA (12m): R$ 2,10
-            </div>
-            <div class="case-result">
-                13,6x
-                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">P/L Atual</div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 12 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -2327,82 +1679,8 @@
             text-align: right;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Ferramenta #2: ROE (Retorno s/ Patrimônio)</h1>
-
-        <div class="content-grid">
-            <!-- Formula -->
-            <div class="formula-box">
-                <div class="formula">
-                    ROE = <span>Lucro Líquido</span> / <span>Patrimônio Líquido</span>
-                </div>
-                <div class="definition">
-                    Mede a eficiência da gestão em gerar retorno com o capital dos acionistas. É o indicador de <strong>QUALIDADE</strong>.
-                </div>
-            </div>
-
-            <!-- Quality Levels -->
-            <div class="quality-meter">
-                <div class="quality-text">Níveis de Eficiência</div>
-                
-                <div style="margin-bottom: 20px;">
-                    <div style="color: #FF5252; font-weight: 700;">&lt; 10% (Baixa Eficiência)</div>
-                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
-                        <div style="width: 30%; height: 100%; background: #FF5252; border-radius: 5px;"></div>
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <div style="color: #FFD700; font-weight: 700;">10% - 15% (Média de Mercado)</div>
-                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
-                        <div style="width: 60%; height: 100%; background: #FFD700; border-radius: 5px;"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div style="color: #64FFDA; font-weight: 700;">&gt; 15% (Alta Qualidade / Vantagem Competitiva)</div>
-                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
-                        <div style="width: 90%; height: 100%; background: #64FFDA; border-radius: 5px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Study -->
-        <div class="case-study">
-            <div class="case-title">
-                <i class="fas fa-search"></i> Caso Real: Petrobras
-            </div>
-            <div class="case-data">
-                Setor de Energia<br>
-                Média Global: ~12%
-            </div>
-            <div class="case-result">
-                ~18%
-                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">ROE Atual (Alta Qualidade)</div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 13 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -2545,65 +1823,8 @@
             text-align: right;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Ferramenta #3: Dividend Yield (DY)</h1>
-
-        <div class="content-grid">
-            <!-- Formula -->
-            <div class="formula-box">
-                <div class="formula">
-                    DY = <span>Dividendo Anual</span> / <span>Preço Ação</span>
-                </div>
-                <div class="definition">
-                    Retorno percentual pago em dinheiro ao acionista. É o "aluguel" que você recebe por ser sócio.
-                </div>
-            </div>
-
-            <!-- Strategy -->
-            <div class="strategy-box">
-                <div class="strategy-icon"><i class="fas fa-anchor"></i></div>
-                <div class="strategy-title">Estratégia "Porto Seguro"</div>
-                <div class="strategy-desc">
-                    Em tempos de crise e queda nas bolsas, empresas que pagam bons dividendos (DY > 6%) oferecem uma <strong>proteção psicológica e financeira</strong>. O preço da ação pode cair, mas o dividendo continua caindo na conta.
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Study -->
-        <div class="case-study">
-            <div class="case-title">
-                <i class="fas fa-search"></i> Caso Real: Petrobras
-            </div>
-            <div class="case-data">
-                Dividendo/Ação: R$ 1,50<br>
-                Preço: R$ 28,50
-            </div>
-            <div class="case-result">
-                5,26%
-                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">DY Anual (Atrativo)</div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 14 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -2732,73 +1953,8 @@
             font-size: 16px;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>O Papel do RI na Guerra</h1>
-
-        <div class="content-layout">
-            <div class="left-col">
-                <i class="fas fa-bullhorn ri-icon"></i>
-                <div class="ri-definition">
-                    Relações com Investidores (RI) é a ponte estratégica entre a empresa e o mercado de capitais.
-                </div>
-                <div style="font-size: 18px; color: #8892b0;">
-                    Em tempos de crise, o silêncio custa caro. A incerteza destrói valor mais rápido que a má notícia.
-                </div>
-            </div>
-
-            <div class="right-col">
-                <div class="checklist-title">Protocolo de Comunicação</div>
-                
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle check-icon"></i>
-                    <div class="check-text">
-                        <h3>Transparência Radical</h3>
-                        <p>Não esconda riscos. O mercado precifica o que conhece e pune o que desconhece.</p>
-                    </div>
-                </div>
-
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle check-icon"></i>
-                    <div class="check-text">
-                        <h3>Velocidade</h3>
-                        <p>Fatos Relevantes devem sair antes dos rumores de WhatsApp.</p>
-                    </div>
-                </div>
-
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle check-icon"></i>
-                    <div class="check-text">
-                        <h3>Plano de Mitigação</h3>
-                        <p>Não diga apenas "temos um problema". Diga "estamos fazendo X, Y e Z para resolver".</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="example-box">
-            "A Petrobras informa que monitora os desdobramentos no Oriente Médio e reafirma que suas operações não foram afetadas. Possuímos hedge cambial para proteger 40% da receita..."
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 15 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -2906,68 +2062,8 @@
             padding-top: 20px;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>3 Princípios para Sobreviver</h1>
-
-        <div class="pillars-container">
-            <!-- Pillar 1 -->
-            <div class="pillar-card">
-                <div class="icon-box">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <h3>Diversificação</h3>
-                <p>
-                    A única "almoço grátis" do mercado. Ter ativos com <span class="highlight">correlação negativa</span> (ex: Ações caem, Dólar sobe) suaviza a volatilidade da carteira.
-                </p>
-            </div>
-
-            <!-- Pillar 2 -->
-            <div class="pillar-card">
-                <div class="icon-box">
-                    <i class="fas fa-gem"></i>
-                </div>
-                <h3>Qualidade</h3>
-                <p>
-                    Em crises, o mercado pune promessas e premia realidades. Busque empresas com <span class="highlight">caixa forte, baixo endividamento e lucro real</span>.
-                </p>
-            </div>
-
-            <!-- Pillar 3 -->
-            <div class="pillar-card">
-                <div class="icon-box">
-                    <i class="fas fa-hourglass-half"></i>
-                </div>
-                <h3>Horizonte</h3>
-                <p>
-                    Volatilidade é ruído de curto prazo. Quem tem visão de longo prazo vê <span class="highlight">oportunidade de compra</span> onde outros veem pânico.
-                </p>
-            </div>
-        </div>
-
-        <div class="quote-box">
-            "O mercado de ações é um dispositivo para transferir dinheiro dos impacientes para os pacientes." — Warren Buffett
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 16 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3081,100 +2177,8 @@
             font-family: 'Lato', sans-serif;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Quem Ganha e Quem Perde</h1>
-
-        <div class="sectors-grid">
-            <!-- Winners -->
-            <div class="sector-col">
-                <div class="col-header win-head"><i class="fas fa-arrow-up"></i> Ganhadores</div>
-                
-                <div class="sector-item">
-                    <i class="fas fa-oil-can sector-icon" style="color: #64FFDA;"></i>
-                    <div class="sector-name">Petróleo e Gás</div>
-                </div>
-                <div class="sector-reason">Receitas sobem com barril caro. (Petrobras, PRIO)</div>
-
-                <div class="sector-item" style="margin-top: 15px;">
-                    <i class="fas fa-shield-alt sector-icon" style="color: #64FFDA;"></i>
-                    <div class="sector-name">Defesa</div>
-                </div>
-                <div class="sector-reason">Demanda por armamentos e tecnologia.</div>
-
-                <div class="sector-item" style="margin-top: 15px;">
-                    <i class="fas fa-gem sector-icon" style="color: #64FFDA;"></i>
-                    <div class="sector-name">Ouro e Metais</div>
-                </div>
-                <div class="sector-reason">Refúgio clássico contra incerteza.</div>
-            </div>
-
-            <!-- Losers -->
-            <div class="sector-col">
-                <div class="col-header lose-head"><i class="fas fa-arrow-down"></i> Perdedores</div>
-                
-                <div class="sector-item">
-                    <i class="fas fa-plane sector-icon" style="color: #FF5252;"></i>
-                    <div class="sector-name">Aviação</div>
-                </div>
-                <div class="sector-reason">Combustível (QAV) é 40% do custo.</div>
-
-                <div class="sector-item" style="margin-top: 15px;">
-                    <i class="fas fa-shopping-cart sector-icon" style="color: #FF5252;"></i>
-                    <div class="sector-name">Varejo</div>
-                </div>
-                <div class="sector-reason">Inflação corrói poder de compra.</div>
-
-                <div class="sector-item" style="margin-top: 15px;">
-                    <i class="fas fa-hard-hat sector-icon" style="color: #FF5252;"></i>
-                    <div class="sector-name">Construção</div>
-                </div>
-                <div class="sector-reason">Juros altos encarecem financiamento.</div>
-            </div>
-
-            <!-- Neutral -->
-            <div class="sector-col">
-                <div class="col-header neu-head"><i class="fas fa-minus"></i> Ambíguos</div>
-                
-                <div class="sector-item">
-                    <i class="fas fa-university sector-icon" style="color: #FFD700;"></i>
-                    <div class="sector-name">Bancos</div>
-                </div>
-                <div class="sector-reason">Ganham com juros (spread), perdem com inadimplência.</div>
-
-                <div class="sector-item" style="margin-top: 15px;">
-                    <i class="fas fa-hammer sector-icon" style="color: #FFD700;"></i>
-                    <div class="sector-name">Mineração</div>
-                </div>
-                <div class="sector-reason">Dólar ajuda receita, mas China desacelera demanda.</div>
-            </div>
-        </div>
-
-        <div class="rec-box">
-            <div class="rec-text">
-                <strong>Recomendação Prática:</strong> Aumentar exposição em Energia/Bancos de Qualidade. Reduzir Varejo/Aéreas. Manter Ouro como seguro.
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 17 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3307,79 +2311,8 @@
             font-family: 'Lato', sans-serif;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>3 Cenários para os Próximos Meses</h1>
-
-        <div class="scenarios-container">
-            <!-- Base Scenario -->
-            <div class="scenario-card base">
-                <div class="prob-box">
-                    <div class="prob-value">60%</div>
-                    <div class="prob-label">Probabilidade</div>
-                </div>
-                <div class="scenario-content">
-                    <div class="scenario-title"><i class="fas fa-balance-scale"></i> Cenário Base (Estagnação)</div>
-                    <div class="scenario-desc">
-                        Conflito curto mas tenso. Petróleo estabiliza em US$ 80-90. Bolsas recuperam lentamente. Inflação moderada.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pessimistic Scenario -->
-            <div class="scenario-card pessimistic">
-                <div class="prob-box">
-                    <div class="prob-value">25%</div>
-                    <div class="prob-label">Probabilidade</div>
-                </div>
-                <div class="scenario-content">
-                    <div class="scenario-title"><i class="fas fa-exclamation-triangle"></i> Cenário Pessimista (Bloqueio)</div>
-                    <div class="scenario-desc">
-                        Bloqueio total de Ormuz. Petróleo > US$ 120. Recessão global. Bolsas caem 20%+. Inflação dispara.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Optimistic Scenario -->
-            <div class="scenario-card optimistic">
-                <div class="prob-box">
-                    <div class="prob-value">15%</div>
-                    <div class="prob-label">Probabilidade</div>
-                </div>
-                <div class="scenario-content">
-                    <div class="scenario-title"><i class="fas fa-dove"></i> Cenário Otimista (Acordo)</div>
-                    <div class="scenario-desc">
-                        Cessar-fogo rápido. Petróleo volta a US$ 70-75. Recuperação em V dos mercados. Dólar cai.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="rec-box">
-            <div class="rec-text">
-                <strong>Estratégia:</strong> Monte a carteira para o Cenário Base, mas faça proteção (Hedge) para o Pessimista.
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 18 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3507,71 +2440,8 @@
             z-index: 1;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Atividade: Sala de Situação</h1>
-
-        <div class="briefing-container">
-            <!-- Mission -->
-            <div class="mission-col">
-                <i class="fas fa-user-tie mission-icon"></i>
-                <div class="mission-title">Sua Missão</div>
-                <div class="mission-desc">
-                    Você é Gestor(a) de um fundo com <strong>R$ 10 Milhões</strong>. O mercado está em pânico. Você tem 30 minutos para salvar o patrimônio dos seus clientes.
-                </div>
-            </div>
-
-            <!-- Steps -->
-            <div class="steps-col">
-                <div class="step-item">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Análise (10 min)</h3>
-                        <p>Identifique quais ativos da sua carteira estão em risco crítico e onde estão as oportunidades.</p>
-                    </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Decisão (10 min)</h3>
-                        <p>Realocar a carteira. Comprar? Vender? Fazer Hedge? Justifique com P/L, ROE ou DY.</p>
-                    </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Comunicação (10 min)</h3>
-                        <p>Redija um Fato Relevante de 5 linhas explicando sua estratégia para acalmar os investidores.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="criteria-box">
-            Critérios de Avaliação: Fundamentação Técnica (Uso de Indicadores) • Coerência com Perfil • Clareza na Comunicação
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 19 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3657,64 +2527,9 @@ h1 {
             color: #E6F1FF;
             font-family: 'Lato', sans-serif;
         }
-</style>
-</head>
-<body><div class="slide-container">
-        <div class="grid-background"></div>
-<h1>O Que Aprendemos Hoje</h1>
-<div class="takeaways-list">
-            <div class="takeaway-item">
-                <div class="takeaway-number">01</div>
-                <div class="takeaway-content">
-                    <h3>Velocidade de Transmissão</h3>
-                    <p>Eventos geopolíticos impactam seu portfólio em horas, via Petróleo, Câmbio e Aversão ao Risco.</p>
-                </div>
-            </div>
-<div class="takeaway-item">
-                <div class="takeaway-number">02</div>
-                <div class="takeaway-content">
-                    <h3>Fundamentos são a Bússola</h3>
-                    <p>Em crises, use P/L, ROE e DY para separar "oportunidade" de "armadilha". Qualidade vence.</p>
-                </div>
-            </div>
-<div class="takeaway-item">
-                <div class="takeaway-number">03</div>
-                <div class="takeaway-content">
-                    <h3>Diversificação é Defesa</h3>
-                    <p>Não coloque todos os ovos na mesma cesta. Correlação negativa protege o patrimônio.</p>
-                </div>
-            </div>
-<div class="takeaway-item">
-                <div class="takeaway-number">04</div>
-                <div class="takeaway-content">
-                    <h3>Comunicação Gera Confiança</h3>
-                    <p>O papel do RI é vital para reduzir a assimetria de informação e acalmar o mercado.</p>
-                </div>
-            </div>
-<div class="takeaway-item">
-                <div class="takeaway-number">05</div>
-                <div class="takeaway-content">
-                    <h3>Crise = Oportunidade</h3>
-                    <p>Para o investidor de longo prazo, o pânico de curto prazo é o melhor momento de compra.</p>
-                </div>
-            </div>
-        </div>
-</div>
-</body>
-</html>
 
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 20 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3835,80 +2650,8 @@ h1 {
             font-family: 'Lato', sans-serif;
         }
 
-    </style>
-</head>
-<body>
-    <div class="slide-container">
-        <div class="grid-background"></div>
-
-        <h1>Onde Aprender Mais</h1>
-
-        <div class="content-grid">
-            <!-- Bibliography -->
-            <div class="section-box">
-                <div class="section-title"><i class="fas fa-book"></i> Bibliografia Básica</div>
-                <ul class="ref-list">
-                    <li class="ref-item">
-                        <div class="ref-title">Mercado de Capitais</div>
-                        <div class="ref-author">SANTOS, A. P. dos. Saraiva, 2012.</div>
-                    </li>
-                    <li class="ref-item">
-                        <div class="ref-title">Mercado de Capitais</div>
-                        <div class="ref-author">PINHEIRO, J. L. Atlas, 2019.</div>
-                    </li>
-                    <li class="ref-item">
-                        <div class="ref-title">Mercado Financeiro: produtos e serviços</div>
-                        <div class="ref-author">FORTUNA, E. Qualitymark, 2013.</div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Articles -->
-            <div class="section-box">
-                <div class="section-title"><i class="fas fa-newspaper"></i> Leituras Recomendadas</div>
-                <ul class="ref-list">
-                    <li class="ref-item">
-                        <div class="ref-title">"Como a tensão entre EUA e Irã pode afetar dólar e petróleo"</div>
-                        <div class="ref-author">G1 Globo (26/02/2026)</div>
-                    </li>
-                    <li class="ref-item">
-                        <div class="ref-title">"Quem Ganha e Quem Perde com a Escalada no Oriente Médio"</div>
-                        <div class="ref-author">Forbes Brasil (04/03/2026)</div>
-                    </li>
-                    <li class="ref-item">
-                        <div class="ref-title">"Guerra contra o Irã: entenda a mudança nas relações internacionais"</div>
-                        <div class="ref-author">The Conversation (03/03/2026)</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Tools -->
-        <div class="tools-bar">
-            <div class="tools-title">Ferramentas de Monitoramento</div>
-            <div class="tools-grid">
-                <div class="tool-item"><i class="fas fa-chart-bar"></i> B3 (b3.com.br)</div>
-                <div class="tool-item"><i class="fas fa-globe"></i> Investing.com</div>
-                <div class="tool-item"><i class="fas fa-money-bill-wave"></i> Yahoo Finance</div>
-                <div class="tool-item"><i class="fas fa-building"></i> Sites de RI das Empresas</div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-
-================================================================================
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* === SLIDE 21 === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
         body { overflow: hidden; }
         .slide-container {
             width: 1280px;
@@ -3988,9 +2731,1115 @@ h1 {
             color: #8892b0;
         }
 .contact-icon { color: #FFD700; }
-</style>
+
+    </style>
 </head>
-<body><div class="slide-container">
+<body>
+
+    <div class="presentation-wrapper" id="presentation">
+
+        <!-- ===== SLIDE 1 ===== -->
+        <section class="slide-page" id="slide-1">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+        <div class="radar-circle"></div>
+
+        <div class="content-wrapper">
+            <h1>Renda Variável em Tempos de Crise</h1>
+            <h2>O Conflito EUA-Irã e Seus Impactos no Mercado</h2>
+            
+            <div class="divider"></div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Disciplina</div>
+                    <div class="info-value">Mercado de Capitais e Derivativos</div>
+                    <div class="info-value" style="font-size: 14px; margin-top: 5px;">Administração — 7º Semestre</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Professora</div>
+                    <div class="info-value">Renata Novaes da Silva</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <div>Faculdade Cosmopolita</div>
+            <div>07 de março de 2026</div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 2 ===== -->
+        <section class="slide-page" id="slide-2">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>E Agora? O Que Você Faz?</h1>
+        <div class="subtitle">Painel de Mercado — 07/03/2026 — 08h00</div>
+
+        <div class="dashboard-container">
+            <!-- Market Data Panel -->
+            <div class="market-panel">
+                <div class="market-header">
+                    <span style="width: 40%">Indicador</span>
+                    <span style="width: 30%; text-align: right">Valor</span>
+                    <span style="width: 30%; text-align: right">Variação</span>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">IBOVESPA</div>
+                    <div class="indicator-value">118.450</div>
+                    <div class="indicator-change negative">
+                        <i class="fas fa-arrow-down"></i> 3,2%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">DÓLAR (Ptax)</div>
+                    <div class="indicator-value">R$ 6,15</div>
+                    <div class="indicator-change negative">
+                        <i class="fas fa-arrow-up"></i> 2,8%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">PETRÓLEO (Brent)</div>
+                    <div class="indicator-value">US$ 91,40</div>
+                    <div class="indicator-change positive">
+                        <i class="fas fa-arrow-up"></i> 6,9%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">OURO (Oz)</div>
+                    <div class="indicator-value">US$ 2.980</div>
+                    <div class="indicator-change positive">
+                        <i class="fas fa-arrow-up"></i> 1,5%
+                    </div>
+                </div>
+
+                <div class="market-row">
+                    <div class="indicator-name">VIX (Medo)</div>
+                    <div class="indicator-value">38,5</div>
+                    <div class="indicator-change warning">
+                        <i class="fas fa-exclamation-triangle"></i> 45%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decision Panel -->
+            <div class="question-panel">
+                <div class="big-question">
+                    Você tem <span class="highlight">R$ 10 Milhões</span> investidos em ações.
+                </div>
+                <div style="font-size: 24px; margin-top: 20px; color: #E6F1FF;">
+                    O que você faz nos próximos 30 minutos?
+                </div>
+                <div class="timer-hint">
+                    <i class="fas fa-stopwatch"></i> Tempo para decisão: 30 min
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 3 ===== -->
+        <section class="slide-page" id="slide-3">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Que é uma Ação?</h1>
+
+        <div class="content-container">
+            <div class="visual-box">
+                <div class="icon-circle">
+                    <i class="fas fa-chart-pie visual-icon"></i>
+                    <i class="fas fa-puzzle-piece slice-icon"></i>
+                </div>
+                <div style="font-size: 18px; color: #64FFDA; text-transform: uppercase; font-weight: 700;">Menor Fração do Capital</div>
+            </div>
+
+            <div class="text-box">
+                <div class="definition">
+                    Uma ação representa um pedaço real de uma empresa. Ao comprar, você se torna <span class="highlight">SÓCIO</span>.
+                </div>
+                
+                <div class="mindset-box">
+                    <div class="mindset-text">
+                        "Você não compra um bilhete de loteria que sobe ou desce aleatoriamente. Você compra participação nos lucros, nos riscos e no patrimônio de um negócio real."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 4 ===== -->
+        <section class="slide-page" id="slide-4">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Tipos de Ações e Códigos</h1>
+
+        <div class="split-container">
+            <!-- ON Card -->
+            <div class="type-card on-card">
+                <div class="card-title on-title">Ordinárias (ON)</div>
+                <div class="code-box">XXXX<span class="code-highlight on-highlight">3</span></div>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <i class="fas fa-vote-yea feature-icon on-title"></i>
+                        Direito a VOTO nas assembleias
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-user-shield feature-icon on-title"></i>
+                        Tag Along (Proteção na venda da empresa)
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-crown feature-icon on-title"></i>
+                        Foco: Controle e Longo Prazo
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PN Card -->
+            <div class="type-card pn-card">
+                <div class="card-title pn-title">Preferenciais (PN)</div>
+                <div class="code-box">XXXX<span class="code-highlight pn-highlight">4</span></div>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <i class="fas fa-hand-holding-usd feature-icon pn-title"></i>
+                        Preferência nos DIVIDENDOS
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-ban feature-icon pn-title"></i>
+                        Sem direito a voto
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-chart-line feature-icon pn-title"></i>
+                        Foco: Renda e Liquidez
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="example-box">
+            Exemplo Prático: <strong>PETR3</strong> (Voto) vs <strong>PETR4</strong> (Dividendos)
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 5 ===== -->
+        <section class="slide-page" id="slide-5">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Renda Fixa vs Renda Variável</h1>
+
+        <div class="comparison-container">
+            <!-- Renda Fixa -->
+            <div class="side-box rf-box">
+                <i class="fas fa-piggy-bank icon-box rf-title"></i>
+                <div class="side-title rf-title">Renda Fixa</div>
+                <div class="concept-text">
+                    Você <span class="highlight rf-highlight">EMPRESTA</span> dinheiro para o banco ou governo em troca de juros.
+                </div>
+                <div class="concept-text" style="font-size: 16px;">
+                    Retorno Previsível • Baixo Risco • Segurança
+                </div>
+            </div>
+
+            <!-- Renda Variável -->
+            <div class="side-box rv-box">
+                <i class="fas fa-chart-line icon-box rv-title"></i>
+                <div class="side-title rv-title">Renda Variável</div>
+                <div class="concept-text">
+                    Você se torna <span class="highlight rv-highlight">SÓCIO</span> do negócio, participando dos lucros e prejuízos.
+                </div>
+                <div class="concept-text" style="font-size: 16px;">
+                    Retorno Ilimitado • Alto Risco • Volatilidade
+                </div>
+            </div>
+        </div>
+
+        <div class="tradeoff-bar">
+            Regra de Ouro: Maior Risco = Maior Potencial de Retorno (no longo prazo)
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 6 ===== -->
+        <section class="slide-page" id="slide-6">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>De Tensão a Guerra: A Escalada</h1>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-fighter-jet"></i>
+                </div>
+                <div class="event-date">28 Fev</div>
+                <div class="event-title">O Estopim</div>
+                <div class="event-desc">Ataques coordenados de EUA e Israel. Morte do líder supremo Ali Khamenei.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-oil-can"></i>
+                </div>
+                <div class="event-date">01-03 Mar</div>
+                <div class="event-title">Choque do Petróleo</div>
+                <div class="event-desc">Retaliações contra bases americanas. Preço do barril dispara.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <div class="event-date">04-05 Mar</div>
+                <div class="event-title">Expansão Naval</div>
+                <div class="event-desc">Submarino dos EUA atingido. Tensão chega ao Mediterrâneo.</div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-icon-box">
+                    <i class="fas fa-radiation-alt"></i>
+                </div>
+                <div class="event-date">06 Mar</div>
+                <div class="event-title">Nova Fase</div>
+                <div class="event-desc">Anúncio de aumento drástico do poder de fogo. Risco sistêmico global.</div>
+            </div>
+        </div>
+
+        <div class="status-box">
+            <div class="status-item">
+                <div class="status-label">Dias de Conflito</div>
+                <div class="status-value">06 Dias</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Nível de Ameaça</div>
+                <div class="status-value">CRÍTICO (DEFCON 3)</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Impacto Econômico</div>
+                <div class="status-value">ALTO RISCO SISTÊMICO</div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 7 ===== -->
+        <section class="slide-page" id="slide-7">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Por Que o Irã Importa?</h1>
+
+        <div class="reasons-container">
+            <!-- Reason 1 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+                <h3>Gigante do Petróleo</h3>
+                <p>
+                    Membro chave da <span class="highlight-text">OPEP</span>. 
+                    Qualquer interrupção na sua produção reduz a oferta global, pressionando preços instantaneamente.
+                </p>
+            </div>
+
+            <!-- Reason 2 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Estreito de Ormuz</h3>
+                <p>
+                    O gargalo mais crítico do mundo. 
+                    <span class="highlight-text">20% do comércio global</span> de petróleo passa por aqui. 
+                    Bloqueio = Choque de Oferta Global.
+                </p>
+            </div>
+
+            <!-- Reason 3 -->
+            <div class="reason-card">
+                <div class="icon-circle">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Parceiro da China</h3>
+                <p>
+                    Fornecedor vital de energia para a "fábrica do mundo" e grande produtor de 
+                    <span class="highlight-text">ureia e fertilizantes</span>, essenciais para o agronegócio.
+                </p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <p class="insight-text">"O Irã não é apenas um país, é um nó crítico na infraestrutura energética global."</p>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 8 ===== -->
+        <section class="slide-page" id="slide-8">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Canais de Transmissão</h1>
+
+        <div class="diagram-container">
+            <!-- Trigger -->
+            <div class="trigger-box">
+                <i class="fas fa-bomb trigger-icon"></i>
+                <div class="trigger-title">Conflito Geopolítico</div>
+            </div>
+
+            <!-- Channels -->
+            <div class="channels-list">
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-oil-can"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">1. Choque de Oferta</div>
+                        <div class="channel-desc">Petróleo dispara > Custos de energia sobem globalmente.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">2. Aversão ao Risco</div>
+                        <div class="channel-desc">Flight to Quality: Saída de Bolsa > Entrada em Dólar/Ouro.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">3. Pressão Inflacionária</div>
+                        <div class="channel-desc">Custos maiores > Inflação sobe > Juros se mantêm altos.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">4. Câmbio</div>
+                        <div class="channel-desc">Dólar se fortalece > Moedas emergentes (Real) desvalorizam.</div>
+                    </div>
+                </div>
+
+                <div class="channel-item">
+                    <div class="channel-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <div class="channel-content">
+                        <div class="channel-title">5. Cadeia de Suprimentos</div>
+                        <div class="channel-desc">Frete marítimo encarece > Atrasos e custos logísticos.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 9 ===== -->
+        <section class="slide-page" id="slide-9">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ganhadores e Perdedores</h1>
+
+        <div class="split-container">
+            <!-- Winners Column -->
+            <div class="column">
+                <div class="column-header winners-header">
+                    <i class="fas fa-arrow-up"></i> Ganhadores
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-gas-pump"></i></div>
+                    <div class="item-content">
+                        <h3>Exportadores de Energia</h3>
+                        <p>Brasil (Petrobras), Canadá, Noruega. Receitas explodem com barril > US$ 90.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="item-content">
+                        <h3>Indústria de Defesa</h3>
+                        <p>Lockheed Martin, Raytheon. Aumento imediato na demanda por tecnologia militar.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon winners-icon"><i class="fas fa-gem"></i></div>
+                    <div class="item-content">
+                        <h3>Ativos de Refúgio</h3>
+                        <p>Dólar e Ouro. Capital global busca segurança e liquidez imediata.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Losers Column -->
+            <div class="column">
+                <div class="column-header losers-header">
+                    <i class="fas fa-arrow-down"></i> Perdedores
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-industry"></i></div>
+                    <div class="item-content">
+                        <h3>Importadores de Energia</h3>
+                        <p>China, Japão, Europa. Custos industriais disparam, margens encolhem.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-plane"></i></div>
+                    <div class="item-content">
+                        <h3>Aviação e Logística</h3>
+                        <p>Combustível é 30-40% do custo. Margens operacionais viram negativas.</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-icon losers-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="item-content">
+                        <h3>Emergentes Frágeis</h3>
+                        <p>Turquia, Argentina. Dólar alto torna dívida externa impagável.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 10 ===== -->
+        <section class="slide-page" id="slide-10">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Brasil em Foco</h1>
+
+        <div class="analysis-container">
+            <!-- Opportunities -->
+            <div class="panel">
+                <div class="panel-header opp-header">
+                    <i class="fas fa-chart-line"></i> Oportunidades
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Exportador Líquido de Petróleo</div>
+                    <div class="point-desc">Petrobras e Junior Oils (PRIO, Brava) aumentam margem de lucro com Brent > US$ 80.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Balança Comercial</div>
+                    <div class="point-desc">Superávit comercial tende a crescer com valorização das commodities energéticas.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Fluxo de Investimento</div>
+                    <div class="point-desc">Brasil visto como emergente "longe do conflito", atraindo capital especulativo.</div>
+                </div>
+            </div>
+
+            <!-- Risks -->
+            <div class="panel">
+                <div class="panel-header risk-header">
+                    <i class="fas fa-exclamation-triangle"></i> Riscos
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Dependência de Fertilizantes</div>
+                    <div class="point-desc">Irã é grande fornecedor de ureia. Risco de custo alto para o agronegócio (safra 2026/27).</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Inflação (IPCA)</div>
+                    <div class="point-desc">Combustíveis + Alimentos mais caros pressionam a meta de inflação.</div>
+                </div>
+
+                <div class="point">
+                    <div class="point-title">Juros (Selic)</div>
+                    <div class="point-desc">Banco Central pode manter Selic alta por mais tempo para conter câmbio e inflação.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario-box">
+            <div class="scenario-label">Cenário Base (60% Probabilidade)</div>
+            <div class="scenario-text">
+                Conflito curto. Petróleo estabiliza em US$ 85. Petrobras lucra, mas inflação de alimentos é moderada. Dólar recua gradualmente.
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 11 ===== -->
+        <section class="slide-page" id="slide-11">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #1: Preço/Lucro (P/L)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    P/L = <span>Preço Ação</span> / <span>LPA</span>
+                </div>
+                <div class="definition">
+                    Indica quantos anos de lucro atual seriam necessários para recuperar o capital investido.
+                </div>
+            </div>
+
+            <!-- Interpretation -->
+            <div class="interpretation-box">
+                <div class="interp-item">
+                    <div class="interp-title low">P/L Baixo (< 12)</div>
+                    <div class="interp-desc">Pode indicar oportunidade (barato) OU risco (mercado prevê queda de lucro).</div>
+                </div>
+                <div class="interp-item">
+                    <div class="interp-title mod">P/L Moderado (12-20)</div>
+                    <div class="interp-desc">Faixa típica de empresas maduras e rentáveis.</div>
+                </div>
+                <div class="interp-item">
+                    <div class="interp-title high">P/L Alto (> 20)</div>
+                    <div class="interp-desc">Expectativa de alto crescimento futuro OU sobrevalorização (caro).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras (PETR4)
+            </div>
+            <div class="case-data">
+                Preço: R$ 28,50<br>
+                LPA (12m): R$ 2,10
+            </div>
+            <div class="case-result">
+                13,6x
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">P/L Atual</div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 12 ===== -->
+        <section class="slide-page" id="slide-12">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #2: ROE (Retorno s/ Patrimônio)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    ROE = <span>Lucro Líquido</span> / <span>Patrimônio Líquido</span>
+                </div>
+                <div class="definition">
+                    Mede a eficiência da gestão em gerar retorno com o capital dos acionistas. É o indicador de <strong>QUALIDADE</strong>.
+                </div>
+            </div>
+
+            <!-- Quality Levels -->
+            <div class="quality-meter">
+                <div class="quality-text">Níveis de Eficiência</div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="color: #FF5252; font-weight: 700;">&lt; 10% (Baixa Eficiência)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 30%; height: 100%; background: #FF5252; border-radius: 5px;"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="color: #FFD700; font-weight: 700;">10% - 15% (Média de Mercado)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 60%; height: 100%; background: #FFD700; border-radius: 5px;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="color: #64FFDA; font-weight: 700;">&gt; 15% (Alta Qualidade / Vantagem Competitiva)</div>
+                    <div style="height: 10px; background: #333; border-radius: 5px; margin-top: 5px;">
+                        <div style="width: 90%; height: 100%; background: #64FFDA; border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras
+            </div>
+            <div class="case-data">
+                Setor de Energia<br>
+                Média Global: ~12%
+            </div>
+            <div class="case-result">
+                ~18%
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">ROE Atual (Alta Qualidade)</div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 13 ===== -->
+        <section class="slide-page" id="slide-13">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Ferramenta #3: Dividend Yield (DY)</h1>
+
+        <div class="content-grid">
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula">
+                    DY = <span>Dividendo Anual</span> / <span>Preço Ação</span>
+                </div>
+                <div class="definition">
+                    Retorno percentual pago em dinheiro ao acionista. É o "aluguel" que você recebe por ser sócio.
+                </div>
+            </div>
+
+            <!-- Strategy -->
+            <div class="strategy-box">
+                <div class="strategy-icon"><i class="fas fa-anchor"></i></div>
+                <div class="strategy-title">Estratégia "Porto Seguro"</div>
+                <div class="strategy-desc">
+                    Em tempos de crise e queda nas bolsas, empresas que pagam bons dividendos (DY > 6%) oferecem uma <strong>proteção psicológica e financeira</strong>. O preço da ação pode cair, mas o dividendo continua caindo na conta.
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study">
+            <div class="case-title">
+                <i class="fas fa-search"></i> Caso Real: Petrobras
+            </div>
+            <div class="case-data">
+                Dividendo/Ação: R$ 1,50<br>
+                Preço: R$ 28,50
+            </div>
+            <div class="case-result">
+                5,26%
+                <div style="font-size: 12px; color: #8892b0; font-weight: 400; margin-top: 5px;">DY Anual (Atrativo)</div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 14 ===== -->
+        <section class="slide-page" id="slide-14">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>O Papel do RI na Guerra</h1>
+
+        <div class="content-layout">
+            <div class="left-col">
+                <i class="fas fa-bullhorn ri-icon"></i>
+                <div class="ri-definition">
+                    Relações com Investidores (RI) é a ponte estratégica entre a empresa e o mercado de capitais.
+                </div>
+                <div style="font-size: 18px; color: #8892b0;">
+                    Em tempos de crise, o silêncio custa caro. A incerteza destrói valor mais rápido que a má notícia.
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="checklist-title">Protocolo de Comunicação</div>
+                
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Transparência Radical</h3>
+                        <p>Não esconda riscos. O mercado precifica o que conhece e pune o que desconhece.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Velocidade</h3>
+                        <p>Fatos Relevantes devem sair antes dos rumores de WhatsApp.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <i class="fas fa-check-circle check-icon"></i>
+                    <div class="check-text">
+                        <h3>Plano de Mitigação</h3>
+                        <p>Não diga apenas "temos um problema". Diga "estamos fazendo X, Y e Z para resolver".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            "A Petrobras informa que monitora os desdobramentos no Oriente Médio e reafirma que suas operações não foram afetadas. Possuímos hedge cambial para proteger 40% da receita..."
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 15 ===== -->
+        <section class="slide-page" id="slide-15">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>3 Princípios para Sobreviver</h1>
+
+        <div class="pillars-container">
+            <!-- Pillar 1 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Diversificação</h3>
+                <p>
+                    A única "almoço grátis" do mercado. Ter ativos com <span class="highlight">correlação negativa</span> (ex: Ações caem, Dólar sobe) suaviza a volatilidade da carteira.
+                </p>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Qualidade</h3>
+                <p>
+                    Em crises, o mercado pune promessas e premia realidades. Busque empresas com <span class="highlight">caixa forte, baixo endividamento e lucro real</span>.
+                </p>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <h3>Horizonte</h3>
+                <p>
+                    Volatilidade é ruído de curto prazo. Quem tem visão de longo prazo vê <span class="highlight">oportunidade de compra</span> onde outros veem pânico.
+                </p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "O mercado de ações é um dispositivo para transferir dinheiro dos impacientes para os pacientes." — Warren Buffett
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 16 ===== -->
+        <section class="slide-page" id="slide-16">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Quem Ganha e Quem Perde</h1>
+
+        <div class="sectors-grid">
+            <!-- Winners -->
+            <div class="sector-col">
+                <div class="col-header win-head"><i class="fas fa-arrow-up"></i> Ganhadores</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-oil-can sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Petróleo e Gás</div>
+                </div>
+                <div class="sector-reason">Receitas sobem com barril caro. (Petrobras, PRIO)</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-shield-alt sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Defesa</div>
+                </div>
+                <div class="sector-reason">Demanda por armamentos e tecnologia.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-gem sector-icon" style="color: #64FFDA;"></i>
+                    <div class="sector-name">Ouro e Metais</div>
+                </div>
+                <div class="sector-reason">Refúgio clássico contra incerteza.</div>
+            </div>
+
+            <!-- Losers -->
+            <div class="sector-col">
+                <div class="col-header lose-head"><i class="fas fa-arrow-down"></i> Perdedores</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-plane sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Aviação</div>
+                </div>
+                <div class="sector-reason">Combustível (QAV) é 40% do custo.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-shopping-cart sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Varejo</div>
+                </div>
+                <div class="sector-reason">Inflação corrói poder de compra.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-hard-hat sector-icon" style="color: #FF5252;"></i>
+                    <div class="sector-name">Construção</div>
+                </div>
+                <div class="sector-reason">Juros altos encarecem financiamento.</div>
+            </div>
+
+            <!-- Neutral -->
+            <div class="sector-col">
+                <div class="col-header neu-head"><i class="fas fa-minus"></i> Ambíguos</div>
+                
+                <div class="sector-item">
+                    <i class="fas fa-university sector-icon" style="color: #FFD700;"></i>
+                    <div class="sector-name">Bancos</div>
+                </div>
+                <div class="sector-reason">Ganham com juros (spread), perdem com inadimplência.</div>
+
+                <div class="sector-item" style="margin-top: 15px;">
+                    <i class="fas fa-hammer sector-icon" style="color: #FFD700;"></i>
+                    <div class="sector-name">Mineração</div>
+                </div>
+                <div class="sector-reason">Dólar ajuda receita, mas China desacelera demanda.</div>
+            </div>
+        </div>
+
+        <div class="rec-box">
+            <div class="rec-text">
+                <strong>Recomendação Prática:</strong> Aumentar exposição em Energia/Bancos de Qualidade. Reduzir Varejo/Aéreas. Manter Ouro como seguro.
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 17 ===== -->
+        <section class="slide-page" id="slide-17">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>3 Cenários para os Próximos Meses</h1>
+
+        <div class="scenarios-container">
+            <!-- Base Scenario -->
+            <div class="scenario-card base">
+                <div class="prob-box">
+                    <div class="prob-value">60%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-balance-scale"></i> Cenário Base (Estagnação)</div>
+                    <div class="scenario-desc">
+                        Conflito curto mas tenso. Petróleo estabiliza em US$ 80-90. Bolsas recuperam lentamente. Inflação moderada.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pessimistic Scenario -->
+            <div class="scenario-card pessimistic">
+                <div class="prob-box">
+                    <div class="prob-value">25%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-exclamation-triangle"></i> Cenário Pessimista (Bloqueio)</div>
+                    <div class="scenario-desc">
+                        Bloqueio total de Ormuz. Petróleo > US$ 120. Recessão global. Bolsas caem 20%+. Inflação dispara.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optimistic Scenario -->
+            <div class="scenario-card optimistic">
+                <div class="prob-box">
+                    <div class="prob-value">15%</div>
+                    <div class="prob-label">Probabilidade</div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-title"><i class="fas fa-dove"></i> Cenário Otimista (Acordo)</div>
+                    <div class="scenario-desc">
+                        Cessar-fogo rápido. Petróleo volta a US$ 70-75. Recuperação em V dos mercados. Dólar cai.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rec-box">
+            <div class="rec-text">
+                <strong>Estratégia:</strong> Monte a carteira para o Cenário Base, mas faça proteção (Hedge) para o Pessimista.
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 18 ===== -->
+        <section class="slide-page" id="slide-18">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Atividade: Sala de Situação</h1>
+
+        <div class="briefing-container">
+            <!-- Mission -->
+            <div class="mission-col">
+                <i class="fas fa-user-tie mission-icon"></i>
+                <div class="mission-title">Sua Missão</div>
+                <div class="mission-desc">
+                    Você é Gestor(a) de um fundo com <strong>R$ 10 Milhões</strong>. O mercado está em pânico. Você tem 30 minutos para salvar o patrimônio dos seus clientes.
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="steps-col">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Análise (10 min)</h3>
+                        <p>Identifique quais ativos da sua carteira estão em risco crítico e onde estão as oportunidades.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Decisão (10 min)</h3>
+                        <p>Realocar a carteira. Comprar? Vender? Fazer Hedge? Justifique com P/L, ROE ou DY.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Comunicação (10 min)</h3>
+                        <p>Redija um Fato Relevante de 5 linhas explicando sua estratégia para acalmar os investidores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="criteria-box">
+            Critérios de Avaliação: Fundamentação Técnica (Uso de Indicadores) • Coerência com Perfil • Clareza na Comunicação
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 19 ===== -->
+        <section class="slide-page" id="slide-19">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+<h1>O Que Aprendemos Hoje</h1>
+<div class="takeaways-list">
+            <div class="takeaway-item">
+                <div class="takeaway-number">01</div>
+                <div class="takeaway-content">
+                    <h3>Velocidade de Transmissão</h3>
+                    <p>Eventos geopolíticos impactam seu portfólio em horas, via Petróleo, Câmbio e Aversão ao Risco.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">02</div>
+                <div class="takeaway-content">
+                    <h3>Fundamentos são a Bússola</h3>
+                    <p>Em crises, use P/L, ROE e DY para separar "oportunidade" de "armadilha". Qualidade vence.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">03</div>
+                <div class="takeaway-content">
+                    <h3>Diversificação é Defesa</h3>
+                    <p>Não coloque todos os ovos na mesma cesta. Correlação negativa protege o patrimônio.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">04</div>
+                <div class="takeaway-content">
+                    <h3>Comunicação Gera Confiança</h3>
+                    <p>O papel do RI é vital para reduzir a assimetria de informação e acalmar o mercado.</p>
+                </div>
+            </div>
+<div class="takeaway-item">
+                <div class="takeaway-number">05</div>
+                <div class="takeaway-content">
+                    <h3>Crise = Oportunidade</h3>
+                    <p>Para o investidor de longo prazo, o pânico de curto prazo é o melhor momento de compra.</p>
+                </div>
+            </div>
+        </div>
+</div>
+        </section>
+
+        <!-- ===== SLIDE 20 ===== -->
+        <section class="slide-page" id="slide-20">
+            <div class="slide-container">
+        <div class="grid-background"></div>
+
+        <h1>Onde Aprender Mais</h1>
+
+        <div class="content-grid">
+            <!-- Bibliography -->
+            <div class="section-box">
+                <div class="section-title"><i class="fas fa-book"></i> Bibliografia Básica</div>
+                <ul class="ref-list">
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado de Capitais</div>
+                        <div class="ref-author">SANTOS, A. P. dos. Saraiva, 2012.</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado de Capitais</div>
+                        <div class="ref-author">PINHEIRO, J. L. Atlas, 2019.</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">Mercado Financeiro: produtos e serviços</div>
+                        <div class="ref-author">FORTUNA, E. Qualitymark, 2013.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Articles -->
+            <div class="section-box">
+                <div class="section-title"><i class="fas fa-newspaper"></i> Leituras Recomendadas</div>
+                <ul class="ref-list">
+                    <li class="ref-item">
+                        <div class="ref-title">"Como a tensão entre EUA e Irã pode afetar dólar e petróleo"</div>
+                        <div class="ref-author">G1 Globo (26/02/2026)</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">"Quem Ganha e Quem Perde com a Escalada no Oriente Médio"</div>
+                        <div class="ref-author">Forbes Brasil (04/03/2026)</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-title">"Guerra contra o Irã: entenda a mudança nas relações internacionais"</div>
+                        <div class="ref-author">The Conversation (03/03/2026)</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="tools-bar">
+            <div class="tools-title">Ferramentas de Monitoramento</div>
+            <div class="tools-grid">
+                <div class="tool-item"><i class="fas fa-chart-bar"></i> B3 (b3.com.br)</div>
+                <div class="tool-item"><i class="fas fa-globe"></i> Investing.com</div>
+                <div class="tool-item"><i class="fas fa-money-bill-wave"></i> Yahoo Finance</div>
+                <div class="tool-item"><i class="fas fa-building"></i> Sites de RI das Empresas</div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- ===== SLIDE 21 ===== -->
+        <section class="slide-page" id="slide-21">
+            <div class="slide-container">
         <div class="grid-background"></div>
 <h1>Perguntas e Discussão</h1>
 <div class="questions-box">
@@ -4020,5 +3869,53 @@ h1 {
             </div>
         </div>
 </div>
+        </section>
+
+    </div>
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="nav-ui">
+        <button class="btn-nav" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Anterior</button>
+        <span id="slide-counter">1 / 21</span>
+        <button class="btn-nav" id="btn-next" onclick="navigate(1)">Próximo &#8594;</button>
+    </nav>
+
+    <script>
+        var currentSlide = 0;
+        var totalSlides = 21;
+        var presentation = document.getElementById('presentation');
+
+        function navigate(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            presentation.style.transform = 'translateX(-' + (currentSlide * 100) + 'vw)';
+            document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+            document.getElementById('btn-prev').disabled = currentSlide === 0;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                navigate(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                navigate(-1);
+            }
+        });
+
+        // Navegação por toque (swipe)
+        var touchStartX = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        document.addEventListener('touchend', function(e) {
+            var diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+        });
+    </script>
+
 </body>
 </html>
