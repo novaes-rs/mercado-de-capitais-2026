@@ -97,10 +97,44 @@
             max-width: 80%;
             text-align: center;
         }
+
+        .top-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .top-controls button {
+            background: #00C853;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-controls button:hover {
+            background: #00E676;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
     <div class="slide-title" id="slideTitle">Slide 1 de 16</div>
+    
+    <div class="top-controls">
+        <button onclick="goHome()" title="Voltar para a página inicial">🏠 Home</button>
+        <button onclick="printSlides()" title="Exportar slides como PDF">🖨️ Imprimir PDF</button>
+    </div>
     
     <div class="presentation-container">
         <div class="slide-frame active" id="slide1"><iframe src="slide_01_capa.html"></iframe></div>
@@ -178,6 +212,16 @@
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') previousSlide();
         });
+
+        // Função para voltar à home
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Função para imprimir/exportar PDF
+        function printSlides() {
+            window.print();
+        }
 
         showSlide(currentSlide);
     </script>
