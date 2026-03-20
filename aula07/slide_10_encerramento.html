@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px; /* keep as required */
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 50px 80px 20px; /* keep top padding (50px) but reduce bottom to save height */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%; max-width: 1000px;
+        }
+
+        h1 {
+            font-size: 64px; font-weight: 900; color: #FFFFFF; margin-bottom: 10px;
+            text-align: center; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; color: #00C853;
+            margin-bottom: 20px; text-align: center; font-weight: 700;
+            background: rgba(0, 200, 83, 0.1); padding: 8px 20px; border-radius: 4px;
+        }
+
+        .instructions-box {
+            background-color: rgba(30, 41, 59, 0.6);
+            border-top: 4px solid #00C853;
+            border-radius: 12px;
+            padding: 18px; /* reduced from 30 */
+            width: 100%;
+            margin-bottom: 20px; /* reduced spacing below */
+            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; gap: 12px; /* smaller gap */
+        }
+
+        .instruction-item {
+            flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+            padding: 6px; /* small internal padding to control height */
+        }
+
+        .instruction-number {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700;
+            color: #00C853; margin-bottom: 8px;
+            width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 200, 83, 0.1);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .instruction-text {
+            font-size: 18px; color: #E0E0E0; line-height: 1.4; /* slightly tighter */
+        }
+
+        .references-box {
+            width: 100%; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px; margin-bottom: 18px; /* reduced padding and margin */
+        }
+
+        .ref-title {
+            font-family: 'Roboto Mono', monospace; font-size: 16px; color: #94A3B8;
+            margin-bottom: 12px; text-transform: uppercase; font-weight: 700; text-align: center;
+        }
+
+        .ref-list {
+            display: flex; flex-direction: column; gap: 8px; /* smaller gap */
+        }
+
+        .ref-item {
+            font-size: 14px; color: #B0C4DE; line-height: 1.3; text-align: center; /* slightly tighter */
+        }
+
+        .motivation-box {
+            background: rgba(41, 121, 255, 0.1);
+            border-left: 4px solid #2979FF;
+            padding: 12px; width: 100%; /* reduced padding */
+            text-align: center;
+        }
+
+        .motivation-text {
+            font-size: 20px; color: #82B1FF; font-style: italic; line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <div class="content-wrapper">
+            <h1>Agora é Sua Vez!</h1>
+            <div class="subtitle">Atividade Avaliativa 1.2</div>
+
+            <div class="instructions-box">
+                <div class="instruction-item">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-text"><strong>Estude o Caso:</strong> Leia atentamente o cenário, o choque do Dia 1 e a falsa esperança do Dia 15.</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-text"><strong>Identifique os Vieses:</strong> Encontre e explique pelo menos 3 vieses comportamentais presentes no caso.</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-text"><strong>Tome Sua Decisão:</strong> Escolha entre vender, manter ou comprar. Justifique com base em gestão de risco.</div>
+                </div>
+            </div>
+
+            <div class="references-box">
+                <div class="ref-title">Referências para Consulta</div>
+                <div class="ref-list">
+                    <div class="ref-item"><strong>Kahneman, D.; Tversky, A. (1979).</strong> Prospect theory: An analysis of decision under risk. Econometrica.</div>
+                    <div class="ref-item"><strong>Daida, S. et al. (2025).</strong> Behavioral finance and investor psychology: Understanding market volatility in crisis scenarios.</div>
+                    <div class="ref-item"><strong>Clube do Valor.</strong> Vieses comportamentais no investimento: o que são, 16 exemplos e mais.</div>
+                </div>
+            </div>
+
+            <div class="motivation-box">
+                <p class="motivation-text">
+                    "A melhor decisão em uma crise não é aquela que faz você se sentir bem emocionalmente, mas aquela que protege seu capital e demonstra frieza analítica."
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

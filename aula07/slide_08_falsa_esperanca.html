@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 60px 30px; /* kept top padding, reduced sides and bottom */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; border-left: 6px solid #FFB300; padding-left: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 30px; padding-left: 26px; z-index: 1; text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            display: flex; flex-direction: column; gap: 20px; z-index: 1; height: 100%;
+        }
+
+        .news-banner {
+            background-color: rgba(255, 179, 0, 0.1);
+            border: 2px solid #FFB300;
+            border-radius: 12px;
+            padding: 18px 20px; /* reduced padding */
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .news-icon { font-size: 48px; color: #FFB300; }
+
+        .news-content { flex: 1; }
+
+        .news-title {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700; color: #FFB300; margin-bottom: 8px;
+        }
+
+        .news-text {
+            font-size: 22px; color: #E0E0E0; line-height: 1.4;
+        }
+
+        .dilemma-section {
+            display: flex; gap: 20px; flex: 1;
+        }
+
+        .context-col {
+            flex: 1;
+            background-color: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            padding: 20px; /* reduced padding */
+            backdrop-filter: blur(10px);
+            border-top: 4px solid #2979FF;
+        }
+
+        .context-title {
+            font-size: 24px; font-weight: 700; color: #2979FF; margin-bottom: 12px;
+        }
+
+        .context-text {
+            font-size: 20px; color: #B0C4DE; line-height: 1.6; margin-bottom: 10px;
+        }
+
+        .price-tag {
+            display: inline-block; background: rgba(41, 121, 255, 0.2); color: #82B1FF;
+            padding: 4px 10px; border-radius: 4px; font-family: 'Roboto Mono', monospace; font-weight: 700;
+        }
+
+        .options-col {
+            flex: 1.5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: min-content;
+            gap: 12px;
+        }
+
+        .options-title { font-size: 24px; font-weight: 700; color: #FFFFFF; margin-bottom: 0; grid-column: 1 / -1; }
+
+        .option-card {
+            background-color: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid #94A3B8;
+            padding: 12px; /* reduced padding */
+            border-radius: 8px;
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .option-letter {
+            font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #FFFFFF;
+            background: rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .option-text { font-size: 20px; color: #E0E0E0; line-height: 1.4; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>A Falsa Esperança: Dia 15</h1>
+        <div class="subtitle">O Canto da Sereia do Mercado</div>
+
+        <div class="content-wrapper">
+            <div class="news-banner">
+                <i class="fas fa-bullhorn news-icon"></i>
+                <div class="news-content">
+                    <div class="news-title">BREAKING NEWS: PACOTE DE SOCORRO</div>
+                    <div class="news-text">
+                        O governo anuncia um pacote de socorro ao setor. As ações da TechNova disparam de R$ 20 para <strong>R$ 35</strong> em um único dia. O mercado entra em euforia e analistas afirmam que "o pior já passou".
+                    </div>
+                </div>
+            </div>
+
+            <div class="dilemma-section">
+                <div class="context-col">
+                    <div class="context-title">O Cenário da Equipe</div>
+                    <p class="context-text">A equipe do Fundo Alpha Capital respira aliviada, mas a pressão aumenta.</p>
+                    <p class="context-text">O preço médio de compra ainda é <span class="price-tag">R$ 50</span>.</p>
+                    <p class="context-text">O preço atual é <span class="price-tag">R$ 35</span>.</p>
+                    <p class="context-text" style="font-style: italic; color: #94A3B8;">"Se comprarmos mais agora, baixamos nosso preço médio e saímos no lucro mais rápido!"</p>
+                </div>
+
+                <div class="options-col">
+                    <div class="options-title">O Dilema da Decisão</div>
+
+                    <div class="option-card" style="border-left-color: #FF5252;">
+                        <div class="option-letter">A</div>
+                        <div class="option-text"><strong>Vender tudo a R$ 35:</strong> Assumir o prejuízo de R$ 15 por ação e proteger o capital restante.</div>
+                    </div>
+
+                    <div class="option-card" style="border-left-color: #FFB300;">
+                        <div class="option-letter">B</div>
+                        <div class="option-text"><strong>Manter a posição:</strong> Não fazer nada e torcer para que a ação volte aos R$ 50 originais.</div>
+                    </div>
+
+                    <div class="option-card" style="border-left-color: #00C853; grid-column: 1 / -1;">
+                        <div class="option-letter">C</div>
+                        <div class="option-text"><strong>Comprar mais a R$ 35:</strong> Fazer "preço médio" para tentar recuperar as perdas mais rapidamente.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

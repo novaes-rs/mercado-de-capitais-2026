@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 50px; padding-left: 26px; z-index: 1;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 30px; z-index: 1; height: 100%;
+        }
+
+        .principle-card {
+            flex: 1;
+            background-color: rgba(30, 41, 59, 0.6);
+            border-top: 4px solid #2979FF;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .principle-card:nth-child(2) { border-top-color: #00C853; }
+        .principle-card:nth-child(3) { border-top-color: #FF5252; }
+
+        .card-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 25px;
+            padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-number {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700;
+            color: #FFFFFF; background: rgba(255,255,255,0.1);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .card-title {
+            font-size: 24px; font-weight: 700; color: #FFFFFF; line-height: 1.2;
+        }
+
+        .card-text {
+            font-size: 20px; color: #B0C4DE; line-height: 1.6;
+        }
+
+        .highlight { color: #FFFFFF; font-weight: 600; }
+
+        .footer-note {
+            margin-top: auto; padding-top: 30px; z-index: 1;
+            font-size: 18px; color: #94A3B8; font-style: italic;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Teoria do Prospecto</h1>
+        <div class="subtitle">Kahneman & Tversky (1979)</div>
+
+        <div class="content-wrapper">
+            <div class="principle-card">
+                <div class="card-header">
+                    <div class="card-number">1</div>
+                    <div class="card-title">Ponto de Referência</div>
+                </div>
+                <div class="card-text">
+                    As pessoas avaliam ganhos e perdas em relação a um <span class="highlight">ponto de referência</span>, geralmente o preço que pagaram pelo ativo, em vez de avaliar a riqueza total.
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="card-header">
+                    <div class="card-number">2</div>
+                    <div class="card-title">Aversão à Perda</div>
+                </div>
+                <div class="card-text">
+                    A dor de uma perda é psicologicamente <span class="highlight">duas vezes maior</span> que o prazer de um ganho equivalente. As pessoas preferem evitar perdas a adquirir ganhos.
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="card-header">
+                    <div class="card-number">3</div>
+                    <div class="card-title">Sensibilidade Decrescente</div>
+                </div>
+                <div class="card-text">
+                    Quanto maior o valor absoluto, <span class="highlight">menor o impacto psicológico relativo</span>. Uma perda de R$ 100 dói mais (percentualmente) que R$ 100 adicionados a uma perda de R$ 1.000.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            A Teoria do Prospecto explica como as pessoas <strong>realmente</strong> tomam decisões sob risco, contrariando a teoria clássica da utilidade esperada.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            /* keep top padding (title spacing) at 60px, reduce bottom padding to fit under 720px */
+            padding: 60px 80px 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; border-left: 6px solid #00C853; padding-left: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 40px; padding-left: 26px; z-index: 1; text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 40px; z-index: 1; height: 100%;
+        }
+
+        /* Left Column: Scenario */
+        .scenario-col {
+            flex: 1; display: flex; flex-direction: column; gap: 20px;
+        }
+
+        .concept-box {
+            background-color: rgba(30, 41, 59, 0.6); padding: 24px; border-radius: 8px;
+            border-left: 6px solid #2979FF; display: flex; flex-direction: column; gap: 15px;
+            backdrop-filter: blur(10px); height: 100%;
+        }
+
+        .concept-title { font-size: 24px; font-weight: 700; color: #2979FF; text-transform: uppercase; }
+        .concept-desc { font-size: 20px; color: #E0E0E0; line-height: 1.6; }
+        
+        .highlight { color: #00C853; font-weight: 600; }
+
+        /* Right Column: Data Table */
+        .data-col {
+            flex: 1.2; display: flex; flex-direction: column;
+        }
+
+        .table-container {
+            background-color: rgba(30, 41, 59, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 20px;
+        }
+
+        .data-table th {
+            text-align: left; padding: 18px 20px;
+            background-color: rgba(30, 41, 59, 0.9); color: #00C853;
+            border-bottom: 2px solid #555; font-weight: 700;
+            font-family: 'Roboto Mono', monospace; text-transform: uppercase;
+        }
+
+        .data-table td {
+            padding: 18px 20px; border-bottom: 1px solid #444;
+            color: #E0E0E0; vertical-align: middle;
+        }
+
+        .data-table tr:last-child td { border-bottom: none; }
+
+        .data-table tr:nth-child(even) td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .data-label { font-weight: 600; color: #B0C4DE; }
+        .data-value { font-family: 'Roboto Mono', monospace; font-weight: 700; color: #FFFFFF; text-align: right; }
+        
+        .value-green { color: #00C853; }
+        .value-blue { color: #2979FF; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Estudo de Caso: O Colapso da TechNova</h1>
+        <div class="subtitle">Cenário Base - Fundo Alpha Capital</div>
+
+        <div class="content-wrapper">
+            <div class="scenario-col">
+                <div class="concept-box">
+                    <div class="concept-title">O Cenário</div>
+                    <div class="concept-desc">
+                        Você é o gestor de risco do <strong>Fundo Alpha Capital</strong>. 
+                        <br><br>
+                        A <span class="highlight">TechNova</span> é a empresa de tecnologia mais promissora do ano. Com fundamentos aparentemente sólidos e recomendação de compra unânime por todos os grandes bancos, o comitê de investimentos decidiu montar uma posição relevante na empresa.
+                        <br><br>
+                        Tudo parecia perfeito, até que o mercado abriu na terça-feira...
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-col">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th width="60%">Parâmetro da Carteira</th>
+                                <th width="40%" style="text-align: right;">Valor Inicial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="data-label">Capital Total do Fundo</td>
+                                <td class="data-value">R$ 50.000.000</td>
+                            </tr>
+                            <tr>
+                                <td class="data-label">Alocação em TechNova</td>
+                                <td class="data-value value-blue">10% (R$ 5.000.000)</td>
+                            </tr>
+                            <tr>
+                                <td class="data-label">Preço de Compra</td>
+                                <td class="data-value value-green">R$ 50,00 / ação</td>
+                            </tr>
+                            <tr>
+                                <td class="data-label">Quantidade de Ações</td>
+                                <td class="data-value">100.000 ações</td>
+                            </tr>
+                            <tr>
+                                <td class="data-label">Tese de Investimento</td>
+                                <td class="data-value" style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #E0E0E0;">Growth (Longo Prazo)</td>
+                            </tr>
+                            <tr>
+                                <td class="data-label">Stop Loss Definido</td>
+                                <td class="data-value" style="color: #FF5252;">Não estabelecido</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

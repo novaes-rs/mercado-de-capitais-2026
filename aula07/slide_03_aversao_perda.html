@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; border-left: 6px solid #FF5252; padding-left: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 30px; padding-left: 26px; z-index: 1; text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            display: flex; gap: 40px; z-index: 1; height: 100%;
+        }
+
+        /* Left Column: Definition */
+        .definition-col {
+            flex: 1.2; display: flex; flex-direction: column; gap: 16px;
+        }
+
+        .definition-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            padding: 20px; border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .def-text {
+            font-size: 26px; line-height: 1.5; color: #E0E0E0; margin-bottom: 12px;
+        }
+
+        .highlight-red { color: #FF5252; font-weight: 700; }
+        .highlight-green { color: #00C853; font-weight: 700; }
+
+        .example-box {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #FF5252;
+            padding: 12px; border-radius: 0 8px 8px 0;
+        }
+
+        .example-text { font-size: 20px; color: #B0C4DE; line-height: 1.5; font-style: italic; }
+
+        /* Right Column: Case Impact */
+        .impact-col {
+            flex: 1; background-color: rgba(30, 41, 59, 0.8);
+            border-radius: 12px; padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; gap: 12px;
+            border-top: 6px solid #FF5252;
+        }
+
+        .impact-title {
+            font-family: 'Roboto Mono', monospace; font-size: 22px; font-weight: 700;
+            color: #FFFFFF; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 8px;
+        }
+
+        .impact-item {
+            background: rgba(255,255,255,0.03); padding: 10px 15px; border-radius: 8px;
+        }
+
+        .impact-label {
+            font-size: 16px; color: #94A3B8; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;
+        }
+
+        .impact-value {
+            font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #FFFFFF;
+        }
+
+        .quote-box {
+            margin-top: auto; padding: 12px;
+            border: 1px dashed #FF5252; border-radius: 8px;
+            background: rgba(255, 82, 82, 0.05);
+        }
+
+        .quote-text {
+            font-size: 18px; color: #FFCDD2; line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Viés 1: Aversão à Perda</h1>
+        <div class="subtitle">Loss Aversion</div>
+
+        <div class="content-wrapper">
+            <div class="definition-col">
+                <div class="definition-card">
+                    <p class="def-text">
+                        A aversão à perda é a tendência de sentir a dor de uma perda muito mais intensamente do que o prazer de um ganho equivalente.
+                    </p>
+                    <div class="example-box">
+                        <p class="example-text">
+                            Psicologicamente, perder R$ 100 dói aproximadamente <span class="highlight-red">duas vezes mais</span> do que ganhar R$ 100 alegra. Isso leva investidores a manterem posições perdedoras para evitar a "dor" de realizar o prejuízo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-col">
+                <div class="impact-title">Impacto no Caso TechNova</div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div class="impact-item" style="flex: 1;">
+                        <div class="impact-label">Preço de Compra</div>
+                        <div class="impact-value" style="color: #00C853;">R$ 50</div>
+                    </div>
+                    <div class="impact-item" style="flex: 1;">
+                        <div class="impact-label">Preço Atual</div>
+                        <div class="impact-value" style="color: #FF5252;">R$ 30</div>
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <div class="impact-label">Comportamento Observado</div>
+                    <div style="font-size: 18px; color: #E0E0E0; line-height: 1.4; margin-top: 5px;">
+                        A equipe se recusa a vender as ações para não aceitar a perda realizada de 40%, preferindo o risco de a empresa quebrar.
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    <p class="quote-text">
+                        "Nós pagamos cinquenta reais... vamos segurar até voltar para cinquenta reais e aí saímos no zero a zero."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            padding: 60px 40px 20px; /* keep top padding (60px), reduce sides and bottom */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; border-left: 6px solid #2979FF; padding-left: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 36px; padding-left: 26px; z-index: 1; text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            display: flex; flex-direction: column; gap: 12px; z-index: 1; /* remove height to avoid stretching */
+        }
+
+        /* Top Section: Definition */
+        .definition-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            padding: 12px 20px; border-radius: 12px; /* reduced vertical padding */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.28);
+            backdrop-filter: blur(8px);
+            border-left: 4px solid #2979FF;
+        }
+
+        .def-text {
+            font-size: 24px; line-height: 1.5; color: #E0E0E0;
+        }
+
+        .highlight-blue { color: #2979FF; font-weight: 700; }
+
+        /* Bottom Section: Process */
+        .process-container {
+            display: flex; gap: 16px; margin-top: 6px; /* removed flex:1 so it won't stretch */
+        }
+
+        .process-step {
+            flex: 1; background-color: rgba(30, 41, 59, 0.8);
+            border-radius: 12px; padding: 12px 16px; /* reduced padding */
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            position: relative;
+            border-top: 4px solid #475569;
+        }
+
+        .process-step:nth-child(1) { border-top-color: #94A3B8; }
+        .process-step:nth-child(2) { border-top-color: #2979FF; }
+        .process-step:nth-child(3) { border-top-color: #FF5252; }
+
+        .step-icon {
+            font-size: 40px; color: #FFFFFF; margin-bottom: 12px; /* reduced */
+            background: rgba(255,255,255,0.1); width: 80px; height: 80px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+
+        .step-title {
+            font-family: 'Roboto Mono', monospace; font-size: 22px; font-weight: 700;
+            color: #FFFFFF; margin-bottom: 10px; text-transform: uppercase; /* reduced */
+        }
+
+        .step-value {
+            font-size: 36px; font-weight: 700; margin-bottom: 10px; /* reduced */
+        }
+
+        .step-desc {
+            font-size: 18px; color: #B0C4DE; line-height: 1.5;
+        }
+
+        /* Arrows between steps */
+        .arrow {
+            display: flex; align-items: center; justify-content: center;
+            color: #475569; font-size: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-grid"></div>
+
+        <h1>Viés 2: Ancoragem</h1>
+        <div class="subtitle">Anchoring Bias</div>
+
+        <div class="content-wrapper">
+            <div class="definition-card">
+                <p class="def-text">
+                    A ancoragem é a tendência cognitiva de confiar excessivamente na <span class="highlight-blue">primeira informação oferecida</span> (a "âncora") ao tomar decisões subsequentes. Uma vez que a âncora é estabelecida, outros julgamentos são feitos ajustando-se a partir dela.
+                </p>
+            </div>
+
+            <div class="process-container">
+                <div class="process-step">
+                    <div class="step-icon"><i class="fas fa-anchor"></i></div>
+                    <div class="step-title">A Âncora</div>
+                    <div class="step-value" style="color: #94A3B8;">R$ 50</div>
+                    <div class="step-desc">
+                        O preço original de compra torna-se o ponto de referência mental da equipe.
+                    </div>
+                </div>
+
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <div class="process-step">
+                    <div class="step-icon"><i class="fas fa-chart-line" style="transform: scaleY(-1);"></i></div>
+                    <div class="step-title">A Realidade</div>
+                    <div class="step-value" style="color: #2979FF;">R$ 30</div>
+                    <div class="step-desc">
+                        O preço cai drasticamente devido a uma fraude contábil bilionária.
+                    </div>
+                </div>
+
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <div class="process-step">
+                    <div class="step-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="step-title">O Erro</div>
+                    <div class="step-value" style="color: #FF5252;">"Barato"</div>
+                    <div class="step-desc">
+                        A equipe julga R$ 30 como "barato" apenas porque está ancorada nos R$ 50, ignorando que os fundamentos da empresa foram destruídos.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
