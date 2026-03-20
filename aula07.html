@@ -197,6 +197,7 @@
             display: flex;
             padding: 50px 40px 10px 50px;
             gap: 30px;
+            height: 720px;
         }
         .s1-content-pane {
             flex: 1.5; display: flex; flex-direction: column; justify-content: center; z-index: 1;
@@ -958,27 +959,36 @@
             if (confirm(msg)) { window.print(); }
         }
 
-        // Escalar slides para caber na viewport (16:9 = 1280×720)
+         // Escalar slides para caber na viewport (16:9 = 1280×720)
         function scaleSlides() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var cw = 1280; // largura fixa do slide
+            var ch = 720;  // altura fixa do slide
+            var scaleX = vw / cw;
+            var scaleY = vh / ch;
+            var scale = Math.min(scaleX, scaleY) * 0.97;
             var pages = document.querySelectorAll('.slide-page');
             pages.forEach(function(page) {
                 var container = page.querySelector('.slide-container');
                 if (!container) return;
-                var vw = window.innerWidth;
-                var vh = window.innerHeight;
-                var cw = container.offsetWidth || 1280;
-                var ch = container.offsetHeight || 720;
-                var scaleX = vw / cw;
-                var scaleY = vh / ch;
-                var scale = Math.min(scaleX, scaleY) * 0.95;
+                container.style.width = cw + 'px';
+                container.style.height = ch + 'px';
                 container.style.transform = 'scale(' + scale + ')';
                 container.style.transformOrigin = 'center center';
             });
         }
-
         window.addEventListener('resize', scaleSlides);
-        window.addEventListener('load', scaleSlides);
-        scaleSlides();
+        // Garantir que o escalonamento ocorra após o layout completo
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(scaleSlides);
+        } else {
+            window.addEventListener('load', function() {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(scaleSlides);
+                });
+            });
+        }
     </script>
 </body>
 </html>
