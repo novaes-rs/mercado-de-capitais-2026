@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 07 - Investimento em Incerteza: Vieses Comportamentais e Gestão de Crises</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; font-family: 'Montserrat', sans-serif; background: #000; }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .slide-frame {
+            width: 1280px;
+            height: 720px;
+            display: none;
+            border: 2px solid #00C853;
+            box-shadow: 0 0 30px rgba(0, 200, 83, 0.3);
+        }
+
+        .slide-frame.active {
+            display: block;
+        }
+
+        .slide-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid #00C853;
+        }
+
+        button {
+            background: #00C853;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #00E676;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none;
+        }
+
+        .slide-counter {
+            color: #00C853;
+            font-weight: 700;
+            font-size: 16px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .slide-title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00C853;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #00C853;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .top-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .top-controls button {
+            background: #00C853;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-controls button:hover {
+            background: #00E676;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-title" id="slideTitle">Slide 1 de 10</div>
+
+    <div class="top-controls">
+        <button onclick="goHome()" title="Voltar para a página inicial">🏠 Home</button>
+        <button onclick="printSlides()" title="Exportar slides como PDF">🖨️ Imprimir PDF</button>
+    </div>
+
+    <div class="presentation-container">
+        <div class="slide-frame active" id="slide1"><iframe src="aula07/slide_01_capa.html"></iframe></div>
+        <div class="slide-frame" id="slide2"><iframe src="aula07/slide_02_teoria_prospecto.html"></iframe></div>
+        <div class="slide-frame" id="slide3"><iframe src="aula07/slide_03_aversao_perda.html"></iframe></div>
+        <div class="slide-frame" id="slide4"><iframe src="aula07/slide_04_ancoragem.html"></iframe></div>
+        <div class="slide-frame" id="slide5"><iframe src="aula07/slide_05_manada.html"></iframe></div>
+        <div class="slide-frame" id="slide6"><iframe src="aula07/slide_06_estudo_caso.html"></iframe></div>
+        <div class="slide-frame" id="slide7"><iframe src="aula07/slide_07_choque_dia1.html"></iframe></div>
+        <div class="slide-frame" id="slide8"><iframe src="aula07/slide_08_falsa_esperanca.html"></iframe></div>
+        <div class="slide-frame" id="slide9"><iframe src="aula07/slide_09_desafios.html"></iframe></div>
+        <div class="slide-frame" id="slide10"><iframe src="aula07/slide_10_encerramento.html"></iframe></div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="previousSlide()">← Anterior</button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / 10</span>
+        <button id="nextBtn" onclick="nextSlide()">Próximo →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        const slideNames = [
+            "Capa — Investimento em Incerteza: Vieses Comportamentais e Gestão de Crises",
+            "Teoria do Prospecto (Kahneman & Tversky)",
+            "Viés 1: Aversão à Perda",
+            "Viés 2: Ancoragem",
+            "Viés 3: Comportamento de Manada",
+            "Estudo de Caso: O Colapso da TechNova — Cenário Base",
+            "O Choque: Dia 1 — Uma Crise Inesperada",
+            "A Falsa Esperança: Dia 15 — O Canto da Sereia",
+            "Desafios da Atividade Avaliativa (2,5 pts)",
+            "Encerramento e Referências"
+        ];
+
+        function showSlide(n) {
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+
+            document.querySelectorAll('.slide-frame').forEach(frame => frame.classList.remove('active'));
+            document.getElementById('slide' + currentSlide).classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('slideTitle').textContent = `Slide ${currentSlide} de ${totalSlides}: ${slideNames[currentSlide - 1]}`;
+
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') previousSlide();
+        });
+
+        // Voltar à home
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Imprimir/exportar PDF
+        function printSlides() {
+            window.print();
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
