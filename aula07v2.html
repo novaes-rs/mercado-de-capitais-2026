@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="version" content="v4-20260320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 07 — Investimento em Incerteza: Vieses Comportamentais e Gestão de Crises</title>
+    <!-- Font Awesome removido: ícones substituídos por SVGs inline -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET E LAYOUT DE APRESENTAÇÃO ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020617;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .presentation-wrapper {
+            display: flex;
+            width: 1000vw;
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-page {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-page .slide-container {
+            flex-shrink: 0;
+            transform-origin: center center;
+        }
+
+        /* ========== BOTÃO: RETORNAR À PÁGINA INICIAL ========== */
+        .btn-home {
+            position: fixed;
+            top: 1.2rem;
+            left: 1.2rem;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-home:hover {
+            background: #f59e0b;
+            color: #000;
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+        .btn-home svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* ========== BOTÃO: IMPRIMIR / EXPORTAR ========== */
+        .btn-print {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.2rem;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-print:hover {
+            background: #64FFDA;
+            color: #000;
+            border-color: #64FFDA;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3);
+        }
+        .btn-print svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* ========== NAVEGAÇÃO INFERIOR ========== */
+        .nav-ui {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            z-index: 9999;
+            background: rgba(2, 6, 23, 0.85);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .btn-nav:hover { background: #f59e0b; color: #000; border-color: #f59e0b; }
+        .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn-nav:disabled:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+
+        #slide-counter {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Roboto Mono', monospace;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ========== IMPRESSÃO ========== */
+        @media print {
+            .nav-ui, .btn-home, .btn-print { display: none !important; }
+            html, body { overflow: visible !important; background: white !important; }
+            .presentation-wrapper {
+                display: block !important;
+                width: 100% !important;
+                transform: none !important;
+            }
+            .slide-page {
+                width: 100% !important;
+                height: auto !important;
+                min-height: 100vh;
+                page-break-after: always;
+                display: flex !important;
+            }
+            .slide-page .slide-container {
+                width: 1280px !important;
+                min-height: 720px;
+                transform: none !important;
+            }
+        }
+
+        /* ========== ESTILOS DOS SLIDES ========== */
+
+        /* --- Comum a todos os slides --- */
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            position: relative;
+        }
+
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        /* --- SLIDE 1: CAPA --- */
+        .s1-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            height: 720px;
+        }
+        .s1-content-pane {
+            display: flex; flex-direction: column; justify-content: center; z-index: 1;
+            width: 100%;
+        }
+        .s1-course-tag {
+            font-family: 'Roboto Mono', monospace;
+            color: #00C853; font-size: 32px; font-weight: 700;
+            margin-bottom: 25px; display: flex; align-items: center; gap: 15px;
+        }
+        .s1-course-tag::before {
+            content: ''; width: 20px; height: 20px; background-color: #00C853;
+            border-radius: 50%; display: inline-block;
+        }
+        .s1-h1 {
+            font-size: 72px; line-height: 1.1; font-weight: 700; margin-bottom: 10px;
+            color: #FFFFFF; text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .s1-subtitle {
+            font-size: 36px; color: #94A3B8; margin-bottom: 40px; font-weight: 400;
+        }
+        .s1-divider {
+            width: 150px; height: 8px; background-color: #00C853; margin-bottom: 30px; border-radius: 5px;
+        }
+        .s1-info-grid {
+            display: grid; grid-template-columns: auto 1fr; gap: 20px 40px;
+            font-family: 'Roboto Mono', monospace; font-size: 32px; color: #E0E0E0;
+            background: rgba(30, 41, 59, 0.8); padding: 25px; border-radius: 20px;
+            border-left: 8px solid #00C853; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            width: fit-content; backdrop-filter: blur(10px);
+        }
+        .s1-info-label { color: #94A3B8; font-weight: 700; }
+
+        /* --- SLIDES 2-10: Layout base --- */
+        .s-inner {
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+        }
+        .s-inner-compact {
+            padding: 60px 60px 30px;
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+        }
+        .s-h1 {
+            font-size: 48px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;
+            z-index: 1; padding-left: 20px;
+        }
+        .s-h1-green  { border-left: 6px solid #00C853; }
+        .s-h1-red    { border-left: 6px solid #FF5252; }
+        .s-h1-blue   { border-left: 6px solid #2979FF; }
+        .s-h1-orange { border-left: 6px solid #FF9100; }
+        .s-h1-amber  { border-left: 6px solid #FFB300; }
+
+        .s-subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 20px; color: #94A3B8;
+            margin-bottom: 30px; padding-left: 26px; z-index: 1; text-transform: uppercase;
+        }
+
+        /* --- SLIDE 2: TEORIA DO PROSPECTO --- */
+        .s2-content { display: flex; gap: 30px; z-index: 1; flex: 1; }
+        .s2-card {
+            flex: 1; background-color: rgba(30, 41, 59, 0.6);
+            border-top: 4px solid #2979FF; border-radius: 12px; padding: 30px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+        }
+        .s2-card:nth-child(2) { border-top-color: #00C853; }
+        .s2-card:nth-child(3) { border-top-color: #FF5252; }
+        .s2-card-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 25px;
+            padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .s2-card-number {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700;
+            color: #FFFFFF; background: rgba(255,255,255,0.1);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .s2-card-title { font-size: 24px; font-weight: 700; color: #FFFFFF; line-height: 1.2; }
+        .s2-card-text { font-size: 20px; color: #B0C4DE; line-height: 1.6; }
+        .s2-highlight { color: #FFFFFF; font-weight: 600; }
+        .s2-footer {
+            margin-top: auto; padding-top: 30px; z-index: 1;
+            font-size: 18px; color: #94A3B8; font-style: italic;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- SLIDE 3: AVERSÃO À PERDA --- */
+        .s3-content { display: flex; gap: 40px; z-index: 1; flex: 1; }
+        .s3-def-col { flex: 1.2; display: flex; flex-direction: column; gap: 16px; }
+        .s3-def-card {
+            background-color: rgba(30, 41, 59, 0.6); padding: 20px; border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .s3-def-text { font-size: 26px; line-height: 1.5; color: #E0E0E0; margin-bottom: 12px; }
+        .s3-hl-red { color: #FF5252; font-weight: 700; }
+        .s3-hl-green { color: #00C853; font-weight: 700; }
+        .s3-example-box { background-color: rgba(0,0,0,0.3); border-left: 4px solid #FF5252; padding: 12px; border-radius: 0 8px 8px 0; }
+        .s3-example-text { font-size: 20px; color: #B0C4DE; line-height: 1.5; font-style: italic; }
+        .s3-impact-col {
+            flex: 1; background-color: rgba(30, 41, 59, 0.8); border-radius: 12px; padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 12px;
+            border-top: 6px solid #FF5252;
+        }
+        .s3-impact-title {
+            font-family: 'Roboto Mono', monospace; font-size: 22px; font-weight: 700;
+            color: #FFFFFF; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 8px;
+        }
+        .s3-impact-item { background: rgba(255,255,255,0.03); padding: 10px 15px; border-radius: 8px; }
+        .s3-impact-label { font-size: 16px; color: #94A3B8; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; }
+        .s3-impact-value { font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #FFFFFF; }
+        .s3-quote-box { margin-top: auto; padding: 12px; border: 1px dashed #FF5252; border-radius: 8px; background: rgba(255,82,82,0.05); }
+        .s3-quote-text { font-size: 18px; color: #FFCDD2; line-height: 1.5; }
+
+        /* --- SLIDE 4: ANCORAGEM --- */
+        .s4-content { display: flex; flex-direction: column; gap: 12px; z-index: 1; }
+        .s4-def-card {
+            background-color: rgba(30, 41, 59, 0.6); padding: 12px 20px; border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.28); backdrop-filter: blur(8px);
+            border-left: 4px solid #2979FF;
+        }
+        .s4-def-text { font-size: 24px; line-height: 1.5; color: #E0E0E0; }
+        .s4-hl-blue { color: #2979FF; font-weight: 700; }
+        .s4-process { display: flex; gap: 16px; margin-top: 6px; }
+        .s4-step {
+            flex: 1; background-color: rgba(30, 41, 59, 0.8); border-radius: 12px; padding: 12px 16px;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            border-top: 4px solid #475569;
+        }
+        .s4-step:nth-child(1) { border-top-color: #94A3B8; }
+        .s4-step:nth-child(3) { border-top-color: #2979FF; }
+        .s4-step:nth-child(5) { border-top-color: #FF5252; }
+        .s4-step-icon {
+            font-size: 40px; color: #FFFFFF; margin-bottom: 12px;
+            background: rgba(255,255,255,0.1); width: 80px; height: 80px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .s4-step-title { font-family: 'Roboto Mono', monospace; font-size: 22px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px; text-transform: uppercase; }
+        .s4-step-value { font-size: 36px; font-weight: 700; margin-bottom: 10px; }
+        .s4-step-desc { font-size: 18px; color: #B0C4DE; line-height: 1.5; }
+        .s4-arrow { display: flex; align-items: center; justify-content: center; color: #475569; font-size: 30px; }
+
+        /* --- SLIDE 5: MANADA --- */
+        .s5-content { display: flex; flex-direction: column; gap: 16px; z-index: 1; }
+        .s5-def-card {
+            background-color: rgba(30, 41, 59, 0.6); padding: 18px; border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+            border-left: 4px solid #FF9100; display: flex; align-items: center; gap: 20px;
+        }
+        .s5-def-icon {
+            font-size: 56px; color: #FF9100; background: rgba(255,145,0,0.1);
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .s5-def-text { font-size: 24px; line-height: 1.5; color: #E0E0E0; }
+        .s5-hl-orange { color: #FF9100; font-weight: 700; }
+        .s5-impact-section { display: flex; gap: 16px; flex: 1; align-items: flex-start; }
+        .s5-impact-card {
+            flex: 1; background-color: rgba(30, 41, 59, 0.8); border-radius: 12px; padding: 18px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); display: flex; flex-direction: column;
+        }
+        .s5-impact-title {
+            font-family: 'Roboto Mono', monospace; font-size: 22px; font-weight: 700;
+            color: #FFFFFF; margin-bottom: 12px; border-bottom: 1px solid #444; padding-bottom: 8px;
+        }
+        .s5-impact-text { font-size: 20px; color: #B0C4DE; line-height: 1.6; margin-bottom: 12px; }
+        .s5-quote-box { margin-top: 12px; padding: 12px; border: 1px dashed #FF9100; border-radius: 8px; background: rgba(255,145,0,0.05); }
+        .s5-quote-text { font-size: 18px; color: #FFE0B2; line-height: 1.5; font-style: italic; }
+
+        /* --- SLIDE 6: ESTUDO DE CASO --- */
+        .s6-content { display: flex; gap: 40px; z-index: 1; flex: 1; }
+        .s6-scenario-col { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        .s6-concept-box {
+            background-color: rgba(30, 41, 59, 0.6); padding: 24px; border-radius: 8px;
+            border-left: 6px solid #2979FF; display: flex; flex-direction: column; gap: 15px;
+            backdrop-filter: blur(10px); height: 100%;
+        }
+        .s6-concept-title { font-size: 24px; font-weight: 700; color: #2979FF; text-transform: uppercase; }
+        .s6-concept-desc { font-size: 20px; color: #E0E0E0; line-height: 1.6; }
+        .s6-hl { color: #00C853; font-weight: 600; }
+        .s6-data-col { flex: 1.2; display: flex; flex-direction: column; }
+        .s6-table-container {
+            background-color: rgba(30, 41, 59, 0.4); border-radius: 8px;
+            overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .s6-table { width: 100%; border-collapse: collapse; font-size: 20px; }
+        .s6-table th {
+            text-align: left; padding: 18px 20px;
+            background-color: rgba(30, 41, 59, 0.9); color: #00C853;
+            border-bottom: 2px solid #555; font-weight: 700;
+            font-family: 'Roboto Mono', monospace; text-transform: uppercase;
+        }
+        .s6-table td { padding: 18px 20px; border-bottom: 1px solid #444; color: #E0E0E0; vertical-align: middle; }
+        .s6-table tr:last-child td { border-bottom: none; }
+        .s6-table tr:nth-child(even) td { background-color: rgba(255,255,255,0.02); }
+        .s6-data-label { font-weight: 600; color: #B0C4DE; }
+        .s6-data-value { font-family: 'Roboto Mono', monospace; font-weight: 700; color: #FFFFFF; text-align: right; }
+        .s6-val-green { color: #00C853; }
+        .s6-val-blue { color: #2979FF; }
+
+        /* --- SLIDE 7: CHOQUE DIA 1 --- */
+        .s7-content { display: flex; flex-direction: row; z-index: 1; gap: 40px; align-items: flex-start; padding-left: 20px; }
+        .s7-timeline {
+            position: relative; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 18px 24px; width: 100%;
+        }
+        .s7-item {
+            position: relative; background-color: rgba(30, 41, 59, 0.6);
+            padding: 12px 18px; border-radius: 8px;
+            border: 1px solid rgba(255,82,82,0.2); backdrop-filter: blur(10px);
+        }
+        .s7-time-badge {
+            font-family: 'Roboto Mono', monospace; font-size: 18px; font-weight: 700;
+            color: #FF5252; margin-bottom: 6px; display: inline-block;
+            background: rgba(255,82,82,0.1); padding: 4px 10px; border-radius: 4px;
+        }
+        .s7-event-title { font-size: 24px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px; }
+        .s7-event-desc { font-size: 20px; color: #B0C4DE; line-height: 1.5; }
+        .s7-impact-tag { margin-top: 8px; font-family: 'Roboto Mono', monospace; font-size: 16px; color: #FF8A80; font-weight: 500; }
+
+        /* --- SLIDE 8: FALSA ESPERANÇA --- */
+        .s8-content { display: flex; flex-direction: column; gap: 20px; z-index: 1; flex: 1; }
+        .s8-news-banner {
+            background-color: rgba(255,179,0,0.1); border: 2px solid #FFB300;
+            border-radius: 12px; padding: 18px 20px;
+            display: flex; align-items: center; gap: 20px;
+        }
+        .s8-news-icon { font-size: 48px; color: #FFB300; }
+        .s8-news-content { flex: 1; }
+        .s8-news-title { font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700; color: #FFB300; margin-bottom: 8px; }
+        .s8-news-text { font-size: 22px; color: #E0E0E0; line-height: 1.4; }
+        .s8-dilemma { display: flex; gap: 20px; flex: 1; }
+        .s8-context-col {
+            flex: 1; background-color: rgba(30, 41, 59, 0.6); border-radius: 12px;
+            padding: 20px; backdrop-filter: blur(10px); border-top: 4px solid #2979FF;
+        }
+        .s8-context-title { font-size: 24px; font-weight: 700; color: #2979FF; margin-bottom: 12px; }
+        .s8-context-text { font-size: 20px; color: #B0C4DE; line-height: 1.6; margin-bottom: 10px; }
+        .s8-price-tag {
+            display: inline-block; background: rgba(41,121,255,0.2); color: #82B1FF;
+            padding: 4px 10px; border-radius: 4px; font-family: 'Roboto Mono', monospace; font-weight: 700;
+        }
+        .s8-options-col {
+            flex: 1.5; display: grid; grid-template-columns: 1fr 1fr;
+            grid-auto-rows: min-content; gap: 12px;
+        }
+        .s8-options-title { font-size: 24px; font-weight: 700; color: #FFFFFF; margin-bottom: 0; grid-column: 1 / -1; }
+        .s8-option-card {
+            background-color: rgba(30, 41, 59, 0.8); border-left: 4px solid #94A3B8;
+            padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 12px;
+        }
+        .s8-option-letter {
+            font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #FFFFFF;
+            background: rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .s8-option-text { font-size: 20px; color: #E0E0E0; line-height: 1.4; }
+
+        /* --- SLIDE 9: DESAFIOS --- */
+        .s9-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; z-index: 1; flex: 1; }
+        .s9-card {
+            background-color: rgba(30, 41, 59, 0.6); border-top: 4px solid #00C853;
+            border-radius: 12px; padding: 20px; display: flex; flex-direction: column;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+        }
+        .s9-card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .s9-card-title { font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700; color: #FFFFFF; }
+        .s9-card-pts {
+            font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #00C853;
+            background: rgba(0,200,83,0.1); padding: 5px 15px; border-radius: 8px;
+        }
+        .s9-card-name { font-size: 26px; font-weight: 700; color: #2979FF; margin-bottom: 10px; }
+        .s9-req-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .s9-req-item { display: flex; align-items: flex-start; gap: 12px; }
+        .s9-req-icon { color: #00C853; font-size: 20px; margin-top: 4px; }
+        .s9-req-text { font-size: 20px; color: #E0E0E0; line-height: 1.5; }
+        .s9-req-text strong { color: #FFFFFF; }
+        .s9-footer {
+            margin-top: 20px; z-index: 1; text-align: center;
+            background-color: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 12px;
+            border: 1px solid rgba(0,200,83,0.3);
+        }
+        .s9-total-text { font-family: 'Roboto Mono', monospace; font-size: 24px; color: #E0E0E0; }
+        .s9-total-value { font-size: 32px; font-weight: 700; color: #00C853; margin-left: 15px; }
+
+        /* --- SLIDE 10: ENCERRAMENTO --- */
+        .s10-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 50px 80px 20px;
+        }
+        .s10-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1000px; }
+        .s10-h1 { font-size: 64px; font-weight: 900; color: #FFFFFF; margin-bottom: 10px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .s10-subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; color: #00C853;
+            margin-bottom: 20px; text-align: center; font-weight: 700;
+            background: rgba(0,200,83,0.1); padding: 8px 20px; border-radius: 4px;
+        }
+        .s10-instructions {
+            background-color: rgba(30, 41, 59, 0.6); border-top: 4px solid #00C853;
+            border-radius: 12px; padding: 18px; width: 100%; margin-bottom: 20px;
+            backdrop-filter: blur(10px); display: flex; justify-content: space-between; gap: 12px;
+        }
+        .s10-instr-item { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6px; }
+        .s10-instr-num {
+            font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700;
+            color: #00C853; margin-bottom: 8px; width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(0,200,83,0.1); display: flex; align-items: center; justify-content: center;
+        }
+        .s10-instr-text { font-size: 18px; color: #E0E0E0; line-height: 1.4; }
+        .s10-refs { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-bottom: 18px; }
+        .s10-ref-title { font-family: 'Roboto Mono', monospace; font-size: 16px; color: #94A3B8; margin-bottom: 12px; text-transform: uppercase; font-weight: 700; text-align: center; }
+        .s10-ref-list { display: flex; flex-direction: column; gap: 8px; }
+        .s10-ref-item { font-size: 14px; color: #B0C4DE; line-height: 1.3; text-align: center; }
+        .s10-motivation { background: rgba(41,121,255,0.1); border-left: 4px solid #2979FF; padding: 12px; width: 100%; text-align: center; }
+        .s10-motivation-text { font-size: 20px; color: #82B1FF; font-style: italic; line-height: 1.4; }
+
+    </style>
+</head>
+<body>
+
+    <!-- BOTÃO: RETORNAR À PÁGINA INICIAL -->
+    <a href="index.html" class="btn-home" title="Retornar à página inicial">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Página Inicial
+    </a>
+
+    <!-- BOTÃO: IMPRIMIR / EXPORTAR -->
+    <button class="btn-print" onclick="printSlides()" title="Imprimir ou exportar como PDF">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Exportar PDF
+    </button>
+
+    <!-- SLIDES -->
+    <div class="presentation-wrapper" id="presentation">
+
+        <!-- ===== SLIDE 1: CAPA ===== -->
+        <section class="slide-page" id="slide-1">
+            <div class="slide-container s1-container">
+                <div class="bg-grid"></div>
+                <div class="s1-content-pane">
+                    <div class="s1-course-tag">MERCADO DE CAPITAIS</div>
+                    <div class="s1-h1">Investimento em Incerteza</div>
+                    <div class="s1-subtitle">Vieses Comportamentais e Gestão de Crises</div>
+                    <div class="s1-divider"></div>
+                    <div class="s1-info-grid">
+                        <div class="s1-info-label">TURMA:</div><div>ADM7N1</div>
+                        <div class="s1-info-label">DATA:</div><div>20/03/2026</div>
+                        <div class="s1-info-label">PROF:</div><div>Renata Novaes</div>
+                        <div class="s1-info-label">SEMANA:</div><div>07</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 2: TEORIA DO PROSPECTO ===== -->
+        <section class="slide-page" id="slide-2">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1 s-h1-green">Teoria do Prospecto</div>
+                    <div class="s-subtitle">Kahneman &amp; Tversky (1979)</div>
+                    <div class="s2-content">
+                        <div class="s2-card">
+                            <div class="s2-card-header">
+                                <div class="s2-card-number">1</div>
+                                <div class="s2-card-title">Ponto de Referência</div>
+                            </div>
+                            <div class="s2-card-text">As pessoas avaliam ganhos e perdas em relação a um <span class="s2-highlight">ponto de referência</span>, geralmente o preço que pagaram pelo ativo, em vez de avaliar a riqueza total.</div>
+                        </div>
+                        <div class="s2-card">
+                            <div class="s2-card-header">
+                                <div class="s2-card-number">2</div>
+                                <div class="s2-card-title">Aversão à Perda</div>
+                            </div>
+                            <div class="s2-card-text">A dor de uma perda é psicologicamente <span class="s2-highlight">duas vezes maior</span> que o prazer de um ganho equivalente. As pessoas preferem evitar perdas a adquirir ganhos.</div>
+                        </div>
+                        <div class="s2-card">
+                            <div class="s2-card-header">
+                                <div class="s2-card-number">3</div>
+                                <div class="s2-card-title">Sensibilidade Decrescente</div>
+                            </div>
+                            <div class="s2-card-text">Quanto maior o valor absoluto, <span class="s2-highlight">menor o impacto psicológico relativo</span>. Uma perda de R$ 100 dói mais (percentualmente) que R$ 100 adicionados a uma perda de R$ 1.000.</div>
+                        </div>
+                    </div>
+                    <div class="s2-footer">A Teoria do Prospecto explica como as pessoas <strong>realmente</strong> tomam decisões sob risco, contrariando a teoria clássica da utilidade esperada.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 3: AVERSÃO À PERDA ===== -->
+        <section class="slide-page" id="slide-3">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1 s-h1-red">Viés 1: Aversão à Perda</div>
+                    <div class="s-subtitle">Loss Aversion</div>
+                    <div class="s3-content">
+                        <div class="s3-def-col">
+                            <div class="s3-def-card">
+                                <p class="s3-def-text">A aversão à perda é a tendência de sentir a dor de uma perda muito mais intensamente do que o prazer de um ganho equivalente.</p>
+                                <div class="s3-example-box">
+                                    <p class="s3-example-text">Psicologicamente, perder R$ 100 dói aproximadamente <span class="s3-hl-red">duas vezes mais</span> do que ganhar R$ 100 alegra. Isso leva investidores a manterem posições perdedoras para evitar a "dor" de realizar o prejuízo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s3-impact-col">
+                            <div class="s3-impact-title">Impacto no Caso TechNova</div>
+                            <div style="display: flex; gap: 15px;">
+                                <div class="s3-impact-item" style="flex: 1;">
+                                    <div class="s3-impact-label">Preço de Compra</div>
+                                    <div class="s3-impact-value" style="color: #00C853;">R$ 50</div>
+                                </div>
+                                <div class="s3-impact-item" style="flex: 1;">
+                                    <div class="s3-impact-label">Preço Atual</div>
+                                    <div class="s3-impact-value" style="color: #FF5252;">R$ 30</div>
+                                </div>
+                            </div>
+                            <div class="s3-impact-item">
+                                <div class="s3-impact-label">Comportamento Observado</div>
+                                <div style="font-size: 18px; color: #E0E0E0; line-height: 1.4; margin-top: 5px;">A equipe se recusa a vender as ações para não aceitar a perda realizada de 40%, preferindo o risco de a empresa quebrar.</div>
+                            </div>
+                            <div class="s3-quote-box">
+                                <p class="s3-quote-text">"Nós pagamos cinquenta reais... vamos segurar até voltar para cinquenta reais e aí saímos no zero a zero."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 4: ANCORAGEM ===== -->
+        <section class="slide-page" id="slide-4">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner" style="padding: 60px 40px 20px;">
+                    <div class="s-h1 s-h1-blue">Viés 2: Ancoragem</div>
+                    <div class="s-subtitle">Anchoring Bias</div>
+                    <div class="s4-content">
+                        <div class="s4-def-card">
+                            <p class="s4-def-text">A ancoragem é a tendência cognitiva de confiar excessivamente na <span class="s4-hl-blue">primeira informação oferecida</span> (a "âncora") ao tomar decisões subsequentes. Uma vez que a âncora é estabelecida, outros julgamentos são feitos ajustando-se a partir dela.</p>
+                        </div>
+                        <div class="s4-process">
+                            <div class="s4-step">
+                                <div class="s4-step-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg></div>
+                                <div class="s4-step-title">A Âncora</div>
+                                <div class="s4-step-value" style="color: #94A3B8;">R$ 50</div>
+                                <div class="s4-step-desc">O preço original de compra torna-se o ponto de referência mental da equipe.</div>
+                            </div>
+                            <div class="s4-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><polyline points="9 18 15 12 9 6"/></svg></div>
+                            <div class="s4-step">
+                                <div class="s4-step-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="36" height="36" style="transform:scaleY(-1)"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+                                <div class="s4-step-title">A Realidade</div>
+                                <div class="s4-step-value" style="color: #2979FF;">R$ 30</div>
+                                <div class="s4-step-desc">O preço cai drasticamente devido a uma fraude contábil bilionária.</div>
+                            </div>
+                            <div class="s4-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><polyline points="9 18 15 12 9 6"/></svg></div>
+                            <div class="s4-step">
+                                <div class="s4-step-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                                <div class="s4-step-title">O Erro</div>
+                                <div class="s4-step-value" style="color: #FF5252;">"Barato"</div>
+                                <div class="s4-step-desc">A equipe julga R$ 30 como "barato" apenas porque está ancorada nos R$ 50, ignorando que os fundamentos foram destruídos.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 5: COMPORTAMENTO DE MANADA ===== -->
+        <section class="slide-page" id="slide-5">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1 s-h1-orange">Viés 3: Comportamento de Manada</div>
+                    <div class="s-subtitle">Herd Behavior</div>
+                    <div class="s5-content">
+                        <div class="s5-def-card">
+                            <div class="s5-def-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                            <p class="s5-def-text">A tendência de <span class="s5-hl-orange">seguir as ações e decisões de um grupo maior</span>, ignorando a própria análise, informações contrárias ou fundamentos lógicos. Ocorre frequentemente sob pressão ou incerteza.</p>
+                        </div>
+                        <div class="s5-impact-section">
+                            <div class="s5-impact-card">
+                                <div class="s5-impact-title">O Gatilho Social</div>
+                                <p class="s5-impact-text">Em momentos de crise, a incerteza gera ansiedade. Para reduzir essa ansiedade, os investidores buscam validação nas ações dos outros, assumindo que "a multidão sabe algo que eu não sei".</p>
+                                <div class="s5-quote-box">
+                                    <p class="s5-quote-text">"Se grandes fundos estão comprando, deve ser o fundo do poço. Não podemos ficar de fora dessa recuperação."</p>
+                                </div>
+                            </div>
+                            <div class="s5-impact-card">
+                                <div class="s5-impact-title">Impacto no Caso TechNova</div>
+                                <p class="s5-impact-text">No Dia 15, surge um boato de que grandes players institucionais estão comprando as ações da TechNova após o anúncio do pacote de socorro do governo.</p>
+                                <p class="s5-impact-text" style="color: #E0E0E0; font-weight: 600; margin-bottom: 0;">A equipe sente a pressão de seguir o movimento do mercado (FOMO — Fear Of Missing Out), ignorando que os fundamentos da empresa continuam deteriorados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 6: ESTUDO DE CASO — CENÁRIO BASE ===== -->
+        <section class="slide-page" id="slide-6">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner" style="padding: 60px 80px 40px;">
+                    <div class="s-h1 s-h1-green">Estudo de Caso: O Colapso da TechNova</div>
+                    <div class="s-subtitle">Cenário Base — Fundo Alpha Capital</div>
+                    <div class="s6-content">
+                        <div class="s6-scenario-col">
+                            <div class="s6-concept-box">
+                                <div class="s6-concept-title">O Cenário</div>
+                                <div class="s6-concept-desc">Você é o gestor de risco do <strong>Fundo Alpha Capital</strong>.<br><br>A <span class="s6-hl">TechNova</span> é a empresa de tecnologia mais promissora do ano. Com fundamentos aparentemente sólidos e recomendação de compra unânime por todos os grandes bancos, o comitê de investimentos decidiu montar uma posição relevante na empresa.<br><br>Tudo parecia perfeito, até que o mercado abriu na terça-feira...</div>
+                            </div>
+                        </div>
+                        <div class="s6-data-col">
+                            <div class="s6-table-container">
+                                <table class="s6-table">
+                                    <thead>
+                                        <tr>
+                                            <th width="60%">Parâmetro da Carteira</th>
+                                            <th width="40%" style="text-align: right;">Valor Inicial</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td class="s6-data-label">Capital Total do Fundo</td><td class="s6-data-value">R$ 50.000.000</td></tr>
+                                        <tr><td class="s6-data-label">Alocação em TechNova</td><td class="s6-data-value s6-val-blue">10% (R$ 5.000.000)</td></tr>
+                                        <tr><td class="s6-data-label">Preço de Compra</td><td class="s6-data-value s6-val-green">R$ 50,00 / ação</td></tr>
+                                        <tr><td class="s6-data-label">Quantidade de Ações</td><td class="s6-data-value">100.000 ações</td></tr>
+                                        <tr><td class="s6-data-label">Tese de Investimento</td><td class="s6-data-value" style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #E0E0E0;">Growth (Longo Prazo)</td></tr>
+                                        <tr><td class="s6-data-label">Stop Loss Definido</td><td class="s6-data-value" style="color: #FF5252;">Não estabelecido</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 7: O CHOQUE — DIA 1 ===== -->
+        <section class="slide-page" id="slide-7">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner-compact">
+                    <div class="s-h1 s-h1-red">O Choque: Dia 1</div>
+                    <div class="s-subtitle">Terça-feira — Uma Crise Inesperada</div>
+                    <div class="s7-content">
+                        <div class="s7-timeline">
+                            <div class="s7-item">
+                                <div class="s7-time-badge">10h00</div>
+                                <div class="s7-event-title">Notícia Bombástica</div>
+                                <div class="s7-event-desc">CEO da TechNova é preso por fraude contábil bilionária. O mercado é surpreendido.</div>
+                                <div class="s7-impact-tag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> IMPACTO: Confiança destruída</div>
+                            </div>
+                            <div class="s7-item">
+                                <div class="s7-time-badge">10h15</div>
+                                <div class="s7-event-title">Leilão de Ações</div>
+                                <div class="s7-event-desc">As ações da TechNova entram em leilão. Vendedores em pânico tentam sair da posição.</div>
+                                <div class="s7-impact-tag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> IMPACTO: Liquidez reduzida a zero</div>
+                            </div>
+                            <div class="s7-item">
+                                <div class="s7-time-badge">10h45</div>
+                                <div class="s7-event-title">Abertura do Mercado</div>
+                                <div class="s7-event-desc">Ações reabrem a R$ 30 (queda de 40% em relação ao preço de compra de R$ 50).</div>
+                                <div class="s7-impact-tag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> IMPACTO: Perda de R$ 2 milhões em minutos</div>
+                            </div>
+                            <div class="s7-item">
+                                <div class="s7-time-badge">Ao longo do dia</div>
+                                <div class="s7-event-title">Efeito Cascata no Mercado</div>
+                                <div class="s7-event-desc">Ibovespa cai 8%. Dólar dispara 5%. Pânico generalizado. A equipe se reúne de emergência.</div>
+                                <div class="s7-impact-tag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> IMPACTO: Risco sistêmico e pressão emocional</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 8: A FALSA ESPERANÇA — DIA 15 ===== -->
+        <section class="slide-page" id="slide-8">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner-compact">
+                    <div class="s-h1 s-h1-amber">A Falsa Esperança: Dia 15</div>
+                    <div class="s-subtitle">O Canto da Sereia do Mercado</div>
+                    <div class="s8-content">
+                        <div class="s8-news-banner">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FFB300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="48" height="48"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+                            <div class="s8-news-content">
+                                <div class="s8-news-title">BREAKING NEWS: PACOTE DE SOCORRO</div>
+                                <div class="s8-news-text">O governo anuncia um pacote de socorro ao setor. As ações da TechNova disparam de R$ 20 para <strong>R$ 35</strong> em um único dia. O mercado entra em euforia e analistas afirmam que "o pior já passou".</div>
+                            </div>
+                        </div>
+                        <div class="s8-dilemma">
+                            <div class="s8-context-col">
+                                <div class="s8-context-title">O Cenário da Equipe</div>
+                                <p class="s8-context-text">A equipe do Fundo Alpha Capital respira aliviada, mas a pressão aumenta.</p>
+                                <p class="s8-context-text">O preço médio de compra ainda é <span class="s8-price-tag">R$ 50</span>.</p>
+                                <p class="s8-context-text">O preço atual é <span class="s8-price-tag">R$ 35</span>.</p>
+                                <p class="s8-context-text" style="font-style: italic; color: #94A3B8;">"Se comprarmos mais agora, baixamos nosso preço médio e saímos no lucro mais rápido!"</p>
+                            </div>
+                            <div class="s8-options-col">
+                                <div class="s8-options-title">O Dilema da Decisão</div>
+                                <div class="s8-option-card" style="border-left-color: #FF5252;">
+                                    <div class="s8-option-letter">A</div>
+                                    <div class="s8-option-text"><strong>Vender tudo a R$ 35:</strong> Assumir o prejuízo de R$ 15 por ação e proteger o capital restante.</div>
+                                </div>
+                                <div class="s8-option-card" style="border-left-color: #FFB300;">
+                                    <div class="s8-option-letter">B</div>
+                                    <div class="s8-option-text"><strong>Manter a posição:</strong> Não fazer nada e torcer para que a ação volte aos R$ 50 originais.</div>
+                                </div>
+                                <div class="s8-option-card" style="border-left-color: #00C853; grid-column: 1 / -1;">
+                                    <div class="s8-option-letter">C</div>
+                                    <div class="s8-option-text"><strong>Comprar mais a R$ 35:</strong> Fazer "preço médio" para tentar recuperar as perdas mais rapidamente.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 9: DESAFIOS DA ATIVIDADE ===== -->
+        <section class="slide-page" id="slide-9">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1 s-h1-green">Desafios da Atividade</div>
+                    <div class="s-subtitle">O que você precisa fazer</div>
+                    <div class="s9-content">
+                        <div class="s9-card">
+                            <div class="s9-card-header">
+                                <div class="s9-card-title">DESAFIO 1</div>
+                                <div class="s9-card-pts">1,0 pt</div>
+                            </div>
+                            <div class="s9-card-name">Diagnóstico Comportamental</div>
+                            <ul class="s9-req-list">
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Identifique <strong>pelo menos 3 vieses comportamentais</strong> presentes no caso TechNova.</span></li>
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Para cada viés, <strong>cite um trecho específico</strong> do texto que o demonstra.</span></li>
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Explique como cada viés influencia a decisão, usando <strong>conceitos da Teoria do Prospecto</strong>.</span></li>
+                            </ul>
+                        </div>
+                        <div class="s9-card">
+                            <div class="s9-card-header">
+                                <div class="s9-card-title">DESAFIO 2</div>
+                                <div class="s9-card-pts">1,5 pt</div>
+                            </div>
+                            <div class="s9-card-name">Decisão Estratégica</div>
+                            <ul class="s9-req-list">
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Escolha uma das <strong>3 opções</strong> (A, B ou C) de ação no Dia 15.</span></li>
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Justifique sua escolha com base em <strong>gestão de risco</strong> e proteção de capital.</span></li>
+                                <li class="s9-req-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0;margin-top:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="s9-req-text">Demonstre como sua decisão <strong>mitiga os vieses</strong> identificados no Desafio 1.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="s9-footer">
+                        <span class="s9-total-text">VALOR TOTAL DA ATIVIDADE:</span>
+                        <span class="s9-total-value">2,5 PONTOS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 10: ENCERRAMENTO ===== -->
+        <section class="slide-page" id="slide-10">
+            <div class="slide-container s10-container">
+                <div class="bg-grid"></div>
+                <div class="s10-content">
+                    <div class="s10-h1">Agora é Sua Vez!</div>
+                    <div class="s10-subtitle">Atividade Avaliativa — 20/03/2026</div>
+                    <div class="s10-instructions">
+                        <div class="s10-instr-item">
+                            <div class="s10-instr-num">1</div>
+                            <div class="s10-instr-text"><strong>Estude o Caso:</strong> Leia atentamente o cenário, o choque do Dia 1 e a falsa esperança do Dia 15.</div>
+                        </div>
+                        <div class="s10-instr-item">
+                            <div class="s10-instr-num">2</div>
+                            <div class="s10-instr-text"><strong>Identifique os Vieses:</strong> Encontre e explique pelo menos 3 vieses comportamentais presentes no caso.</div>
+                        </div>
+                        <div class="s10-instr-item">
+                            <div class="s10-instr-num">3</div>
+                            <div class="s10-instr-text"><strong>Tome Sua Decisão:</strong> Escolha entre vender, manter ou comprar. Justifique com base em gestão de risco.</div>
+                        </div>
+                    </div>
+                    <div class="s10-refs">
+                        <div class="s10-ref-title">Referências para Consulta</div>
+                        <div class="s10-ref-list">
+                            <div class="s10-ref-item"><strong>Kahneman, D.; Tversky, A. (1979).</strong> Prospect theory: An analysis of decision under risk. <em>Econometrica</em>, 47(2), 263–291.</div>
+                            <div class="s10-ref-item"><strong>Daida, S. et al. (2025).</strong> Behavioral finance and investor psychology: Understanding market volatility in crisis scenarios. <em>ACR Journal</em>.</div>
+                            <div class="s10-ref-item"><strong>Clube do Valor.</strong> Vieses comportamentais no investimento: o que são, 16 exemplos e mais. Disponível em: clubedovalor.com.br</div>
+                        </div>
+                    </div>
+                    <div class="s10-motivation">
+                        <p class="s10-motivation-text">"A melhor decisão em uma crise não é aquela que faz você se sentir bem emocionalmente, mas aquela que protege seu capital e demonstra frieza analítica."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- fim .presentation-wrapper -->
+
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="nav-ui">
+        <button class="btn-nav" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Anterior</button>
+        <span id="slide-counter">1 / 10</span>
+        <button class="btn-nav" id="btn-next" onclick="navigate(1)">Próximo &#8594;</button>
+    </nav>
+
+    <script>
+        var currentSlide = 0;
+        var totalSlides = 10;
+        var presentation = document.getElementById('presentation');
+
+        function navigate(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            presentation.style.transform = 'translateX(-' + (currentSlide * 100) + 'vw)';
+            document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+            document.getElementById('btn-prev').disabled = currentSlide === 0;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault(); navigate(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault(); navigate(-1);
+            }
+        });
+
+        // Navegação por toque (swipe)
+        var touchStartX = 0;
+        document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', function(e) {
+            var diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+        });
+
+        // Exportar PDF
+        function printSlides() {
+            var msg = 'Para exportar como PDF:\n\n' +
+                      '1. Na janela de impressão, selecione "Salvar como PDF" como destino.\n' +
+                      '2. Recomendado: orientação Paisagem, margens Nenhuma.\n\n' +
+                      'Clique OK para continuar.';
+            if (confirm(msg)) { window.print(); }
+        }
+
+         // Escalar slides para caber na viewport (16:9 = 1280×720)
+        function scaleSlides() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var cw = 1280; // largura fixa do slide
+            var ch = 720;  // altura fixa do slide
+            var scaleX = vw / cw;
+            var scaleY = vh / ch;
+            var scale = Math.min(scaleX, scaleY) * 0.97;
+            var pages = document.querySelectorAll('.slide-page');
+            pages.forEach(function(page) {
+                var container = page.querySelector('.slide-container');
+                if (!container) return;
+                container.style.width = cw + 'px';
+                container.style.height = ch + 'px';
+                container.style.transform = 'scale(' + scale + ')';
+                container.style.transformOrigin = 'center center';
+            });
+        }
+        window.addEventListener('resize', scaleSlides);
+        // Garantir que o escalonamento ocorra após o layout completo
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(scaleSlides);
+        } else {
+            window.addEventListener('load', function() {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(scaleSlides);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
