@@ -1,88 +1,112 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 02 - Macroeconomia e Valor | Material de Estudo Detalhado</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Aula 02 — Macroeconomia e Valor | Mercado de Capitais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@700;800&display=swap');
-        
-        :root {
-            --bg: #020617;
-            --card: #0f172a;
-            --accent: #f59e0b;
-            --text-muted: #94a3b8;
-        }
+        /* ========== RESET E LAYOUT ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: #f8fafc;
-            margin: 0;
+        html, body {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            background: #020617;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .presentation-container {
+        .presentation-wrapper {
             display: flex;
-            width: 1100vw; /* 11 slides */
+            width: 1300vw; /* 13 slides */
             height: 100vh;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .slide {
+        .slide-page {
             width: 100vw;
             height: 100vh;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-page .slide-container {
             flex-shrink: 0;
-            padding: 2rem;
+            transform-origin: center center;
         }
 
-        .canvas-16-9 {
-            width: 1280px;
-            height: 720px;
-            background-color: var(--card);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem;
+        /* ========== BOTÃO: RETORNAR À PÁGINA INICIAL ========== */
+        .btn-home {
+            position: fixed;
+            top: 1.2rem;
+            left: 1.2rem;
+            z-index: 9999;
             display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-
-        .slide-header {
-            border-left: 6px solid var(--accent);
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
+        .btn-home:hover {
+            background: #f59e0b;
+            color: #000;
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
         }
+        .btn-home svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-        .slide-title { font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1.2; }
-        .slide-subtitle { color: var(--accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; }
-
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; flex-grow: 1; align-items: start; overflow-y: auto; }
-        .content-grid::-webkit-scrollbar { width: 4px; }
-        .content-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        
-        .theory-box { background: rgba(255, 255, 255, 0.02); border-radius: 1rem; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .theory-box p { font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 0.8rem; text-align: justify; }
-        .theory-box strong { color: #fff; }
-
-        .ref-tag {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-style: italic;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
-            display: block;
+        /* ========== BOTÃO: IMPRIMIR / EXPORTAR ========== */
+        .btn-print {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.2rem;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
+        .btn-print:hover {
+            background: #f59e0b;
+            color: #000;
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+        .btn-print svg { width: 16px; height: 16px; flex-shrink: 0; }
 
+        /* ========== NAVEGAÇÃO INFERIOR ========== */
         .nav-ui {
             position: fixed;
             bottom: 1.5rem;
@@ -91,368 +115,1165 @@
             display: flex;
             gap: 1.5rem;
             align-items: center;
-            z-index: 100;
+            z-index: 9999;
+            background: rgba(2, 6, 23, 0.85);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         .btn-nav {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .btn-nav:hover { background: #f59e0b; color: #000; border-color: #f59e0b; }
+        .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn-nav:disabled:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+
+        #slide-counter {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Roboto Mono', monospace;
+            min-width: 60px;
+            text-align: center;
         }
 
-        .btn-nav:hover { background: var(--accent); color: #000; }
+        /* ========== IMPRESSÃO ========== */
+        @media print {
+            .nav-ui, .btn-home, .btn-print { display: none !important; }
+            html, body { overflow: visible !important; background: white !important; }
+            .presentation-wrapper {
+                display: block !important;
+                width: 100% !important;
+                transform: none !important;
+            }
+            .slide-page {
+                width: 100% !important;
+                height: auto !important;
+                min-height: 100vh;
+                page-break-after: always;
+                display: flex !important;
+            }
+            .slide-page .slide-container {
+                width: 1280px !important;
+                min-height: 720px;
+                transform: none !important;
+            }
+        }
 
-        .chart-wrapper { position: relative; width: 100%; height: 280px; }
+        /* ========== ESTILOS DOS SLIDES ========== */
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #020617;
+            font-family: 'Montserrat', sans-serif;
+            color: #E6F1FF;
+            position: relative;
+        }
 
-        mjx-container { font-size: 1.1rem !important; color: var(--accent) !important; }
-        
-        .exercise-input { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.5rem; color: #fff; width: 100%; font-size: 0.8rem; }
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245, 158, 11, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0; pointer-events: none;
+        }
+
+        /* --- SLIDE 1: CAPA --- */
+        .s1-wrap {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 60px 80px; height: 720px; z-index: 1; position: relative;
+        }
+        .s1-tag {
+            font-family: 'Roboto Mono', monospace;
+            color: #f59e0b; font-size: 28px; font-weight: 700;
+            margin-bottom: 20px; display: flex; align-items: center; gap: 15px;
+        }
+        .s1-tag::before {
+            content: ''; width: 18px; height: 18px; background-color: #f59e0b;
+            border-radius: 50%; display: inline-block;
+        }
+        .s1-h1 { font-size: 76px; line-height: 1.05; font-weight: 900; color: #FFFFFF; margin-bottom: 12px; }
+        .s1-sub { font-size: 32px; color: #94A3B8; margin-bottom: 40px; font-weight: 400; }
+        .s1-divider { width: 120px; height: 7px; background: #f59e0b; margin-bottom: 32px; border-radius: 4px; }
+        .s1-info {
+            display: grid; grid-template-columns: auto 1fr; gap: 16px 40px;
+            font-family: 'Roboto Mono', monospace; font-size: 26px; color: #E0E0E0;
+            background: rgba(30, 41, 59, 0.8); padding: 24px 32px; border-radius: 16px;
+            border-left: 7px solid #f59e0b; width: fit-content; backdrop-filter: blur(10px);
+        }
+        .s1-label { color: #94A3B8; font-weight: 700; }
+
+        /* --- LAYOUT BASE DOS SLIDES INTERNOS --- */
+        .s-inner {
+            padding: 55px 70px 45px;
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+            position: relative;
+            z-index: 1;
+        }
+        .s-h1 {
+            font-size: 46px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;
+            padding-left: 20px; border-left: 6px solid #f59e0b;
+        }
+        .s-subtitle {
+            font-family: 'Roboto Mono', monospace; font-size: 18px; color: #94A3B8;
+            margin-bottom: 28px; padding-left: 26px; text-transform: uppercase;
+        }
+
+        /* --- SLIDE 2: MAPA MENTAL --- */
+        .mindmap-wrap {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+        }
+        .mindmap-svg { width: 100%; max-width: 1100px; height: auto; }
+
+        /* --- SLIDE 3: INTERDEPENDÊNCIA --- */
+        .s3-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+        .s3-card {
+            background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 26px;
+            border-top: 4px solid #f59e0b; display: flex; flex-direction: column;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+        }
+        .s3-card-title { font-size: 22px; font-weight: 700; color: #f59e0b; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .s3-card-text { font-size: 20px; color: #CBD5E1; line-height: 1.6; }
+        .s3-card-text strong { color: #fff; }
+        .s3-quote {
+            margin-top: 18px; padding: 14px 18px; border-left: 4px solid #f59e0b;
+            background: rgba(245,158,11,0.06); border-radius: 0 10px 10px 0;
+            font-size: 19px; color: #FDE68A; font-style: italic; line-height: 1.5;
+        }
+        .s3-ref { margin-top: auto; font-size: 14px; color: #475569; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; }
+
+        /* --- SLIDE 4: SELIC --- */
+        .s4-cols { display: flex; gap: 28px; flex: 1; }
+        .s4-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s4-right { flex: 0.9; display: flex; flex-direction: column; gap: 16px; }
+        .s4-text-card {
+            background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        .s4-text { font-size: 21px; color: #CBD5E1; line-height: 1.65; }
+        .s4-text strong { color: #fff; }
+        .s4-metric {
+            background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
+            border-radius: 14px; padding: 20px 24px; text-align: center;
+        }
+        .s4-metric-label { font-size: 14px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .s4-metric-value { font-size: 52px; font-weight: 900; color: #f59e0b; font-family: 'Roboto Mono', monospace; }
+        .s4-metric-sub { font-size: 16px; color: #64748B; margin-top: 4px; }
+        .chart-box { flex: 1; background: rgba(30,41,59,0.5); border-radius: 14px; padding: 16px; }
+        .s4-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 5: IPCA --- */
+        .s5-cols { display: flex; gap: 28px; flex: 1; }
+        .s5-left { flex: 1.2; display: flex; flex-direction: column; gap: 16px; }
+        .s5-right { flex: 0.8; display: flex; flex-direction: column; gap: 14px; }
+        .s5-def-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        .s5-def-text { font-size: 21px; color: #CBD5E1; line-height: 1.65; }
+        .s5-def-text strong { color: #fff; }
+        .s5-bullet-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .s5-bullet-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: rgba(30,41,59,0.5); border-radius: 10px; padding: 14px 18px;
+            border-left: 3px solid #f59e0b;
+        }
+        .s5-bullet-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+        .s5-bullet-text { font-size: 19px; color: #CBD5E1; line-height: 1.5; }
+        .s5-bullet-text strong { color: #fff; }
+        .s5-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .s5-kpi {
+            border-radius: 12px; padding: 18px; text-align: center;
+        }
+        .s5-kpi.amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); }
+        .s5-kpi.slate { background: rgba(30,41,59,0.7); border: 1px solid rgba(255,255,255,0.07); }
+        .s5-kpi-label { font-size: 13px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+        .s5-kpi-val { font-size: 40px; font-weight: 900; font-family: 'Roboto Mono', monospace; }
+        .s5-kpi.amber .s5-kpi-val { color: #f59e0b; }
+        .s5-kpi.slate .s5-kpi-val { color: #fff; }
+        .s5-kpi-sub { font-size: 13px; color: #64748B; margin-top: 4px; }
+        .s5-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 6: EQUAÇÃO DE FISHER --- */
+        .s6-cols { display: flex; gap: 28px; flex: 1; }
+        .s6-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s6-right { flex: 0.9; display: flex; flex-direction: column; gap: 16px; }
+        .s6-formula-card {
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 14px; padding: 24px; text-align: center;
+        }
+        .s6-formula-label { font-size: 14px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+        .s6-result-card {
+            background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 14px; padding: 24px; text-align: center; flex: 1;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .s6-result-label { font-size: 14px; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .s6-result-val { font-size: 72px; font-weight: 900; color: #fff; font-family: 'Roboto Mono', monospace; }
+        .s6-result-sub { font-size: 16px; color: #64748B; margin-top: 6px; text-transform: uppercase; }
+        .s6-step-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .s6-step {
+            display: flex; align-items: center; gap: 16px;
+            background: rgba(30,41,59,0.6); border-radius: 10px; padding: 14px 18px;
+        }
+        .s6-step-num {
+            width: 36px; height: 36px; border-radius: 50%; background: #f59e0b;
+            color: #000; font-weight: 900; font-size: 18px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .s6-step-text { font-size: 19px; color: #CBD5E1; }
+        .s6-step-text strong { color: #fff; }
+        .s6-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 7: TAXA LIVRE DE RISCO --- */
+        .s7-cols { display: flex; gap: 28px; flex: 1; }
+        .s7-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s7-right { flex: 0.9; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center; }
+        .s7-def-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        .s7-def-text { font-size: 21px; color: #CBD5E1; line-height: 1.65; }
+        .s7-def-text strong { color: #fff; }
+        .s7-diagram {
+            width: 100%; display: flex; flex-direction: column; gap: 10px;
+        }
+        .s7-diag-row {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .s7-diag-label { font-size: 16px; color: #94A3B8; font-weight: 700; width: 130px; text-align: right; flex-shrink: 0; }
+        .s7-diag-bar-wrap { flex: 1; background: rgba(255,255,255,0.05); border-radius: 6px; height: 36px; overflow: hidden; }
+        .s7-diag-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 12px; font-size: 16px; font-weight: 700; color: #000; font-family: 'Roboto Mono', monospace; }
+        .s7-diag-bar.rf { background: #f59e0b; width: 55%; }
+        .s7-diag-bar.premio { background: #64748B; width: 30%; color: #fff; }
+        .s7-diag-bar.total { background: #10B981; width: 85%; }
+        .s7-shield-box {
+            background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 14px; padding: 24px; text-align: center;
+        }
+        .s7-shield-title { font-size: 20px; font-weight: 700; color: #f59e0b; margin-bottom: 8px; }
+        .s7-shield-text { font-size: 17px; color: #94A3B8; line-height: 1.5; }
+        .s7-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 8: VALUATION DCF --- */
+        .s8-cols { display: flex; gap: 28px; flex: 1; }
+        .s8-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s8-right { flex: 0.9; display: flex; flex-direction: column; gap: 16px; }
+        .s8-def-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        .s8-def-text { font-size: 20px; color: #CBD5E1; line-height: 1.65; }
+        .s8-def-text strong { color: #fff; }
+        .s8-formula-card {
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 14px; padding: 20px; text-align: center;
+        }
+        .s8-impact-card {
+            background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2);
+            border-radius: 14px; padding: 20px; flex: 1;
+        }
+        .s8-impact-title { font-size: 16px; font-weight: 700; color: #F87171; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+        .s8-impact-text { font-size: 19px; color: #CBD5E1; line-height: 1.6; margin-bottom: 10px; }
+        .s8-impact-text strong { color: #fff; }
+        .s8-quote {
+            padding: 14px; border: 1px dashed rgba(239,68,68,0.3); border-radius: 8px;
+            background: rgba(239,68,68,0.04); font-size: 18px; color: #FECACA; font-style: italic; line-height: 1.5;
+        }
+        .s8-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 9: CORRELAÇÃO INVERSA --- */
+        .s9-cols { display: flex; gap: 28px; flex: 1; }
+        .s9-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s9-right { flex: 0.9; display: flex; flex-direction: column; gap: 14px; }
+        .s9-def-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        .s9-def-text { font-size: 20px; color: #CBD5E1; line-height: 1.65; }
+        .s9-def-text strong { color: #fff; }
+        .s9-factor-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .s9-factor {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: rgba(30,41,59,0.5); border-radius: 10px; padding: 14px 18px;
+        }
+        .s9-factor-icon { font-size: 24px; flex-shrink: 0; }
+        .s9-factor-body {}
+        .s9-factor-title { font-size: 18px; font-weight: 700; color: #f59e0b; margin-bottom: 4px; }
+        .s9-factor-text { font-size: 17px; color: #94A3B8; line-height: 1.5; }
+        .s9-flow-diagram { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .s9-flow-box {
+            width: 100%; background: rgba(30,41,59,0.7); border-radius: 10px; padding: 12px 18px;
+            text-align: center; font-size: 18px; font-weight: 700; color: #fff;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .s9-flow-box.amber { border-color: rgba(245,158,11,0.4); color: #f59e0b; }
+        .s9-flow-box.red { border-color: rgba(239,68,68,0.4); color: #F87171; }
+        .s9-flow-arrow { font-size: 22px; color: #475569; }
+        .s9-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 10: BITCOIN --- */
+        .s10-cols { display: flex; gap: 28px; flex: 1; }
+        .s10-left { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+        .s10-right { flex: 0.9; display: flex; flex-direction: column; gap: 16px; }
+        .s10-def-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-left: 4px solid #f97316;
+        }
+        .s10-def-text { font-size: 20px; color: #CBD5E1; line-height: 1.65; }
+        .s10-def-text strong { color: #fff; }
+        .s10-btc-card {
+            background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2);
+            border-radius: 14px; padding: 24px; text-align: center; flex: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+        }
+        .s10-btc-icon { font-size: 64px; }
+        .s10-btc-title { font-size: 22px; font-weight: 700; color: #fff; }
+        .s10-btc-sub { font-size: 16px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; }
+        .s10-risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .s10-risk-card {
+            border-radius: 10px; padding: 16px; text-align: center;
+        }
+        .s10-risk-card.risk-on { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+        .s10-risk-card.risk-off { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); }
+        .s10-risk-label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+        .s10-risk-card.risk-on .s10-risk-label { color: #10B981; }
+        .s10-risk-card.risk-off .s10-risk-label { color: #F87171; }
+        .s10-risk-text { font-size: 16px; color: #94A3B8; line-height: 1.5; }
+        .s10-ref { font-size: 14px; color: #475569; font-style: italic; }
+
+        /* --- SLIDE 11: EXERCÍCIO --- */
+        .s11-cols { display: flex; gap: 28px; flex: 1; }
+        .s11-left { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+        .s11-right { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+        .s11-scenario-card {
+            background: rgba(30,41,59,0.6); border-radius: 14px; padding: 24px;
+            border-top: 4px solid #f59e0b;
+        }
+        .s11-scenario-title { font-size: 16px; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+        .s11-scenario-text { font-size: 19px; color: #CBD5E1; line-height: 1.6; }
+        .s11-q-list { display: flex; flex-direction: column; gap: 14px; }
+        .s11-q-item { background: rgba(30,41,59,0.5); border-radius: 10px; padding: 16px 18px; }
+        .s11-q-label { font-size: 14px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+        .s11-q-text { font-size: 18px; color: #E2E8F0; line-height: 1.5; }
+        .s11-analysis-card {
+            background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
+            border-radius: 14px; padding: 24px; flex: 1;
+        }
+        .s11-analysis-title { font-size: 16px; font-weight: 700; color: #60A5FA; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+        .s11-analysis-text { font-size: 18px; color: #CBD5E1; line-height: 1.6; font-style: italic; margin-bottom: 14px; }
+        .s11-analysis-q { font-size: 18px; font-weight: 700; color: #fff; }
+
+        /* --- SLIDE 12: DIAGRAMA DE SÍNTESE --- */
+        .s12-diagram-wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+
+        /* --- SLIDE 13: REFERÊNCIAS --- */
+        .s13-ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; }
+        .s13-ref-card {
+            background: rgba(30,41,59,0.5); border-radius: 12px; padding: 20px 22px;
+            border-left: 3px solid #f59e0b;
+        }
+        .s13-ref-author { font-size: 17px; font-weight: 700; color: #f59e0b; margin-bottom: 4px; }
+        .s13-ref-title { font-size: 16px; color: #CBD5E1; line-height: 1.5; }
+        .s13-footer { text-align: center; padding-top: 20px; font-size: 14px; color: #334155; font-family: 'Roboto Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; }
     </style>
 </head>
 <body>
 
-    <div class="presentation-container" id="presentation">
-        
-        <!-- SLIDE 1: CAPA -->
-        <section class="slide">
-            <div class="canvas-16-9 justify-center items-center text-center">
-                <p class="slide-subtitle mb-4 tracking-[0.5em]">Mercado de Capitais • Aula 02</p>
-                <h1 class="text-7xl font-black mb-8 leading-tight">Macroeconomia <br> & Valor</h1>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 italic">"O valor de um ativo é a soma dos seus fluxos de caixa descontados pelo custo da incerteza."</p>
-                <div class="flex gap-6 items-center justify-center text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    <span>Profa. Ma. Renata Novaes</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    <span>Unidade I</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    <span>2026.1</span>
-                </div>
-            </div>
-        </section>
+    <!-- BOTÃO: RETORNAR À PÁGINA INICIAL -->
+    <a href="index.html" class="btn-home" title="Retornar à página inicial">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Página Inicial
+    </a>
 
-        <!-- SLIDE 2: MACRO E VALOR -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Fundamentação</p>
-                    <h2 class="slide-title">Interdependência Macro-Financeira</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>O Mercado de Capitais atua como um sistema de vasos comunicantes com a macroeconomia. Segundo **Assaf Neto (2021)**, as decisões de investimento no mercado financeiro são pautadas por um tripé: **Rentabilidade, Risco e Liquidez**.</p>
-                        <p>Variáveis macroeconômicas como inflação e juros alteram diretamente a "barra" da rentabilidade mínima exigida. Em momentos de stress fiscal ou incerteza política, o prêmio de risco sobe, forçando a desvalorização dos ativos para equilibrar a equação de valor.</p>
-                        <span class="ref-tag">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021. p. 42-45.</span>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="p-6 border border-white/5 rounded-2xl bg-white/5">
-                            <h3 class="text-sm font-bold text-amber-500 mb-2 uppercase tracking-widest">Conceito Chave</h3>
-                            <p class="text-sm italic">"Os preços dos títulos no mercado de capitais refletem a avaliação contínua dos agentes sobre as condições macroeconômicas futuras."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- BOTÃO: IMPRIMIR / EXPORTAR -->
+    <button class="btn-print" onclick="printSlides()" title="Imprimir ou exportar como PDF">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Exportar PDF
+    </button>
 
-        <!-- SLIDE 3: SELIC A 15% -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Aperto Monetário</p>
-                    <h2 class="slide-title">O impacto da Selic a 15,00%</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>A Taxa Selic é o principal instrumento de política monetária para o controle inflacionário. Quando o Banco Central fixa a taxa em **15,00%**, ele estabelece um novo patamar para o **Custo de Oportunidade**.</p>
-                        <p>Conforme **Fortuna (2018)**, taxas elevadas reduzem o consumo das famílias e o investimento das empresas, visando arrefecer a demanda agregada. No mercado de capitais, isso gera uma migração de liquidez dos ativos de risco (Equity) para a segurança do Tesouro Nacional.</p>
-                        <span class="ref-tag">FORTUNA, Eduardo. Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018. p. 112.</span>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="chartComparison"></canvas>
+    <!-- SLIDES -->
+    <div class="presentation-wrapper" id="presentation">
+
+        <!-- ===== SLIDE 1: CAPA ===== -->
+        <section class="slide-page" id="slide-1">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s1-wrap">
+                    <div class="s1-tag">MERCADO DE CAPITAIS</div>
+                    <div class="s1-h1">Macroeconomia<br>&amp; Valor</div>
+                    <div class="s1-sub">Como os juros, a inflação e o risco moldam os preços dos ativos</div>
+                    <div class="s1-divider"></div>
+                    <div class="s1-info">
+                        <span class="s1-label">Professora</span><span>Profa. Ma. Renata Novaes</span>
+                        <span class="s1-label">Unidade</span><span>Unidade I — Aula 02</span>
+                        <span class="s1-label">Semestre</span><span>2026.1</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 4: IPCA E PODER DE COMPRA -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Inflação</p>
-                    <h2 class="slide-title">IPCA: O Balizador da Realidade</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>O Índice Nacional de Preços ao Consumidor Amplo (IPCA) mede a variação de preços de um conjunto de bens e serviços consumidos pelas famílias. Para o mercado, o IPCA é o indicador que determina se houve **ganho de capital** ou apenas **reposição de valor**.</p>
-                        <p>Investir sem considerar a inflação é cair na **"Ilusão Monetária"**. Em 2026, com uma inflação projetada de 4,50%, um retorno nominal de 10% já não é suficiente para manter o patrimônio crescendo em termos reais.</p>
-                        <span class="ref-tag">IBGE. Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</span>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="p-5 bg-white/5 border border-white/5 rounded-2xl">
-                            <h4 class="text-[10px] font-black text-slate-500 uppercase mb-2">Meta COPOM 2026</h4>
-                            <p class="text-3xl font-bold">3,00% <span class="text-sm font-normal opacity-50">+/- 1,5%</span></p>
-                        </div>
-                        <div class="p-5 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
-                            <h4 class="text-[10px] font-black text-amber-500 uppercase mb-2">IPCA Real (12m)</h4>
-                            <p class="text-3xl font-bold text-white">4,50%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 5: EQUAÇÃO DE FISHER -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Cálculo Financeiro</p>
-                    <h2 class="slide-title">Equação de Fisher: Taxa Real</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>A Equação de Fisher é fundamental para separar o **Juro Nominal** do **Juro Real**. Segundo **Bodie et al. (2014)**, o juro nominal é composto pelo juro real e por um prêmio pela inflação esperada.</p>
-                        <div class="p-4 bg-slate-950 rounded-xl my-4 text-center">
-                            \[ (1 + i) = (1 + r) \cdot (1 + \pi) \]
-                        </div>
-                        <p class="text-xs text-slate-500 italic">Onde \(i\) é a taxa nominal (Selic), \(r\) é a taxa real e \(\pi\) é a inflação (IPCA).</p>
-                        <span class="ref-tag">BODIE, Zvi; KANE, Alex; MARCUS, Alan J. Investimentos. 10. ed. Porto Alegre: AMGH, 2014. p. 128.</span>
-                    </div>
-                    <div class="bg-emerald-500/10 border border-emerald-500/20 p-8 rounded-3xl flex flex-col justify-center items-center text-center">
-                        <h4 class="text-emerald-500 font-bold mb-4 uppercase text-xs tracking-widest">Resultado do Cenário</h4>
-                        <p class="text-sm text-slate-300 mb-2">Com Selic 15% e IPCA 4,5%:</p>
-                        <p class="text-5xl font-black">10,05%</p>
-                        <p class="text-xs text-slate-500 mt-2 uppercase tracking-tighter">Taxa de Juros Real ao Ano</p>
+        <!-- ===== SLIDE 2: MAPA MENTAL ===== -->
+        <section class="slide-page" id="slide-2">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Mapa Mental da Aula</div>
+                    <div class="s-subtitle">Macroeconomia &amp; Valor — Visão Geral</div>
+                    <div class="mindmap-wrap">
+                        <svg class="mindmap-svg" viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Linhas de conexão -->
+                            <line x1="550" y1="280" x2="200" y2="140" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <line x1="550" y1="280" x2="200" y2="280" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <line x1="550" y1="280" x2="200" y2="420" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <line x1="550" y1="280" x2="900" y2="140" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <line x1="550" y1="280" x2="900" y2="280" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <line x1="550" y1="280" x2="900" y2="420" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+                            <!-- Nó central -->
+                            <rect x="430" y="230" width="240" height="100" rx="20" fill="#f59e0b"/>
+                            <text x="550" y="272" text-anchor="middle" font-family="Montserrat" font-size="22" font-weight="900" fill="#000">MACROECONOMIA</text>
+                            <text x="550" y="300" text-anchor="middle" font-family="Montserrat" font-size="22" font-weight="900" fill="#000">&amp; VALOR</text>
+                            <!-- Nó esquerdo 1 -->
+                            <rect x="50" y="90" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="160" y="132" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Taxa Selic</text>
+                            <text x="160" y="156" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Custo de oportunidade</text>
+                            <!-- Nó esquerdo 2 -->
+                            <rect x="50" y="230" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="160" y="272" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">IPCA</text>
+                            <text x="160" y="296" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Inflação e poder real</text>
+                            <!-- Nó esquerdo 3 -->
+                            <rect x="50" y="370" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="160" y="412" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Fisher</text>
+                            <text x="160" y="436" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Taxa real de juros</text>
+                            <!-- Nó direito 1 -->
+                            <rect x="830" y="90" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="940" y="132" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Risk-Free (Rf)</text>
+                            <text x="940" y="156" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Base do valuation</text>
+                            <!-- Nó direito 2 -->
+                            <rect x="830" y="230" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="940" y="272" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">DCF / Valuation</text>
+                            <text x="940" y="296" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Fluxo de caixa descontado</text>
+                            <!-- Nó direito 3 -->
+                            <rect x="830" y="370" width="220" height="100" rx="14" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="940" y="412" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Selic × Ibov</text>
+                            <text x="940" y="436" text-anchor="middle" font-family="Montserrat" font-size="16" fill="#94A3B8">Correlação inversa</text>
+                        </svg>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 6: TAXA LIVRE DE RISCO -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Gestão de Risco</p>
-                    <h2 class="slide-title">Risk-Free Rate (\(R_f\))</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>A taxa livre de risco é a rentabilidade teórica de um ativo com risco de inadimplência nulo. No Brasil, os títulos públicos federais (Selic) são o referencial.</p>
-                        <p>Para **Ross et al. (2015)**, o \(R_f\) é o ponto de partida para qualquer modelo de precificação. Se o investidor consegue 15% ao ano no Tesouro, ele exigirá um prêmio adicional substancial para investir em ativos voláteis.</p>
-                        <span class="ref-tag">ROSS, Stephen A.; WESTERFIELD, Randolph W.; JAFFE, Jeffrey. Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</span>
-                    </div>
-                    <div class="flex items-center justify-center p-10">
-                        <div class="text-center">
-                            <i class="fa-solid fa-shield-halved text-6xl text-amber-500 mb-6 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]"></i>
-                            <h4 class="font-bold text-white mb-2">Selic = Porto Seguro</h4>
-                            <p class="text-xs text-slate-500 max-w-xs mx-auto">Em tempos de juros a 15%, o capital especulativo se torna capital conservador.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 7: MECÂNICA DO VALUATION -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Valuation</p>
-                    <h2 class="slide-title">O Valor Presente dos Fluxos</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>Segundo **Aswath Damodaran (2007)**, a base da avaliação de ativos é o Fluxo de Caixa Descontado (DCF). O valor de uma empresa hoje é o somatório de toda a geração de caixa futura, trazida ao presente por uma taxa que reflita o risco.</p>
-                        <div class="p-5 bg-slate-950 rounded-xl my-4 text-center">
-                            \[ PV = \sum_{t=1}^{n} \frac{CF_t}{(1 + k)^t} \]
-                        </div>
-                        <p class="text-xs italic text-slate-500">\(CF\) = Fluxo de Caixa; \(k\) = Taxa de Desconto; \(PV\) = Valor Presente.</p>
-                        <span class="ref-tag">DAMODARAN, Aswath. Avaliação de Investimentos. São Paulo: Qualitymark, 2007. p. 8-12.</span>
-                    </div>
-                    <div class="bg-red-500/10 border border-red-500/20 p-8 rounded-3xl">
-                        <h4 class="text-red-400 font-bold mb-4 text-xs uppercase italic">A Matemática Pura</h4>
-                        <p class="text-sm leading-relaxed mb-4">Como a taxa de juros (\(k\)) está no **denominador**, um aumento na Selic de 10% para 15% reduz drasticamente o resultado final (\(PV\)). </p>
-                        <p class="text-sm font-bold text-white">"Juros altos são a gravidade para os preços das ações."</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 8: POR QUE A BOLSA CAI? -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Dinâmica de Mercado</p>
-                    <h2 class="slide-title">Correlação Inversa: Selic x Ibov</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>Historicamente, observamos uma correlação negativa entre a taxa de juros e o índice de ações. Entender essa dinâmica é vital para o gestor de portfólio.</p>
-                        <p><strong>Fatores de Queda:</strong></p>
-                        <ul class="text-sm space-y-3">
-                            <li><span class="text-amber-500">●</span> <strong>Endividamento:</strong> Aumento das despesas financeiras das empresas.</li>
-                            <li><span class="text-amber-500">●</span> <strong>Consumo:</strong> Queda no varejo devido ao crédito caro.</li>
-                            <li><span class="text-amber-500">●</span> <strong>Fluxo:</strong> Retirada de capital estrangeiro em busca de prêmio de risco.</li>
-                        </ul>
-                        <span class="ref-tag">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</span>
-                    </div>
-                    <div class="flex items-center justify-center">
-                         <div class="relative w-48 h-48 border-4 border-white/5 rounded-full flex items-center justify-center">
-                             <div class="absolute inset-0 border-t-4 border-amber-500 rounded-full animate-spin"></div>
-                             <i class="fa-solid fa-arrows-up-down text-5xl text-slate-700"></i>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 9: BITCOIN E O RISK-OFF -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Criptoativos</p>
-                    <h2 class="slide-title">Bitcoin: O Ativo de Beta Alto</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <p>Embora o Bitcoin tenha sido proposto por **Satoshi Nakamoto (2008)** como um sistema de dinheiro eletrônico *peer-to-peer*, no mercado atual ele atua como um termômetro de liquidez.</p>
-                        <p>Em cenários de **Risk-Off** (Aversão ao Risco), ativos com volatilidade extrema são os primeiros a serem liquidados. Com a Selic a 15%, o "porto seguro" se torna tão rentável que a tese de investimento em cripto perde força no curto prazo.</p>
-                        <span class="ref-tag">NAKAMOTO, Satoshi. Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</span>
-                    </div>
-                    <div class="p-8 bg-orange-500/5 border border-orange-500/20 rounded-[3rem] text-center">
-                        <i class="fa-brands fa-bitcoin text-7xl text-orange-500 mb-4"></i>
-                        <h4 class="font-bold mb-2">Correlação com a Liquidez</h4>
-                        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Menos liquidez global = Queda em ativos de Beta Alto</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 10: EXERCÍCIO DE FIXAÇÃO -->
-        <section class="slide">
-            <div class="canvas-16-9 border-blue-500/20">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Workshop</p>
-                    <h2 class="slide-title">Exercício de Fixação - Aula 02</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box">
-                        <h4 class="text-amber-500 font-bold mb-3 uppercase text-xs">Cenário para Cálculo</h4>
-                        <p class="text-xs">Um investidor possui R$ 100.000,00 aplicados no Tesouro Direto (Selic 15%). O IPCA projetado é de 4,5%.</p>
-                        <div class="space-y-4 mt-6">
-                            <div>
-                                <label class="text-[10px] text-slate-500 font-bold uppercase">1. Qual a taxa real exata deste investimento?</label>
-                                <input type="text" class="exercise-input mt-1" placeholder="Resposta...">
+        <!-- ===== SLIDE 3: INTERDEPENDÊNCIA MACRO-FINANCEIRA ===== -->
+        <section class="slide-page" id="slide-3">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Interdependência Macro-Financeira</div>
+                    <div class="s-subtitle">Fundamentação Teórica</div>
+                    <div class="s3-grid">
+                        <div class="s3-card">
+                            <div class="s3-card-title">O Tripé do Investidor</div>
+                            <div class="s3-card-text">
+                                Segundo <strong>Assaf Neto (2021)</strong>, toda decisão de investimento no mercado financeiro é pautada por três pilares fundamentais que se equilibram dinamicamente:
                             </div>
-                            <div>
-                                <label class="text-[10px] text-slate-500 font-bold uppercase">2. Se o IPCA subir para 7%, o que ocorre com o retorno real?</label>
-                                <input type="text" class="exercise-input mt-1" placeholder="Resposta...">
+                            <div style="display:flex; gap:12px; margin-top:16px;">
+                                <div style="flex:1; background:rgba(245,158,11,0.1); border-radius:10px; padding:14px; text-align:center;">
+                                    <div style="font-size:28px; margin-bottom:6px;">📈</div>
+                                    <div style="font-size:18px; font-weight:700; color:#f59e0b;">Rentabilidade</div>
+                                    <div style="font-size:15px; color:#94A3B8; margin-top:4px;">Retorno esperado</div>
+                                </div>
+                                <div style="flex:1; background:rgba(239,68,68,0.08); border-radius:10px; padding:14px; text-align:center;">
+                                    <div style="font-size:28px; margin-bottom:6px;">⚠️</div>
+                                    <div style="font-size:18px; font-weight:700; color:#F87171;">Risco</div>
+                                    <div style="font-size:15px; color:#94A3B8; margin-top:4px;">Incerteza do ativo</div>
+                                </div>
+                                <div style="flex:1; background:rgba(59,130,246,0.08); border-radius:10px; padding:14px; text-align:center;">
+                                    <div style="font-size:28px; margin-bottom:6px;">💧</div>
+                                    <div style="font-size:18px; font-weight:700; color:#60A5FA;">Liquidez</div>
+                                    <div style="font-size:15px; color:#94A3B8; margin-top:4px;">Facilidade de resgate</div>
+                                </div>
+                            </div>
+                            <div class="s3-ref">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021. p. 42-45.</div>
+                        </div>
+                        <div class="s3-card" style="border-top-color: #60A5FA;">
+                            <div class="s3-card-title" style="color:#60A5FA;">Macro Afeta o Mercado</div>
+                            <div class="s3-card-text">
+                                O mercado de capitais funciona como um <strong>sistema de vasos comunicantes</strong> com a macroeconomia. Variáveis como inflação e juros alteram diretamente a rentabilidade mínima exigida pelos investidores.
+                            </div>
+                            <div class="s3-quote">
+                                "Os preços dos títulos no mercado de capitais refletem a avaliação contínua dos agentes sobre as condições macroeconômicas futuras."
+                            </div>
+                            <div class="s3-card-text" style="margin-top:14px;">
+                                Em momentos de <strong>stress fiscal</strong> ou incerteza política, o prêmio de risco sobe, forçando a desvalorização dos ativos para equilibrar a equação de valor.
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 bg-blue-500/5 border border-blue-500/10 rounded-2xl flex flex-col justify-center">
-                        <h4 class="text-blue-400 font-bold mb-3 uppercase text-xs">Análise de Valuation</h4>
-                        <p class="text-xs mb-4 italic">"Uma empresa de tecnologia tem lucro zero hoje, mas espera fluxos gigantescos daqui a 10 anos. Uma empresa de transmissão elétrica paga dividendos constantes agora."</p>
-                        <p class="text-[10px] font-bold text-white uppercase mb-2">Quem sofre mais com a alta da Selic de 15%?</p>
-                        <textarea class="exercise-input h-24" placeholder="Fundamente sua resposta com base no modelo DCF..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 4: SELIC A 15% ===== -->
+        <section class="slide-page" id="slide-4">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">O Impacto da Selic a 15,00%</div>
+                    <div class="s-subtitle">Aperto Monetário — Política do Banco Central</div>
+                    <div class="s4-cols">
+                        <div class="s4-left">
+                            <div class="s4-text-card">
+                                <div class="s4-text">
+                                    A <strong>Taxa Selic</strong> é o principal instrumento de política monetária. Ao fixá-la em <strong>15,00%</strong>, o Banco Central estabelece um novo patamar para o <strong>Custo de Oportunidade</strong> de toda a economia.
+                                </div>
+                            </div>
+                            <div class="s4-text-card">
+                                <div class="s4-text">
+                                    Conforme <strong>Fortuna (2018)</strong>, taxas elevadas reduzem o consumo das famílias e o investimento das empresas, visando arrefecer a demanda agregada. No mercado de capitais, isso gera uma <strong>migração de liquidez</strong> dos ativos de risco (Equity) para a segurança do Tesouro Nacional.
+                                </div>
+                            </div>
+                            <div class="s4-ref">FORTUNA, Eduardo. Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018. p. 112.</div>
+                        </div>
+                        <div class="s4-right">
+                            <div class="s4-metric">
+                                <div class="s4-metric-label">Selic Meta — COPOM 2026</div>
+                                <div class="s4-metric-value">15,00%</div>
+                                <div class="s4-metric-sub">ao ano</div>
+                            </div>
+                            <div class="chart-box" style="height:240px;">
+                                <canvas id="chartSelic"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 11: REFERÊNCIAS CONSOLIDADAS -->
-        <section class="slide">
-            <div class="canvas-16-9">
-                <div class="slide-header">
-                    <p class="slide-subtitle">Academicismo</p>
-                    <h2 class="slide-title">Referências Bibliográficas</h2>
-                </div>
-                <div class="content-grid">
-                    <div class="theory-box col-span-2 overflow-y-auto no-scrollbar">
-                        <ul class="text-[10px] space-y-4 text-slate-400">
-                            <li><strong>ASSAF NETO, Alexandre.</strong> Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</li>
-                            <li><strong>BODIE, Zvi; KANE, Alex; MARCUS, Alan J.</strong> Investimentos. 10. ed. Porto Alegre: AMGH, 2014.</li>
-                            <li><strong>DAMODARAN, Aswath.</strong> Avaliação de Investimentos: Ferramentas e Técnicas para a Determinação do Valor de Qualquer Ativo. Rio de Janeiro: Qualitymark, 2007.</li>
-                            <li><strong>FORTUNA, Eduardo.</strong> Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018.</li>
-                            <li><strong>ROSS, Stephen A.; WESTERFIELD, Randolph W.; JAFFE, Jeffrey.</strong> Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</li>
-                            <li><strong>NAKAMOTO, Satoshi.</strong> Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</li>
-                            <li><strong>IBGE.</strong> Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</li>
-                            <li><strong>BCB.</strong> Atas do Comitê de Política Monetária (COPOM). Brasília, 2026.</li>
-                        </ul>
+        <!-- ===== SLIDE 5: IPCA ===== -->
+        <section class="slide-page" id="slide-5">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">IPCA: O Balizador da Realidade</div>
+                    <div class="s-subtitle">Inflação — Ilusão Monetária e Retorno Real</div>
+                    <div class="s5-cols">
+                        <div class="s5-left">
+                            <div class="s5-def-card">
+                                <div class="s5-def-text">
+                                    O <strong>IPCA</strong> mede a variação de preços de bens e serviços consumidos pelas famílias. Para o mercado, é o indicador que determina se houve <strong>ganho de capital</strong> ou apenas <strong>reposição de valor</strong>.
+                                </div>
+                            </div>
+                            <ul class="s5-bullet-list">
+                                <li class="s5-bullet-item">
+                                    <span class="s5-bullet-icon">💡</span>
+                                    <div class="s5-bullet-text"><strong>Ilusão Monetária:</strong> Investir sem considerar a inflação é confundir retorno nominal com retorno real.</div>
+                                </li>
+                                <li class="s5-bullet-item">
+                                    <span class="s5-bullet-icon">📉</span>
+                                    <div class="s5-bullet-text"><strong>Erosão do Patrimônio:</strong> Com IPCA a 4,50%, um retorno nominal de 4% representa <strong>perda real</strong> de poder de compra.</div>
+                                </li>
+                                <li class="s5-bullet-item">
+                                    <span class="s5-bullet-icon">🎯</span>
+                                    <div class="s5-bullet-text"><strong>Meta do COPOM:</strong> A meta oficial é 3,00% ± 1,5 p.p. O desvio acima da meta pressiona o BC a elevar os juros.</div>
+                                </li>
+                            </ul>
+                            <div class="s5-ref">IBGE. Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</div>
+                        </div>
+                        <div class="s5-right">
+                            <div class="s5-kpi-grid">
+                                <div class="s5-kpi amber">
+                                    <div class="s5-kpi-label">IPCA Real (12m)</div>
+                                    <div class="s5-kpi-val">4,50%</div>
+                                    <div class="s5-kpi-sub">acima da meta</div>
+                                </div>
+                                <div class="s5-kpi slate">
+                                    <div class="s5-kpi-label">Meta COPOM</div>
+                                    <div class="s5-kpi-val">3,00%</div>
+                                    <div class="s5-kpi-sub">± 1,5 p.p.</div>
+                                </div>
+                                <div class="s5-kpi slate" style="grid-column: 1 / -1; background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.2);">
+                                    <div class="s5-kpi-label" style="color:#F87171;">Desvio da Meta</div>
+                                    <div class="s5-kpi-val" style="color:#F87171; font-size:36px;">+1,50 p.p.</div>
+                                    <div class="s5-kpi-sub">pressão para alta de juros</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="text-center pt-6">
-                    <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.4em]">novaes-rs.github.io • Profa. Renata Novaes</p>
                 </div>
             </div>
         </section>
 
-    </div>
+        <!-- ===== SLIDE 6: EQUAÇÃO DE FISHER ===== -->
+        <section class="slide-page" id="slide-6">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Equação de Fisher: Taxa Real</div>
+                    <div class="s-subtitle">Cálculo Financeiro — Separando Nominal do Real</div>
+                    <div class="s6-cols">
+                        <div class="s6-left">
+                            <div class="s6-formula-card">
+                                <div class="s6-formula-label">Equação de Fisher</div>
+                                \[ (1 + i) = (1 + r) \times (1 + \pi) \]
+                                <div style="font-size:16px; color:#64748B; margin-top:10px;">
+                                    \(i\) = taxa nominal (Selic) &nbsp;|&nbsp; \(r\) = taxa real &nbsp;|&nbsp; \(\pi\) = inflação (IPCA)
+                                </div>
+                            </div>
+                            <ul class="s6-step-list">
+                                <li class="s6-step">
+                                    <div class="s6-step-num">1</div>
+                                    <div class="s6-step-text">Selic nominal: <strong>15,00% a.a.</strong></div>
+                                </li>
+                                <li class="s6-step">
+                                    <div class="s6-step-num">2</div>
+                                    <div class="s6-step-text">IPCA projetado: <strong>4,50% a.a.</strong></div>
+                                </li>
+                                <li class="s6-step">
+                                    <div class="s6-step-num">3</div>
+                                    <div class="s6-step-text">Cálculo: \((1,15) \div (1,045) - 1\)</div>
+                                </li>
+                                <li class="s6-step">
+                                    <div class="s6-step-num">4</div>
+                                    <div class="s6-step-text">Taxa real exata: <strong>10,05% a.a.</strong></div>
+                                </li>
+                            </ul>
+                            <div class="s6-ref">BODIE, Z.; KANE, A.; MARCUS, A. J. Investimentos. 10. ed. Porto Alegre: AMGH, 2014. p. 128.</div>
+                        </div>
+                        <div class="s6-right">
+                            <div class="s6-result-card">
+                                <div class="s6-result-label">Taxa Real ao Ano</div>
+                                <div class="s6-result-val">10,05%</div>
+                                <div class="s6-result-sub">Selic 15% — IPCA 4,5%</div>
+                            </div>
+                            <div style="background:rgba(30,41,59,0.6); border-radius:14px; padding:20px; border-left:4px solid #10B981;">
+                                <div style="font-size:16px; font-weight:700; color:#10B981; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">Interpretação</div>
+                                <div style="font-size:19px; color:#CBD5E1; line-height:1.6;">
+                                    O investidor no Tesouro Selic ganha <strong>10,05% acima da inflação</strong> — um retorno real historicamente elevado, que eleva o custo de oportunidade para qualquer outro ativo.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- UI DE NAVEGAÇÃO -->
-    <div class="nav-ui">
-        <button class="btn-nav" onclick="navSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="text-[10px] font-black text-slate-500 tracking-widest uppercase" id="slideCount">01 / 11</div>
-        <button class="btn-nav" onclick="navSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
+        <!-- ===== SLIDE 7: TAXA LIVRE DE RISCO ===== -->
+        <section class="slide-page" id="slide-7">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Risk-Free Rate (R<sub style="font-size:0.7em">f</sub>)</div>
+                    <div class="s-subtitle">Gestão de Risco — O Ponto de Partida do Valuation</div>
+                    <div class="s7-cols">
+                        <div class="s7-left">
+                            <div class="s7-def-card">
+                                <div class="s7-def-text">
+                                    A <strong>taxa livre de risco</strong> é a rentabilidade teórica de um ativo com risco de inadimplência nulo. No Brasil, os <strong>títulos públicos federais (Selic)</strong> são o referencial.
+                                </div>
+                            </div>
+                            <div class="s7-def-card" style="border-color:#60A5FA;">
+                                <div class="s7-def-text">
+                                    Para <strong>Ross et al. (2015)</strong>, o R<sub>f</sub> é o ponto de partida para qualquer modelo de precificação. Se o investidor consegue <strong>15% ao ano</strong> no Tesouro, ele exigirá um prêmio adicional substancial para investir em ativos voláteis.
+                                </div>
+                            </div>
+                            <div class="s7-ref">ROSS, S. A.; WESTERFIELD, R. W.; JAFFE, J. Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</div>
+                        </div>
+                        <div class="s7-right">
+                            <div style="background:rgba(30,41,59,0.6); border-radius:14px; padding:20px; border-top:4px solid #f59e0b;">
+                                <div style="font-size:16px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Composição do Retorno Exigido</div>
+                                <div class="s7-diagram">
+                                    <div class="s7-diag-row">
+                                        <div class="s7-diag-label">Rf (Selic)</div>
+                                        <div class="s7-diag-bar-wrap"><div class="s7-diag-bar rf">15,00%</div></div>
+                                    </div>
+                                    <div class="s7-diag-row">
+                                        <div class="s7-diag-label">Prêmio Risco</div>
+                                        <div class="s7-diag-bar-wrap"><div class="s7-diag-bar premio">+X%</div></div>
+                                    </div>
+                                    <div class="s7-diag-row">
+                                        <div class="s7-diag-label">Retorno Total</div>
+                                        <div class="s7-diag-bar-wrap"><div class="s7-diag-bar total">≥ 15%</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="s7-shield-box">
+                                <div class="s7-shield-title">🛡️ Selic = Porto Seguro</div>
+                                <div class="s7-shield-text">Em tempos de juros a 15%, o capital especulativo se torna capital conservador. A barra mínima de rentabilidade sobe para toda a economia.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 8: VALUATION / DCF ===== -->
+        <section class="slide-page" id="slide-8">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">O Valor Presente dos Fluxos (DCF)</div>
+                    <div class="s-subtitle">Valuation — Fluxo de Caixa Descontado</div>
+                    <div class="s8-cols">
+                        <div class="s8-left">
+                            <div class="s8-def-card">
+                                <div class="s8-def-text">
+                                    Segundo <strong>Damodaran (2007)</strong>, a base da avaliação de ativos é o <strong>Fluxo de Caixa Descontado (DCF)</strong>. O valor de uma empresa hoje é o somatório de toda a geração de caixa futura, trazida ao presente por uma taxa que reflita o risco.
+                                </div>
+                            </div>
+                            <div class="s8-formula-card">
+                                \[ PV = \sum_{t=1}^{n} \frac{CF_t}{(1 + k)^t} \]
+                                <div style="font-size:16px; color:#64748B; margin-top:10px;">
+                                    \(CF\) = Fluxo de Caixa &nbsp;|&nbsp; \(k\) = Taxa de Desconto &nbsp;|&nbsp; \(PV\) = Valor Presente
+                                </div>
+                            </div>
+                            <div class="s8-ref">DAMODARAN, Aswath. Avaliação de Investimentos. São Paulo: Qualitymark, 2007. p. 8-12.</div>
+                        </div>
+                        <div class="s8-right">
+                            <div class="s8-impact-card">
+                                <div class="s8-impact-title">A Matemática do Impacto</div>
+                                <div class="s8-impact-text">
+                                    Como a taxa de desconto (<strong>k</strong>) está no <strong>denominador</strong>, um aumento na Selic de 10% para 15% reduz drasticamente o Valor Presente (PV) de qualquer ativo.
+                                </div>
+                                <div style="display:flex; gap:12px; margin-bottom:14px;">
+                                    <div style="flex:1; background:rgba(16,185,129,0.1); border-radius:10px; padding:14px; text-align:center;">
+                                        <div style="font-size:14px; color:#10B981; font-weight:700; margin-bottom:6px;">k = 10%</div>
+                                        <div style="font-size:26px; font-weight:900; color:#fff; font-family:'Roboto Mono',monospace;">PV Alto</div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; font-size:28px; color:#475569;">→</div>
+                                    <div style="flex:1; background:rgba(239,68,68,0.1); border-radius:10px; padding:14px; text-align:center;">
+                                        <div style="font-size:14px; color:#F87171; font-weight:700; margin-bottom:6px;">k = 15%</div>
+                                        <div style="font-size:26px; font-weight:900; color:#fff; font-family:'Roboto Mono',monospace;">PV Baixo</div>
+                                    </div>
+                                </div>
+                                <div class="s8-quote">"Juros altos são a gravidade para os preços das ações." — Analogia de Warren Buffett</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 9: CORRELAÇÃO INVERSA SELIC × IBOV ===== -->
+        <section class="slide-page" id="slide-9">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Correlação Inversa: Selic × Ibovespa</div>
+                    <div class="s-subtitle">Dinâmica de Mercado — Por que a Bolsa cai?</div>
+                    <div class="s9-cols">
+                        <div class="s9-left">
+                            <div class="s9-def-card">
+                                <div class="s9-def-text">
+                                    Historicamente, observamos uma <strong>correlação negativa</strong> entre a taxa de juros e o índice de ações. Entender essa dinâmica é vital para o gestor de portfólio.
+                                </div>
+                            </div>
+                            <ul class="s9-factor-list">
+                                <li class="s9-factor">
+                                    <span class="s9-factor-icon">🏦</span>
+                                    <div class="s9-factor-body">
+                                        <div class="s9-factor-title">Endividamento Corporativo</div>
+                                        <div class="s9-factor-text">Aumento das despesas financeiras das empresas reduz o lucro e o fluxo de caixa livre.</div>
+                                    </div>
+                                </li>
+                                <li class="s9-factor">
+                                    <span class="s9-factor-icon">🛒</span>
+                                    <div class="s9-factor-body">
+                                        <div class="s9-factor-title">Queda no Consumo</div>
+                                        <div class="s9-factor-text">Crédito caro contrai o varejo e reduz a receita das empresas listadas.</div>
+                                    </div>
+                                </li>
+                                <li class="s9-factor">
+                                    <span class="s9-factor-icon">🌍</span>
+                                    <div class="s9-factor-body">
+                                        <div class="s9-factor-title">Fuga de Capital Estrangeiro</div>
+                                        <div class="s9-factor-text">Investidores migram para renda fixa, reduzindo o fluxo de capital para ações.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="s9-ref">ASSAF NETO, Alexandre. Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</div>
+                        </div>
+                        <div class="s9-right">
+                            <div style="background:rgba(30,41,59,0.6); border-radius:14px; padding:20px; border-top:4px solid #f59e0b; flex:1;">
+                                <div style="font-size:16px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Diagrama de Fluxo</div>
+                                <div class="s9-flow-diagram">
+                                    <div class="s9-flow-box amber">⬆️ Selic sobe para 15%</div>
+                                    <div class="s9-flow-arrow">↓</div>
+                                    <div class="s9-flow-box">Custo de capital das empresas aumenta</div>
+                                    <div class="s9-flow-arrow">↓</div>
+                                    <div class="s9-flow-box">Taxa de desconto (k) no DCF sobe</div>
+                                    <div class="s9-flow-arrow">↓</div>
+                                    <div class="s9-flow-box red">⬇️ Valor Presente (PV) das ações cai</div>
+                                    <div class="s9-flow-arrow">↓</div>
+                                    <div class="s9-flow-box red">⬇️ Ibovespa recua</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 10: BITCOIN E RISK-OFF ===== -->
+        <section class="slide-page" id="slide-10">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Bitcoin: O Ativo de Beta Alto</div>
+                    <div class="s-subtitle">Criptoativos — Risk-On vs. Risk-Off</div>
+                    <div class="s10-cols">
+                        <div class="s10-left">
+                            <div class="s10-def-card">
+                                <div class="s10-def-text">
+                                    Embora o Bitcoin tenha sido proposto por <strong>Satoshi Nakamoto (2008)</strong> como um sistema de dinheiro eletrônico <em>peer-to-peer</em>, no mercado atual ele atua como um <strong>termômetro de liquidez global</strong>.
+                                </div>
+                            </div>
+                            <div class="s10-def-card">
+                                <div class="s10-def-text">
+                                    Em cenários de <strong>Risk-Off</strong> (aversão ao risco), ativos com volatilidade extrema são os primeiros a serem liquidados. Com a Selic a 15%, o "porto seguro" se torna tão rentável que a tese de investimento em cripto perde força no curto prazo.
+                                </div>
+                            </div>
+                            <div class="s10-ref">NAKAMOTO, Satoshi. Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</div>
+                        </div>
+                        <div class="s10-right">
+                            <div class="s10-btc-card">
+                                <div class="s10-btc-icon">₿</div>
+                                <div class="s10-btc-title">Bitcoin — Alta Volatilidade</div>
+                                <div class="s10-btc-sub">Correlação com a Liquidez Global</div>
+                            </div>
+                            <div class="s10-risk-grid">
+                                <div class="s10-risk-card risk-on">
+                                    <div class="s10-risk-label">Risk-On 🟢</div>
+                                    <div class="s10-risk-text">Juros baixos, apetite por risco, capital flui para cripto e ações.</div>
+                                </div>
+                                <div class="s10-risk-card risk-off">
+                                    <div class="s10-risk-label">Risk-Off 🔴</div>
+                                    <div class="s10-risk-text">Juros altos, fuga para segurança, Bitcoin e ações sofrem queda.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 11: EXERCÍCIO DE FIXAÇÃO ===== -->
+        <section class="slide-page" id="slide-11">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Exercício de Fixação</div>
+                    <div class="s-subtitle">Workshop — Aula 02</div>
+                    <div class="s11-cols">
+                        <div class="s11-left">
+                            <div class="s11-scenario-card">
+                                <div class="s11-scenario-title">📋 Cenário para Cálculo</div>
+                                <div class="s11-scenario-text">
+                                    Um investidor possui <strong>R$ 100.000,00</strong> aplicados no Tesouro Direto (Selic 15%). O IPCA projetado é de <strong>4,5%</strong>.
+                                </div>
+                            </div>
+                            <div class="s11-q-list">
+                                <div class="s11-q-item">
+                                    <div class="s11-q-label">Questão 1</div>
+                                    <div class="s11-q-text">Qual a taxa real exata deste investimento? Use a Equação de Fisher.</div>
+                                </div>
+                                <div class="s11-q-item">
+                                    <div class="s11-q-label">Questão 2</div>
+                                    <div class="s11-q-text">Se o IPCA subir para 7%, o que ocorre com o retorno real? Recalcule.</div>
+                                </div>
+                                <div class="s11-q-item">
+                                    <div class="s11-q-label">Questão 3</div>
+                                    <div class="s11-q-text">Qual seria o retorno nominal mínimo para garantir 8% real com IPCA de 4,5%?</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s11-right">
+                            <div class="s11-analysis-card">
+                                <div class="s11-analysis-title">🔍 Análise de Valuation</div>
+                                <div class="s11-analysis-text">
+                                    "Uma empresa de tecnologia tem lucro zero hoje, mas espera fluxos gigantescos daqui a 10 anos. Uma empresa de transmissão elétrica paga dividendos constantes agora."
+                                </div>
+                                <div class="s11-analysis-q">Quem sofre mais com a alta da Selic para 15%? Fundamente com o modelo DCF.</div>
+                            </div>
+                            <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:14px; padding:20px;">
+                                <div style="font-size:16px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">💡 Dica</div>
+                                <div style="font-size:18px; color:#CBD5E1; line-height:1.6;">
+                                    Pense no impacto da taxa de desconto sobre fluxos de caixa <strong>distantes no tempo</strong> versus fluxos <strong>imediatos</strong>. Qual empresa tem mais fluxos no futuro?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 12: DIAGRAMA DE SÍNTESE ===== -->
+        <section class="slide-page" id="slide-12">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Diagrama de Síntese</div>
+                    <div class="s-subtitle">Como tudo se conecta — Visão Integrada</div>
+                    <div class="s12-diagram-wrap">
+                        <svg viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:1100px; height:auto;">
+                            <!-- Setas -->
+                            <!-- Selic -> Fisher -->
+                            <defs>
+                                <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/>
+                                </marker>
+                            </defs>
+                            <line x1="230" y1="100" x2="430" y2="220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+                            <!-- IPCA -> Fisher -->
+                            <line x1="230" y1="260" x2="430" y2="260" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+                            <!-- Fisher -> Rf -->
+                            <line x1="670" y1="260" x2="830" y2="180" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+                            <!-- Rf -> DCF -->
+                            <line x1="1000" y1="180" x2="1000" y2="330" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+                            <!-- DCF -> Ibov -->
+                            <line x1="830" y1="380" x2="670" y2="420" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+                            <!-- Selic -> Ibov -->
+                            <line x1="230" y1="420" x2="430" y2="420" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+
+                            <!-- Caixa Selic -->
+                            <rect x="50" y="60" width="180" height="80" rx="12" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="140" y="96" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Selic 15%</text>
+                            <text x="140" y="118" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">Política Monetária</text>
+
+                            <!-- Caixa IPCA -->
+                            <rect x="50" y="220" width="180" height="80" rx="12" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="140" y="256" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">IPCA 4,5%</text>
+                            <text x="140" y="278" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">Inflação</text>
+
+                            <!-- Caixa Fisher (centro) -->
+                            <rect x="430" y="220" width="240" height="80" rx="12" fill="#f59e0b"/>
+                            <text x="550" y="256" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="900" fill="#000">Fisher</text>
+                            <text x="550" y="278" text-anchor="middle" font-family="Montserrat" font-size="16" font-weight="700" fill="#000">Taxa Real = 10,05%</text>
+
+                            <!-- Caixa Rf -->
+                            <rect x="830" y="110" width="200" height="80" rx="12" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="930" y="146" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Risk-Free (Rf)</text>
+                            <text x="930" y="168" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">Base do Valuation</text>
+
+                            <!-- Caixa DCF -->
+                            <rect x="830" y="330" width="200" height="80" rx="12" fill="rgba(30,41,59,0.9)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="930" y="366" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">DCF / PV</text>
+                            <text x="930" y="388" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">Valor dos Ativos</text>
+
+                            <!-- Caixa Ibov -->
+                            <rect x="430" y="390" width="240" height="80" rx="12" fill="rgba(239,68,68,0.15)" stroke="#F87171" stroke-width="2"/>
+                            <text x="550" y="426" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#F87171">Ibovespa Recua</text>
+                            <text x="550" y="448" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">Correlação Inversa</text>
+
+                            <!-- Caixa Selic 2 -->
+                            <rect x="50" y="380" width="180" height="80" rx="12" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="140" y="416" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#f59e0b">Selic ↑</text>
+                            <text x="140" y="438" text-anchor="middle" font-family="Montserrat" font-size="15" fill="#94A3B8">k no DCF sobe</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SLIDE 13: REFERÊNCIAS ===== -->
+        <section class="slide-page" id="slide-13">
+            <div class="slide-container">
+                <div class="bg-grid"></div>
+                <div class="s-inner">
+                    <div class="s-h1">Referências Bibliográficas</div>
+                    <div class="s-subtitle">Academicismo — Fontes Consultadas</div>
+                    <div class="s13-ref-grid">
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">ASSAF NETO, Alexandre</div>
+                            <div class="s13-ref-title">Mercado Financeiro. 15. ed. São Paulo: Atlas, 2021.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">BODIE, Z.; KANE, A.; MARCUS, A. J.</div>
+                            <div class="s13-ref-title">Investimentos. 10. ed. Porto Alegre: AMGH, 2014.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">DAMODARAN, Aswath</div>
+                            <div class="s13-ref-title">Avaliação de Investimentos: Ferramentas e Técnicas para a Determinação do Valor de Qualquer Ativo. Rio de Janeiro: Qualitymark, 2007.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">FORTUNA, Eduardo</div>
+                            <div class="s13-ref-title">Mercado Financeiro: Produtos e Serviços. 21. ed. Rio de Janeiro: Qualitymark, 2018.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">ROSS, S. A.; WESTERFIELD, R. W.; JAFFE, J.</div>
+                            <div class="s13-ref-title">Administração Financeira. 10. ed. Porto Alegre: AMGH, 2015.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">NAKAMOTO, Satoshi</div>
+                            <div class="s13-ref-title">Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">IBGE</div>
+                            <div class="s13-ref-title">Índice Nacional de Preços ao Consumidor Amplo (IPCA). Brasília, 2026.</div>
+                        </div>
+                        <div class="s13-ref-card">
+                            <div class="s13-ref-author">BCB — Banco Central do Brasil</div>
+                            <div class="s13-ref-title">Atas do Comitê de Política Monetária (COPOM). Brasília, 2026.</div>
+                        </div>
+                    </div>
+                    <div class="s13-footer">novaes-rs.github.io • Profa. Ma. Renata Novaes • Mercado de Capitais 2026.1</div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- fim .presentation-wrapper -->
+
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <nav class="nav-ui">
+        <button class="btn-nav" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Anterior</button>
+        <span id="slide-counter">1 / 13</span>
+        <button class="btn-nav" id="btn-next" onclick="navigate(1)">Próximo &#8594;</button>
+    </nav>
 
     <script>
-        let currentSlide = 0;
-        const totalSlides = 11;
-        const pres = document.getElementById('presentation');
-        const count = document.getElementById('slideCount');
+        var currentSlide = 0;
+        var totalSlides = 13;
+        var presentation = document.getElementById('presentation');
 
-        function navSlide(dir) {
-            currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
-            pres.style.transform = `translateX(-${currentSlide * 100}vw)`;
-            count.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${totalSlides}`;
-            
-            // Re-render math
+        function navigate(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            presentation.style.transform = 'translateX(-' + (currentSlide * 100) + 'vw)';
+            document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+            document.getElementById('btn-prev').disabled = currentSlide === 0;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+            // Re-render MathJax
             if (window.MathJax) MathJax.typeset();
-            
-            // Render chart if on slide 3
-            if (currentIdx() === 2) renderChart();
+            // Render chart on slide 4
+            if (currentSlide === 3) renderChart();
         }
 
-        function currentIdx() { return currentSlide; }
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault(); navigate(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault(); navigate(-1);
+            }
+        });
 
+        // Navegação por toque (swipe)
+        var touchStartX = 0;
+        document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', function(e) {
+            var diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+        });
+
+        // Exportar PDF
+        function printSlides() {
+            var msg = 'Para exportar como PDF:\n\n' +
+                      '1. Na janela de impressão, selecione "Salvar como PDF" como destino.\n' +
+                      '2. Recomendado: orientação Paisagem, margens Nenhuma.\n\n' +
+                      'Clique OK para continuar.';
+            if (confirm(msg)) { window.print(); }
+        }
+
+        // Escalar slides para caber na viewport (16:9 = 1280×720)
+        function scaleSlides() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var cw = 1280;
+            var ch = 720;
+            var scaleX = vw / cw;
+            var scaleY = vh / ch;
+            var scale = Math.min(scaleX, scaleY) * 0.97;
+            var pages = document.querySelectorAll('.slide-page');
+            pages.forEach(function(page) {
+                var container = page.querySelector('.slide-container');
+                if (!container) return;
+                container.style.width = cw + 'px';
+                container.style.height = ch + 'px';
+                container.style.transform = 'scale(' + scale + ')';
+                container.style.transformOrigin = 'center center';
+            });
+        }
+        window.addEventListener('resize', scaleSlides);
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(scaleSlides);
+        } else {
+            window.addEventListener('load', function() {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(scaleSlides);
+                });
+            });
+        }
+
+        // Gráfico de barras - Slide 4
         function renderChart() {
-            const ctx = document.getElementById('chartComparison');
+            var ctx = document.getElementById('chartSelic');
             if (!ctx) return;
-            if (window.myChart) window.myChart.destroy();
-
+            if (window.myChart) { window.myChart.destroy(); }
             window.myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Selic Nominal', 'IPCA (Inf.)', 'Juro Real'],
+                    labels: ['Selic Nominal', 'IPCA (Inflação)', 'Juro Real'],
                     datasets: [{
                         label: 'Taxas (%)',
                         data: [15.00, 4.50, 10.05],
                         backgroundColor: ['#f59e0b', '#94a3b8', '#10b981'],
-                        borderRadius: 12
+                        borderRadius: 10,
+                        borderSkipped: false
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return ctx.parsed.y.toFixed(2) + '%'; }
+                            }
+                        }
+                    },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b' } },
-                        x: { grid: { display: false }, ticks: { color: '#cbd5e1' } }
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#64748b', font: { size: 14 }, callback: function(v) { return v + '%'; } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#cbd5e1', font: { size: 14, weight: '600' } }
+                        }
                     }
                 }
             });
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') navSlide(1);
-            if (e.key === 'ArrowLeft') navSlide(-1);
-        });
-
-        window.onload = () => {
+        window.addEventListener('load', function() {
             renderChart();
-        };
+            requestAnimationFrame(function() {
+                requestAnimationFrame(scaleSlides);
+            });
+        });
     </script>
 </body>
 </html>
