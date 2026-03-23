@@ -150,25 +150,57 @@
         }
 
         /* ========== IMPRESSÃO ========== */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
         @media print {
             .nav-ui, .btn-home, .btn-print { display: none !important; }
-            html, body { overflow: visible !important; background: white !important; }
+
+            html, body {
+                overflow: visible !important;
+                background: #020617 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                width: 297mm;
+                height: 210mm;
+            }
+
             .presentation-wrapper {
                 display: block !important;
-                width: 100% !important;
-                transform: none !important;
-            }
-            .slide-page {
-                width: 100% !important;
+                width: 297mm !important;
                 height: auto !important;
-                min-height: 100vh;
-                page-break-after: always;
-                display: flex !important;
-            }
-            .slide-page .slide-container {
-                width: 1280px !important;
-                min-height: 720px;
                 transform: none !important;
+            }
+
+            .slide-page {
+                width: 297mm !important;
+                height: 210mm !important;
+                min-height: unset !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                overflow: hidden !important;
+            }
+
+            .slide-page:last-child {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+            .slide-page .slide-container {
+                /* A4 landscape = 297 x 210 mm = ~1122 x 793 px a 96dpi            */
+                /* Slide nativo = 1280 x 720px → escala = 793/720 ≈ 1.10 → usa 210mm */
+                /* Para garantir que caiba sem corte, usamos transform: scale()      */
+                width: 1280px !important;
+                height: 720px !important;
+                transform: scale(0.82) !important;
+                transform-origin: center center !important;
+                flex-shrink: 0 !important;
             }
         }
 
@@ -1188,11 +1220,7 @@
 
         // Exportar PDF
         function printSlides() {
-            var msg = 'Para exportar como PDF:\n\n' +
-                      '1. Na janela de impressão, selecione "Salvar como PDF" como destino.\n' +
-                      '2. Recomendado: orientação Paisagem, margens Nenhuma.\n\n' +
-                      'Clique OK para continuar.';
-            if (confirm(msg)) { window.print(); }
+            window.print();
         }
 
         // Escalar slides para caber na viewport (16:9 = 1280×720)
