@@ -922,26 +922,31 @@
                             <div class="flex items-center gap-4 mb-8">
                                 <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-2xl">🔬</div>
                                 <div>
-                                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório Aula 01</h2>
-                                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Base de Conhecimento Local</p>
+                                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Laboratório de IA Guiada</h2>
+                                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Base de Conhecimento — Todas as Aulas</p>
                                 </div>
                             </div>
                             
-                            <p class="text-sm text-slate-400 mb-8 leading-relaxed">Selecione um tópico abaixo para gerar um resumo técnico instantâneo. Este laboratório utiliza uma base de dados local, garantindo funcionamento estável em sala de aula.</p>
-                            
-                            <!-- Grade de Botões de Tópicos Ampliados -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                                <button onclick="runLocalIA('pix')" class="flex items-center gap-3 p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl text-left hover:bg-amber-500/10 transition-all group">
-                                    <span class="text-amber-500 group-hover:scale-110 transition-transform">📱</span>
-                                    <span class="text-[11px] font-bold uppercase text-slate-300">PIX & Meios de Pagamento</span>
-                                </button>
+                            <p class="text-sm text-slate-400 mb-6 leading-relaxed">Selecione um tópico abaixo para gerar um resumo técnico instantâneo. Cobre todos os conteúdos das aulas 01 a 07 — SFN, Agenda BC#, Ações, Debêntures e Finanças Comportamentais.</p>
+
+                            <!-- Grupo: SFN e Agenda BC# -->
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-2">📚 Aulas 01–02 · SFN e Agenda BC#</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
                                 <button onclick="runLocalIA('sfn')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
                                     <span class="text-blue-400 group-hover:scale-110 transition-transform">🏛️</span>
                                     <span class="text-[11px] font-bold uppercase text-slate-300">Estrutura do SFN</span>
                                 </button>
+                                <button onclick="runLocalIA('intermediacao')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">🔄</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Intermediação vs. Desintermediação</span>
+                                </button>
                                 <button onclick="runLocalIA('bc')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
                                     <span class="text-blue-400 group-hover:scale-110 transition-transform">📅</span>
                                     <span class="text-[11px] font-bold uppercase text-slate-300">Agenda BC# (4 Pilares)</span>
+                                </button>
+                                <button onclick="runLocalIA('pix')" class="flex items-center gap-3 p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl text-left hover:bg-amber-500/10 transition-all group">
+                                    <span class="text-amber-500 group-hover:scale-110 transition-transform">📱</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">PIX & Meios de Pagamento</span>
                                 </button>
                                 <button onclick="runLocalIA('spread')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
                                     <span class="text-blue-400 group-hover:scale-110 transition-transform">📉</span>
@@ -954,6 +959,89 @@
                                 <button onclick="runLocalIA('fintechs')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
                                     <span class="text-blue-400 group-hover:scale-110 transition-transform">🏢</span>
                                     <span class="text-[11px] font-bold uppercase text-slate-300">Fintechs: SCD vs SEP</span>
+                                </button>
+                                <button onclick="runLocalIA('openfinance')" class="flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-left hover:bg-blue-500/10 transition-all group">
+                                    <span class="text-blue-400 group-hover:scale-110 transition-transform">🔓</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Open Finance</span>
+                                </button>
+                            </div>
+
+                            <!-- Grupo: Ações ON e PN -->
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-2">📈 Aulas 03 · Mercado de Renda Variável</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                                <button onclick="runLocalIA('acoes_on_pn')" class="flex items-center gap-3 p-4 bg-purple-500/5 border border-purple-500/20 rounded-xl text-left hover:bg-purple-500/10 transition-all group">
+                                    <span class="text-purple-400 group-hover:scale-110 transition-transform">📊</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Ações ON vs. PN</span>
+                                </button>
+                                <button onclick="runLocalIA('tag_along')" class="flex items-center gap-3 p-4 bg-purple-500/5 border border-purple-500/20 rounded-xl text-left hover:bg-purple-500/10 transition-all group">
+                                    <span class="text-purple-400 group-hover:scale-110 transition-transform">🛡️</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Tag Along e Direitos do Acionista</span>
+                                </button>
+                                <button onclick="runLocalIA('mercado_primario')" class="flex items-center gap-3 p-4 bg-purple-500/5 border border-purple-500/20 rounded-xl text-left hover:bg-purple-500/10 transition-all group">
+                                    <span class="text-purple-400 group-hover:scale-110 transition-transform">🚀</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Mercado Primário vs. Secundário</span>
+                                </button>
+                                <button onclick="runLocalIA('governanca')" class="flex items-center gap-3 p-4 bg-purple-500/5 border border-purple-500/20 rounded-xl text-left hover:bg-purple-500/10 transition-all group">
+                                    <span class="text-purple-400 group-hover:scale-110 transition-transform">🏆</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Governança Corporativa (B3)</span>
+                                </button>
+                            </div>
+
+                            <!-- Grupo: Debêntures -->
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-2">💼 Aulas 04–06 · Debêntures</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                                <button onclick="runLocalIA('debentures')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">📄</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Debêntures: Conceito e Estrutura</span>
+                                </button>
+                                <button onclick="runLocalIA('garantias')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">🔒</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Hierarquia de Garantias</span>
+                                </button>
+                                <button onclick="runLocalIA('remuneracao')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">💰</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Tipos de Remuneração</span>
+                                </button>
+                                <button onclick="runLocalIA('incentivadas')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">🏗️</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Debêntures Incentivadas (Lei 12.431)</span>
+                                </button>
+                                <button onclick="runLocalIA('escritura')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">📝</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Escritura de Emissão e Rating</span>
+                                </button>
+                                <button onclick="runLocalIA('emissao')" class="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-left hover:bg-emerald-500/10 transition-all group">
+                                    <span class="text-emerald-400 group-hover:scale-110 transition-transform">🏦</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Processo de Emissão (ICVM 476/400)</span>
+                                </button>
+                            </div>
+
+                            <!-- Grupo: Finanças Comportamentais -->
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-2">🧠 Aula 07 · Finanças Comportamentais</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                                <button onclick="runLocalIA('prospecto')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">📐</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Teoria do Prospecto</span>
+                                </button>
+                                <button onclick="runLocalIA('aversao')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">😰</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Aversão à Perda</span>
+                                </button>
+                                <button onclick="runLocalIA('ancoragem')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">⚓</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Ancoragem</span>
+                                </button>
+                                <button onclick="runLocalIA('manada')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">🐑</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Comportamento de Manada</span>
+                                </button>
+                                <button onclick="runLocalIA('disposicao')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">📉</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Efeito Disposição</span>
+                                </button>
+                                <button onclick="runLocalIA('excesso_confianca')" class="flex items-center gap-3 p-4 bg-rose-500/5 border border-rose-500/20 rounded-xl text-left hover:bg-rose-500/10 transition-all group">
+                                    <span class="text-rose-400 group-hover:scale-110 transition-transform">🦁</span>
+                                    <span class="text-[11px] font-bold uppercase text-slate-300">Excesso de Confiança</span>
                                 </button>
                             </div>
 
@@ -1176,7 +1264,305 @@ O DREX é a moeda digital focada no atacado e economia programável:
 Figuras criadas pelo BC para aumentar a competição:
 
 * **SCD (Sociedade de Crédito Direto):** Empresta apenas **capital próprio**. Foco em tecnologia.
-* **SEP (Sociedade de Empréstimo entre Pessoas):** Realiza o **Peer-to-Peer (P2P)**, conectando credor e tomador diretamente.`
+* **SEP (Sociedade de Empréstimo entre Pessoas):** Realiza o **Peer-to-Peer (P2P)**, conectando credor e tomador diretamente.`,
+
+            openfinance: `
+### Open Finance: Portabilidade de Dados Financeiros
+O Open Finance é a evolução do Open Banking, permitindo que o cliente compartilhe **todos os seus dados financeiros** (não apenas bancários) com qualquer instituição autorizada.
+
+**Como funciona:**
+1. O cliente autoriza o compartilhamento de seus dados (histórico de crédito, investimentos, seguros).
+2. Fintechs e outros bancos acessam esses dados via API.
+3. O cliente recebe ofertas personalizadas e mais competitivas.
+
+**Impacto no Mercado de Capitais:**
+* Reduz a **assimetria de informação** que favorecia grandes bancos.
+* Aumenta a **concorrência** (pilar Competitividade da Agenda BC#).
+* Facilita o acesso de pequenas empresas a crédito mais barato no mercado de capitais.
+
+**Relação com Debêntures:** Uma empresa que compartilha seu histórico via Open Finance pode obter melhores condições em emissões privadas de debêntures.`,
+
+            intermediacao: `
+### Intermediação vs. Desintermediação Financeira
+
+**Intermediação Financeira:**
+> Poupador → **Banco** (cobra spread) → Tomador
+
+* O banco é o “atravessador” entre quem tem dinheiro e quem precisa.
+* Cobra uma taxa de empréstimo **maior** do que a taxa de captação.
+* A diferença = **Spread Bancário** (custo da intermediação).
+
+**Desintermediação Financeira:**
+> Investidor → **Mercado de Capitais** → Empresa Emissora
+
+* A empresa acessa diretamente os investidores, **eliminando o banco**.
+* Exemplo clássico: emissão de **debêntures**.
+* Vantagem para a empresa: custo de captação menor (sem spread).
+* Vantagem para o investidor: rentabilidade superior à dos produtos bancários.
+
+**Ponto de Prova:** A emissão de debêntures é exemplo de **desintermediação**, não de intermediação.`,
+
+            acoes_on_pn: `
+### Ações Ordinárias (ON) vs. Preferenciais (PN)
+
+| Característica | ON (sufixo 3) | PN (sufixo 4) |
+|---|---|---|
+| Direito a Voto | **Sim** | Não |
+| Preferência em Dividendos | Não | **Sim** |
+| Preferência em Liquidação | Não | **Sim** |
+| Perfil do Investidor | Controle/Gestão | Renda/Liquidez |
+| Exemplos B3 | VALE3, PETR3 | ITUB4, BBDC4 |
+
+**Estratégia de Emissão:** Quando uma família fundadora quer abrir capital (IPO) sem perder o controle, emite **Ações PN** para o mercado e retém as **Ações ON** (poder de voto).`,
+
+            tag_along: `
+### Tag Along: Proteção ao Acionista Minoritário
+O **Tag Along** garante ao acionista minoritário o direito de vender suas ações em caso de transferência do controle acionário.
+
+**Como funciona:**
+* Se o bloco controlador vende suas ações por R$ 100/ação...
+* O minoritário tem direito de vender pelo menos a **80% desse valor** (R$ 80/ação).
+* No **Novo Mercado da B3**: Tag Along de **100%** (mesmo preço do controlador).
+
+**Outros Direitos dos Acionistas:**
+* **Dividendo Mínimo Obrigatório:** 25% do lucro líquido ajustado (Lei 6.404/76).
+* **Direito de Preferência:** Acionistas existentes têm prioridade na subscrição de novas ações.
+* **Direito de Recesso:** Sair da empresa em caso de decisões prejudiciais.`,
+
+            mercado_primario: `
+### Mercado Primário vs. Mercado Secundário
+
+**Mercado Primário:**
+* É onde ocorre a **emissão** de novos títulos.
+* A empresa **capta recursos** diretamente dos investidores.
+* Exemplos: IPO (Oferta Pública Inicial), Follow-on, emissão de debêntures.
+* O dinheiro vai **para a empresa**.
+
+**Mercado Secundário:**
+* É onde os investidores **negociam entre si** os títulos já emitidos.
+* A empresa **não recebe** mais recursos.
+* Exemplos: negociação de ações na B3, negociação de debêntures no mercado secundário.
+* Garante **liquidez** ao investidor.
+
+**Ponto de Prova:** No mercado secundário, o dinheiro circula entre investidores, não para a empresa emissora.`,
+
+            governanca: `
+### Governança Corporativa: Níveis da B3
+A B3 criou segmentos especiais de listagem com requisitos progressivos de governança:
+
+| Nível | Requisitos Principais |
+|---|---|
+| **Novo Mercado** | Só ações ON; Tag Along 100%; mín. 25% de free float; Câmara de Arbitragem |
+| **Nível 2** | ON e PN; Tag Along 100% para ON e 100% para PN; arbitragem |
+| **Nível 1** | Maior transparência; mín. 25% de free float; divulgação mensal |
+| **Bovespa Mais** | Para empresas menores; acesso facilitado ao mercado |
+
+**Impacto:** Maior governança = menor custo de capital (investidores exigem menos prêmio de risco).`,
+
+            debentures: `
+### Debêntures: Conceito e Estrutura
+Debêntures são **títulos de dívida** emitidos por S.A. não financeiras para captar recursos de médio e longo prazo diretamente no mercado de capitais.
+
+**Partes envolvidas:**
+* **Emissora:** S.A. que precisa de recursos.
+* **Debenturista:** Investidor que compra o título (credor).
+* **Agente Fiduciário:** Representa os debenturistas e fiscaliza a emissora.
+* **Banco Coordenador:** Estrutura e distribui a emissão.
+
+**Vantagens para a empresa vs. empréstimo bancário:**
+* Custo menor (sem spread bancário)
+* Prazos mais longos (5 a 15 anos)
+* Maior flexibilidade nas condições
+* Acesso direto ao mercado (desintermediação)
+
+**Base legal:** Lei n.º 6.404/1976 (Lei das S.A.).`,
+
+            garantias: `
+### Hierarquia de Garantias das Debêntures
+Em ordem **decrescente de segurança** para o investidor:
+
+1. **Real** — Menor risco
+   * Lastreada em ativos tangíveis específicos (imóveis, máquinas).
+   * Em falência, esses bens são vendidos exclusivamente para pagar esses debenturistas.
+
+2. **Flutuante** — Baixo risco
+   * Privilégio sobre o ativo geral da empresa.
+   * Os bens não são vinculados especificamente e podem ser negociados.
+
+3. **Quirografária** — Risco médio
+   * Sem garantia específica.
+   * Em falência, concorre em igualdade com demais credores.
+   * **Modalidade mais comum no mercado.**
+
+4. **Subordinada** — Maior risco
+   * Último na ordem de recebimento em liquidação.
+   * Recebe apenas após todos os outros credores.
+   * Funciona quase como equity.
+
+**Regra geral:** Maior garantia = menor risco = menor taxa de juros paga pela empresa.`,
+
+            remuneracao: `
+### Tipos de Remuneração de Debêntures
+
+| Tipo | Fórmula | Perfil |
+|---|---|---|
+| **Prefixada** | Taxa fixa (ex: 12% a.a.) | Previsibilidade total |
+| **Pós-fixada (CDI)** | CDI + spread (ex: CDI + 2%) | Proteção contra alta de juros |
+| **Híbrida (IPCA+)** | IPCA + taxa real (ex: IPCA + 5%) | Proteção contra inflação |
+| **Participação nos Lucros** | % do lucro líquido | Risco compartilhado |
+
+**Tendência atual (2026):** Com a Selic elevada, as emissões pós-fixadas (CDI+) dominam o mercado, pois oferecem proteção automática contra variações da taxa de juros.
+
+**Escritura de Emissão:** Documento que define todos os termos da debêntüre: remuneração, prazo, garantias, vencimento e direitos dos debenturistas.`,
+
+            incentivadas: `
+### Debêntures Incentivadas (Lei n.º 12.431/2011)
+Criadas para financiar projetos de **infraestrutura** (energia, logística, saneamento, telecomunicações).
+
+**Benefício Fiscal (o grande atrativo):**
+
+| Investidor | Aliquota de IR |
+|---|---|
+| **Pessoa Física (PF)** | **0% (isenção total)** |
+| **Pessoa Jurídica (PJ)** | 15% (independente do prazo) |
+| **Estrangeiro** | 0% (isenção) |
+
+**Comparação com debêntüre comum:**
+* Debêntüre comum: IR regressivo de 22,5% a 15% (conforme prazo).
+* Debêntüre incentivada (PF): **0% de IR**.
+
+**Requisito:** O projeto deve ser prioritário, declarado pelo Ministério competente.
+
+**Ponto de Prova:** A isenção de IR para PF é o principal diferencial das debêntures incentivadas.`,
+
+            escritura: `
+### Escritura de Emissão e Rating de Crédito
+
+**Escritura de Emissão:**
+Documento jurídico que formaliza a emissão de debêntures. Contém:
+* Valor total da emissão e valor unitário
+* Prazo e datas de pagamento de juros (cupons)
+* Tipo de remuneração e indexador
+* Tipo de garantia
+* Direitos e obrigações da emissora (covenants)
+* Condições de vencimento antecipado
+
+**Rating de Crédito:**
+Classificação de risco atribuída por agência especializada (Moody's, S&P, Fitch).
+
+| Classificação | Significado |
+|---|---|
+| **AAA / Aaa** | Risco mínimo (grau de investimento) |
+| **AA / Aa** | Risco muito baixo |
+| **BBB / Baa** | Grau de investimento (limite inferior) |
+| **BB / Ba** | Especulativo (junk bond) |
+| **CCC e abaixo** | Alto risco de default |
+
+**Regra:** Quanto menor o rating, maior a taxa de juros exigida pelo mercado.`,
+
+            emissao: `
+### Processo de Emissão de Debêntures: ICVM 476 vs. 400
+
+| Característica | ICVM 476 (Esforços Restritos) | ICVM 400 (Oferta Pública) |
+|---|---|---|
+| Público-alvo | Máx. 75 investidores profissionais | Público em geral |
+| Registro CVM | Dispensado | Obrigatório |
+| Velocidade | Rápida (dias) | Lenta (meses) |
+| Custo | Menor | Maior |
+| Liquidez | Menor (mercado restrito) | Maior |
+
+**Etapas da emissão (ICVM 400):**
+1. Assembleia de acionistas aprova a emissão
+2. Contratação do banco coordenador
+3. Elaboração da escritura e prospecto
+4. Registro na CVM
+5. Roadshow (apresentação aos investidores)
+6. Bookbuilding (formação do livro de ordens)
+7. Liquidação e emissão dos títulos`,
+
+            prospecto: `
+### Teoria do Prospecto (Kahneman & Tversky, 1979)
+A Teoria do Prospecto é a base das Finanças Comportamentais. Postula que as pessoas **não avaliam resultados em termos absolutos**, mas em relação a um **ponto de referência**.
+
+**Principais descobertas:**
+1. **Aversão à Perda:** A dor de perder R$ 1.000 é ~2x maior que a alegria de ganhar R$ 1.000.
+2. **Sensibilidade Decrescente:** Ganhos e perdas adicionais impactam cada vez menos.
+3. **Ponderamento de Probabilidades:** Superestimamos eventos raros (loteria) e subestimamos eventos moderados.
+
+**Função de Valor:**
+* No domínio dos **ganhos**: comportamento **avesso ao risco** (vende cedo demais).
+* No domínio das **perdas**: comportamento **propenso ao risco** (segura ativo perdedor).
+
+**Prêmio Nobel:** Daniel Kahneman recebeu o Nobel de Economia em 2002 por este trabalho.`,
+
+            aversao: `
+### Aversão à Perda
+O viés mais importante das Finanças Comportamentais.
+
+**Definição:** A dor psicológica de uma perda é aproximadamente **2 vezes maior** do que o prazer de um ganho equivalente.
+
+**Manifestações no mercado:**
+* **Efeito Disposição:** Vender ações vencedoras cedo demais (realizar o ganho) e segurar as perdedoras (evitar realizar a perda).
+* **Paralisia por Análise:** Não tomar decisões por medo de errar.
+* **Relação com Debêntures:** Investidor pode rejeitar debêntures quirográfarias mesmo com boa remuneração, por aversão ao risco de perda do principal.
+
+**Exemplo:** Um investidor com ação comprada a R$ 50 (hoje valendo R$ 30) se recusa a vender, esperando “voltar ao preço de compra”. Isso é aversão à perda combinada com ancoragem.`,
+
+            ancoragem: `
+### Ancoragem
+O viés de ancoragem ocorre quando uma pessoa usa uma **informação inicial** (a âncora) como referência excessiva para decisões subsequentes.
+
+**Exemplos no mercado financeiro:**
+* **Preço de Compra:** Investidor que comprou ação a R$ 100 usa esse valor como âncora, recusando-se a vender por R$ 80 mesmo que os fundamentos da empresa tenham deteriorado.
+* **Preço-alvo de analista:** Investidor ancora suas expectativas no preço-alvo divulgado, ignorando novas informações.
+* **Negociação:** O primeiro preço oferecido em uma negociação ancora toda a discussão subsequente.
+
+**Relação com Debêntures:** Investidor que comprou debêntüre a 100% do valor nominal pode rejeitar vendê-la no mercado secundário por 95%, mesmo sendo uma decisão racional.`,
+
+            manada: `
+### Comportamento de Manada (Herding)
+Tendência de investidores seguirem as decisões da maioria, independentemente de análise própria.
+
+**Causas:**
+* Medo de errar sozinho (pressão social).
+* Assimetria de informação (acreditar que a maioria sabe mais).
+* Incentivos institucionais (gestores que não querem se desviar do benchmark).
+
+**Consequências no mercado:**
+* **Bolhas:** Preços sobem muito além do valor fundamental (ex: bolha das .com, 2000).
+* **Crashes:** Quedas abruptas quando a manada reverte a direção.
+* **Contagió:** Crise em um ativo se espalha para outros sem relação.
+
+**Exemplo:** Durante a pandemia (2020), investidores venderam em massa todos os ativos de risco (inclusive debêntures de alta qualidade), gerando oportunidades para quem não seguiu a manada.`,
+
+            disposicao: `
+### Efeito Disposição
+Combinação de aversão à perda e busca por certeza que leva o investidor a:
+
+* **Vender cedo demais** os ativos vencedores (para “garantir o lucro”).
+* **Segurar por muito tempo** os ativos perdedores (para “não realizar o prejuízo”).
+
+**Por que é prejudicial?**
+* Corta os ganhos antes do tempo (vende ação que ainda tinha potencial).
+* Deixa as perdas crescerem (segura ação que continua caindo).
+* Resultado: carteira com muitos perdedores e poucos vencedores.
+
+**Solução:** Regras de stop loss e rebalanceamento periódico retiram a emoção do processo decisorio.
+
+**Relação com a Teoria do Prospecto:** O efeito disposição é a manifestação prática da função de valor assimétrica de Kahneman e Tversky.`,
+
+            excesso_confianca: `
+### Excesso de Confiança (Overconfidence)
+Tendência de superestimar as próprias habilidades, conhecimentos e precisão das previsões.
+
+**Manifestações:**
+* **Excesso de negociação:** Investidor opera com frequência excessiva, acreditando ter vantagem informacional. Resultado: custos de transação elevados que destroem retorno.
+* **Subestimação de riscos:** Acreditar que “comigo não vai acontecer”.
+* **Concentração excessiva:** Colocar muito dinheiro em poucos ativos por “convicção”.
+
+**Evidência empírica:** Estudos mostram que investidores individuais que operam mais frequentemente obtm retornos menores do que os que operam menos.
+
+**Relação com outros viéses:** O excesso de confiança amplifica a ancoragem (confiança excessiva na própria âncora) e o comportamento de manada inverso (acreditar saber mais que o mercado).`
         };
 
         function handleLogin() {
