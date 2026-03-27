@@ -2,81 +2,56 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="v1-20260327">
+    <meta name="version" content="v2-20260327">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aula de Revisão — 1º NPC | Mercado de Capitais 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ========== RESET E LAYOUT ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            width: 100%; height: 100%;
-            overflow: hidden;
-            background: #020617;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .presentation-wrapper {
-            display: flex;
-            width: 1200vw;
-            height: 100vh;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .slide-page {
-            width: 100vw; height: 100vh;
-            flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-        }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #020617; font-family: 'Montserrat', sans-serif; }
+        .presentation-wrapper { display: flex; width: 1600vw; height: 100vh; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slide-page { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .slide-page .slide-container { flex-shrink: 0; transform-origin: center center; }
 
-        /* ========== BOTÃO HOME ========== */
         .btn-home {
             position: fixed; top: 1.2rem; left: 1.2rem; z-index: 9999;
             display: flex; align-items: center; gap: 0.5rem;
-            background: rgba(2, 6, 23, 0.85);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(2,6,23,0.85); border: 1px solid rgba(255,255,255,0.12);
             color: #f8fafc; padding: 0.55rem 1.1rem; border-radius: 9999px;
-            font-size: 0.78rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.05em; cursor: pointer; text-decoration: none;
-            backdrop-filter: blur(10px); transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .btn-home:hover { background: #f59e0b; color: #000; border-color: #f59e0b; transform: translateY(-1px); }
 
-        /* ========== BOTÃO IMPRIMIR ========== */
         .btn-print {
             position: fixed; top: 1.2rem; right: 1.2rem; z-index: 9999;
             display: flex; align-items: center; gap: 0.5rem;
-            background: rgba(2, 6, 23, 0.85);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(2,6,23,0.85); border: 1px solid rgba(255,255,255,0.12);
             color: #f8fafc; padding: 0.55rem 1.1rem; border-radius: 9999px;
-            font-size: 0.78rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.05em; cursor: pointer;
-            backdrop-filter: blur(10px); transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .btn-print:hover { background: #64FFDA; color: #000; border-color: #64FFDA; transform: translateY(-1px); }
 
-        /* ========== NAVEGAÇÃO INFERIOR ========== */
         .nav-ui {
             position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
             display: flex; gap: 1.5rem; align-items: center; z-index: 9999;
-            background: rgba(2, 6, 23, 0.85); padding: 0.6rem 1.5rem; border-radius: 9999px;
-            border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            background: rgba(2,6,23,0.85); padding: 0.6rem 1.5rem; border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
         .btn-nav {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            color: white; padding: 0.5rem 1.2rem; border-radius: 9999px;
-            font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease;
+            color: white; padding: 0.5rem 1.4rem; border-radius: 9999px;
+            font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease;
             font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em;
         }
         .btn-nav:hover { background: #f59e0b; color: #000; border-color: #f59e0b; }
         .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
         .btn-nav:disabled:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
-        #slide-counter { font-size: 0.75rem; color: #94a3b8; font-family: 'Roboto Mono', monospace; min-width: 60px; text-align: center; }
+        #slide-counter { font-size: 0.82rem; color: #94a3b8; font-family: 'Roboto Mono', monospace; min-width: 70px; text-align: center; }
 
-        /* ========== IMPRESSÃO ========== */
         @media print {
             .nav-ui, .btn-home, .btn-print { display: none !important; }
             html, body { overflow: visible !important; background: white !important; }
@@ -85,309 +60,121 @@
             .slide-page .slide-container { width: 1280px !important; min-height: 720px; transform: none !important; }
         }
 
-        /* ========== ESTILOS COMUNS ========== */
-        .slide-container {
-            width: 1280px; min-height: 720px;
-            background-color: #020617;
-            font-family: 'Montserrat', sans-serif;
-            color: #E6F1FF; position: relative;
-        }
+        /* ── BASE ── */
+        .slide-container { width: 1280px; min-height: 720px; background-color: #020617; font-family: 'Montserrat', sans-serif; color: #E6F1FF; position: relative; }
         .bg-grid {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image:
-                linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(100, 255, 218, 0.05) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(100,255,218,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(100,255,218,0.05) 1px, transparent 1px);
             background-size: 40px 40px; z-index: 0; pointer-events: none;
         }
-        .accent { color: #64FFDA; }
+        .slide-inner { position: relative; z-index: 1; height: 100%; }
+
+        /* ── TIPOGRAFIA GLOBAL DOS SLIDES ── */
+        .slide-tag { display: inline-block; background: rgba(100,255,218,0.1); border: 1px solid rgba(100,255,218,0.3); color: #64FFDA; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
+        .slide-eyebrow { font-size: 0.72rem; color: #64FFDA; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .slide-h1 { font-size: 2.6rem; font-weight: 900; color: #E6F1FF; line-height: 1.1; }
+        .slide-h1 span { color: #64FFDA; }
+        .slide-h2 { font-size: 1.9rem; font-weight: 900; color: #E6F1FF; line-height: 1.15; }
+        .slide-h2 span { color: #64FFDA; }
+        .slide-h3 { font-size: 1rem; font-weight: 700; color: #64FFDA; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+        .slide-body { font-size: 0.95rem; color: #cbd5e1; line-height: 1.65; }
+        .slide-small { font-size: 0.85rem; color: #94a3b8; line-height: 1.6; }
+        .slide-mono { font-family: 'Roboto Mono', monospace; }
+        .accent-teal { color: #64FFDA; }
         .accent-yellow { color: #f59e0b; }
         .accent-red { color: #f87171; }
         .accent-blue { color: #60a5fa; }
+        .divider { width: 72px; height: 4px; background: linear-gradient(90deg, #64FFDA, #60a5fa); border-radius: 2px; margin: 1rem 0 1.4rem; }
 
-        /* ========== SLIDE 1: CAPA ========== */
-        .s1-container {
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: flex-start; height: 720px; padding: 0 80px; position: relative; overflow: hidden;
-        }
-        .s1-bg-accent {
-            position: absolute; right: -100px; top: -100px;
-            width: 600px; height: 600px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(100,255,218,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .s1-tag {
-            background: rgba(100,255,218,0.1); border: 1px solid rgba(100,255,218,0.3);
-            color: #64FFDA; padding: 0.4rem 1rem; border-radius: 9999px;
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
-            text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block;
-        }
-        .s1-title {
-            font-size: 3.5rem; font-weight: 900; line-height: 1.1;
-            color: #E6F1FF; margin-bottom: 0.5rem;
-        }
-        .s1-subtitle {
-            font-size: 1.6rem; font-weight: 300; color: #94a3b8; margin-bottom: 2rem;
-        }
-        .s1-meta {
-            display: flex; gap: 2rem; margin-bottom: 2.5rem;
-        }
-        .s1-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
-        .s1-meta-label { font-size: 0.65rem; color: #64FFDA; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-        .s1-meta-value { font-size: 0.9rem; color: #cbd5e1; font-weight: 600; }
-        .s1-topics {
-            display: flex; gap: 1rem; flex-wrap: wrap;
-        }
-        .s1-topic-badge {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8; padding: 0.4rem 0.9rem; border-radius: 9999px;
-            font-size: 0.72rem; font-weight: 600;
-        }
-        .s1-line {
-            width: 80px; height: 4px; background: linear-gradient(90deg, #64FFDA, #60a5fa);
-            border-radius: 2px; margin-bottom: 1.5rem;
-        }
+        /* ── CARDS GENÉRICOS ── */
+        .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 1.4rem 1.6rem; }
+        .card-teal { background: rgba(100,255,218,0.07); border-color: rgba(100,255,218,0.25); }
+        .card-blue { background: rgba(96,165,250,0.07); border-color: rgba(96,165,250,0.25); }
+        .card-yellow { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.25); }
+        .card-red { background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.25); }
 
-        /* ========== SLIDE 2: BIBLIOGRAFIA ========== */
-        .s2-container {
-            display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative;
-        }
-        .slide-header { margin-bottom: 2rem; }
-        .slide-number { font-size: 0.65rem; color: #64FFDA; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .slide-title { font-size: 2rem; font-weight: 900; color: #E6F1FF; }
-        .slide-title span { color: #64FFDA; }
-        .s2-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .s2-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem 1.4rem;
-        }
-        .s2-card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .s2-card-title { font-size: 0.75rem; font-weight: 700; color: #64FFDA; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
-        .s2-card-ref { font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; }
-        .s2-card-ref em { color: #94a3b8; }
-        .s2-note { margin-top: 1.5rem; background: rgba(100,255,218,0.05); border-left: 3px solid #64FFDA; padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; }
-        .s2-note-text { font-size: 0.78rem; color: #94a3b8; line-height: 1.6; }
+        /* ── CALLOUT ── */
+        .callout { border-radius: 10px; padding: 1rem 1.3rem; font-size: 0.92rem; line-height: 1.6; }
+        .callout-yellow { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); color: #fde68a; }
+        .callout-teal  { background: rgba(100,255,218,0.07); border: 1px solid rgba(100,255,218,0.25); color: #a7f3d0; }
+        .callout-blue  { background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.25); color: #bfdbfe; }
+        .callout-red   { background: rgba(248,113,113,0.07); border: 1px solid rgba(248,113,113,0.25); color: #fecaca; }
 
-        /* ========== SLIDE 3: SFN ========== */
-        .s3-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s3-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-        .s3-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem 1.4rem;
-        }
-        .s3-card-title { font-size: 0.8rem; font-weight: 700; color: #64FFDA; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
-        .s3-card-body { font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; }
-        .s3-highlight {
-            margin-top: 1.5rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
-            border-radius: 10px; padding: 1rem 1.2rem;
-            font-size: 0.82rem; color: #fde68a; line-height: 1.6;
-        }
-        .s3-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.78rem; }
-        .s3-table th { background: rgba(100,255,218,0.1); color: #64FFDA; padding: 0.5rem 0.8rem; text-align: left; font-weight: 700; letter-spacing: 0.05em; }
-        .s3-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: #cbd5e1; }
-        .s3-table tr:last-child td { border-bottom: none; }
+        /* ── BADGE ── */
+        .badge { display: inline-block; padding: 0.3rem 0.85rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; }
+        .badge-teal { background: rgba(100,255,218,0.12); color: #64FFDA; border: 1px solid rgba(100,255,218,0.3); }
+        .badge-blue { background: rgba(96,165,250,0.12); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+        .badge-yellow { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+        .badge-red { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
 
-        /* ========== SLIDE 4: AGENDA BC# ========== */
-        .s4-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s4-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
-        .s4-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem 1.4rem;
-            display: flex; flex-direction: column; gap: 0.5rem;
-        }
-        .s4-card-num { font-size: 2rem; font-weight: 900; color: rgba(100,255,218,0.2); line-height: 1; }
-        .s4-card-title { font-size: 1rem; font-weight: 700; color: #64FFDA; }
-        .s4-card-body { font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
-        .s4-card-example { font-size: 0.75rem; color: #fde68a; margin-top: 0.3rem; font-style: italic; }
-        .s4-quiz {
-            margin-top: 1.5rem; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.25);
-            border-radius: 10px; padding: 1rem 1.2rem;
-        }
-        .s4-quiz-label { font-size: 0.65rem; font-weight: 700; color: #60a5fa; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .s4-quiz-text { font-size: 0.82rem; color: #bfdbfe; line-height: 1.5; }
+        /* ── TABLE ── */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .data-table th { background: rgba(100,255,218,0.1); color: #64FFDA; padding: 0.6rem 1rem; text-align: left; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; }
+        .data-table td { padding: 0.6rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: #cbd5e1; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .td-teal { color: #64FFDA; font-weight: 700; }
+        .data-table .td-red  { color: #f87171; }
 
-        /* ========== SLIDE 5: AÇÕES ========== */
-        .s5-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s5-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
-        .s5-card {
-            border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden;
-        }
-        .s5-card-on { background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.3); }
-        .s5-card-pn { background: rgba(100,255,218,0.08); border: 1px solid rgba(100,255,218,0.3); }
-        .s5-card-badge {
-            display: inline-block; padding: 0.3rem 0.8rem; border-radius: 9999px;
-            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem;
-        }
-        .s5-badge-on { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
-        .s5-badge-pn { background: rgba(100,255,218,0.15); color: #64FFDA; border: 1px solid rgba(100,255,218,0.3); }
-        .s5-card-name { font-size: 1.4rem; font-weight: 900; margin-bottom: 0.3rem; }
-        .s5-card-code { font-size: 0.75rem; color: #94a3b8; font-family: 'Roboto Mono', monospace; margin-bottom: 1rem; }
-        .s5-feature { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.5rem; }
-        .s5-feature-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 0.35rem; flex-shrink: 0; }
-        .s5-dot-on { background: #60a5fa; }
-        .s5-dot-pn { background: #64FFDA; }
-        .s5-feature-text { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
-        .s5-case {
-            margin-top: 1.5rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
-            border-radius: 10px; padding: 1rem 1.2rem;
-        }
-        .s5-case-label { font-size: 0.65rem; font-weight: 700; color: #f59e0b; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .s5-case-text { font-size: 0.82rem; color: #fde68a; line-height: 1.5; }
+        /* ── BULLET LIST ── */
+        .blist { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .blist li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.92rem; color: #cbd5e1; line-height: 1.5; }
+        .blist li::before { content: "→"; color: #64FFDA; font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
 
-        /* ========== SLIDE 6: DEBÊNTURES CONCEITO ========== */
-        .s6-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s6-def {
-            background: rgba(100,255,218,0.05); border-left: 4px solid #64FFDA;
-            padding: 1rem 1.2rem; border-radius: 0 10px 10px 0; margin-top: 1.2rem; margin-bottom: 1.5rem;
-        }
-        .s6-def-text { font-size: 0.9rem; color: #E6F1FF; line-height: 1.6; }
-        .s6-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .s6-col-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .s6-col-bank { color: #f87171; }
-        .s6-col-deb { color: #64FFDA; }
-        .s6-item { display: flex; gap: 0.6rem; margin-bottom: 0.5rem; align-items: flex-start; }
-        .s6-item-label { font-size: 0.7rem; font-weight: 700; color: #94a3b8; min-width: 80px; }
-        .s6-item-value { font-size: 0.78rem; color: #cbd5e1; line-height: 1.4; }
-        .s6-bottom {
-            margin-top: 1.5rem; background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.2);
-            border-radius: 10px; padding: 0.9rem 1.2rem;
-            font-size: 0.8rem; color: #bfdbfe; line-height: 1.5;
-        }
+        /* ── LAYOUT HELPERS ── */
+        .pad { padding: 52px 72px; height: 720px; display: flex; flex-direction: column; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4rem; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .mt-sm { margin-top: 1rem; }
+        .mt-md { margin-top: 1.5rem; }
+        .mt-lg { margin-top: 2rem; }
+        .flex-center { display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .gap-sm { gap: 0.6rem; }
+        .gap-md { gap: 1rem; }
 
-        /* ========== SLIDE 7: GARANTIAS ========== */
-        .s7-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s7-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
-        .s7-card {
-            border-radius: 12px; padding: 1.2rem 1.4rem; position: relative;
-        }
-        .s7-card-1 { background: rgba(100,255,218,0.08); border: 1px solid rgba(100,255,218,0.3); }
-        .s7-card-2 { background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.3); }
-        .s7-card-3 { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); }
-        .s7-card-4 { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); }
-        .s7-card-rank { font-size: 2rem; font-weight: 900; opacity: 0.2; position: absolute; top: 0.8rem; right: 1rem; }
-        .s7-card-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .s7-card-1 .s7-card-title { color: #64FFDA; }
-        .s7-card-2 .s7-card-title { color: #60a5fa; }
-        .s7-card-3 .s7-card-title { color: #f59e0b; }
-        .s7-card-4 .s7-card-title { color: #f87171; }
-        .s7-card-body { font-size: 0.78rem; color: #94a3b8; line-height: 1.5; }
-        .s7-quiz {
-            margin-top: 1.5rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
-            border-radius: 10px; padding: 1rem 1.2rem;
-        }
-        .s7-quiz-label { font-size: 0.65rem; font-weight: 700; color: #f59e0b; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .s7-quiz-text { font-size: 0.82rem; color: #fde68a; line-height: 1.5; }
+        /* ── SLIDE CAPA ── */
+        .capa-wrap { height: 720px; display: flex; flex-direction: column; justify-content: center; padding: 0 88px; position: relative; overflow: hidden; }
+        .capa-glow { position: absolute; right: -80px; top: -80px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(100,255,218,0.09) 0%, transparent 70%); pointer-events: none; }
+        .capa-title { font-size: 4rem; font-weight: 900; line-height: 1.05; color: #E6F1FF; margin-bottom: 0.4rem; }
+        .capa-sub { font-size: 1.5rem; font-weight: 300; color: #94a3b8; margin-bottom: 2rem; }
+        .capa-meta { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; }
+        .capa-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+        .capa-meta-label { font-size: 0.68rem; color: #64FFDA; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .capa-meta-value { font-size: 1rem; color: #cbd5e1; font-weight: 600; }
+        .capa-chips { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .capa-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 600; }
 
-        /* ========== SLIDE 8: DEBÊNTURES INCENTIVADAS ========== */
-        .s8-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s8-top { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-        .s8-info-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem 1.4rem;
-        }
-        .s8-info-title { font-size: 0.75rem; font-weight: 700; color: #64FFDA; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem; }
-        .s8-info-body { font-size: 0.8rem; color: #cbd5e1; line-height: 1.6; }
-        .s8-ir-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.8rem; }
-        .s8-ir-table th { background: rgba(100,255,218,0.1); color: #64FFDA; padding: 0.6rem 1rem; text-align: left; font-weight: 700; }
-        .s8-ir-table td { padding: 0.6rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: #cbd5e1; }
-        .s8-ir-table tr:last-child td { border-bottom: none; }
-        .s8-ir-table .highlight-cell { color: #64FFDA; font-weight: 700; }
-        .s8-ir-table .highlight-cell-red { color: #f87171; }
-        .s8-bottom {
-            margin-top: 1.5rem; background: rgba(100,255,218,0.06); border: 1px solid rgba(100,255,218,0.2);
-            border-radius: 10px; padding: 0.9rem 1.2rem;
-            font-size: 0.8rem; color: #a7f3d0; line-height: 1.5;
-        }
+        /* ── SLIDE ENCERRAMENTO ── */
+        .enc-wrap { height: 720px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 100px; position: relative; overflow: hidden; }
+        .enc-title { font-size: 3.2rem; font-weight: 900; color: #E6F1FF; margin-bottom: 1rem; line-height: 1.15; }
+        .enc-sub { font-size: 1.05rem; color: #94a3b8; max-width: 640px; line-height: 1.7; margin-bottom: 2rem; }
+        .enc-checklist { display: flex; flex-direction: column; gap: 0.8rem; text-align: left; max-width: 620px; width: 100%; margin-bottom: 2rem; }
+        .enc-check { display: flex; align-items: center; gap: 0.9rem; }
+        .enc-check-icon { width: 26px; height: 26px; background: rgba(100,255,218,0.12); border: 1px solid rgba(100,255,218,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .enc-check-text { font-size: 0.92rem; color: #cbd5e1; }
+        .enc-footer { font-size: 0.78rem; color: #475569; }
 
-        /* ========== SLIDE 9: FINANÇAS COMPORTAMENTAIS ========== */
-        .s9-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s9-intro { font-size: 0.85rem; color: #94a3b8; line-height: 1.6; margin-top: 0.8rem; margin-bottom: 1.5rem; }
-        .s9-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
-        .s9-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;
-        }
-        .s9-card-icon { font-size: 1.8rem; }
-        .s9-card-title { font-size: 0.85rem; font-weight: 700; color: #64FFDA; }
-        .s9-card-body { font-size: 0.78rem; color: #94a3b8; line-height: 1.5; }
-        .s9-card-example { font-size: 0.75rem; color: #fde68a; font-style: italic; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.5rem; margin-top: 0.3rem; }
-        .s9-quiz {
-            margin-top: 1.5rem; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25);
-            border-radius: 10px; padding: 1rem 1.2rem;
-        }
-        .s9-quiz-label { font-size: 0.65rem; font-weight: 700; color: #f87171; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .s9-quiz-text { font-size: 0.82rem; color: #fecaca; line-height: 1.5; }
+        /* ── VIÉS CARD ── */
+        .vies-card { border-radius: 14px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; }
+        .vies-icon { font-size: 2rem; line-height: 1; }
+        .vies-title { font-size: 1rem; font-weight: 700; }
+        .vies-body { font-size: 0.88rem; color: #94a3b8; line-height: 1.55; }
+        .vies-quote { font-size: 0.82rem; font-style: italic; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.6rem; margin-top: 0.3rem; }
 
-        /* ========== SLIDE 10: MAPA MENTAL ========== */
-        .s10-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s10-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
-        .s10-topic {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 1.2rem;
-        }
-        .s10-topic-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .s10-topic-1 .s10-topic-title { color: #60a5fa; }
-        .s10-topic-2 .s10-topic-title { color: #64FFDA; }
-        .s10-topic-3 .s10-topic-title { color: #f59e0b; }
-        .s10-item { font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.3rem; display: flex; gap: 0.4rem; }
-        .s10-item::before { content: "→"; color: #64FFDA; flex-shrink: 0; }
-        .s10-alert {
-            margin-top: 1.5rem; background: rgba(100,255,218,0.06); border: 1px solid rgba(100,255,218,0.2);
-            border-radius: 10px; padding: 1rem 1.2rem;
-            font-size: 0.82rem; color: #a7f3d0; line-height: 1.5; text-align: center;
-        }
-
-        /* ========== SLIDE 11: ESTUDO DE CASO ========== */
-        .s11-container { display: flex; flex-direction: column; height: 720px; padding: 48px 72px; position: relative; }
-        .s11-scenario {
-            background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2);
-            border-radius: 12px; padding: 1.2rem 1.4rem; margin-top: 1.2rem; margin-bottom: 1.2rem;
-        }
-        .s11-scenario-title { font-size: 0.75rem; font-weight: 700; color: #f59e0b; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
-        .s11-scenario-text { font-size: 0.82rem; color: #fde68a; line-height: 1.6; }
-        .s11-tasks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-        .s11-task {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px; padding: 1rem;
-        }
-        .s11-task-letter { font-size: 1.5rem; font-weight: 900; color: rgba(100,255,218,0.3); margin-bottom: 0.3rem; }
-        .s11-task-title { font-size: 0.75rem; font-weight: 700; color: #64FFDA; margin-bottom: 0.4rem; }
-        .s11-task-body { font-size: 0.75rem; color: #94a3b8; line-height: 1.5; }
-        .s11-hint {
-            margin-top: 1.2rem; background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.2);
-            border-radius: 10px; padding: 0.9rem 1.2rem;
-            font-size: 0.8rem; color: #bfdbfe; line-height: 1.5;
-        }
-
-        /* ========== SLIDE 12: ENCERRAMENTO ========== */
-        .s12-container {
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; height: 720px; padding: 0 80px; position: relative; text-align: center;
-        }
-        .s12-tag {
-            background: rgba(100,255,218,0.1); border: 1px solid rgba(100,255,218,0.3);
-            color: #64FFDA; padding: 0.4rem 1rem; border-radius: 9999px;
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
-            text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block;
-        }
-        .s12-title { font-size: 2.8rem; font-weight: 900; color: #E6F1FF; margin-bottom: 1rem; line-height: 1.2; }
-        .s12-subtitle { font-size: 1rem; color: #94a3b8; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.6; }
-        .s12-checklist { display: flex; flex-direction: column; gap: 0.8rem; text-align: left; max-width: 600px; margin-bottom: 2rem; }
-        .s12-check { display: flex; align-items: center; gap: 0.8rem; }
-        .s12-check-icon { width: 24px; height: 24px; background: rgba(100,255,218,0.15); border: 1px solid rgba(100,255,218,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .s12-check-icon svg { width: 12px; height: 12px; color: #64FFDA; }
-        .s12-check-text { font-size: 0.85rem; color: #cbd5e1; }
-        .s12-footer { font-size: 0.75rem; color: #475569; }
+        /* ── GARANTIA CARD ── */
+        .gar-card { border-radius: 14px; padding: 1.3rem 1.5rem; position: relative; }
+        .gar-rank { font-size: 2.4rem; font-weight: 900; opacity: 0.15; position: absolute; top: 0.7rem; right: 1.1rem; line-height: 1; }
+        .gar-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .gar-body { font-size: 0.88rem; color: #94a3b8; line-height: 1.55; }
     </style>
 </head>
 <body>
 
-<!-- BOTÃO HOME -->
 <a href="index.html" class="btn-home">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
     Página Inicial
 </a>
 
-<!-- BOTÃO IMPRIMIR -->
 <button class="btn-print" onclick="printSlides()">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.056 48.056 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
     Exportar PDF
@@ -395,555 +182,494 @@
 
 <div class="presentation-wrapper" id="presentation">
 
-    <!-- ===== SLIDE 1: CAPA ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s1-container">
-                <div class="s1-bg-accent"></div>
-                <div class="s1-tag">Revisão · 1º NPC · 2026.1</div>
-                <div class="s1-line"></div>
-                <div class="s1-title">Revisão para a<br><span class="accent">Primeira Prova</span></div>
-                <div class="s1-subtitle">Mercado de Capitais e Derivativos</div>
-                <div class="s1-meta">
-                    <div class="s1-meta-item">
-                        <span class="s1-meta-label">Turma</span>
-                        <span class="s1-meta-value">ADM7N1</span>
-                    </div>
-                    <div class="s1-meta-item">
-                        <span class="s1-meta-label">Data</span>
-                        <span class="s1-meta-value">27/03/2026</span>
-                    </div>
-                    <div class="s1-meta-item">
-                        <span class="s1-meta-label">Professora</span>
-                        <span class="s1-meta-value">Renata Novaes</span>
-                    </div>
-                    <div class="s1-meta-item">
-                        <span class="s1-meta-label">Semana</span>
-                        <span class="s1-meta-value">Revisão</span>
-                    </div>
-                </div>
-                <div class="s1-topics">
-                    <span class="s1-topic-badge">SFN &amp; Agenda BC#</span>
-                    <span class="s1-topic-badge">Ações ON vs PN</span>
-                    <span class="s1-topic-badge">Debêntures</span>
-                    <span class="s1-topic-badge">Garantias</span>
-                    <span class="s1-topic-badge">Debêntures Incentivadas</span>
-                    <span class="s1-topic-badge">Finanças Comportamentais</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 1 — CAPA
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="capa-wrap slide-inner">
+    <div class="capa-glow"></div>
+    <div class="slide-tag">Revisão · 1º NPC · 2026.1</div>
+    <div class="divider"></div>
+    <div class="capa-title">Revisão para a<br><span style="color:#64FFDA">Primeira Prova</span></div>
+    <div class="capa-sub">Mercado de Capitais e Derivativos</div>
+    <div class="capa-meta">
+        <div class="capa-meta-item"><span class="capa-meta-label">Turma</span><span class="capa-meta-value">ADM7N1</span></div>
+        <div class="capa-meta-item"><span class="capa-meta-label">Data</span><span class="capa-meta-value">27/03/2026</span></div>
+        <div class="capa-meta-item"><span class="capa-meta-label">Professora</span><span class="capa-meta-value">Renata Novaes</span></div>
+        <div class="capa-meta-item"><span class="capa-meta-label">Semana</span><span class="capa-meta-value">Revisão NPC 1</span></div>
+    </div>
+    <div class="capa-chips">
+        <span class="capa-chip">SFN &amp; Agenda BC#</span>
+        <span class="capa-chip">Ações ON vs PN</span>
+        <span class="capa-chip">Debêntures</span>
+        <span class="capa-chip">Garantias</span>
+        <span class="capa-chip">Debêntures Incentivadas</span>
+        <span class="capa-chip">Finanças Comportamentais</span>
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 2: BIBLIOGRAFIA ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s2-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 02 · Referências</div>
-                    <div class="slide-title">Bibliografia <span>Recomendada</span></div>
-                </div>
-                <div class="s2-grid">
-                    <div class="s2-card">
-                        <div class="s2-card-icon">📚</div>
-                        <div class="s2-card-title">Mercado Financeiro</div>
-                        <div class="s2-card-ref">ASSAF NETO, Alexandre. <em>Mercado Financeiro</em>. 15. ed. São Paulo: Atlas, 2021.</div>
-                    </div>
-                    <div class="s2-card">
-                        <div class="s2-card-icon">📊</div>
-                        <div class="s2-card-title">Mercado de Capitais</div>
-                        <div class="s2-card-ref">PINHEIRO, Juliano Lima. <em>Mercado de Capitais: Fundamentos e Técnicas</em>. São Paulo: Atlas, 2019.</div>
-                    </div>
-                    <div class="s2-card">
-                        <div class="s2-card-icon">🧠</div>
-                        <div class="s2-card-title">Teoria do Prospecto</div>
-                        <div class="s2-card-ref">KAHNEMAN, D.; TVERSKY, A. Prospect theory: An analysis of decision under risk. <em>Econometrica</em>, 47(2), 263–291, 1979.</div>
-                    </div>
-                    <div class="s2-card">
-                        <div class="s2-card-icon">🏛️</div>
-                        <div class="s2-card-title">Banco Central do Brasil</div>
-                        <div class="s2-card-ref">BANCO CENTRAL DO BRASIL. <em>SFN em Transformação</em>. Brasília: BCB, 2023. Disponível em: bcb.gov.br</div>
-                    </div>
-                </div>
-                <div class="s2-note">
-                    <div class="s2-note-text">💡 <strong>Dica de Estudo:</strong> Releia os slides das Aulas 01 (SFN), 02 (Macroeconomia), 03 (Ações), 04 (Debêntures) e 07 (Vieses Comportamentais) antes da prova. Todo o conteúdo do NPC está ancorado nessas aulas.</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 2 — BIBLIOGRAFIA
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 02 · Referências</div>
+    <div class="slide-h2">Bibliografia <span>Recomendada</span></div>
+    <div class="divider"></div>
+    <div class="grid-2" style="flex:1">
+        <div class="card">
+            <div style="font-size:1.6rem;margin-bottom:0.6rem">📚</div>
+            <div class="slide-h3">Mercado Financeiro</div>
+            <div class="slide-body">ASSAF NETO, Alexandre. <em style="color:#94a3b8">Mercado Financeiro</em>. 15. ed. São Paulo: Atlas, 2021.</div>
         </div>
-    </section>
+        <div class="card">
+            <div style="font-size:1.6rem;margin-bottom:0.6rem">📊</div>
+            <div class="slide-h3">Mercado de Capitais</div>
+            <div class="slide-body">PINHEIRO, Juliano Lima. <em style="color:#94a3b8">Mercado de Capitais: Fundamentos e Técnicas</em>. São Paulo: Atlas, 2019.</div>
+        </div>
+        <div class="card">
+            <div style="font-size:1.6rem;margin-bottom:0.6rem">🧠</div>
+            <div class="slide-h3">Teoria do Prospecto</div>
+            <div class="slide-body">KAHNEMAN, D.; TVERSKY, A. Prospect theory: An analysis of decision under risk. <em style="color:#94a3b8">Econometrica</em>, 47(2), 263–291, 1979.</div>
+        </div>
+        <div class="card">
+            <div style="font-size:1.6rem;margin-bottom:0.6rem">🏛️</div>
+            <div class="slide-h3">Banco Central do Brasil</div>
+            <div class="slide-body">BANCO CENTRAL DO BRASIL. <em style="color:#94a3b8">SFN em Transformação</em>. Brasília: BCB, 2023. Disponível em: bcb.gov.br</div>
+        </div>
+    </div>
+    <div class="callout callout-teal mt-sm">
+        💡 <strong>Dica:</strong> Releia os slides das Aulas 01, 02, 03, 04 e 07 antes da prova. Todo o conteúdo do NPC está ancorado nessas aulas.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 3: SFN ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s3-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 03 · Aula 01</div>
-                    <div class="slide-title">Sistema Financeiro <span>Nacional</span></div>
-                </div>
-                <div class="s3-grid">
-                    <div class="s3-card">
-                        <div class="s3-card-title">Intermediação Financeira</div>
-                        <div class="s3-card-body">Processo de canalizar a poupança dos <strong style="color:#64FFDA">agentes superavitários</strong> (poupadores) para os <strong style="color:#f59e0b">agentes deficitários</strong> (tomadores). O banco atua como intermediário, cobrando um <em>spread</em>.</div>
-                    </div>
-                    <div class="s3-card">
-                        <div class="s3-card-title">Desintermediação Financeira</div>
-                        <div class="s3-card-body">Quando a empresa capta recursos <strong style="color:#64FFDA">diretamente no mercado de capitais</strong> (ex: emissão de debêntures), eliminando o banco como intermediário e reduzindo o custo de capital.</div>
-                    </div>
-                </div>
-                <table class="s3-table">
-                    <thead>
-                        <tr>
-                            <th>Órgão</th>
-                            <th>Tipo</th>
-                            <th>Função Principal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong style="color:#64FFDA">CMN</strong></td>
-                            <td>Normativo</td>
-                            <td>Define as "leis" do mercado: meta de inflação, diretrizes cambiais e crédito.</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color:#60a5fa">Banco Central (BCB)</strong></td>
-                            <td>Supervisor</td>
-                            <td>Executa a Selic, fiscaliza bancos, controla a moeda. Gestor do PIX e DREX.</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color:#f59e0b">CVM</strong></td>
-                            <td>Supervisor</td>
-                            <td>Fiscaliza ações, debêntures e fundos. Protege o investidor e garante transparência das S.A.s.</td>
-                        </tr>
-                        <tr>
-                            <td><strong style="color:#f87171">B3, Bancos, Fintechs</strong></td>
-                            <td>Operadores</td>
-                            <td>Executam as operações no mercado (compra, venda, crédito, custódia).</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="s3-highlight">
-                    ⚠️ <strong>Ponto de Prova:</strong> A emissão de debêntures é um exemplo de <strong>desintermediação financeira</strong>, não de intermediação. A empresa acessa diretamente os poupadores, eliminando o spread bancário.
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 3 — SFN: ESTRUTURA E INTERMEDIAÇÃO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 03 · Aula 01 — SFN</div>
+    <div class="slide-h2">Sistema Financeiro <span>Nacional</span></div>
+    <div class="divider"></div>
+    <div class="grid-2">
+        <div class="card card-teal">
+            <div class="slide-h3">Intermediação Financeira</div>
+            <div class="slide-body">Processo de canalizar a poupança dos <strong class="accent-teal">agentes superavitários</strong> (poupadores) para os <strong class="accent-yellow">agentes deficitários</strong> (tomadores). O banco atua como intermediário e cobra um <em>spread</em> pela operação.</div>
         </div>
-    </section>
+        <div class="card card-red">
+            <div class="slide-h3" style="color:#f87171">Desintermediação Financeira</div>
+            <div class="slide-body">Quando a empresa capta recursos <strong class="accent-teal">diretamente no mercado de capitais</strong> (ex: emissão de debêntures), eliminando o banco como intermediário e reduzindo o custo de capital.</div>
+        </div>
+    </div>
+    <table class="data-table mt-md">
+        <thead><tr><th>Órgão</th><th>Tipo</th><th>Função Principal</th></tr></thead>
+        <tbody>
+            <tr><td><strong class="accent-teal">CMN</strong></td><td>Normativo</td><td>Define as "leis" do mercado: meta de inflação, diretrizes cambiais e crédito.</td></tr>
+            <tr><td><strong class="accent-blue">Banco Central (BCB)</strong></td><td>Supervisor</td><td>Executa a Selic, fiscaliza bancos, controla a moeda. Gestor do PIX e DREX.</td></tr>
+            <tr><td><strong class="accent-yellow">CVM</strong></td><td>Supervisor</td><td>Fiscaliza ações, debêntures e fundos. Protege o investidor e garante transparência.</td></tr>
+            <tr><td><strong class="accent-red">B3, Bancos, Fintechs</strong></td><td>Operadores</td><td>Executam as operações no mercado (compra, venda, crédito, custódia).</td></tr>
+        </tbody>
+    </table>
+    <div class="callout callout-yellow mt-md">
+        ⚠️ <strong>Ponto de Prova:</strong> A emissão de debêntures é exemplo de <strong>desintermediação financeira</strong>, não de intermediação. A empresa acessa diretamente os poupadores, eliminando o spread bancário.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 4: AGENDA BC# ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s4-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 04 · Aula 01</div>
-                    <div class="slide-title">Agenda <span>BC#</span></div>
-                </div>
-                <div class="s4-grid">
-                    <div class="s4-card">
-                        <div class="s4-card-num">01</div>
-                        <div class="s4-card-title">Inclusão</div>
-                        <div class="s4-card-body">Acesso de microempreendedores e população de baixa renda a serviços financeiros digitais. Redução das barreiras físicas de entrada.</div>
-                        <div class="s4-card-example">Ex: Conta digital gratuita para MEI via Fintech.</div>
-                    </div>
-                    <div class="s4-card">
-                        <div class="s4-card-num">02</div>
-                        <div class="s4-card-title">Competição</div>
-                        <div class="s4-card-body">Quebra do oligopólio bancário via incentivo às Fintechs e portabilidade de crédito e dados. <strong style="color:#64FFDA">Open Finance</strong> reduz a assimetria de informação.</div>
-                        <div class="s4-card-example">Ex: SCD oferece juros menores que banco tradicional via Open Finance.</div>
-                    </div>
-                    <div class="s4-card">
-                        <div class="s4-card-num">03</div>
-                        <div class="s4-card-title">Transparência</div>
-                        <div class="s4-card-body">Combate à assimetria de informação. O histórico de crédito pertence ao cliente. O mercado deve conhecer os riscos reais.</div>
-                        <div class="s4-card-example">Ex: PIX e MED (Mecanismo Especial de Devolução) garantem rastreabilidade.</div>
-                    </div>
-                    <div class="s4-card">
-                        <div class="s4-card-num">04</div>
-                        <div class="s4-card-title">Educação</div>
-                        <div class="s4-card-body">Promoção da cidadania financeira para reduzir inadimplência e melhorar a alocação de poupança no país.</div>
-                        <div class="s4-card-example">Ex: Programas de educação financeira em escolas públicas.</div>
-                    </div>
-                </div>
-                <div class="s4-quiz">
-                    <div class="s4-quiz-label">🎯 Quiz Rápido</div>
-                    <div class="s4-quiz-text">Uma rede de supermercados conseguiu taxas de juros menores em uma Fintech (SCD) porque o <strong>Open Finance</strong> permitiu a portabilidade de seus dados bancários. Qual dimensão da Agenda BC# explica isso? → <strong style="color:#64FFDA">Competição</strong>, pois a portabilidade de dados reduz a assimetria de informação e quebra o oligopólio bancário.</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 4 — AGENDA BC#: 4 DIMENSÕES
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 04 · Aula 01 — Agenda BC#</div>
+    <div class="slide-h2">Agenda <span>BC#</span> — As 4 Dimensões</div>
+    <div class="divider"></div>
+    <div class="grid-4" style="flex:1">
+        <div class="card" style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="font-size:2.2rem;font-weight:900;color:rgba(100,255,218,0.2);line-height:1">01</div>
+            <div class="slide-h3">Inclusão</div>
+            <div class="slide-body">Acesso de microempreendedores e população de baixa renda a serviços financeiros digitais. Redução das barreiras físicas de entrada.</div>
+            <div style="font-size:0.82rem;color:#fde68a;font-style:italic">Ex: conta digital gratuita para MEI via Fintech.</div>
         </div>
-    </section>
+        <div class="card" style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="font-size:2.2rem;font-weight:900;color:rgba(100,255,218,0.2);line-height:1">02</div>
+            <div class="slide-h3">Competição</div>
+            <div class="slide-body">Quebra do oligopólio bancário via Fintechs e <strong class="accent-teal">Open Finance</strong>. Portabilidade de dados reduz a assimetria de informação.</div>
+            <div style="font-size:0.82rem;color:#fde68a;font-style:italic">Ex: SCD oferece juros menores que banco via Open Finance.</div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="font-size:2.2rem;font-weight:900;color:rgba(100,255,218,0.2);line-height:1">03</div>
+            <div class="slide-h3">Transparência</div>
+            <div class="slide-body">Combate à assimetria de informação. O histórico de crédito pertence ao cliente. PIX e MED garantem rastreabilidade total.</div>
+            <div style="font-size:0.82rem;color:#fde68a;font-style:italic">Ex: MED (Mecanismo Especial de Devolução) para fraudes via PIX.</div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="font-size:2.2rem;font-weight:900;color:rgba(100,255,218,0.2);line-height:1">04</div>
+            <div class="slide-h3">Educação</div>
+            <div class="slide-body">Promoção da cidadania financeira para reduzir inadimplência e melhorar a alocação de poupança no país.</div>
+            <div style="font-size:0.82rem;color:#fde68a;font-style:italic">Ex: programas de educação financeira em escolas públicas.</div>
+        </div>
+    </div>
+    <div class="callout callout-blue mt-md">
+        🎯 <strong>Quiz:</strong> Uma rede de supermercados obteve juros menores em uma Fintech (SCD) via Open Finance. Qual dimensão da Agenda BC# explica isso? → <strong class="accent-teal">Competição</strong> — portabilidade de dados quebra o oligopólio bancário.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 5: AÇÕES ON vs PN ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s5-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 05 · Aula 03</div>
-                    <div class="slide-title">Ações: <span>ON vs PN</span></div>
-                </div>
-                <div class="s5-compare">
-                    <div class="s5-card s5-card-on">
-                        <div class="s5-card-badge s5-badge-on">Ordinária</div>
-                        <div class="s5-card-name" style="color:#60a5fa">Ação ON</div>
-                        <div class="s5-card-code">Código: XXXX3</div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-on"></div>
-                            <div class="s5-feature-text"><strong>Direito a voto</strong> nas assembleias da empresa.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-on"></div>
-                            <div class="s5-feature-text"><strong>Tag Along:</strong> proteção ao acionista minoritário em caso de venda do controle.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-on"></div>
-                            <div class="s5-feature-text">Foco: <strong>controle estratégico</strong> e longo prazo.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-on"></div>
-                            <div class="s5-feature-text">Sem preferência nos dividendos.</div>
-                        </div>
-                    </div>
-                    <div class="s5-card s5-card-pn">
-                        <div class="s5-card-badge s5-badge-pn">Preferencial</div>
-                        <div class="s5-card-name" style="color:#64FFDA">Ação PN</div>
-                        <div class="s5-card-code">Código: XXXX4</div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-pn"></div>
-                            <div class="s5-feature-text"><strong>Sem direito a voto</strong> nas assembleias.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-pn"></div>
-                            <div class="s5-feature-text"><strong>Preferência no recebimento de dividendos</strong> em relação às ações ON.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-pn"></div>
-                            <div class="s5-feature-text">Foco: <strong>renda e liquidez</strong>. Ideal para investidor de varejo.</div>
-                        </div>
-                        <div class="s5-feature">
-                            <div class="s5-feature-dot s5-dot-pn"></div>
-                            <div class="s5-feature-text">Não garante assento no conselho de administração.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="s5-case">
-                    <div class="s5-case-label">📦 Caso Prático — Varejo Forte S.A.</div>
-                    <div class="s5-case-text">A família fundadora quer fazer um IPO, mas <strong>não quer perder o controle</strong> das assembleias e quer <strong>atrair investidores que buscam dividendos</strong>. Solução: emitir <strong>Ações Preferenciais (PN)</strong> para o mercado. Os fundadores mantêm as ON (e o voto), enquanto o mercado recebe PN (com preferência em dividendos, sem voto).</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 5 — AÇÕES ON vs PN
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 05 · Aula 03 — Renda Variável</div>
+    <div class="slide-h2">Ações: <span>ON vs PN</span></div>
+    <div class="divider"></div>
+    <div class="grid-2" style="flex:1">
+        <div class="card card-blue">
+            <div class="badge badge-blue" style="margin-bottom:0.8rem">Ordinária · XXXX3</div>
+            <div style="font-size:1.6rem;font-weight:900;color:#60a5fa;margin-bottom:0.3rem">Ação ON</div>
+            <ul class="blist mt-sm">
+                <li><strong>Direito a voto</strong> nas assembleias da empresa.</li>
+                <li><strong>Tag Along:</strong> proteção ao acionista minoritário em caso de venda do controle.</li>
+                <li>Foco: <strong>controle estratégico</strong> e longo prazo.</li>
+                <li>Sem preferência nos dividendos em relação às PN.</li>
+            </ul>
         </div>
-    </section>
+        <div class="card card-teal">
+            <div class="badge badge-teal" style="margin-bottom:0.8rem">Preferencial · XXXX4</div>
+            <div style="font-size:1.6rem;font-weight:900;color:#64FFDA;margin-bottom:0.3rem">Ação PN</div>
+            <ul class="blist mt-sm">
+                <li><strong>Sem direito a voto</strong> nas assembleias.</li>
+                <li><strong>Preferência no recebimento de dividendos</strong> em relação às ON.</li>
+                <li>Foco: <strong>renda e liquidez</strong>. Ideal para investidor de varejo.</li>
+                <li>Não garante assento no conselho de administração.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="callout callout-yellow mt-md">
+        📦 <strong>Caso Prático:</strong> Família fundadora quer fazer IPO, mas <strong>não quer perder o controle</strong> e quer <strong>atrair investidores que buscam dividendos</strong>. Solução: emitir <strong>Ações Preferenciais (PN)</strong>. Fundadores retêm as ON (e o voto); mercado recebe PN (preferência em dividendos, sem voto).
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 6: DEBÊNTURES — CONCEITO ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s6-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 06 · Aula 04</div>
-                    <div class="slide-title">Debêntures: <span>Conceito e Comparativo</span></div>
-                </div>
-                <div class="s6-def">
-                    <div class="s6-def-text">Debêntures são <strong>títulos de dívida de médio e longo prazo</strong> emitidos por Sociedades Anônimas (S.A.) não financeiras para captar recursos diretamente no mercado de capitais. O investidor empresta dinheiro à empresa em troca de uma remuneração (juros) pré-estabelecida.</div>
-                </div>
-                <div class="s6-compare">
-                    <div>
-                        <div class="s6-col-title s6-col-bank">🏦 Empréstimo Bancário</div>
-                        <div class="s6-item"><span class="s6-item-label">Custo:</span><span class="s6-item-value">Alto — spread bancário elevado + taxas administrativas.</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Prazo:</span><span class="s6-item-value">Curto a médio (1 a 5 anos).</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Flexibilidade:</span><span class="s6-item-value">Baixa — contratos padronizados pelo banco.</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Exigências:</span><span class="s6-item-value">Garantias reais (imóveis, recebíveis).</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Volume:</span><span class="s6-item-value">Limitado pelo limite de crédito do banco.</span></div>
-                    </div>
-                    <div>
-                        <div class="s6-col-title s6-col-deb">📄 Emissão de Debêntures</div>
-                        <div class="s6-item"><span class="s6-item-label">Custo:</span><span class="s6-item-value">Menor — captação direta com o investidor, sem spread.</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Prazo:</span><span class="s6-item-value">Longo prazo (5, 7, 10+ anos).</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Flexibilidade:</span><span class="s6-item-value">Alta — customizável via escritura de emissão.</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Exigências:</span><span class="s6-item-value">Auditoria, rating de crédito e governança corporativa.</span></div>
-                        <div class="s6-item"><span class="s6-item-label">Volume:</span><span class="s6-item-value">Alto — capacidade de absorção do mercado.</span></div>
-                    </div>
-                </div>
-                <div class="s6-bottom">
-                    ⚠️ <strong>Atenção:</strong> A emissão de debêntures exige <strong>maior transparência e governança corporativa</strong>, o que aumenta os custos administrativos e jurídicos. Porém, em cenários de Selic elevada, o custo efetivo pode ser inferior ao dos empréstimos bancários.
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 6 — DEBÊNTURES: CONCEITO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 06 · Aula 04 — Renda Fixa Privada</div>
+    <div class="slide-h2">Debêntures: <span>Conceito e Comparativo</span></div>
+    <div class="divider"></div>
+    <div class="callout callout-teal" style="font-size:0.97rem;margin-bottom:1.4rem">
+        Debêntures são <strong>títulos de dívida de médio e longo prazo</strong> emitidos por Sociedades Anônimas (S.A.) não financeiras para captar recursos diretamente no mercado de capitais. O investidor empresta dinheiro à empresa em troca de remuneração (juros) pré-estabelecida.
+    </div>
+    <div class="grid-2" style="flex:1">
+        <div>
+            <div style="font-size:0.82rem;font-weight:700;color:#f87171;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem;padding-bottom:0.4rem;border-bottom:1px solid rgba(255,255,255,0.1)">🏦 Empréstimo Bancário</div>
+            <ul class="blist">
+                <li><strong>Custo:</strong> alto — spread bancário elevado + taxas administrativas.</li>
+                <li><strong>Prazo:</strong> curto a médio (1 a 5 anos).</li>
+                <li><strong>Flexibilidade:</strong> baixa — contratos padronizados pelo banco.</li>
+                <li><strong>Exigências:</strong> garantias reais (imóveis, recebíveis).</li>
+                <li><strong>Volume:</strong> limitado pelo limite de crédito do banco.</li>
+            </ul>
         </div>
-    </section>
+        <div>
+            <div style="font-size:0.82rem;font-weight:700;color:#64FFDA;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem;padding-bottom:0.4rem;border-bottom:1px solid rgba(255,255,255,0.1)">📄 Emissão de Debêntures</div>
+            <ul class="blist">
+                <li><strong>Custo:</strong> menor — captação direta com investidor, sem spread bancário.</li>
+                <li><strong>Prazo:</strong> longo prazo (5, 7, 10+ anos).</li>
+                <li><strong>Flexibilidade:</strong> alta — customizável via escritura de emissão.</li>
+                <li><strong>Exigências:</strong> auditoria, rating de crédito e governança corporativa.</li>
+                <li><strong>Volume:</strong> alto — capacidade de absorção do mercado.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="callout callout-blue mt-md">
+        ⚠️ <strong>Atenção:</strong> A emissão de debêntures exige <strong>maior transparência e governança</strong>, o que aumenta os custos administrativos. Porém, em cenários de Selic elevada, o custo efetivo pode ser inferior ao dos empréstimos bancários.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 7: GARANTIAS ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s7-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 07 · Aula 04</div>
-                    <div class="slide-title">Tipos de <span>Garantias</span></div>
-                </div>
-                <div class="s7-grid">
-                    <div class="s7-card s7-card-1">
-                        <div class="s7-card-rank">1°</div>
-                        <div class="s7-card-title">Garantia Real</div>
-                        <div class="s7-card-body">Lastreada em <strong>ativos tangíveis específicos</strong> (imóveis, terrenos, máquinas) que ficam <strong>alienados fiduciariamente</strong>. Em caso de falência, o bem é vendido para pagar esses debenturistas <em>primeiro</em>. Menor risco, menor retorno.</div>
-                    </div>
-                    <div class="s7-card s7-card-2">
-                        <div class="s7-card-rank">2°</div>
-                        <div class="s7-card-title">Garantia Flutuante</div>
-                        <div class="s7-card-body">Privilégio sobre o <strong>ativo geral da empresa</strong>, mas os bens <em>podem ser negociados</em> ao longo do tempo. Não há vinculação a um bem específico.</div>
-                    </div>
-                    <div class="s7-card s7-card-3">
-                        <div class="s7-card-rank">3°</div>
-                        <div class="s7-card-title">Garantia Quirografária</div>
-                        <div class="s7-card-body"><strong>Sem garantia específica.</strong> O investidor concorre em <em>igualdade</em> com fornecedores e outros credores na massa falida. Modalidade mais comum no mercado.</div>
-                    </div>
-                    <div class="s7-card s7-card-4">
-                        <div class="s7-card-rank">4°</div>
-                        <div class="s7-card-title">Garantia Subordinada</div>
-                        <div class="s7-card-body"><strong>Última na ordem de recebimento</strong> em caso de falência. Só recebe após todos os outros credores serem pagos. Funciona quase como capital próprio. <em>Maior risco = maior retorno.</em></div>
-                    </div>
-                </div>
-                <div class="s7-quiz">
-                    <div class="s7-quiz-label">🎯 Quiz Rápido</div>
-                    <div class="s7-quiz-text">Uma concessionária emite debêntures oferecendo <strong>praças de pedágio e terrenos como lastro</strong>. Em caso de falência, esses bens não podem ser negociados e servem para pagar os debenturistas primeiro. Qual é o tipo de garantia? → <strong style="color:#64FFDA">Garantia Real</strong>, pois é lastreada em ativos tangíveis específicos alienados fiduciariamente.</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 7 — TIPOS DE GARANTIAS
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 07 · Aula 04 — Garantias</div>
+    <div class="slide-h2">Hierarquia de <span>Garantias</span></div>
+    <div class="divider"></div>
+    <div class="grid-4" style="flex:1">
+        <div class="gar-card card-teal">
+            <div class="gar-rank">1°</div>
+            <div class="gar-title accent-teal">Garantia Real</div>
+            <div class="gar-body">Lastreada em <strong>ativos tangíveis específicos</strong> (imóveis, terrenos, máquinas) que ficam <strong>alienados fiduciariamente</strong>. Em caso de falência, o bem é vendido para pagar esses debenturistas <em>primeiro</em>. Menor risco, menor retorno.</div>
         </div>
-    </section>
+        <div class="gar-card card-blue">
+            <div class="gar-rank">2°</div>
+            <div class="gar-title accent-blue">Garantia Flutuante</div>
+            <div class="gar-body">Privilégio sobre o <strong>ativo geral da empresa</strong>, mas os bens <em>podem ser negociados</em> ao longo do tempo. Não há vinculação a um bem específico.</div>
+        </div>
+        <div class="gar-card card-yellow">
+            <div class="gar-rank">3°</div>
+            <div class="gar-title accent-yellow">Quirografária</div>
+            <div class="gar-body"><strong>Sem garantia específica.</strong> O investidor concorre em <em>igualdade</em> com fornecedores e outros credores na massa falida. Modalidade mais comum no mercado.</div>
+        </div>
+        <div class="gar-card card-red">
+            <div class="gar-rank">4°</div>
+            <div class="gar-title accent-red">Subordinada</div>
+            <div class="gar-body"><strong>Última na ordem de recebimento</strong> em caso de falência. Só recebe após todos os outros credores. Funciona quase como capital próprio. <em>Maior risco = maior retorno.</em></div>
+        </div>
+    </div>
+    <div class="callout callout-yellow mt-md">
+        🎯 <strong>Quiz:</strong> Uma concessionária emite debêntures com <strong>praças de pedágio e terrenos como lastro</strong>, que não podem ser negociados. Qual garantia? → <strong class="accent-teal">Garantia Real</strong> — ativos tangíveis específicos alienados fiduciariamente.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 8: DEBÊNTURES INCENTIVADAS ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s8-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 08 · Aula 04</div>
-                    <div class="slide-title">Debêntures <span>Incentivadas</span> — Lei 12.431</div>
-                </div>
-                <div class="s8-top">
-                    <div class="s8-info-card">
-                        <div class="s8-info-title">Objetivo Estratégico</div>
-                        <div class="s8-info-body">Criadas para financiar grandes projetos de <strong>infraestrutura no Brasil</strong>. Oferecem incentivos fiscais para atrair investidores e alongar o perfil da dívida nacional. Setores elegíveis: energia, logística, saneamento e telecomunicações.</div>
-                    </div>
-                    <div class="s8-info-card">
-                        <div class="s8-info-title">Principal Atrativo para PF</div>
-                        <div class="s8-info-body">O principal atrativo para o investidor <strong>Pessoa Física</strong> é a <strong style="color:#64FFDA">isenção total (0%) de Imposto de Renda</strong> sobre os rendimentos. Isso aumenta o retorno líquido, tornando o título competitivo mesmo com taxa nominal menor que uma debênture comum.</div>
-                    </div>
-                </div>
-                <table class="s8-ir-table">
-                    <thead>
-                        <tr>
-                            <th>Tipo de Debênture</th>
-                            <th>Investidor PF</th>
-                            <th>Investidor PJ</th>
-                            <th>Observação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Debênture Comum</td>
-                            <td class="highlight-cell-red">Tabela Regressiva (22,5% → 15%)</td>
-                            <td class="highlight-cell-red">15% (fixo)</td>
-                            <td>Quanto mais tempo aplicado, menor a alíquota.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Debênture Incentivada (Lei 12.431)</strong></td>
-                            <td class="highlight-cell">0% (Isento)</td>
-                            <td class="highlight-cell-red">15% (fixo)</td>
-                            <td>A isenção vale apenas para Pessoa Física.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="s8-bottom">
-                    💡 <strong>Simulação:</strong> Debênture comum a 8% a.a. → Retorno líquido PF (após IR 15%): <strong>6,80% a.a.</strong> | Debênture incentivada a 8% a.a. → Retorno líquido PF: <strong style="color:#64FFDA">8,00% a.a.</strong> A isenção equivale a +1,20 p.p. de ganho real anual.
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 8 — DEBÊNTURES INCENTIVADAS
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 08 · Aula 04 — Lei 12.431</div>
+    <div class="slide-h2">Debêntures <span>Incentivadas</span></div>
+    <div class="divider"></div>
+    <div class="grid-2">
+        <div class="card">
+            <div class="slide-h3">Objetivo Estratégico</div>
+            <div class="slide-body">Criadas para financiar grandes projetos de <strong>infraestrutura no Brasil</strong>. Setores elegíveis: <strong>energia, logística, saneamento e telecomunicações</strong>. Oferecem incentivos fiscais para atrair investidores e alongar o perfil da dívida nacional.</div>
         </div>
-    </section>
+        <div class="card card-teal">
+            <div class="slide-h3">Principal Atrativo para PF</div>
+            <div class="slide-body">O principal atrativo para o investidor <strong>Pessoa Física</strong> é a <strong class="accent-teal">isenção total (0%) de Imposto de Renda</strong> sobre os rendimentos. Isso aumenta o retorno líquido, tornando o título competitivo mesmo com taxa nominal menor.</div>
+        </div>
+    </div>
+    <table class="data-table mt-md">
+        <thead><tr><th>Tipo de Debênture</th><th>Investidor PF</th><th>Investidor PJ</th><th>Observação</th></tr></thead>
+        <tbody>
+            <tr><td>Debênture Comum</td><td class="td-red">Tabela Regressiva (22,5% → 15%)</td><td class="td-red">15% (fixo)</td><td>Quanto mais tempo aplicado, menor a alíquota.</td></tr>
+            <tr><td><strong>Incentivada (Lei 12.431)</strong></td><td class="td-teal">0% — Isento</td><td class="td-red">15% (fixo)</td><td>Isenção válida apenas para Pessoa Física.</td></tr>
+        </tbody>
+    </table>
+    <div class="callout callout-teal mt-md">
+        💡 <strong>Simulação:</strong> Debênture comum a 8% a.a. → Retorno líquido PF (IR 15%): <strong>6,80% a.a.</strong> | Debênture incentivada a 8% a.a. → Retorno líquido PF: <strong class="accent-teal">8,00% a.a.</strong> A isenção equivale a +1,20 p.p. de ganho real anual.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 9: FINANÇAS COMPORTAMENTAIS ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s9-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 09 · Aula 07</div>
-                    <div class="slide-title">Finanças <span>Comportamentais</span></div>
-                </div>
-                <div class="s9-intro">A <strong>Teoria do Prospecto</strong> (Kahneman &amp; Tversky, 1979) demonstra que os investidores não são racionais: avaliam ganhos e perdas em relação a um <em>ponto de referência</em>, e a dor de perder é psicologicamente <strong>duas vezes maior</strong> que o prazer de ganhar o mesmo valor.</div>
-                <div class="s9-grid">
-                    <div class="s9-card">
-                        <div class="s9-card-icon">⚓</div>
-                        <div class="s9-card-title">Aversão à Perda</div>
-                        <div class="s9-card-body">A dor de realizar um prejuízo é maior que a aceitação racional da nova realidade. Leva o investidor a <strong>segurar ativos em queda</strong> esperando que voltem ao preço de compra.</div>
-                        <div class="s9-card-example">"Nós pagamos R$ 80. Vamos segurar até voltar para R$ 80 e aí saímos no zero a zero."</div>
-                    </div>
-                    <div class="s9-card">
-                        <div class="s9-card-icon">📍</div>
-                        <div class="s9-card-title">Ancoragem</div>
-                        <div class="s9-card-body">Tendência de confiar excessivamente na <strong>primeira informação</strong> (a "âncora") ao tomar decisões. O preço de compra torna-se o ponto de referência mental, distorcendo a análise.</div>
-                        <div class="s9-card-example">Ação cai de R$ 50 para R$ 30 por fraude. A equipe acha que está "barata" porque está ancorada nos R$ 50.</div>
-                    </div>
-                    <div class="s9-card">
-                        <div class="s9-card-icon">🐑</div>
-                        <div class="s9-card-title">Comportamento de Manada</div>
-                        <div class="s9-card-body">Tendência de <strong>seguir as ações da maioria</strong>, ignorando a própria análise. Ocorre sob pressão e incerteza, movido pelo FOMO (Fear Of Missing Out).</div>
-                        <div class="s9-card-example">"Se grandes fundos estão comprando, deve ser o fundo do poço. Não podemos ficar de fora."</div>
-                    </div>
-                </div>
-                <div class="s9-quiz">
-                    <div class="s9-quiz-label">🎯 Quiz Rápido</div>
-                    <div class="s9-quiz-text">Um gestor se recusa a vender ações que caíram de R$ 80 para R$ 30, afirmando que vai "segurar até voltar para R$ 80", mesmo com os fundamentos da empresa deteriorados. Qual viés explica isso? → <strong style="color:#f87171">Aversão à Perda</strong>, pois a dor de realizar o prejuízo é psicologicamente maior do que a aceitação racional da nova realidade.</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 9 — FINANÇAS COMPORTAMENTAIS: TEORIA DO PROSPECTO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 09 · Aula 07 — Finanças Comportamentais</div>
+    <div class="slide-h2">Teoria do <span>Prospecto</span></div>
+    <div class="divider"></div>
+    <div class="slide-body" style="margin-bottom:1.2rem">A <strong>Teoria do Prospecto</strong> (Kahneman &amp; Tversky, 1979) demonstra que os investidores não são racionais: avaliam ganhos e perdas em relação a um <em>ponto de referência</em>, e a dor de perder é psicologicamente <strong>duas vezes maior</strong> que o prazer de ganhar o mesmo valor.</div>
+    <div class="grid-3" style="flex:1">
+        <div class="vies-card card">
+            <div class="vies-icon">⚓</div>
+            <div class="vies-title accent-red">Aversão à Perda</div>
+            <div class="vies-body">A dor de realizar um prejuízo é maior que a aceitação racional da nova realidade. Leva o investidor a <strong>segurar ativos em queda</strong> esperando que voltem ao preço de compra, mesmo com fundamentos deteriorados.</div>
+            <div class="vies-quote" style="color:#fecaca">"Vamos segurar até voltar para R$ 80 e aí saímos no zero a zero."</div>
         </div>
-    </section>
+        <div class="vies-card card">
+            <div class="vies-icon">📍</div>
+            <div class="vies-title accent-yellow">Ancoragem</div>
+            <div class="vies-body">Tendência de confiar excessivamente na <strong>primeira informação</strong> (a "âncora"). O preço de compra torna-se o ponto de referência mental, distorcendo a análise dos fundamentos reais.</div>
+            <div class="vies-quote" style="color:#fde68a">Ação cai de R$ 50 para R$ 30 por fraude. A equipe acha "barata" por estar ancorada nos R$ 50.</div>
+        </div>
+        <div class="vies-card card">
+            <div class="vies-icon">🐑</div>
+            <div class="vies-title accent-blue">Comportamento de Manada</div>
+            <div class="vies-body">Tendência de <strong>seguir as ações da maioria</strong>, ignorando a própria análise. Ocorre sob pressão e incerteza, movido pelo FOMO (Fear Of Missing Out).</div>
+            <div class="vies-quote" style="color:#bfdbfe">"Se grandes fundos estão comprando, deve ser o fundo do poço. Não podemos ficar de fora."</div>
+        </div>
+    </div>
+    <div class="callout callout-red mt-md">
+        🎯 <strong>Quiz:</strong> Um gestor se recusa a vender ações que caíram de R$ 80 para R$ 30, mesmo com fundamentos deteriorados. Qual viés? → <strong class="accent-red">Aversão à Perda</strong> — a dor de realizar o prejuízo é maior que a aceitação racional da nova realidade.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 10: MAPA MENTAL DE REVISÃO ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s10-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 10 · Consolidação</div>
-                    <div class="slide-title">Mapa Mental de <span>Revisão</span></div>
-                </div>
-                <div class="s10-grid">
-                    <div class="s10-topic s10-topic-1">
-                        <div class="s10-topic-title">SFN &amp; Agenda BC#</div>
-                        <div class="s10-item">Intermediação vs. Desintermediação</div>
-                        <div class="s10-item">CMN (normativo) → BCB (supervisor) → B3 (operador)</div>
-                        <div class="s10-item">CVM: fiscaliza ações, debêntures e fundos</div>
-                        <div class="s10-item">4 dimensões: Inclusão, Competição, Transparência, Educação</div>
-                        <div class="s10-item">Open Finance → portabilidade de dados → quebra oligopólio</div>
-                        <div class="s10-item">SCD: Fintech 100% digital, capital próprio, sem depósitos</div>
-                    </div>
-                    <div class="s10-topic s10-topic-2">
-                        <div class="s10-topic-title">Ações &amp; Debêntures</div>
-                        <div class="s10-item">ON (XXXX3): voto + Tag Along, sem preferência em dividendos</div>
-                        <div class="s10-item">PN (XXXX4): preferência em dividendos, sem voto</div>
-                        <div class="s10-item">Debênture: título de dívida emitido por S.A.</div>
-                        <div class="s10-item">Garantias: Real &gt; Flutuante &gt; Quirografária &gt; Subordinada</div>
-                        <div class="s10-item">Incentivada (Lei 12.431): IR 0% para PF, 15% para PJ</div>
-                        <div class="s10-item">Debênture comum: tabela regressiva (22,5% → 15%) para PF</div>
-                    </div>
-                    <div class="s10-topic s10-topic-3">
-                        <div class="s10-topic-title">Finanças Comportamentais</div>
-                        <div class="s10-item">Teoria do Prospecto: Kahneman &amp; Tversky (1979)</div>
-                        <div class="s10-item">Ponto de referência: preço de compra como âncora mental</div>
-                        <div class="s10-item">Aversão à Perda: dor da perda &gt; prazer do ganho equivalente</div>
-                        <div class="s10-item">Ancoragem: fixação na primeira informação recebida</div>
-                        <div class="s10-item">Comportamento de Manada: seguir a maioria (FOMO)</div>
-                        <div class="s10-item">Sensibilidade Decrescente: impacto relativo menor em valores altos</div>
-                    </div>
-                </div>
-                <div class="s10-alert">
-                    🏆 <strong>Dica Final:</strong> Leia cada questão do NPC com atenção às palavras-chave: <em>"desintermediação"</em>, <em>"competição"</em>, <em>"garantia real"</em>, <em>"isenção IR"</em>, <em>"aversão à perda"</em>. Elas indicam diretamente a resposta correta.
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 10 — MAPA MENTAL DE REVISÃO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 10 · Consolidação</div>
+    <div class="slide-h2">Mapa Mental de <span>Revisão</span></div>
+    <div class="divider"></div>
+    <div class="grid-3" style="flex:1">
+        <div class="card">
+            <div class="slide-h3" style="color:#60a5fa;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.08)">SFN &amp; Agenda BC#</div>
+            <ul class="blist">
+                <li>Intermediação vs. Desintermediação</li>
+                <li>CMN (normativo) → BCB (supervisor) → B3 (operador)</li>
+                <li>CVM: fiscaliza ações, debêntures e fundos</li>
+                <li>4 dimensões: Inclusão, Competição, Transparência, Educação</li>
+                <li>Open Finance → portabilidade → quebra oligopólio</li>
+                <li>SCD: Fintech 100% digital, capital próprio</li>
+            </ul>
         </div>
-    </section>
+        <div class="card">
+            <div class="slide-h3" style="color:#64FFDA;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.08)">Ações &amp; Debêntures</div>
+            <ul class="blist">
+                <li>ON (XXXX3): voto + Tag Along</li>
+                <li>PN (XXXX4): preferência em dividendos, sem voto</li>
+                <li>Debênture: título de dívida emitido por S.A.</li>
+                <li>Garantias: Real &gt; Flutuante &gt; Quirografária &gt; Subordinada</li>
+                <li>Incentivada (Lei 12.431): IR 0% PF, 15% PJ</li>
+                <li>Comum: tabela regressiva 22,5% → 15% para PF</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="slide-h3" style="color:#f59e0b;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.08)">Finanças Comportamentais</div>
+            <ul class="blist">
+                <li>Teoria do Prospecto: Kahneman &amp; Tversky (1979)</li>
+                <li>Ponto de referência: preço de compra como âncora</li>
+                <li>Aversão à Perda: dor da perda &gt; prazer do ganho</li>
+                <li>Ancoragem: fixação na primeira informação</li>
+                <li>Comportamento de Manada: seguir a maioria (FOMO)</li>
+                <li>Sensibilidade Decrescente: impacto relativo menor em valores altos</li>
+            </ul>
+        </div>
+    </div>
+    <div class="callout callout-teal mt-md" style="text-align:center">
+        🏆 <strong>Dica Final:</strong> Identifique as palavras-chave: <em>"desintermediação"</em>, <em>"competição"</em>, <em>"garantia real"</em>, <em>"isenção IR"</em>, <em>"aversão à perda"</em>. Elas indicam diretamente a resposta correta.
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 11: ESTUDO DE CASO INTEGRADOR ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s11-container">
-                <div class="slide-header">
-                    <div class="slide-number">Slide 11 · Questão Discursiva</div>
-                    <div class="slide-title">Estudo de Caso: <span>Varejo Forte S.A.</span></div>
-                </div>
-                <div class="s11-scenario">
-                    <div class="s11-scenario-title">📦 Cenário</div>
-                    <div class="s11-scenario-text">Você é o consultor financeiro da <strong>Varejo Forte S.A.</strong>, rede varejista familiar com 30 anos de mercado. A empresa decidiu abrir seu capital (IPO) na B3 para captar <strong>R$ 200 milhões</strong> e financiar a abertura de 50 novas lojas. A família fundadora tem duas exigências: (1) <strong>não abrir mão do controle absoluto</strong> das decisões estratégicas; (2) <strong>atrair investidores de varejo</strong> que buscam fluxo de caixa constante, oferecendo vantagem na distribuição dos lucros.</div>
-                </div>
-                <div class="s11-tasks">
-                    <div class="s11-task">
-                        <div class="s11-task-letter">A</div>
-                        <div class="s11-task-title">Qual tipo de ação emitir?</div>
-                        <div class="s11-task-body"><strong style="color:#64FFDA">Ações Preferenciais (PN)</strong>, pois atendem simultaneamente às duas exigências: não dão direito a voto e oferecem preferência nos dividendos.</div>
-                    </div>
-                    <div class="s11-task">
-                        <div class="s11-task-letter">B</div>
-                        <div class="s11-task-title">Como a família mantém o controle?</div>
-                        <div class="s11-task-body">As PN <strong>não conferem direito a voto</strong> nas assembleias. Assim, os novos acionistas não participam das decisões estratégicas. A família retém as ON (com voto) e mantém o controle absoluto.</div>
-                    </div>
-                    <div class="s11-task">
-                        <div class="s11-task-letter">C</div>
-                        <div class="s11-task-title">Qual vantagem para o investidor?</div>
-                        <div class="s11-task-body"><strong>Preferência no recebimento de dividendos</strong>: os detentores de PN recebem os lucros distribuídos <em>antes</em> dos acionistas ordinários, garantindo fluxo de caixa constante.</div>
-                    </div>
-                </div>
-                <div class="s11-hint">
-                    💡 <strong>Gabarito Resumido:</strong> A = PN | B = sem direito a voto, família retém ON | C = preferência nos dividendos (fluxo de caixa constante para o investidor de varejo).
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 11 — ESTUDO DE CASO INTEGRADOR
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 11 · Questão Discursiva</div>
+    <div class="slide-h2">Estudo de Caso: <span>Varejo Forte S.A.</span></div>
+    <div class="divider"></div>
+    <div class="callout callout-yellow" style="margin-bottom:1.2rem">
+        <strong>📦 Cenário:</strong> Você é consultor da <strong>Varejo Forte S.A.</strong>, rede familiar com 30 anos de mercado. A empresa fará IPO na B3 para captar <strong>R$ 200 milhões</strong> e abrir 50 novas lojas. A família fundadora exige: (1) <strong>não abrir mão do controle absoluto</strong> das decisões estratégicas; (2) <strong>atrair investidores de varejo</strong> que buscam fluxo de caixa constante.
+    </div>
+    <div class="grid-3" style="flex:1">
+        <div class="card">
+            <div style="font-size:2rem;font-weight:900;color:rgba(100,255,218,0.25);line-height:1;margin-bottom:0.4rem">A</div>
+            <div class="slide-h3">Qual tipo de ação emitir?</div>
+            <div class="slide-body"><strong class="accent-teal">Ações Preferenciais (PN)</strong>, pois atendem simultaneamente às duas exigências: não dão direito a voto e oferecem preferência nos dividendos.</div>
         </div>
-    </section>
+        <div class="card">
+            <div style="font-size:2rem;font-weight:900;color:rgba(100,255,218,0.25);line-height:1;margin-bottom:0.4rem">B</div>
+            <div class="slide-h3">Como a família mantém o controle?</div>
+            <div class="slide-body">As PN <strong>não conferem direito a voto</strong> nas assembleias. Os novos acionistas não participam das decisões estratégicas. A família retém as ON (com voto) e mantém o controle absoluto.</div>
+        </div>
+        <div class="card">
+            <div style="font-size:2rem;font-weight:900;color:rgba(100,255,218,0.25);line-height:1;margin-bottom:0.4rem">C</div>
+            <div class="slide-h3">Qual vantagem para o investidor?</div>
+            <div class="slide-body"><strong>Preferência no recebimento de dividendos</strong>: os detentores de PN recebem os lucros distribuídos <em>antes</em> dos acionistas ordinários, garantindo fluxo de caixa constante.</div>
+        </div>
+    </div>
+    <div class="callout callout-teal mt-md">
+        💡 <strong>Gabarito:</strong> A = PN | B = sem direito a voto, família retém as ON | C = preferência nos dividendos (fluxo de caixa constante para o investidor de varejo).
+    </div>
+</div>
+</div></section>
 
-    <!-- ===== SLIDE 12: ENCERRAMENTO ===== -->
-    <section class="slide-page">
-        <div class="slide-container">
-            <div class="bg-grid"></div>
-            <div class="s12-container">
-                <div class="s1-bg-accent"></div>
-                <div class="s12-tag">Boa Prova! · ADM7N1 · 2026.1</div>
-                <div class="s12-title">Você está <span class="accent">preparado!</span></div>
-                <div class="s12-subtitle">Revise os conceitos-chave, durma bem e confie no seu estudo. Lembre-se: cada questão do NPC foi trabalhada em sala de aula.</div>
-                <div class="s12-checklist">
-                    <div class="s12-check">
-                        <div class="s12-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                        <div class="s12-check-text">SFN: Intermediação vs. Desintermediação e Agenda BC# (4 dimensões)</div>
-                    </div>
-                    <div class="s12-check">
-                        <div class="s12-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                        <div class="s12-check-text">Ações: ON (voto) vs. PN (dividendos, sem voto)</div>
-                    </div>
-                    <div class="s12-check">
-                        <div class="s12-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                        <div class="s12-check-text">Debêntures: conceito, garantias (Real &gt; Flutuante &gt; Quirografária &gt; Subordinada)</div>
-                    </div>
-                    <div class="s12-check">
-                        <div class="s12-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                        <div class="s12-check-text">Debêntures Incentivadas: IR 0% para PF, 15% para PJ (Lei 12.431)</div>
-                    </div>
-                    <div class="s12-check">
-                        <div class="s12-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                        <div class="s12-check-text">Finanças Comportamentais: Aversão à Perda, Ancoragem, Comportamento de Manada</div>
-                    </div>
-                </div>
-                <div class="s12-footer">Profa. Ma. Renata Novaes da Silva · Faculdade Cosmopolita · Mercado de Capitais e Derivativos 2026.1</div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 12 — SELIC, IPCA E CUSTO DE CAPITAL
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="pad slide-inner">
+    <div class="slide-eyebrow">Slide 12 · Aula 02 — Macroeconomia</div>
+    <div class="slide-h2">Selic, IPCA e <span>Custo de Capital</span></div>
+    <div class="divider"></div>
+    <div class="grid-2">
+        <div class="card card-teal">
+            <div class="slide-h3">Equação de Fisher — Taxa Real</div>
+            <div class="slide-body" style="margin-bottom:0.8rem">Separa o retorno nominal do retorno real, descontando a inflação:</div>
+            <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:0.8rem 1rem;font-family:'Roboto Mono',monospace;font-size:0.95rem;color:#64FFDA;margin-bottom:0.8rem">(1 + i) = (1 + r) × (1 + π)</div>
+            <div class="slide-small">Selic 15% a.a. | IPCA 4,5% a.a. → Taxa real ≈ <strong class="accent-teal">10,05% a.a.</strong></div>
         </div>
-    </section>
+        <div class="card">
+            <div class="slide-h3">Correlação Inversa: Selic × Bolsa</div>
+            <ul class="blist mt-sm">
+                <li><strong>Selic sobe</strong> → custo de capital das empresas aumenta.</li>
+                <li>Taxa de desconto (k) no DCF sobe → <strong>valor presente das ações cai</strong>.</li>
+                <li>Crédito caro → queda no consumo → redução de receita.</li>
+                <li>Capital estrangeiro migra para renda fixa → fuga da bolsa.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="grid-2 mt-md">
+        <div class="callout callout-yellow">
+            🏦 <strong>Risk-Free Rate (Rf):</strong> Com Selic a 15% a.a., o investidor exige um <strong>prêmio adicional substancial</strong> para assumir risco em ações. A barra mínima de rentabilidade sobe para toda a economia.
+        </div>
+        <div class="callout callout-blue">
+            📉 <strong>Impacto nas Debêntures:</strong> Em cenário de Selic elevada, debêntures pós-fixadas (CDI+) tornam-se mais atrativas. A oferta de debêntures incentivadas (isentas de IR) ganha ainda mais competitividade frente à renda fixa bancária.
+        </div>
+    </div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 13 — ENCERRAMENTO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide-page"><div class="slide-container"><div class="bg-grid"></div>
+<div class="enc-wrap slide-inner">
+    <div class="capa-glow"></div>
+    <div class="slide-tag">Boa Prova! · ADM7N1 · 2026.1</div>
+    <div class="enc-title">Você está <span style="color:#64FFDA">preparado!</span></div>
+    <div class="enc-sub">Revise os conceitos-chave, durma bem e confie no seu estudo. Cada questão do NPC foi trabalhada em sala de aula.</div>
+    <div class="enc-checklist">
+        <div class="enc-check">
+            <div class="enc-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+            <div class="enc-check-text">SFN: Intermediação vs. Desintermediação e Agenda BC# (4 dimensões)</div>
+        </div>
+        <div class="enc-check">
+            <div class="enc-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+            <div class="enc-check-text">Ações: ON (voto + Tag Along) vs. PN (dividendos, sem voto)</div>
+        </div>
+        <div class="enc-check">
+            <div class="enc-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+            <div class="enc-check-text">Debêntures: conceito, garantias (Real &gt; Flutuante &gt; Quirografária &gt; Subordinada)</div>
+        </div>
+        <div class="enc-check">
+            <div class="enc-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+            <div class="enc-check-text">Debêntures Incentivadas: IR 0% para PF, 15% para PJ (Lei 12.431)</div>
+        </div>
+        <div class="enc-check">
+            <div class="enc-check-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#64FFDA" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+            <div class="enc-check-text">Finanças Comportamentais: Aversão à Perda, Ancoragem, Comportamento de Manada</div>
+        </div>
+    </div>
+    <div class="enc-footer">Profa. Ma. Renata Novaes da Silva · Faculdade Cosmopolita · Mercado de Capitais e Derivativos 2026.1</div>
+</div>
+</div></section>
 
 </div><!-- fim .presentation-wrapper -->
 
-<!-- NAVEGAÇÃO INFERIOR -->
 <nav class="nav-ui">
     <button class="btn-nav" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Anterior</button>
-    <span id="slide-counter">1 / 12</span>
+    <span id="slide-counter">1 / 13</span>
     <button class="btn-nav" id="btn-next" onclick="navigate(1)">Próximo &#8594;</button>
 </nav>
 
 <script>
-    var currentSlide = 0;
-    var totalSlides = 12;
+    var currentSlide = 0, totalSlides = 13;
     var presentation = document.getElementById('presentation');
     function navigate(dir) {
-        currentSlide += dir;
-        if (currentSlide < 0) currentSlide = 0;
-        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
         presentation.style.transform = 'translateX(-' + (currentSlide * 100) + 'vw)';
         document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
         document.getElementById('btn-prev').disabled = currentSlide === 0;
         document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
     }
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
-            e.preventDefault(); navigate(1);
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault(); navigate(-1);
-        }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); navigate(-1); }
     });
     var touchStartX = 0;
     document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
@@ -952,37 +678,19 @@
         if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
     });
     function printSlides() {
-        var msg = 'Para exportar como PDF:\n\n1. Na janela de impressão, selecione "Salvar como PDF" como destino.\n2. Recomendado: orientação Paisagem, margens Nenhuma.\n\nClique OK para continuar.';
-        if (confirm(msg)) { window.print(); }
+        if (confirm('Para exportar como PDF:\n\n1. Selecione "Salvar como PDF" como destino.\n2. Orientação: Paisagem, margens: Nenhuma.\n\nClique OK para continuar.')) window.print();
     }
     function scaleSlides() {
-        var vw = window.innerWidth;
-        var vh = window.innerHeight;
-        var cw = 1280;
-        var ch = 720;
-        var scaleX = vw / cw;
-        var scaleY = vh / ch;
-        var scale = Math.min(scaleX, scaleY) * 0.97;
-        var pages = document.querySelectorAll('.slide-page');
-        pages.forEach(function(page) {
-            var container = page.querySelector('.slide-container');
-            if (!container) return;
-            container.style.width = cw + 'px';
-            container.style.height = ch + 'px';
-            container.style.transform = 'scale(' + scale + ')';
-            container.style.transformOrigin = 'center center';
+        var scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.97;
+        document.querySelectorAll('.slide-page').forEach(function(page) {
+            var c = page.querySelector('.slide-container');
+            if (!c) return;
+            c.style.width = '1280px'; c.style.height = '720px';
+            c.style.transform = 'scale(' + scale + ')'; c.style.transformOrigin = 'center center';
         });
     }
     window.addEventListener('resize', scaleSlides);
-    if (document.readyState === 'complete') {
-        requestAnimationFrame(scaleSlides);
-    } else {
-        window.addEventListener('load', function() {
-            requestAnimationFrame(function() {
-                requestAnimationFrame(scaleSlides);
-            });
-        });
-    }
+    window.addEventListener('load', function() { requestAnimationFrame(function() { requestAnimationFrame(scaleSlides); }); });
 </script>
 </body>
 </html>

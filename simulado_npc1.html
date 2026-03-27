@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — 1.º NPC | Mercado de Capitais</title>
+<style>
+  /* ── RESET & BASE ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul-primario:  #1a3a6b;
+    --azul-medio:     #1e5799;
+    --azul-claro:     #dce8f5;
+    --azul-hover:     #e8f1fb;
+    --azul-borda:     #4a90d9;
+    --verde:          #1a7a4a;
+    --verde-claro:    #d4edda;
+    --verde-borda:    #28a745;
+    --vermelho:       #8b1a1a;
+    --vermelho-claro: #fde8e8;
+    --vermelho-borda: #dc3545;
+    --amarelo:        #856404;
+    --amarelo-claro:  #fff8d6;
+    --amarelo-borda:  #ffc107;
+    --cinza-borda:    #d0d7e3;
+    --cinza-fundo:    #f4f7fb;
+    --texto:          #1a2340;
+    --texto-sec:      #4a5568;
+    --branco:         #ffffff;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--cinza-fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ──────────────────────────────────────────────────────────── */
+  header {
+    background: var(--azul-primario);
+    color: var(--branco);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .header-left p {
+    font-size: 0.85rem;
+    opacity: 0.82;
+    margin-top: 2px;
+  }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 220px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #7ec8f4;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 0.82rem;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────────────────────────────── */
+  main {
+    max-width: 820px;
+    margin: 36px auto 60px;
+    padding: 0 20px;
+  }
+
+  /* ── TELA DE BOAS-VINDAS ─────────────────────────────────────────────── */
+  #tela-inicio {
+    background: var(--branco);
+    border-radius: 12px;
+    border: 1px solid var(--cinza-borda);
+    padding: 48px 40px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(26,58,107,0.07);
+  }
+  #tela-inicio .badge {
+    display: inline-block;
+    background: var(--azul-claro);
+    color: var(--azul-primario);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  #tela-inicio h2 {
+    font-size: 1.9rem;
+    color: var(--azul-primario);
+    margin-bottom: 12px;
+    font-weight: 800;
+  }
+  #tela-inicio p {
+    color: var(--texto-sec);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .info-card {
+    background: var(--azul-claro);
+    border-radius: 8px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+  .info-card .num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--azul-primario);
+    display: block;
+  }
+  .info-card .desc {
+    font-size: 0.82rem;
+    color: var(--azul-medio);
+    margin-top: 4px;
+  }
+  .aviso {
+    background: var(--amarelo-claro);
+    border: 1px solid var(--amarelo-borda);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    color: var(--amarelo);
+    text-align: left;
+    margin: 20px 0 28px;
+    line-height: 1.6;
+  }
+  .aviso strong { color: var(--amarelo); }
+
+  /* ── BOTÕES ──────────────────────────────────────────────────────────── */
+  .btn-primario {
+    background: var(--azul-primario);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primario:hover { background: var(--azul-medio); transform: translateY(-1px); }
+  .btn-primario:active { transform: translateY(0); }
+  .btn-primario:disabled {
+    background: #b0bec5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-secundario {
+    background: var(--branco);
+    color: var(--azul-primario);
+    border: 2px solid var(--azul-primario);
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secundario:hover { background: var(--azul-claro); }
+
+  /* ── CARD DE QUESTÃO ─────────────────────────────────────────────────── */
+  #tela-questao { display: none; }
+  .questao-card {
+    background: var(--branco);
+    border-radius: 12px;
+    border: 1px solid var(--cinza-borda);
+    padding: 36px 40px;
+    box-shadow: 0 2px 12px rgba(26,58,107,0.07);
+  }
+  .questao-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .questao-num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--azul-medio);
+    background: var(--azul-claro);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .questao-tema {
+    font-size: 0.78rem;
+    color: var(--texto-sec);
+    background: #f0f4f8;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .questao-enunciado {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--texto);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .questao-enunciado strong { color: var(--azul-primario); }
+
+  /* ── ALTERNATIVAS ────────────────────────────────────────────────────── */
+  .alternativas { display: flex; flex-direction: column; gap: 12px; }
+  .alt-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--branco);
+    border: 2px solid var(--cinza-borda);
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.97rem;
+    color: var(--texto);
+    transition: all 0.18s;
+    line-height: 1.55;
+    width: 100%;
+  }
+  .alt-btn:hover:not(:disabled) {
+    border-color: var(--azul-borda);
+    background: var(--azul-hover);
+  }
+  .alt-btn:disabled { cursor: default; }
+  .alt-letra {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--cinza-fundo);
+    border: 2px solid var(--cinza-borda);
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--azul-primario);
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .alt-btn:hover:not(:disabled) .alt-letra {
+    background: var(--azul-claro);
+    border-color: var(--azul-borda);
+  }
+  /* Estados após resposta */
+  .alt-btn.correta {
+    border-color: var(--verde-borda);
+    background: var(--verde-claro);
+  }
+  .alt-btn.correta .alt-letra {
+    background: var(--verde-borda);
+    border-color: var(--verde-borda);
+    color: white;
+  }
+  .alt-btn.errada {
+    border-color: var(--vermelho-borda);
+    background: var(--vermelho-claro);
+  }
+  .alt-btn.errada .alt-letra {
+    background: var(--vermelho-borda);
+    border-color: var(--vermelho-borda);
+    color: white;
+  }
+  .alt-btn.neutra-pos {
+    border-color: #c8d6e5;
+    background: #f8fafc;
+    opacity: 0.7;
+  }
+
+  /* ── GABARITO COMENTADO ──────────────────────────────────────────────── */
+  .gabarito-box {
+    margin-top: 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid var(--cinza-borda);
+    display: none;
+  }
+  .gabarito-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    font-weight: 700;
+    font-size: 0.97rem;
+  }
+  .gabarito-header.acerto {
+    background: var(--verde-claro);
+    color: var(--verde);
+    border-bottom: 1.5px solid var(--verde-borda);
+  }
+  .gabarito-header.erro {
+    background: var(--vermelho-claro);
+    color: var(--vermelho);
+    border-bottom: 1.5px solid var(--vermelho-borda);
+  }
+  .gabarito-icone { font-size: 1.3rem; }
+  .gabarito-body {
+    background: var(--branco);
+    padding: 20px 22px;
+  }
+  .gabarito-body h4 {
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--azul-medio);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .gabarito-body p {
+    font-size: 0.97rem;
+    color: var(--texto);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .gabarito-body p:last-child { margin-bottom: 0; }
+  .gabarito-body strong { color: var(--azul-primario); }
+  .gabarito-body em { color: var(--texto-sec); font-style: italic; }
+  .por-que-erradas {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--cinza-borda);
+  }
+  .por-que-erradas ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+  }
+  .por-que-erradas li {
+    font-size: 0.92rem;
+    color: var(--texto-sec);
+    padding: 5px 0 5px 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .por-que-erradas li::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: var(--vermelho-borda);
+    font-weight: 700;
+  }
+  .por-que-erradas li.correta-item::before {
+    content: '✓';
+    color: var(--verde-borda);
+  }
+
+  /* ── BOTÃO PRÓXIMA ───────────────────────────────────────────────────── */
+  .nav-questao {
+    display: none;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+
+  /* ── TELA DE DIAGNÓSTICO ─────────────────────────────────────────────── */
+  #tela-diagnostico { display: none; }
+  .diag-header {
+    background: var(--azul-primario);
+    color: var(--branco);
+    border-radius: 12px 12px 0 0;
+    padding: 32px 40px;
+    text-align: center;
+  }
+  .diag-header h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+  .diag-header p { opacity: 0.85; font-size: 0.95rem; }
+  .diag-body {
+    background: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 36px 40px;
+    box-shadow: 0 2px 12px rgba(26,58,107,0.07);
+  }
+
+  /* Placar */
+  .placar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .placar-card {
+    border-radius: 10px;
+    padding: 20px 12px;
+    text-align: center;
+    border: 1.5px solid var(--cinza-borda);
+  }
+  .placar-card .valor {
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+  }
+  .placar-card .label {
+    font-size: 0.78rem;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .placar-card.acertos { background: var(--verde-claro); border-color: var(--verde-borda); }
+  .placar-card.acertos .valor { color: var(--verde); }
+  .placar-card.acertos .label { color: var(--verde); }
+  .placar-card.erros { background: var(--vermelho-claro); border-color: var(--vermelho-borda); }
+  .placar-card.erros .valor { color: var(--vermelho); }
+  .placar-card.erros .label { color: var(--vermelho); }
+  .placar-card.nota { background: var(--azul-claro); border-color: var(--azul-borda); }
+  .placar-card.nota .valor { color: var(--azul-primario); }
+  .placar-card.nota .label { color: var(--azul-medio); }
+  .placar-card.perc { background: #f0f4f8; }
+  .placar-card.perc .valor { color: var(--texto); }
+  .placar-card.perc .label { color: var(--texto-sec); }
+
+  /* Barra de desempenho */
+  .desempenho-barra-wrap {
+    margin-bottom: 32px;
+  }
+  .desempenho-barra-wrap h3 {
+    font-size: 1rem;
+    color: var(--azul-primario);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .barra-tema {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .barra-tema-nome {
+    font-size: 0.88rem;
+    color: var(--texto);
+    min-width: 220px;
+    font-weight: 500;
+  }
+  .barra-bg {
+    flex: 1;
+    height: 14px;
+    background: #e8edf3;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+  .barra-fill {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 0.8s ease;
+  }
+  .barra-pct {
+    font-size: 0.82rem;
+    font-weight: 700;
+    min-width: 38px;
+    text-align: right;
+  }
+
+  /* Diagnóstico detalhado */
+  .diag-secao {
+    margin-bottom: 28px;
+  }
+  .diag-secao h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--azul-primario);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--azul-claro);
+  }
+  .diag-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid var(--cinza-borda);
+    background: var(--branco);
+  }
+  .diag-item.gargalo { border-color: var(--vermelho-borda); background: var(--vermelho-claro); }
+  .diag-item.acerto  { border-color: var(--verde-borda);    background: var(--verde-claro); }
+  .diag-item.neutro  { border-color: var(--amarelo-borda);  background: var(--amarelo-claro); }
+  .diag-icone { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .diag-texto { font-size: 0.93rem; line-height: 1.6; }
+  .diag-texto strong { color: var(--azul-primario); }
+
+  /* Recomendações */
+  .rec-card {
+    background: var(--azul-claro);
+    border: 1.5px solid var(--azul-borda);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 12px;
+  }
+  .rec-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--azul-primario);
+    margin-bottom: 8px;
+  }
+  .rec-card p {
+    font-size: 0.92rem;
+    color: var(--texto-sec);
+    line-height: 1.65;
+  }
+  .rec-card .aulas-tag {
+    display: inline-block;
+    background: var(--azul-primario);
+    color: var(--branco);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin: 6px 4px 0 0;
+  }
+
+  .btn-refazer-wrap {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  /* ── RESPONSIVO ──────────────────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .questao-card { padding: 24px 20px; }
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+    .placar-grid { grid-template-columns: repeat(2, 1fr); }
+    .barra-tema-nome { min-width: 140px; font-size: 0.8rem; }
+    header { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .progress-wrap { width: 100%; }
+    #tela-inicio { padding: 28px 20px; }
+    .diag-body { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <h1>Simulado — 1.º NPC</h1>
+    <p>Mercado de Capitais e Derivativos · ADM7N1 · 2026.1</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <span class="progress-label" id="progressLabel">0 / 10</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══ TELA DE INÍCIO ══════════════════════════════════════════════════ -->
+  <div id="tela-inicio">
+    <div class="badge">Preparação para a Prova</div>
+    <h2>Simulado do 1.º NPC</h2>
+    <p>Este simulado foi elaborado para treinar os conceitos e competências avaliados na primeira prova, com questões originais que cobrem os mesmos tópicos — mas com cenários e contextos completamente diferentes da prova real.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="num">10</span>
+        <div class="desc">Questões originais</div>
+      </div>
+      <div class="info-card">
+        <span class="num">5</span>
+        <div class="desc">Tópicos cobrados</div>
+      </div>
+      <div class="info-card">
+        <span class="num">100%</span>
+        <div class="desc">Gabarito comentado</div>
+      </div>
+    </div>
+
+    <div class="aviso">
+      <strong>Como funciona:</strong> Uma questão por vez. Após marcar sua alternativa, o gabarito comentado aparece imediatamente, indicando se você acertou ou errou e explicando o porquê de cada alternativa. Ao final, você recebe um diagnóstico completo de performance com recomendações de revisão.
+    </div>
+
+    <p style="font-size:0.88rem; color:var(--texto-sec); margin-bottom: 24px;">
+      <strong>Tópicos:</strong> SFN e Intermediação Financeira · Agenda BC# · Ações ON e PN · Debêntures e Garantias · Finanças Comportamentais
+    </p>
+
+    <button class="btn-primario" onclick="iniciarSimulado()">Iniciar Simulado</button>
+  </div>
+
+  <!-- ══ TELA DE QUESTÃO ═════════════════════════════════════════════════ -->
+  <div id="tela-questao">
+    <div class="questao-card">
+      <div class="questao-meta">
+        <span class="questao-num" id="questaoNum">Questão 1 de 10</span>
+        <span class="questao-tema" id="questaoTema">Tema</span>
+      </div>
+
+      <div class="questao-enunciado" id="questaoEnunciado"></div>
+
+      <div class="alternativas" id="alternativas"></div>
+
+      <!-- Gabarito comentado -->
+      <div class="gabarito-box" id="gabaritoBox">
+        <div class="gabarito-header" id="gabaritoHeader">
+          <span class="gabarito-icone" id="gabaritoIcone"></span>
+          <span id="gabaritoTitulo"></span>
+        </div>
+        <div class="gabarito-body">
+          <h4>Por que esta é a resposta correta?</h4>
+          <p id="gabaritoExplicacao"></p>
+          <div class="por-que-erradas" id="porQueErradas"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-questao" id="navQuestao">
+      <button class="btn-primario" id="btnProxima" onclick="proximaQuestao()">Próxima questão →</button>
+    </div>
+  </div>
+
+  <!-- ══ TELA DE DIAGNÓSTICO ════════════════════════════════════════════ -->
+  <div id="tela-diagnostico">
+    <div class="diag-header">
+      <h2>Diagnóstico de Performance</h2>
+      <p>Simulado concluído · Análise detalhada dos seus resultados</p>
+    </div>
+    <div class="diag-body">
+
+      <!-- Placar -->
+      <div class="placar-grid">
+        <div class="placar-card acertos">
+          <span class="valor" id="diagAcertos">—</span>
+          <div class="label">Acertos</div>
+        </div>
+        <div class="placar-card erros">
+          <span class="valor" id="diagErros">—</span>
+          <div class="label">Erros</div>
+        </div>
+        <div class="placar-card nota">
+          <span class="valor" id="diagNota">—</span>
+          <div class="label">Nota (0–10)</div>
+        </div>
+        <div class="placar-card perc">
+          <span class="valor" id="diagPerc">—</span>
+          <div class="label">Aproveitamento</div>
+        </div>
+      </div>
+
+      <!-- Barras por tema -->
+      <div class="desempenho-barra-wrap">
+        <h3>Desempenho por Tópico</h3>
+        <div id="barrasTemas"></div>
+      </div>
+
+      <!-- Análise detalhada -->
+      <div class="diag-secao">
+        <h3>Análise Detalhada</h3>
+        <div id="analiseDetalhada"></div>
+      </div>
+
+      <!-- Recomendações -->
+      <div class="diag-secao">
+        <h3>Recomendações de Revisão</h3>
+        <div id="recomendacoes"></div>
+      </div>
+
+      <div class="btn-refazer-wrap">
+        <button class="btn-secundario" onclick="refazerSimulado()" style="margin-right:12px">↺ Refazer Simulado</button>
+        <button class="btn-primario" onclick="voltarInicio()">← Voltar ao Início</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// BANCO DE QUESTÕES — 10 questões originais (mesmos conceitos, cenários novos)
+// ══════════════════════════════════════════════════════════════════════════════
+const questoes = [
+  {
+    id: 1,
+    tema: 'SFN — Estrutura e Hierarquia',
+    enunciado: `Uma startup de tecnologia financeira (Fintech) deseja lançar um produto de crédito pessoal digital e, para isso, precisa obter autorização para funcionar como instituição financeira. Considerando a estrutura hierárquica do <strong>Sistema Financeiro Nacional (SFN)</strong>, qual órgão é responsável por <strong>autorizar o funcionamento</strong> dessa Fintech e fiscalizar suas operações de crédito?`,
+    alternativas: [
+      'Conselho Monetário Nacional (CMN), pois é o órgão máximo do SFN e define todas as regras.',
+      'Comissão de Valores Mobiliários (CVM), pois regula todas as instituições financeiras do país.',
+      'Banco Central do Brasil (BCB), pois é o órgão supervisor responsável por autorizar e fiscalizar instituições financeiras.',
+      'B3 (Bolsa de Valores), pois é a operadora que controla o acesso ao mercado de crédito.',
+      'Ministério da Fazenda, pois é o órgão do governo federal que regula o sistema financeiro.',
+    ],
+    correta: 2,
+    explicacao: `O <strong>Banco Central do Brasil (BCB)</strong> é o órgão supervisor do SFN responsável por autorizar o funcionamento de instituições financeiras — incluindo Fintechs que operam como Sociedades de Crédito Direto (SCD) ou Instituições de Pagamento. O BCB também fiscaliza as operações de crédito, câmbio e executa a política monetária (taxa Selic).`,
+    porQueErradas: [
+      { letra: 'A', texto: 'O CMN é o órgão normativo (define as regras gerais), mas não autoriza nem fiscaliza diretamente instituições financeiras individuais.' },
+      { letra: 'B', texto: 'A CVM regula o mercado de valores mobiliários (ações, debêntures, fundos), não as instituições de crédito.' },
+      { letra: 'C', texto: 'CORRETA — O BCB é o supervisor que autoriza e fiscaliza instituições financeiras.', correta: true },
+      { letra: 'D', texto: 'A B3 é uma operadora (bolsa de valores), não um órgão regulador ou supervisor.' },
+      { letra: 'E', texto: 'O Ministério da Fazenda não tem papel direto na autorização de instituições financeiras no SFN.' },
+    ]
+  },
+  {
+    id: 2,
+    tema: 'SFN — Intermediação Financeira',
+    enunciado: `A empresa <strong>Construtora Horizonte S.A.</strong> precisa captar R$ 50 milhões para financiar a construção de um complexo logístico. O diretor financeiro avalia duas opções: (1) contratar um empréstimo bancário a 18% a.a.; ou (2) emitir debêntures no mercado de capitais a 13% a.a. Ao optar pela emissão de debêntures, a empresa está praticando:`,
+    alternativas: [
+      'Intermediação financeira, pois o banco atua como intermediário na distribuição das debêntures.',
+      'Desintermediação financeira, pois a empresa capta recursos diretamente dos investidores, eliminando o spread bancário.',
+      'Securitização de recebíveis, pois os ativos da construtora são transformados em títulos negociáveis.',
+      'Arbitragem de taxas, pois a empresa aproveita a diferença entre as taxas de mercado e as bancárias.',
+      'Alavancagem financeira, pois a empresa está captando recursos de terceiros para financiar seus ativos.',
+    ],
+    correta: 1,
+    explicacao: `A emissão de debêntures é o exemplo clássico de <strong>desintermediação financeira</strong>: a empresa acessa diretamente os poupadores (investidores) no mercado de capitais, sem a intermediação de um banco. Isso elimina o <em>spread</em> bancário (diferença entre a taxa de captação e a de empréstimo do banco), reduzindo o custo de capital da empresa de 18% a.a. (empréstimo bancário) para 13% a.a. (debênture).`,
+    porQueErradas: [
+      { letra: 'A', texto: 'Na desintermediação, o banco pode atuar como coordenador da emissão (banco de investimento), mas não como intermediário financeiro que capta e empresta recursos.' },
+      { letra: 'B', texto: 'CORRETA — Desintermediação financeira: acesso direto ao mercado, sem spread bancário.', correta: true },
+      { letra: 'C', texto: 'Securitização envolve transformar recebíveis (ex: aluguéis, duplicatas) em títulos. Não é o caso aqui.' },
+      { letra: 'D', texto: 'Arbitragem de taxas é uma estratégia de trading, não uma forma de captação de recursos.' },
+      { letra: 'E', texto: 'Alavancagem financeira descreve o uso de dívida para ampliar retorno, mas não é o conceito que define a forma de captação descrita.' },
+    ]
+  },
+  {
+    id: 3,
+    tema: 'Agenda BC# — Dimensões',
+    enunciado: `A <strong>Padaria Artesanal do Seu Zé</strong>, um microempreendedor individual (MEI) do interior de Minas Gerais, nunca teve conta em banco porque a agência mais próxima ficava a 80 km de distância. Em 2023, ele abriu uma conta digital gratuita em uma Fintech pelo celular em menos de 5 minutos, passou a receber pagamentos via PIX e conseguiu um microcrédito de R$ 5.000 para comprar um forno industrial. Qual dimensão da <strong>Agenda BC#</strong> é mais diretamente exemplificada por essa situação?`,
+    alternativas: [
+      'Transparência, pois o PIX aumenta a rastreabilidade das transações financeiras do MEI.',
+      'Educação, pois o MEI aprendeu a usar serviços financeiros digitais.',
+      'Competição, pois a Fintech concorre com os bancos tradicionais pelo cliente.',
+      'Inclusão, pois o MEI desbancarizado foi inserido no sistema financeiro por meio da digitalização.',
+      'Regulação, pois o BCB autorizou a Fintech a operar como instituição de pagamento.',
+    ],
+    correta: 3,
+    explicacao: `A dimensão <strong>Inclusão</strong> da Agenda BC# tem como objetivo inserir a população desbancarizada e os microempreendedores no sistema financeiro, reduzindo barreiras físicas e burocráticas. O caso do Seu Zé é o exemplo perfeito: um MEI sem acesso a agência bancária que passa a ter conta, PIX e crédito por meio de uma Fintech digital. A inclusão financeira é o ponto de partida para as demais dimensões da agenda.`,
+    porQueErradas: [
+      { letra: 'A', texto: 'Transparência foca na qualidade da informação e rastreabilidade das operações (ex: MED para fraudes no PIX), não na inclusão de desbancarizados.' },
+      { letra: 'B', texto: 'Educação financeira é uma dimensão da BC#, mas o foco do caso é o acesso ao sistema, não o aprendizado.' },
+      { letra: 'C', texto: 'Competição é relevante (Fintech vs. banco), mas o ponto central do caso é a inclusão de quem estava fora do sistema.' },
+      { letra: 'D', texto: 'CORRETA — Inclusão: inserção do desbancarizado no SFN via digitalização.', correta: true },
+      { letra: 'E', texto: '"Regulação" não é uma das quatro dimensões da Agenda BC#.' },
+    ]
+  },
+  {
+    id: 4,
+    tema: 'Agenda BC# — Open Finance',
+    enunciado: `A <strong>Transportadora Veloz Ltda.</strong> tinha um empréstimo de capital de giro no Banco Tradicional S.A. a 22% a.a. Ao aderir ao <strong>Open Finance</strong>, ela compartilhou seu histórico de pagamentos, faturamento e fluxo de caixa com outras instituições. A Fintech CréditoRápido S.A. analisou os dados e ofereceu crédito a 14% a.a. A transportadora migrou para a Fintech e economizou R$ 80.000 em juros no ano. Esse cenário exemplifica qual dimensão da Agenda BC# e qual é o mecanismo central que o viabilizou?`,
+    alternativas: [
+      'Inclusão; o mecanismo central é o PIX, que reduziu o custo das transações financeiras.',
+      'Transparência; o mecanismo central é o MED, que protege contra fraudes no sistema.',
+      'Competição; o mecanismo central é o Open Finance, que reduziu a assimetria de informação e permitiu a portabilidade de dados.',
+      'Educação; o mecanismo central é a portabilidade de crédito, que permite migrar dívidas entre bancos.',
+      'Regulação; o mecanismo central é a supervisão do BCB sobre as taxas de juros praticadas.',
+    ],
+    correta: 2,
+    explicacao: `O cenário exemplifica a dimensão <strong>Competição</strong> da Agenda BC#. O mecanismo central é o <strong>Open Finance</strong>, que permite ao cliente compartilhar seu histórico financeiro com outras instituições. Ao reduzir a assimetria de informação (antes, apenas o banco original conhecia o histórico do cliente), o Open Finance cria condições para que Fintechs e bancos menores ofereçam taxas mais competitivas, quebrando o oligopólio bancário.`,
+    porQueErradas: [
+      { letra: 'A', texto: 'O PIX é um instrumento de pagamento instantâneo, não o mecanismo que viabiliza a comparação de taxas de crédito.' },
+      { letra: 'B', texto: 'Transparência e MED focam em qualidade da informação e proteção contra fraudes, não em competição por crédito.' },
+      { letra: 'C', texto: 'CORRETA — Competição via Open Finance: portabilidade de dados reduz assimetria de informação.', correta: true },
+      { letra: 'D', texto: 'A portabilidade de crédito existe, mas o mecanismo descrito no caso é o compartilhamento de dados via Open Finance.' },
+      { letra: 'E', texto: 'O BCB não controla diretamente as taxas de juros praticadas pelas instituições financeiras.' },
+    ]
+  },
+  {
+    id: 5,
+    tema: 'Ações ON e PN',
+    enunciado: `Os irmãos <strong>Carlos e Mariana Ferreira</strong> fundaram a rede de academias <strong>FitLife S.A.</strong> há 10 anos e detêm 100% das ações. Para expandir para outras cidades, precisam captar R$ 30 milhões via abertura de capital (IPO). Porém, Carlos e Mariana não querem perder o controle das decisões estratégicas da empresa. Um assessor de investimentos recomendou emitir ações para o mercado de forma que a família mantenha o poder de voto. Qual estratégia é a mais adequada?`,
+    alternativas: [
+      'Emitir apenas Ações Ordinárias (ON) para o mercado, pois são as mais valorizadas pelos investidores.',
+      'Emitir Ações Preferenciais (PN) para o mercado, retendo as Ações Ordinárias (ON) para a família, que assim mantém o poder de voto.',
+      'Emitir Ações Preferenciais (PN) para a família, pois elas conferem preferência em dividendos e maior controle.',
+      'Converter todas as ações em debêntures conversíveis para atrair investidores institucionais.',
+      'Emitir apenas Ações Ordinárias (ON) para a família, pois as PN são proibidas em IPOs pela CVM.',
+    ],
+    correta: 1,
+    explicacao: `A estratégia correta é emitir <strong>Ações Preferenciais (PN)</strong> para o mercado e reter as <strong>Ações Ordinárias (ON)</strong> para a família. As ações ON conferem direito a voto nas assembleias, garantindo o controle estratégico para Carlos e Mariana. As ações PN, embora não confiram voto (em regra), oferecem preferência no recebimento de dividendos, o que as torna atrativas para investidores de varejo que buscam renda.`,
+    porQueErradas: [
+      { letra: 'A', texto: 'Emitir apenas ON para o mercado diluiria o poder de voto da família, que poderia perder o controle da empresa.' },
+      { letra: 'B', texto: 'CORRETA — PN para o mercado (sem voto) + ON para a família (com voto) = controle mantido.', correta: true },
+      { letra: 'C', texto: 'As PN não conferem poder de controle — é exatamente o contrário: elas abrem mão do voto em troca de preferência em dividendos.' },
+      { letra: 'D', texto: 'Debêntures conversíveis são títulos de dívida, não ações. Além disso, a questão pede uma estratégia de abertura de capital.' },
+      { letra: 'E', texto: 'As PN não são proibidas em IPOs. Ao contrário, são amplamente utilizadas nesse contexto.' },
+    ]
+  },
+  {
+    id: 6,
+    tema: 'Ações ON e PN — Tag Along',
+    enunciado: `A <strong>Indústria Metalúrgica Bravura S.A.</strong> tem seu capital dividido entre ações ON e PN. O grupo controlador (família Bravura) detém 60% das ações ON. Um fundo de private equity fez uma oferta para comprar o bloco de controle por R$ 80 por ação ON. Um investidor minoritário possui 10.000 ações ON e quer saber qual é o valor mínimo garantido pelo <strong>Tag Along</strong> para suas ações, considerando que a empresa está listada no segmento padrão da B3 (não no Novo Mercado).`,
+    alternativas: [
+      'R$ 800.000, pois o Tag Along garante 100% do valor pago pelo bloco de controle.',
+      'R$ 640.000, pois o Tag Along garante no mínimo 80% do valor pago pelo bloco de controle.',
+      'R$ 560.000, pois o Tag Along garante no mínimo 70% do valor pago pelo bloco de controle.',
+      'R$ 0, pois o Tag Along se aplica apenas às ações PN, não às ON.',
+      'R$ 480.000, pois o Tag Along garante no mínimo 60% do valor pago pelo bloco de controle.',
+    ],
+    correta: 1,
+    explicacao: `O <strong>Tag Along</strong> é um mecanismo de proteção ao acionista minoritário previsto na Lei das S.A. (Lei 6.404/76). Para empresas listadas no <strong>segmento padrão</strong> da B3, o Tag Along garante aos acionistas minoritários detentores de ações ON o direito de vender suas ações por, no mínimo, <strong>80%</strong> do valor pago pelo bloco de controle. Cálculo: 10.000 ações × R$ 80 × 80% = <strong>R$ 640.000</strong>. No Novo Mercado, o Tag Along seria de 100%.`,
+    porQueErradas: [
+      { letra: 'A', texto: '100% de Tag Along é garantido apenas no Novo Mercado da B3, não no segmento padrão.' },
+      { letra: 'B', texto: 'CORRETA — 80% é o mínimo legal para ações ON no segmento padrão: 10.000 × R$80 × 80% = R$640.000.', correta: true },
+      { letra: 'C', texto: '70% não é o percentual legal do Tag Along para nenhum segmento da B3.' },
+      { letra: 'D', texto: 'O Tag Along se aplica às ações ON (com direito a voto), não às PN.' },
+      { letra: 'E', texto: '60% não é o percentual legal do Tag Along.' },
+    ]
+  },
+  {
+    id: 7,
+    tema: 'Debêntures — Garantias',
+    enunciado: `A <strong>Energia Renovável do Nordeste S.A.</strong> emitiu debêntures para financiar a construção de um parque eólico. Na escritura de emissão, ficou estabelecido que os <strong>terrenos e as turbinas eólicas</strong> do parque ficam alienados fiduciariamente em favor dos debenturistas, não podendo ser negociados pela empresa durante o prazo da emissão. Em caso de falência, esses bens serão vendidos exclusivamente para pagar esses debenturistas. Qual é o tipo de garantia oferecida?`,
+    alternativas: [
+      'Garantia Quirografária, pois os debenturistas concorrem com os demais credores em igualdade de condições.',
+      'Garantia Subordinada, pois os debenturistas são os últimos a receber em caso de liquidação.',
+      'Garantia Flutuante, pois os bens ficam vinculados ao ativo geral da empresa.',
+      'Garantia Real, pois ativos tangíveis específicos (terrenos e turbinas) são alienados fiduciariamente em favor dos debenturistas.',
+      'Garantia Fidejussória, pois um terceiro (fiador) garante o pagamento das debêntures.',
+    ],
+    correta: 3,
+    explicacao: `A <strong>Garantia Real</strong> é a mais segura para o debenturista. Ela é caracterizada pela alienação fiduciária de <strong>ativos tangíveis específicos</strong> (imóveis, terrenos, máquinas, equipamentos) em favor dos debenturistas. Os bens vinculados <strong>não podem ser negociados</strong> pela empresa durante o prazo da emissão e, em caso de falência, são vendidos exclusivamente para pagar os detentores dessas debêntures, antes de qualquer outro credor.`,
+    porQueErradas: [
+      { letra: 'A', texto: 'Na quirografária, não há garantia específica — os debenturistas concorrem em igualdade com credores sem preferência.' },
+      { letra: 'B', texto: 'Na subordinada, os debenturistas são os últimos a receber — é a mais arriscada, não a mais segura.' },
+      { letra: 'C', texto: 'Na flutuante, os bens NÃO são vinculados especificamente e podem ser negociados pela empresa. No caso, os bens são alienados fiduciariamente (vinculados), o que caracteriza garantia real.' },
+      { letra: 'D', texto: 'CORRETA — Garantia Real: ativos tangíveis específicos alienados fiduciariamente, exclusivos para os debenturistas.', correta: true },
+      { letra: 'E', texto: 'Garantia Fidejussória (fiança ou aval) envolve um terceiro garantidor, não a vinculação de ativos da própria empresa.' },
+    ]
+  },
+  {
+    id: 8,
+    tema: 'Debêntures Incentivadas',
+    enunciado: `A <strong>Rodovias do Cerrado S.A.</strong> emitiu debêntures incentivadas (Lei n.º 12.431/2011) para financiar a duplicação de 300 km de rodovia federal. A investidora <strong>Dra. Patrícia Alves</strong>, pessoa física, aplicou R$ 100.000 nessas debêntures e obteve rendimento bruto de R$ 12.000 ao final do prazo. Quanto ela pagará de <strong>Imposto de Renda</strong> sobre esse rendimento?`,
+    alternativas: [
+      'R$ 2.700, pois a alíquota de IR para debêntures incentivadas para PF é de 22,5%.',
+      'R$ 1.800, pois a alíquota de IR para debêntures incentivadas para PF é de 15%.',
+      'R$ 0, pois debêntures incentivadas são isentas de IR para Pessoa Física.',
+      'R$ 1.200, pois a alíquota de IR para debêntures incentivadas para PF é de 10%.',
+      'R$ 900, pois a alíquota de IR para debêntures incentivadas para PF é de 7,5%.',
+    ],
+    correta: 2,
+    explicacao: `As <strong>debêntures incentivadas</strong> (Lei n.º 12.431/2011) são isentas de Imposto de Renda para <strong>Pessoa Física</strong>. Essa isenção é o principal atrativo desse instrumento e foi criada para estimular o investimento privado em projetos de infraestrutura (energia, logística, saneamento, telecomunicações). Portanto, a Dra. Patrícia pagará <strong>R$ 0 de IR</strong> sobre os R$ 12.000 de rendimento.`,
+    porQueErradas: [
+      { letra: 'A', texto: '22,5% é a alíquota máxima da tabela regressiva de IR para renda fixa comum (prazo até 180 dias). Não se aplica às incentivadas.' },
+      { letra: 'B', texto: '15% é a alíquota de IR para Pessoa Jurídica nas debêntures incentivadas, não para PF.' },
+      { letra: 'C', texto: 'CORRETA — Isenção total (0%) de IR para Pessoa Física nas debêntures incentivadas (Lei 12.431/2011).', correta: true },
+      { letra: 'D', texto: '10% não é uma alíquota prevista para debêntures incentivadas.' },
+      { letra: 'E', texto: '7,5% não é uma alíquota prevista para debêntures incentivadas.' },
+    ]
+  },
+  {
+    id: 9,
+    tema: 'Finanças Comportamentais — Vieses',
+    enunciado: `O investidor <strong>Roberto Campos</strong> comprou 500 ações da <strong>TechBrasil S.A.</strong> a R$ 60 cada (total investido: R$ 30.000). Após um escândalo de fraude contábil amplamente divulgado, as ações caíram para R$ 22. Todos os analistas recomendam venda, pois os fundamentos da empresa se deterioraram irreversivelmente. No entanto, Roberto se recusa a vender, afirmando: <em>"Não vendo com prejuízo. Vou esperar voltar para R$ 60."</em> Qual viés comportamental explica <strong>primariamente</strong> a decisão de Roberto?`,
+    alternativas: [
+      'Comportamento de Manada, pois Roberto está seguindo a opinião dos analistas que recomendam venda.',
+      'Ancoragem, pois Roberto está ancorado no preço de compra (R$ 60) como referência para a decisão de venda.',
+      'Aversão à Perda, pois Roberto prefere manter o ativo em queda a realizar o prejuízo, mesmo diante de evidências racionais de deterioração.',
+      'Excesso de Confiança, pois Roberto acredita que sua análise é superior à dos analistas de mercado.',
+      'Efeito Manada Reverso, pois Roberto está fazendo o oposto do que o mercado recomenda.',
+    ],
+    correta: 2,
+    explicacao: `O viés <strong>primário</strong> é a <strong>Aversão à Perda</strong>: Roberto se recusa a <em>realizar</em> o prejuízo porque a dor psicológica de admitir a perda é maior do que a análise racional dos fundamentos. Segundo a Teoria do Prospecto (Kahneman e Tversky, 1979), a dor de perder é aproximadamente duas vezes maior do que o prazer de ganhar o mesmo valor. A frase "não vendo com prejuízo" é a expressão clássica desse viés. <br><br><em>Nota: A ancoragem também está presente (âncora em R$60), mas o viés primário que explica a recusa em vender é a aversão à perda.</em>`,
+    porQueErradas: [
+      { letra: 'A', texto: 'Comportamento de Manada seria seguir a maioria sem análise própria. Roberto está fazendo o oposto — ignorando a recomendação dos analistas.' },
+      { letra: 'B', texto: 'A ancoragem está presente (R$60 como âncora), mas ela é secundária. O mecanismo principal que impede a venda é a aversão à perda — a relutância em realizar o prejuízo.' },
+      { letra: 'C', texto: 'CORRETA — Aversão à Perda: recusa em realizar prejuízo mesmo com fundamentos deteriorados.', correta: true },
+      { letra: 'D', texto: 'Excesso de confiança seria Roberto acreditar que a empresa vai se recuperar por sua própria análise superior. O texto não indica isso — ele apenas não quer "vender com prejuízo".' },
+      { letra: 'E', texto: '"Efeito Manada Reverso" não é um conceito reconhecido na literatura de Finanças Comportamentais.' },
+    ]
+  },
+  {
+    id: 10,
+    tema: 'Finanças Comportamentais — Teoria do Prospecto',
+    enunciado: `Em um experimento baseado na <strong>Teoria do Prospecto</strong> de Kahneman e Tversky (1979), dois grupos de investidores receberam as seguintes situações:<br><br>
+    <strong>Grupo A:</strong> Você tem R$ 1.000 e pode ganhar mais R$ 500 com certeza, ou tentar ganhar R$ 1.000 adicionais com 50% de chance (e nada com 50%).<br>
+    <strong>Grupo B:</strong> Você tem R$ 2.000 e pode perder R$ 500 com certeza, ou tentar não perder nada com 50% de chance (e perder R$ 1.000 com 50%).<br><br>
+    Matematicamente, as duas situações são <strong>idênticas</strong> em valor esperado. Qual é o comportamento previsto pela Teoria do Prospecto e o que ele demonstra?`,
+    alternativas: [
+      'Ambos os grupos escolherão a opção certa (sem risco), pois os investidores são racionais e avessos ao risco em todas as situações.',
+      'O Grupo A tenderá a escolher a opção certa (ganho garantido de R$500), enquanto o Grupo B tenderá a escolher a opção arriscada (tentar não perder nada). Isso demonstra que as pessoas são avessas ao risco no domínio dos ganhos e propensas ao risco no domínio das perdas.',
+      'O Grupo A escolherá a opção arriscada e o Grupo B escolherá a opção certa, pois as perdas motivam mais do que os ganhos.',
+      'Ambos os grupos escolherão a opção arriscada, pois os investidores são naturalmente propensos ao risco.',
+      'O comportamento dos grupos será aleatório, pois a Teoria do Prospecto afirma que as decisões sob incerteza são imprevisíveis.',
+    ],
+    correta: 1,
+    explicacao: `A <strong>Teoria do Prospecto</strong> prevê exatamente esse padrão assimétrico: <ul style="margin:10px 0 0 20px; line-height:1.8">
+    <li><strong>Grupo A (domínio dos ganhos):</strong> As pessoas são <em>avessas ao risco</em> — preferem o ganho certo de R$500 a arriscar por R$1.000 com 50% de chance.</li>
+    <li><strong>Grupo B (domínio das perdas):</strong> As pessoas são <em>propensas ao risco</em> — preferem arriscar (tentar não perder nada) a aceitar a perda certa de R$500.</li></ul><br>
+    Isso demonstra que as pessoas avaliam resultados em relação a um <strong>ponto de referência</strong> (não em termos absolutos) e que a função de valor é côncava para ganhos e convexa para perdas — a assimetria fundamental da Teoria do Prospecto.`,
+    porQueErradas: [
+      { letra: 'A', texto: 'A hipótese de racionalidade plena é justamente o que a Teoria do Prospecto refuta. Investidores racionais deveriam ser indiferentes entre as opções de mesmo valor esperado.' },
+      { letra: 'B', texto: 'CORRETA — Aversão ao risco nos ganhos + propensão ao risco nas perdas = assimetria da Teoria do Prospecto.', correta: true },
+      { letra: 'C', texto: 'O padrão está invertido. A teoria prevê aversão ao risco nos ganhos (Grupo A escolhe o certo) e propensão ao risco nas perdas (Grupo B arrisca).' },
+      { letra: 'D', texto: 'A teoria não prevê propensão ao risco em todas as situações — apenas no domínio das perdas.' },
+      { letra: 'E', texto: 'A Teoria do Prospecto faz previsões sistemáticas sobre o comportamento humano sob incerteza — não afirma aleatoriedade.' },
+    ]
+  }
+];
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ESTADO DO SIMULADO
+// ══════════════════════════════════════════════════════════════════════════════
+let estado = {
+  questaoAtual: 0,
+  respostas: [],   // { questaoId, respondeu, correta, temaId }
+  respondeuAtual: false,
+};
+
+// Mapeamento de temas para análise
+const temas = [
+  { id: 'sfn-estrutura',   nome: 'SFN — Estrutura e Hierarquia',     questoes: [0] },
+  { id: 'sfn-inter',       nome: 'SFN — Intermediação Financeira',    questoes: [1] },
+  { id: 'agendabc',        nome: 'Agenda BC#',                        questoes: [2, 3] },
+  { id: 'acoes',           nome: 'Ações ON e PN',                     questoes: [4, 5] },
+  { id: 'debentures',      nome: 'Debêntures',                        questoes: [6, 7] },
+  { id: 'comportamental',  nome: 'Finanças Comportamentais',          questoes: [8, 9] },
+];
+
+// Recomendações por tema
+const recomendacoesTemas = {
+  'sfn-estrutura': {
+    titulo: 'SFN — Estrutura e Hierarquia',
+    texto: 'Revise a hierarquia dos três níveis do SFN: órgãos normativos (CMN), supervisores (BCB e CVM) e operadores (B3, bancos, corretoras). Foque nas funções específicas de cada órgão.',
+    aulas: ['Aula 01', 'Aula 02'],
+  },
+  'sfn-inter': {
+    titulo: 'Intermediação vs. Desintermediação',
+    texto: 'Domine a diferença entre intermediação (banco como atravessador, spread bancário) e desintermediação (acesso direto ao mercado, sem spread). A emissão de debêntures é o exemplo central.',
+    aulas: ['Aula 01', 'Aula 04'],
+  },
+  'agendabc': {
+    titulo: 'Agenda BC# — As 4 Dimensões',
+    texto: 'Memorize as quatro dimensões (Inclusão, Competição, Transparência, Educação) e seus instrumentos principais. O Open Finance é o instrumento central da dimensão Competição.',
+    aulas: ['Aula 02', 'Aula 03'],
+  },
+  'acoes': {
+    titulo: 'Ações Ordinárias (ON) e Preferenciais (PN)',
+    texto: 'Revise as diferenças entre ON (voto, controle, Tag Along) e PN (sem voto, preferência em dividendos, renda). Pratique cenários de IPO e estratégias de emissão.',
+    aulas: ['Aula 03', 'Aula 05'],
+  },
+  'debentures': {
+    titulo: 'Debêntures — Garantias e Incentivadas',
+    texto: 'Revise a hierarquia das quatro garantias (Real > Flutuante > Quirografária > Subordinada) e o benefício fiscal das debêntures incentivadas (isenção de IR para PF).',
+    aulas: ['Aula 04', 'Aula 05', 'Aula 06'],
+  },
+  'comportamental': {
+    titulo: 'Finanças Comportamentais',
+    texto: 'Revise a Teoria do Prospecto e os três vieses principais: Aversão à Perda, Ancoragem e Comportamento de Manada. Pratique identificar qual viés está presente em cada situação.',
+    aulas: ['Aula 07'],
+  },
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// FUNÇÕES PRINCIPAIS
+// ══════════════════════════════════════════════════════════════════════════════
+function iniciarSimulado() {
+  estado.questaoAtual = 0;
+  estado.respostas = [];
+  estado.respondeuAtual = false;
+  document.getElementById('tela-inicio').style.display = 'none';
+  document.getElementById('tela-diagnostico').style.display = 'none';
+  document.getElementById('tela-questao').style.display = 'block';
+  renderQuestao();
+}
+
+function renderQuestao() {
+  const q = questoes[estado.questaoAtual];
+  estado.respondeuAtual = false;
+
+  // Progresso
+  const pct = (estado.questaoAtual / questoes.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${estado.questaoAtual} / ${questoes.length}`;
+
+  // Meta
+  document.getElementById('questaoNum').textContent = `Questão ${estado.questaoAtual + 1} de ${questoes.length}`;
+  document.getElementById('questaoTema').textContent = q.tema;
+
+  // Enunciado
+  document.getElementById('questaoEnunciado').innerHTML = q.enunciado;
+
+  // Alternativas
+  const altDiv = document.getElementById('alternativas');
+  altDiv.innerHTML = '';
+  const letras = ['A', 'B', 'C', 'D', 'E'];
+  q.alternativas.forEach((alt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'alt-btn';
+    btn.innerHTML = `<span class="alt-letra">${letras[idx]}</span><span>${alt}</span>`;
+    btn.onclick = () => responder(idx);
+    altDiv.appendChild(btn);
+  });
+
+  // Esconder gabarito e botão
+  document.getElementById('gabaritoBox').style.display = 'none';
+  document.getElementById('navQuestao').style.display = 'none';
+
+  // Scroll para o topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function responder(idxEscolhido) {
+  if (estado.respondeuAtual) return;
+  estado.respondeuAtual = true;
+
+  const q = questoes[estado.questaoAtual];
+  const correta = idxEscolhido === q.correta;
+  const letras = ['A', 'B', 'C', 'D', 'E'];
+
+  // Registrar resposta
+  estado.respostas.push({
+    questaoIdx: estado.questaoAtual,
+    idxEscolhido,
+    correta,
+    tema: q.tema,
+  });
+
+  // Estilizar alternativas
+  const altBtns = document.querySelectorAll('.alt-btn');
+  altBtns.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === q.correta) {
+      btn.classList.add('correta');
+    } else if (idx === idxEscolhido && !correta) {
+      btn.classList.add('errada');
+    } else {
+      btn.classList.add('neutra-pos');
+    }
+  });
+
+  // Mostrar gabarito
+  const gabBox = document.getElementById('gabaritoBox');
+  const gabHeader = document.getElementById('gabaritoHeader');
+  const gabIcone = document.getElementById('gabaritoIcone');
+  const gabTitulo = document.getElementById('gabaritoTitulo');
+  const gabExp = document.getElementById('gabaritoExplicacao');
+  const porQueDiv = document.getElementById('porQueErradas');
+
+  gabBox.style.display = 'block';
+
+  if (correta) {
+    gabHeader.className = 'gabarito-header acerto';
+    gabIcone.textContent = '✅';
+    gabTitulo.textContent = `Correto! Você marcou a alternativa ${letras[idxEscolhido]}.`;
+  } else {
+    gabHeader.className = 'gabarito-header erro';
+    gabIcone.textContent = '❌';
+    gabTitulo.textContent = `Incorreto. Você marcou ${letras[idxEscolhido]}. A resposta correta é ${letras[q.correta]}.`;
+  }
+
+  gabExp.innerHTML = q.explicacao;
+
+  // Por que as outras estão erradas
+  porQueDiv.innerHTML = '<h4>Análise de cada alternativa:</h4><ul>';
+  q.porQueErradas.forEach((item) => {
+    const liClass = item.correta ? 'correta-item' : '';
+    porQueDiv.innerHTML += `<li class="${liClass}"><strong>${item.letra})</strong> ${item.texto}</li>`;
+  });
+  porQueDiv.innerHTML += '</ul>';
+
+  // Botão próxima
+  const navDiv = document.getElementById('navQuestao');
+  navDiv.style.display = 'flex';
+  const btnProxima = document.getElementById('btnProxima');
+  if (estado.questaoAtual >= questoes.length - 1) {
+    btnProxima.textContent = 'Ver Diagnóstico →';
+  } else {
+    btnProxima.textContent = 'Próxima questão →';
+  }
+
+  // Scroll para o gabarito
+  setTimeout(() => {
+    gabBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 200);
+}
+
+function proximaQuestao() {
+  estado.questaoAtual++;
+  if (estado.questaoAtual >= questoes.length) {
+    mostrarDiagnostico();
+  } else {
+    renderQuestao();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// DIAGNÓSTICO DE PERFORMANCE
+// ══════════════════════════════════════════════════════════════════════════════
+function mostrarDiagnostico() {
+  document.getElementById('tela-questao').style.display = 'none';
+  document.getElementById('tela-diagnostico').style.display = 'block';
+
+  // Progresso 100%
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = `${questoes.length} / ${questoes.length}`;
+
+  const total = questoes.length;
+  const acertos = estado.respostas.filter(r => r.correta).length;
+  const erros = total - acertos;
+  const nota = ((acertos / total) * 10).toFixed(1);
+  const perc = Math.round((acertos / total) * 100);
+
+  document.getElementById('diagAcertos').textContent = acertos;
+  document.getElementById('diagErros').textContent = erros;
+  document.getElementById('diagNota').textContent = nota;
+  document.getElementById('diagPerc').textContent = perc + '%';
+
+  // Barras por tema
+  const barrasDiv = document.getElementById('barrasTemas');
+  barrasDiv.innerHTML = '';
+  temas.forEach(tema => {
+    const questoesTema = tema.questoes;
+    const acertosTema = questoesTema.filter(qi => estado.respostas[qi]?.correta).length;
+    const totalTema = questoesTema.length;
+    const pctTema = totalTema > 0 ? Math.round((acertosTema / totalTema) * 100) : 0;
+    const cor = pctTema >= 70 ? '#28a745' : pctTema >= 50 ? '#ffc107' : '#dc3545';
+
+    barrasDiv.innerHTML += `
+      <div class="barra-tema">
+        <div class="barra-tema-nome">${tema.nome}</div>
+        <div class="barra-bg">
+          <div class="barra-fill" style="width:${pctTema}%; background:${cor};"></div>
+        </div>
+        <div class="barra-pct" style="color:${cor}">${acertosTema}/${totalTema}</div>
+      </div>
+    `;
+  });
+
+  // Análise detalhada
+  const analiseDiv = document.getElementById('analiseDetalhada');
+  analiseDiv.innerHTML = '';
+
+  estado.respostas.forEach((resp, idx) => {
+    const q = questoes[resp.questaoIdx];
+    const letras = ['A', 'B', 'C', 'D', 'E'];
+    const cls = resp.correta ? 'acerto' : 'gargalo';
+    const icone = resp.correta ? '✅' : '❌';
+    const marcada = letras[resp.idxEscolhido];
+    const correta = letras[q.correta];
+
+    analiseDiv.innerHTML += `
+      <div class="diag-item ${cls}">
+        <span class="diag-icone">${icone}</span>
+        <div class="diag-texto">
+          <strong>Q${idx + 1} — ${q.tema}:</strong>
+          ${resp.correta
+            ? `Você marcou <strong>${marcada}</strong> — correto!`
+            : `Você marcou <strong>${marcada}</strong>, mas a resposta correta é <strong>${correta}</strong>.`
+          }
+        </div>
+      </div>
+    `;
+  });
+
+  // Recomendações
+  const recDiv = document.getElementById('recomendacoes');
+  recDiv.innerHTML = '';
+
+  // Identificar temas com gargalo (< 70%) e temas de acerto (≥ 70%)
+  const temasGargalo = [];
+  const temasAcerto = [];
+
+  temas.forEach(tema => {
+    const questoesTema = tema.questoes;
+    const acertosTema = questoesTema.filter(qi => estado.respostas[qi]?.correta).length;
+    const totalTema = questoesTema.length;
+    const pctTema = totalTema > 0 ? (acertosTema / totalTema) * 100 : 0;
+    if (pctTema < 70) temasGargalo.push({ tema, pct: pctTema, acertos: acertosTema, total: totalTema });
+    else temasAcerto.push({ tema, pct: pctTema, acertos: acertosTema, total: totalTema });
+  });
+
+  // Mensagem geral
+  let msgGeral = '';
+  if (perc >= 80) {
+    msgGeral = `<div class="diag-item acerto" style="margin-bottom:20px"><span class="diag-icone">🏆</span><div class="diag-texto"><strong>Excelente desempenho!</strong> Você acertou ${perc}% das questões. Está muito bem preparado para a prova. Revise os pontos abaixo para garantir 100%.</div></div>`;
+  } else if (perc >= 60) {
+    msgGeral = `<div class="diag-item neutro" style="margin-bottom:20px"><span class="diag-icone">📈</span><div class="diag-texto"><strong>Bom desempenho!</strong> Você acertou ${perc}% das questões. Com foco nos tópicos de gargalo abaixo, você estará muito bem preparado.</div></div>`;
+  } else {
+    msgGeral = `<div class="diag-item gargalo" style="margin-bottom:20px"><span class="diag-icone">📚</span><div class="diag-texto"><strong>Atenção!</strong> Você acertou ${perc}% das questões. Há tópicos importantes que precisam de revisão antes da prova. Siga as recomendações abaixo.</div></div>`;
+  }
+  recDiv.innerHTML = msgGeral;
+
+  if (temasGargalo.length > 0) {
+    recDiv.innerHTML += `<h4 style="color:#8b1a1a; font-size:0.9rem; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em;">⚠ Pontos de Gargalo — Prioridade de Revisão</h4>`;
+    temasGargalo.sort((a, b) => a.pct - b.pct).forEach(({ tema, acertos, total }) => {
+      const rec = recomendacoesTemas[tema.id];
+      if (!rec) return;
+      const aulasHtml = rec.aulas.map(a => `<span class="aulas-tag">${a}</span>`).join('');
+      recDiv.innerHTML += `
+        <div class="rec-card" style="border-color:#dc3545; background:#fde8e8;">
+          <h4 style="color:#8b1a1a;">❌ ${rec.titulo} (${acertos}/${total} acertos)</h4>
+          <p>${rec.texto}</p>
+          <div style="margin-top:8px"><strong style="font-size:0.8rem; color:#8b1a1a;">Revisitar:</strong> ${aulasHtml}</div>
+        </div>
+      `;
+    });
+  }
+
+  if (temasAcerto.length > 0) {
+    recDiv.innerHTML += `<h4 style="color:#1a7a4a; font-size:0.9rem; margin-bottom:10px; margin-top:20px; text-transform:uppercase; letter-spacing:0.06em;">✅ Pontos de Acerto — Continue Assim</h4>`;
+    temasAcerto.forEach(({ tema, acertos, total }) => {
+      const rec = recomendacoesTemas[tema.id];
+      if (!rec) return;
+      const aulasHtml = rec.aulas.map(a => `<span class="aulas-tag" style="background:#1a7a4a;">${a}</span>`).join('');
+      recDiv.innerHTML += `
+        <div class="rec-card" style="border-color:#28a745; background:#d4edda;">
+          <h4 style="color:#1a7a4a;">✅ ${rec.titulo} (${acertos}/${total} acertos)</h4>
+          <p>Bom domínio deste tópico! Faça uma revisão rápida para consolidar o conhecimento antes da prova.</p>
+          <div style="margin-top:8px"><strong style="font-size:0.8rem; color:#1a7a4a;">Revisitar:</strong> ${aulasHtml}</div>
+        </div>
+      `;
+    });
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function refazerSimulado() {
+  iniciarSimulado();
+}
+
+function voltarInicio() {
+  document.getElementById('tela-diagnostico').style.display = 'none';
+  document.getElementById('tela-questao').style.display = 'none';
+  document.getElementById('tela-inicio').style.display = 'block';
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('progressLabel').textContent = '0 / 10';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
