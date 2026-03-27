@@ -52,6 +52,27 @@
     top: 0;
     z-index: 100;
   }
+  .btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.15);
+    color: var(--branco);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s;
+    white-space: nowrap;
+    margin-bottom: 6px;
+  }
+  .btn-home:hover {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.6);
+  }
   .header-left h1 {
     font-size: 1.25rem;
     font-weight: 700;
@@ -572,6 +593,10 @@
 <!-- HEADER -->
 <header>
   <div class="header-left">
+    <a href="index.html" class="btn-home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      Voltar para Home
+    </a>
     <h1>Simulado — 1.º NPC</h1>
     <p>Mercado de Capitais e Derivativos · ADM7N1 · 2026.1</p>
   </div>
