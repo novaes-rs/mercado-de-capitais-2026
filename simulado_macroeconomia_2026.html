@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — 1.º NPC | Macroeconomia</title>
+<style>
+  /* ── RESET & BASE ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul-primario:  #0d47a1;
+    --azul-medio:     #1565c0;
+    --azul-claro:     #e3f2fd;
+    --azul-hover:     #f1f8fe;
+    --azul-borda:     #64b5f6;
+    --verde:          #2e7d32;
+    --verde-claro:    #e8f5e9;
+    --verde-borda:    #81c784;
+    --vermelho:       #c62828;
+    --vermelho-claro: #ffebee;
+    --vermelho-borda: #e57373;
+    --amarelo:        #f9a825;
+    --amarelo-claro:  #fffde7;
+    --amarelo-borda:  #fff176;
+    --cinza-borda:    #cfd8dc;
+    --cinza-fundo:    #f5f7f9;
+    --texto:          #263238;
+    --texto-sec:      #546e7a;
+    --branco:         #ffffff;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--cinza-fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ──────────────────────────────────────────────────────────── */
+  header {
+    background: var(--azul-primario);
+    color: var(--branco);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .header-left p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #90caf9;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .progress-label {
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  /* ── CARDS ───────────────────────────────────────────────────────────── */
+  .card {
+    background: var(--branco);
+    border-radius: 12px;
+    border: 1px solid var(--cinza-borda);
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  #tela-inicio { text-align: center; }
+  .badge {
+    display: inline-block;
+    background: var(--azul-claro);
+    color: var(--azul-primario);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  h2 { font-size: 1.8rem; margin-bottom: 12px; color: var(--azul-primario); }
+  .intro-text { color: var(--texto-sec); margin-bottom: 32px; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .info-item {
+    background: var(--cinza-fundo);
+    padding: 16px;
+    border-radius: 8px;
+  }
+  .info-item .val { font-size: 1.5rem; font-weight: 800; color: var(--azul-primario); display: block; }
+  .info-item .lab { font-size: 0.75rem; color: var(--texto-sec); text-transform: uppercase; }
+
+  /* ── QUESTÕES ────────────────────────────────────────────────────────── */
+  #tela-questao { display: none; }
+  .q-meta { display: flex; justify-content: space-between; margin-bottom: 20px; align-items: center; }
+  .q-num { font-weight: 700; color: var(--azul-medio); font-size: 0.9rem; }
+  .q-tema { font-size: 0.8rem; background: var(--azul-claro); color: var(--azul-primario); padding: 2px 10px; border-radius: 10px; }
+  .q-enunciado { font-size: 1.1rem; margin-bottom: 24px; line-height: 1.7; }
+  
+  .alternativas { display: flex; flex-direction: column; gap: 12px; }
+  .alt-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border: 2px solid var(--cinza-borda);
+    border-radius: 8px;
+    background: var(--branco);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-size: 1rem;
+  }
+  .alt-btn:hover:not(:disabled) { border-color: var(--azul-borda); background: var(--azul-hover); }
+  .alt-letra {
+    width: 28px; height: 28px;
+    background: var(--cinza-fundo);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.8rem; flex-shrink: 0;
+  }
+  
+  .alt-btn.correta { border-color: var(--verde-borda); background: var(--verde-claro); }
+  .alt-btn.correta .alt-letra { background: var(--verde); color: white; }
+  .alt-btn.errada { border-color: var(--vermelho-borda); background: var(--vermelho-claro); }
+  .alt-btn.errada .alt-letra { background: var(--vermelho); color: white; }
+  .alt-btn.neutra { opacity: 0.6; }
+
+  /* ── GABARITO ────────────────────────────────────────────────────────── */
+  .gabarito { margin-top: 24px; border-radius: 8px; overflow: hidden; display: none; border: 1px solid var(--cinza-borda); }
+  .gab-header { padding: 12px 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .gab-header.acerto { background: var(--verde-claro); color: var(--verde); }
+  .gab-header.erro { background: var(--vermelho-claro); color: var(--vermelho); }
+  .gab-body { padding: 20px; background: #fafafa; }
+  .gab-body h4 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: var(--texto-sec); }
+  .gab-body p { margin-bottom: 16px; font-size: 0.95rem; }
+  .analise-alts { list-style: none; font-size: 0.9rem; }
+  .analise-alts li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .analise-alts li::before { content: '•'; position: absolute; left: 0; color: var(--azul-medio); }
+
+  /* ── DIAGNÓSTICO ─────────────────────────────────────────────────────── */
+  #tela-diagnostico { display: none; }
+  .diag-header { text-align: center; margin-bottom: 32px; }
+  .score-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--azul-primario);
+    color: white;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .score-val { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+  .score-lab { font-size: 0.7rem; text-transform: uppercase; opacity: 0.8; }
+  
+  .rec-card {
+    border-left: 4px solid var(--azul-primario);
+    background: var(--azul-claro);
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+  }
+  .rec-card h4 { margin-bottom: 4px; color: var(--azul-primario); }
+  .rec-card p { font-size: 0.9rem; color: var(--texto-sec); }
+
+  /* ── BOTÕES ──────────────────────────────────────────────────────────── */
+  .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-size: 1rem;
+  }
+  .btn-primary { background: var(--azul-primario); color: white; }
+  .btn-primary:hover { background: var(--azul-medio); transform: translateY(-1px); }
+  .btn-outline { background: transparent; border: 2px solid var(--azul-primario); color: var(--azul-primario); }
+  .btn-outline:hover { background: var(--azul-claro); }
+  
+  .nav-buttons { margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Macroeconomia</h1>
+    <p>Simulado Preparatório — 1.º NPC</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div id="progressBar" class="progress-bar-fill"></div></div>
+    <span id="progressLabel" class="progress-label">0 / 10</span>
+  </div>
+</header>
+
+<main>
+  <!-- TELA INICIAL -->
+  <section id="tela-inicio" class="card">
+    <span class="badge">Simulado 2026.1</span>
+    <h2>Pronto para começar?</h2>
+    <p class="intro-text">Este simulado contém 10 questões baseadas nos temas centrais da 1ª NPC de Macroeconomia, incluindo Ciclos Econômicos, Políticas Monetária e Fiscal, Inflação e o Pensamento de Abhijit Banerjee.</p>
+    
+    <div class="info-grid">
+      <div class="info-item"><span class="val">10</span><span class="lab">Questões</span></div>
+      <div class="info-item"><span class="val">0,5</span><span class="lab">Pts/Questão</span></div>
+      <div class="info-item"><span class="val">~15</span><span class="lab">Minutos</span></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="iniciar()">Iniciar Simulado</button>
+  </section>
+
+  <!-- TELA DE QUESTÃO -->
+  <section id="tela-questao" class="card">
+    <div class="q-meta">
+      <span id="qNum" class="q-num">Questão 1</span>
+      <span id="qTema" class="q-tema">Tema</span>
+    </div>
+    <div id="qEnunciado" class="q-enunciado"></div>
+    
+    <div id="alternativas" class="alternativas"></div>
+
+    <div id="gabarito" class="gabarito">
+      <div id="gabHeader" class="gab-header"></div>
+      <div class="gab-body">
+        <h4>Explicação:</h4>
+        <p id="gabExp"></p>
+        <h4>Análise das Alternativas:</h4>
+        <ul id="analiseAlts" class="analise-alts"></ul>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="btnProxima" class="btn btn-primary" style="display:none" onclick="proxima()">Próxima Questão →</button>
+    </div>
+  </section>
+
+  <!-- TELA DE DIAGNÓSTICO -->
+  <section id="tela-diagnostico" class="card">
+    <div class="diag-header">
+      <div class="score-circle">
+        <span id="diagNota" class="score-val">0.0</span>
+        <span class="score-lab">Sua Nota</span>
+      </div>
+      <h2 id="diagMsg">Resultado</h2>
+      <p id="diagSub">Confira seu desempenho por tema e recomendações de estudo.</p>
+    </div>
+
+    <div id="recomendacoes"></div>
+
+    <div class="nav-buttons" style="justify-content: center; margin-top: 40px;">
+      <button class="btn btn-outline" onclick="location.reload()">Refazer Simulado</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const questoes = [
+  {
+    tema: "Ciclos Econômicos e Gestão",
+    enunciado: "Durante uma fase de <strong>recessão</strong> econômica, caracterizada por queda na demanda agregada e aumento da ociosidade, qual deve ser a postura racional de um gestor empresarial sob a ótica macroeconômica?",
+    alternativas: [
+      "Aumentar contratações imediatamente para antecipar a retomada.",
+      "Expandir investimentos em capital fixo para ganhar market share.",
+      "Reduzir investimentos e congelar contratações para preservar o caixa.",
+      "Aumentar o endividamento para financiar estoques futuros.",
+      "Manter as operações inalteradas, ignorando o cenário externo."
+    ],
+    correta: 2,
+    explicacao: "Em períodos de recessão, a incerteza aumenta e a demanda cai. A estratégia mais prudente para a gestão é a preservação de liquidez (caixa) e a redução de custos fixos e riscos, aguardando sinais claros de recuperação antes de novos ciclos de investimento.",
+    analise: [
+      "A) Errada. Contratar na recessão aumenta custos sem garantia de receita.",
+      "B) Errada. Investir em capital fixo com demanda em queda gera mais ociosidade.",
+      "C) CORRETA. Foco em sobrevivência e eficiência financeira.",
+      "D) Errada. O endividamento em cenário de queda de vendas é extremamente arriscado.",
+      "E) Errada. A macroeconomia impacta diretamente o micro (empresa); ignorar é erro fatal."
+    ]
+  },
+  {
+    tema: "Efeito Multiplicador e Demanda",
+    enunciado: "Como o aumento da massa salarial decorrente de programas de transferência de renda impacta a <strong>Demanda Agregada</strong> e a estratégia de uma empresa de bens essenciais?",
+    alternativas: [
+      "A demanda diminui devido ao aumento do custo de vida.",
+      "A demanda aumenta, permitindo ajustes de preços sem perda drástica de volume.",
+      "O impacto é neutro, pois o consumo de essenciais é inelástico.",
+      "A empresa deve reduzir preços para competir com o governo.",
+      "Programas sociais reduzem a produtividade geral da economia."
+    ],
+    correta: 1,
+    explicacao: "O aumento da renda disponível (massa salarial) desloca a curva de demanda agregada para a direita. Para empresas, isso significa um mercado consumidor maior, o que pode sustentar margens de lucro mesmo com pressões inflacionárias.",
+    analise: [
+      "A) Errada. Mais renda gera mais consumo, não menos.",
+      "B) CORRETA. O efeito multiplicador amplia o consumo das famílias.",
+      "C) Errada. Mesmo bens essenciais sofrem impacto positivo com aumento de renda.",
+      "D) Errada. Com demanda alta, não há necessidade lógica de reduzir preços.",
+      "E) Errada. Estudos (como os de Banerjee) mostram que pode até aumentar a produtividade."
+    ]
+  },
+  {
+    tema: "Política Monetária Restritiva",
+    enunciado: "O Banco Central decide elevar o <strong>depósito compulsório</strong> e vender títulos públicos. Qual o impacto direto para uma empresa que precisa de crédito?",
+    alternativas: [
+      "Redução do custo do capital e facilidade de empréstimos.",
+      "Aumento da liquidez no mercado interbancário.",
+      "Redução da liquidez e elevação do custo do crédito (juros).",
+      "Queda na taxa Selic para estimular o consumo.",
+      "Isenção de impostos para o setor produtivo."
+    ],
+    correta: 2,
+    explicacao: "Essas são medidas de política monetária restritiva (contracionista). Ao aumentar o compulsório e vender títulos, o BC retira dinheiro de circulação. Com menos dinheiro disponível nos bancos, o custo do crédito (juros) sobe.",
+    analise: [
+      "A) Errada. O custo do capital sobe, não desce.",
+      "B) Errada. A liquidez diminui (o dinheiro vai para o BC).",
+      "C) CORRETA. Menos oferta de moeda = juros mais altos.",
+      "D) Errada. A Selic tende a subir nesse cenário.",
+      "E) Errada. Isso seria política fiscal, não monetária."
+    ]
+  },
+  {
+    tema: "Cenários Econômicos",
+    enunciado: "Por que a formação de <strong>cenários econômicos</strong> é vital para um gestor financeiro de uma PME?",
+    alternativas: [
+      "Para eliminar totalmente a incerteza do futuro.",
+      "Para identificar trajetórias possíveis e preparar estratégias flexíveis.",
+      "É uma prática inútil, pois o futuro é imprevisível.",
+      "Serve apenas para grandes empresas com departamentos de economia.",
+      "Para garantir que o lucro será sempre crescente."
+    ],
+    correta: 1,
+    explicacao: "Cenários não servem para 'adivinhar' o futuro, mas para mapear riscos e oportunidades. Eles permitem que a empresa tenha um 'Plano B' caso a economia tome um rumo diferente do esperado.",
+    analise: [
+      "A) Errada. A incerteza nunca é eliminada, apenas gerida.",
+      "B) CORRETA. Flexibilidade estratégica é a chave da gestão moderna.",
+      "C) Errada. Ignorar tendências é abdicar da gestão.",
+      "D) Errada. PMEs são as que mais sofrem com choques e mais precisam de cenários.",
+      "E) Errada. Cenários podem prever quedas, ajudando a minimizar perdas."
+    ]
+  },
+  {
+    tema: "Tese de Abhijit Banerjee",
+    enunciado: "Segundo o Prêmio Nobel <strong>Abhijit Banerjee</strong>, por que programas de transferência de renda podem aumentar a oferta de trabalho?",
+    alternativas: [
+      "Porque obrigam os pobres a trabalhar em obras públicas.",
+      "Porque reduzem o valor dos salários, forçando mais horas de trabalho.",
+      "Porque aliviam restrições de crédito, permitindo investir em ferramentas e busca por empregos melhores.",
+      "Porque geram inflação, obrigando as pessoas a buscarem mais renda.",
+      "Porque desestimulam o estudo, focando apenas no trabalho braçal."
+    ],
+    correta: 2,
+    explicacao: "A tese de Banerjee (baseada em evidências) quebra o mito do 'desestímulo'. Ao garantir o básico, a pessoa tem 'fôlego' financeiro para procurar empregos melhores ou investir em pequenos negócios próprios, aumentando sua produtividade.",
+    analise: [
+      "A) Errada. Não se trata de trabalho forçado.",
+      "B) Errada. O efeito é via investimento e dignidade, não via arrocho.",
+      "C) CORRETA. Liquidez permite mobilidade e investimento pessoal.",
+      "D) Errada. A inflação é um efeito colateral indesejado, não o motor da oferta.",
+      "E) Errada. Pelo contrário, permite que famílias mantenham filhos na escola."
+    ]
+  },
+  {
+    tema: "Identidade do PIB",
+    enunciado: "Considerando a equação <strong>PIB = C + I + G + (X-M)</strong>, se o consumo das famílias (C) cai drasticamente, qual estratégia pode mitigar o risco de uma empresa B2B?",
+    alternativas: [
+      "Focar exclusivamente no mercado interno.",
+      "Reduzir investimentos em tecnologia.",
+      "Buscar contratos com o setor público (G) ou expandir para o mercado externo (X).",
+      "Aumentar os preços para compensar a queda no volume.",
+      "Ignorar a balança comercial."
+    ],
+    correta: 2,
+    explicacao: "Se um componente da demanda agregada (C) cai, a empresa deve buscar outros motores de crescimento. O gasto público (G) ou a exportação (X) são alternativas lógicas para manter o faturamento.",
+    analise: [
+      "A) Errada. O mercado interno está em queda (C baixo).",
+      "B) Errada. Inovação é necessária para buscar novos mercados.",
+      "C) CORRETA. Diversificação de fontes de demanda (público e externo).",
+      "D) Errada. Aumentar preços com demanda em queda acelera a falência.",
+      "E) Errada. O mercado externo pode ser a salvação na crise interna."
+    ]
+  },
+  {
+    tema: "Objetivos Macroeconômicos",
+    enunciado: "Qual é o foco central das políticas macroeconômicas modernas?",
+    alternativas: [
+      "Maximizar apenas o lucro das grandes corporações.",
+      "Garantir a estabilidade de preços, o pleno emprego e o crescimento sustentável.",
+      "Eliminar totalmente a cobrança de impostos.",
+      "Controlar cada decisão individual de consumo dos cidadãos.",
+      "Isolar a economia nacional do comércio global."
+    ],
+    correta: 1,
+    explicacao: "A macroeconomia busca o equilíbrio geral: inflação controlada (estabilidade), pessoas trabalhando (emprego) e a economia produzindo mais valor ao longo do tempo (crescimento).",
+    analise: [
+      "A) Errada. O foco é o bem-estar social e econômico geral.",
+      "B) CORRETA. O tripé: estabilidade, emprego e crescimento.",
+      "C) Errada. Impostos são necessários para o financiamento do Estado (G).",
+      "D) Errada. Isso seria economia planejada centralizada extrema.",
+      "E) Errada. A integração global é vista como motor de eficiência."
+    ]
+  },
+  {
+    tema: "Inflação de Custos vs. Demanda",
+    enunciado: "Uma empresa observa que seus custos de energia e matéria-prima subiram 15%, enquanto as vendas estão estáveis. Que tipo de inflação ela enfrenta?",
+    alternativas: [
+      "Inflação de Demanda.",
+      "Inflação de Custos (ou Oferta).",
+      "Deflação.",
+      "Hiperinflação inercial.",
+      "Inflação importada por queda de câmbio."
+    ],
+    correta: 1,
+    explicacao: "Quando o aumento de preços vem do lado da produção (insumos, energia, salários) e não de um excesso de compradores, chamamos de inflação de custos. É mais difícil de combater apenas com juros.",
+    analise: [
+      "A) Errada. Na demanda, as vendas estariam 'bombando'.",
+      "B) CORRETA. Pressão vem dos fornecedores e custos operacionais.",
+      "C) Errada. Deflação é queda generalizada de preços.",
+      "D) Errada. Inercial refere-se à memória inflacionária (indexação).",
+      "E) Errada. Embora possível, o enunciado foca em energia e matéria-prima direta."
+    ]
+  },
+  {
+    tema: "Variação Cambial e Gestão",
+    enunciado: "Uma empresa exportadora que usa 50% de insumos importados vê o <strong>Dólar subir 20%</strong>. Qual o efeito líquido provável?",
+    alternativas: [
+      "Perda total de competitividade.",
+      "Ganho nas receitas de exportação, mas aumento nos custos de produção.",
+      "Redução imediata de todos os preços internos.",
+      "O câmbio não afeta empresas exportadoras.",
+      "Aumento da margem de lucro sem qualquer risco."
+    ],
+    correta: 1,
+    explicacao: "É um cenário misto. Ela ganha mais Reais por cada Dólar exportado, mas paga mais Reais por cada insumo importado. A gestão deve usar 'hedge' para proteger essa margem.",
+    analise: [
+      "A) Errada. Ela ganha competitividade no preço final lá fora.",
+      "B) CORRETA. Receita sobe, mas custo também. O saldo depende da eficiência.",
+      "C) Errada. Preços tendem a subir para repassar o custo do insumo.",
+      "D) Errada. O câmbio é a variável mais crítica para exportadores.",
+      "E) Errada. O risco cambial é altíssimo e pode corroer o lucro."
+    ]
+  },
+  {
+    tema: "Mercado de Trabalho e Belém",
+    enunciado: "Considerando a realidade de <strong>Belém</strong>, como a análise da massa salarial ajuda um administrador local?",
+    alternativas: [
+      "Não ajuda, pois Belém vive apenas de serviços públicos.",
+      "Permite ajustar estoques e preços conforme o poder de compra da população local.",
+      "Serve apenas para decidir o valor do vale-transporte.",
+      "Indica que a empresa deve sempre cobrar o preço mais alto possível.",
+      "A massa salarial é irrelevante para o comércio varejista."
+    ],
+    correta: 1,
+    explicacao: "A massa salarial é o 'combustível' do consumo. Se ela sobe (via novos empregos ou programas sociais), o administrador pode prever maior giro de estoque e planejar expansões.",
+    analise: [
+      "A) Errada. O setor privado e o comércio são fortes na região.",
+      "B) CORRETA. Dados macro orientam decisões micro (estoque/preço).",
+      "C) Errada. Visão muito limitada da gestão.",
+      "D) Errada. Preço alto sem massa salarial gera estoque parado.",
+      "E) Errada. É a variável mais importante para o varejo."
+    ]
+  }
+];
+
+let estado = {
+  atual: 0,
+  acertos: 0,
+  respondido: false,
+  respostas: []
+};
+
+function iniciar() {
+  document.getElementById('tela-inicio').style.display = 'none';
+  document.getElementById('tela-questao').style.display = 'block';
+  renderQuestao();
+}
+
+function renderQuestao() {
+  const q = questoes[estado.atual];
+  estado.respondido = false;
+  
+  // Header
+  document.getElementById('qNum').textContent = `Questão ${estado.atual + 1} de ${questoes.length}`;
+  document.getElementById('qTema').textContent = q.tema;
+  document.getElementById('qEnunciado').innerHTML = q.enunciado;
+  
+  // Progresso
+  const pct = ((estado.atual) / questoes.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${estado.atual} / ${questoes.length}`;
+
+  // Alternativas
+  const container = document.getElementById('alternativas');
+  container.innerHTML = '';
+  const letras = ['A', 'B', 'C', 'D', 'E'];
+  
+  q.alternativas.forEach((alt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'alt-btn';
+    btn.innerHTML = `<span class="alt-letra">${letras[i]}</span><span>${alt}</span>`;
+    btn.onclick = () => responder(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('gabarito').style.display = 'none';
+  document.getElementById('btnProxima').style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+function responder(idx) {
+  if (estado.respondido) return;
+  estado.respondido = true;
+  
+  const q = questoes[estado.atual];
+  const correta = idx === q.correta;
+  if (correta) estado.acertos++;
+  
+  estado.respostas.push({ q: estado.atual, escolhida: idx, correta: correta });
+
+  // Estilizar botões
+  const btns = document.querySelectorAll('.alt-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correta) btn.classList.add('correta');
+    else if (i === idx) btn.classList.add('errada');
+    else btn.classList.add('neutra');
+  });
+
+  // Mostrar Gabarito
+  const gab = document.getElementById('gabarito');
+  const head = document.getElementById('gabHeader');
+  gab.style.display = 'block';
+  
+  if (correta) {
+    head.className = 'gab-header acerto';
+    head.innerHTML = '<span>✅</span> Resposta Correta!';
+  } else {
+    head.className = 'gab-header erro';
+    head.innerHTML = `<span>❌</span> Incorreto. A resposta certa é a letra ${['A','B','C','D','E'][q.correta]}`;
+  }
+
+  document.getElementById('gabExp').innerHTML = q.explicacao;
+  const analiseList = document.getElementById('analiseAlts');
+  analiseList.innerHTML = q.analise.map(a => `<li>${a}</li>`).join('');
+
+  document.getElementById('btnProxima').style.display = 'block';
+  if (estado.atual === questoes.length - 1) {
+    document.getElementById('btnProxima').textContent = 'Ver Resultado Final';
+  }
+}
+
+function proxima() {
+  estado.atual++;
+  if (estado.atual < questoes.length) {
+    renderQuestao();
+  } else {
+    finalizar();
+  }
+}
+
+function finalizar() {
+  document.getElementById('tela-questao').style.display = 'none';
+  document.getElementById('tela-diagnostico').style.display = 'block';
+  
+  const nota = (estado.acertos / questoes.length) * 10;
+  document.getElementById('diagNota').textContent = nota.toFixed(1);
+  
+  let msg = "";
+  if (nota >= 8) msg = "Excelente! Você domina os conceitos.";
+  else if (nota >= 6) msg = "Bom trabalho! Mas revise os pontos onde errou.";
+  else msg = "Atenção! Você precisa reforçar os estudos básicos.";
+  
+  document.getElementById('diagMsg').textContent = msg;
+  
+  // Gerar recomendações baseadas nos erros
+  const recs = document.getElementById('recomendacoes');
+  recs.innerHTML = '<h3>Recomendações de Estudo:</h3>';
+  
+  const temasComErro = [...new Set(estado.respostas.filter(r => !r.correta).map(r => questoes[r.q].tema))];
+  
+  if (temasComErro.length === 0) {
+    recs.innerHTML += '<div class="rec-card"><h4>Parabéns!</h4><p>Você não teve erros significativos. Continue revisando para manter o nível.</p></div>';
+  } else {
+    temasComErro.forEach(tema => {
+      recs.innerHTML += `
+        <div class="rec-card">
+          <h4>Revisar: ${tema}</h4>
+          <p>Você errou questões deste tema. Sugerimos reler os slides da aula correspondente e os capítulos do livro texto sobre este assunto.</p>
+        </div>
+      `;
+    });
+  }
+  
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = 'Concluído!';
+}
+</script>
+</body>
+</html>
