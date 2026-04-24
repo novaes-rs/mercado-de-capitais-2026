@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 11 — O Guardião da Margem: Hedge com Futuros e Swaps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ========== RESET E LAYOUT DE APRESENTAÇÃO ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020617;
+            font-family: 'Inter', sans-serif;
+        }
+        .presentation-wrapper {
+            display: flex;
+            width: 1900vw;
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .slide-page {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .slide-page .slide-container {
+            flex-shrink: 0;
+            transform-origin: center center;
+        }
+
+        /* ========== BOTÃO: RETORNAR ========== */
+        .btn-home {
+            position: fixed;
+            top: 1.2rem;
+            left: 1.2rem;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-home:hover {
+            background: #f59e0b;
+            color: #000;
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+        }
+
+        /* ========== BOTÃO: IMPRIMIR ========== */
+        .btn-print {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.2rem;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #f8fafc;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-print:hover {
+            background: #4338CA;
+            color: #fff;
+            border-color: #4338CA;
+            transform: translateY(-1px);
+        }
+
+        /* ========== NAVEGAÇÃO INFERIOR ========== */
+        .nav-ui {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            z-index: 9999;
+            background: rgba(2, 6, 23, 0.85);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .btn-nav {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .btn-nav:hover { background: #f59e0b; color: #000; border-color: #f59e0b; }
+        .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn-nav:disabled:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+        #slide-counter {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: monospace;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ========== IMPRESSÃO ========== */
+        @media print {
+            .nav-ui, .btn-home, .btn-print { display: none !important; }
+            html, body { overflow: visible !important; background: white !important; }
+            .presentation-wrapper { display: block !important; width: 100% !important; transform: none !important; }
+            .slide-page { width: 100% !important; height: auto !important; min-height: 100vh; page-break-after: always; display: flex !important; }
+            .slide-page .slide-container { width: 1280px !important; min-height: 720px; transform: none !important; }
+        }
+
+        /* ========== ESTILOS DOS SLIDES ========== */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .content {
+            text-align: center;
+            padding: 0 80px;
+            width: 100%;
+        }
+        .accent-line {
+            width: 120px;
+            height: 6px;
+            background-color: #BE123C;
+            margin: 0 auto 40px;
+        }
+        .title {
+            font-size: 56px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 32px;
+            font-weight: 500;
+            color: #4338CA;
+            margin-bottom: 80px;
+        }
+        .metadata {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 28px;
+            color: #334155;
+            font-weight: 400;
+        }
+        .metadata-item {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .metadata-label {
+            font-weight: 700;
+            color: #0F172A;
+            min-width: 150px;
+            text-align: right;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 50px;
+            border-left: 8px solid #4338CA;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            border-bottom: 3px solid #E2E8F0;
+            padding-bottom: 15px;
+        }
+        .reference-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .reference-link {
+            color: #4338CA;
+            font-weight: 700;
+            word-break: break-all;
+            margin-top: 10px;
+            display: block;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .impact-box {
+            background-color: #ffffff;
+            border-left: 8px solid #BE123C;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .company-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .situation {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.3;
+        }
+        .loss-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-end;
+            margin: 8px 0;
+        }
+        .loss-block { text-align: left; }
+        .loss-label {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0F172A;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .loss-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: #BE123C;
+            line-height: 1;
+        }
+        .question {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4338CA;
+            text-align: center;
+            margin-top: 16px;
+            font-style: italic;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .context-box {
+            background-color: #ffffff;
+            border-top: 8px solid #4338CA;
+            padding: 40px;
+        }
+        .financial-box {
+            background-color: #ffffff;
+            border-top: 8px solid #BE123C;
+            padding: 40px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 30px;
+        }
+        .data-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .data-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        .data-label {
+            font-weight: 700;
+            color: #0F172A;
+            display: block;
+        }
+        .highlight {
+            color: #BE123C;
+            font-weight: 700;
+        }
+        .margin-target {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #E2E8F0;
+            font-size: 32px;
+            font-weight: 900;
+            color: #4338CA;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .base-info {
+            display: flex;
+            justify-content: space-between;
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 20px 40px;
+            margin-bottom: 40px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .scenarios-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .scenario-box {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border-top: 8px solid #0F172A;
+        }
+        .scenario-box.pessimistic {
+            border-top-color: #BE123C;
+        }
+        .scenario-box.current {
+            border-top-color: #4338CA;
+        }
+        .scenario-header {
+            padding: 20px;
+            text-align: center;
+            background-color: #F8FAFC;
+            border-bottom: 2px solid #E2E8F0;
+        }
+        .scenario-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .exchange-rate {
+            font-size: 42px;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .pessimistic .exchange-rate { color: #BE123C; }
+        .current .exchange-rate { color: #4338CA; }
+        
+        .scenario-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 24px;
+            color: #334155;
+        }
+        .data-row.margin {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #CBD5E1;
+            font-weight: 700;
+            font-size: 28px;
+        }
+        .pessimistic .data-row.margin { color: #BE123C; }
+        .current .data-row.margin { color: #4338CA; }
+        
+        .question-box {
+            background-color: #4338CA;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: auto;
+            margin-bottom: 40px;
+        }
+    
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#E2E8F0}
+        .slide-container{width:1280px;min-height:720px;background:#E2E8F0;display:flex;flex-direction:column;padding:60px 60px 0 60px;overflow:hidden}
+        .title{font-size:48px;font-weight:900;color:#0F172A;margin-bottom:30px;border-bottom:4px solid #4338CA;padding-bottom:15px}
+        .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+        .concept-box{display:flex;flex-direction:column;gap:12px}
+        .concept-highlight{font-size:42px;font-weight:900;color:#4338CA;display:flex;align-items:center;gap:16px}
+        .concept-text{font-size:28px;color:#334155;line-height:1.4;border-left:6px solid #0F172A;padding-left:16px}
+        .rule-box{background:#0F172A;color:#fff;padding:12px;font-size:24px;font-weight:700;text-align:center;margin-top:5px}
+        .video-box{background:#BE123C;color:#fff;padding:12px;display:flex;align-items:center;gap:15px;margin-top:5px;text-decoration:none;border:4px solid #BE123C}
+        .video-box i{font-size:36px}
+        .video-text{font-size:22px;font-weight:700;line-height:1.2}
+        .analogy-box{background:#fff;border:6px solid #4338CA;padding:18px;display:flex;flex-direction:column;gap:16px}
+        .analogy-title{font-size:32px;font-weight:900;color:#0F172A;text-align:center;text-transform:uppercase;margin-bottom:6px}
+        .analogy-row{display:flex;align-items:center;gap:12px;font-size:28px;color:#334155}
+        .analogy-icon{font-size:48px;color:#4338CA;width:60px;text-align:center}
+        .analogy-text{flex:1;line-height:1.4}
+        .analogy-text strong{color:#0F172A}
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            border: 4px solid #0F172A;
+            background-color: #ffffff;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            border-right: 4px solid #0F172A;
+        }
+        .column:last-child {
+            border-right: none;
+        }
+        .col-header {
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            border-bottom: 4px solid #0F172A;
+        }
+        .header-red {
+            background-color: #BE123C;
+        }
+        .header-blue {
+            background-color: #4338CA;
+        }
+        .col-content {
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .feature {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+        .feature-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .feature-value {
+            font-size: 28px;
+            font-weight: 500;
+            color: #0F172A;
+        }
+        .value-high-risk {
+            color: #BE123C;
+            font-weight: 900;
+        }
+        .value-low-risk {
+            color: #4338CA;
+            font-weight: 900;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+        }
+        .definition {
+            font-size: 32px;
+            color: #334155;
+            border-top: 6px solid #4338CA;
+            padding-top: 20px;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        .characteristics {
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 20px;
+        }
+        .char-list {
+            list-style: none;
+        }
+        .char-list li {
+            font-size: 28px;
+            color: #334155;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+        .char-list li::before {
+            content: "■";
+            color: #BE123C;
+            margin-right: 15px;
+            font-size: 20px;
+            margin-top: 4px;
+        }
+        .video-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 20px;
+            border-bottom: 8px solid #BE123C;
+        }
+        .video-icon {
+            font-size: 64px;
+            color: #BE123C;
+        }
+        .video-text {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #ffffff;
+        }
+        .video-subtext {
+            font-size: 24px;
+            font-weight: 400;
+            color: #E2E8F0;
+            margin-top: 10px;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .concept-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #BE123C;
+            margin-bottom: 25px;
+        }
+        .concept-text {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .bullet-list {
+            list-style-type: none;
+            margin-bottom: 40px;
+        }
+        .bullet-list li {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .bullet-list li::before {
+            content: "■";
+            color: #4338CA;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 24px;
+        }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .diagram-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            border: 4px solid #0F172A;
+        }
+        .entity {
+            font-size: 32px;
+            font-weight: 900;
+            color: #0F172A;
+            text-align: center;
+        }
+        .exchange-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .arrow-line {
+            font-size: 22px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .arrow-red { color: #BE123C; }
+        .arrow-blue { color: #4338CA; }
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #BE123C;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 4px solid #BE123C;
+        }
+        .video-link i {
+            font-size: 32px;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .news-box {
+            background-color: #ffffff;
+            border: 6px solid #BE123C;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .news-header {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            background-color: #BE123C;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-align: center;
+            margin: -40px -40px 20px -40px;
+        }
+        .news-headline {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1.3;
+        }
+        .news-body {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .task-box {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .task-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .task-instructions {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+            background-color: #ffffff;
+            padding: 30px;
+            border-left: 8px solid #0F172A;
+        }
+        .calculation-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0F172A;
+            border-bottom: 2px dashed #CBD5E1;
+            padding-bottom: 10px;
+        }
+        .calc-value {
+            color: #BE123C;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .boleta-container {
+            background-color: #ffffff;
+            border: 8px solid #0F172A;
+            padding: 12px; /* reduced from 30 to save vertical space */
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced from 20 */
+        }
+        .boleta-header {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 8px; /* reduced from 15 */
+            margin-bottom: 0; /* removed extra margin */
+            text-transform: uppercase;
+        }
+        .boleta-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced from 15 */
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4338CA;
+            background-color: #F8FAFC;
+            padding: 6px 12px; /* reduced from 10px 15px */
+            border-left: 6px solid #4338CA;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 26px;
+            color: #334155;
+            padding: 0 15px;
+        }
+        .form-label {
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .form-input {
+            border-bottom: 2px solid #CBD5E1;
+            width: 200px;
+            display: inline-block;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 12px; /* slightly reduced */
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #0F172A;
+            display: inline-block;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+        }
+        .table-container {
+            width: 100%;
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            margin-bottom: 20px; /* reduced */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: #0F172A;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 10px; /* reduced */
+            text-align: center;
+            border: 2px solid #0F172A;
+        }
+        td {
+            font-size: 28px;
+            color: #334155;
+            padding: 10px; /* reduced */
+            text-align: center;
+            border: 2px solid #CBD5E1;
+        }
+        tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+        .loss {
+            color: #BE123C;
+            font-weight: 700;
+        }
+        .gain {
+            color: #4338CA;
+            font-weight: 700;
+        }
+        .question-box {
+            background-color: #BE123C;
+            color: #ffffff;
+            padding: 15px; /* reduced */
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: auto;
+            margin-bottom: 0; /* removed to save space */
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .intro-box {
+            background-color: #ffffff;
+            border-left: 8px solid #BE123C;
+            padding: 12px 20px; /* reduzido */
+            margin-bottom: 20px; /* reduzido */
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            background-color: #ffffff;
+            border: 2px solid #0F172A; /* reduzido */
+        }
+        .table-header {
+            background-color: #0F172A;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            padding: 10px; /* reduzido */
+            text-align: center;
+            border: 2px solid #0F172A;
+        }
+        .header-swap {
+            background-color: #4338CA;
+            border-color: #4338CA;
+        }
+        .table-cell {
+            font-size: 26px;
+            color: #334155;
+            padding: 8px 12px; /* reduzido */
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+        }
+        .cell-center {
+            justify-content: center;
+            text-align: center;
+            font-weight: 700;
+        }
+        .cell-label {
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .highlight-row .table-cell {
+            background-color: #F8FAFC;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .question-box {
+            background-color: #4338CA;
+            color: #ffffff;
+            padding: 12px; /* reduzido */
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: 20px; /* ajustado */
+            margin-bottom: 10px; /* reduzido */
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 15px;
+        }
+        .intro {
+            font-size: 32px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 20px; /* reduced */
+            text-align: center;
+        }
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px; /* reduced */
+            margin-bottom: 12px; /* reduced */
+        }
+        .scenario-card {
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+        }
+        .scenario-header {
+            padding: 12px; /* reduced */
+            text-align: center;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        .header-red { background-color: #BE123C; }
+        .header-blue { background-color: #4338CA; }
+        .header-dark { background-color: #0F172A; }
+        
+        .scenario-rate {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            padding: 10px 0; /* reduced */
+            border-bottom: 2px solid #E2E8F0;
+            color: #0F172A;
+        }
+        .scenario-body {
+            padding: 10px; /* reduced */
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced */
+        }
+        .impact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; /* reduced */
+        }
+        .impact-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+        }
+        .impact-result {
+            font-size: 26px;
+            color: #0F172A;
+            padding-left: 15px;
+            border-left: 4px solid #CBD5E1;
+        }
+        .question-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 12px; /* reduced */
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: auto;
+            margin-bottom: 0; /* removed extra bottom space */
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px; /* keep as required */
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px; /* do not shrink upper padding of title */
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px; /* slightly reduced gap to save height */
+        }
+        .rules-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            /* Method 1 & 2: shrink inner padding and refresh layout into two columns */
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            border-bottom: 8px solid #BE123C;
+            align-items: start;
+        }
+        .rules-title {
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            grid-column: 1 / -1; /* full width */
+            margin-bottom: 0; /* removed extra margin to save space */
+            padding-bottom: 6px;
+        }
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px; /* reduced gap between icon and text */
+            font-size: 28px;
+            line-height: 1.4;
+        }
+        .rule-icon {
+            font-size: 40px;
+            color: #BE123C;
+            width: 50px;
+            text-align: center;
+        }
+        /* place rule items into a two-column layout */
+        .r1 { grid-column: 1; }
+        .r2 { grid-column: 2; }
+        .r3 { grid-column: 1; }
+
+        .questions-box {
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            /* shrink padding and reorganize into two columns to reduce vertical space */
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+        .questions-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4338CA;
+            grid-column: 1 / -1;
+            margin-bottom: 0;
+        }
+        .question-item {
+            font-size: 32px;
+            color: #334155;
+            line-height: 1.5;
+            padding-left: 12px;
+            border-left: 6px solid #4338CA;
+        }
+        /* distribute questions into two columns to save height */
+        .q1 { grid-column: 1; }
+        .q2 { grid-column: 2; }
+        .q3 { grid-column: 1; }
+        .question-number {
+            font-weight: 900;
+            color: #0F172A;
+            margin-right: 10px;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .intro {
+            font-size: 28px;
+            color: #334155;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+            /* reduced vertical padding to save height */
+            padding: 10px 16px;
+            border-left: 6px solid #0F172A;
+        }
+        .framework-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .zone-row {
+            display: flex;
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+        }
+        .zone-name {
+            width: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            border-right: 4px solid #0F172A;
+        }
+        .zone-green { background-color: #16A34A; }
+        .zone-yellow { background-color: #D97706; }
+        .zone-red { background-color: #BE123C; }
+        
+        .zone-content {
+            flex: 1;
+            /* reduced vertical padding to bring rows within 720px */
+            padding: 6px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .zone-metric {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 10px;
+        }
+        .zone-action {
+            font-size: 26px;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .zone-action::before {
+            content: "▶";
+            color: #4338CA;
+            font-size: 20px;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px; /* keep top padding */
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 15px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .box {
+            background-color: #ffffff;
+            padding: 20px; /* reduced from 40px */
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* reduced from 25px */
+        }
+        .box-problem { border-top: 8px solid #BE123C; }
+        .box-solution { border-top: 8px solid #4338CA; }
+        .box-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-problem { color: #BE123C; }
+        .icon-solution { color: #4338CA; }
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* reduced from 20px */
+        }
+        .bullet-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+            padding-left: 25px;
+            position: relative;
+        }
+        .bullet-item::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 20px;
+        }
+        .box-problem .bullet-item::before { color: #BE123C; }
+        .box-solution .bullet-item::before { color: #4338CA; }
+        .highlight-text { font-weight: 700; color: #0F172A; }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 20px; /* reduced from 40 to save vertical space */
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+        }
+        .mission-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 18px; /* reduced from 30 */
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px; /* reduced from 40 */
+            border-left: 8px solid #BE123C;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .step-card {
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            padding: 18px; /* reduced from 30 */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #BE123C;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 10px;
+        }
+        .step-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #0F172A;
+            text-transform: uppercase;
+        }
+        .step-desc {
+            font-size: 24px;
+            color: #334155;
+            line-height: 1.5;
+        }
+    
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #0F172A; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0F172A;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .quote-icon {
+            font-size: 80px;
+            color: #BE123C;
+            margin-bottom: 20px; /* reduced to save vertical space */
+        }
+        .quote-text {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 10px; /* reduced spacing */
+            max-width: 1000px;
+        }
+        .quote-author {
+            font-size: 32px;
+            font-weight: 400;
+            color: #CBD5E1;
+            margin-bottom: 20px; /* reduced spacing */
+            font-style: italic;
+        }
+        .takeaway-box {
+            background-color: #ffffff;
+            padding: 18px 50px; /* reduced vertical padding */
+            border-left: 8px solid #4338CA;
+            max-width: 900px;
+        }
+        .takeaway-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #BE123C;
+            font-weight: 900;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <!-- Botão Voltar -->
+    <a href="../index.html" class="btn-home">
+        &#8592; Voltar
+    </a>
+
+    <!-- Botão Imprimir -->
+    <button class="btn-print" onclick="printSlides()">
+        &#128438; Exportar PDF
+    </button>
+
+    <!-- SLIDES -->
+    <div class="presentation-wrapper" id="presentation">
+        <section class="slide-page" id="slide-1">
+<div class="slide-container">
+        <div class="content">
+            <div class="accent-line"></div>
+            <h1 class="title">O Guardião da Margem</h1>
+            <h2 class="subtitle">Hedge com Futuros e Swaps</h2>
+            
+            <div class="metadata">
+                <div class="metadata-item">
+                    <span class="metadata-label">Data:</span>
+                    <span>24 de Abril de 2026</span>
+                </div>
+                <div class="metadata-item">
+                    <span class="metadata-label">Disciplina:</span>
+                    <span>Mercado de Capitais e Derivativos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-2">
+<div class="slide-container">
+        <h1 class="title">Referência Bibliográfica</h1>
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Fonte Oficial</div>
+                <div class="reference-item">
+                    <strong>Banco Central do Brasil (BCB)</strong><br>
+                    Estabilidade Financeira: Swap Cambial
+                    <span class="reference-link">https://www.bcb.gov.br/estabilidadefinanceira/swapcambial</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-3">
+<div class="slide-container">
+        <h1 class="title">A Semana Que Mudou Tudo: Um Caso Real</h1>
+        
+        <div class="impact-box">
+            <div class="company-name">Exportadora de Commodities - Brasil</div>
+            <div class="situation">
+                Contrato fechado: 10 milhões de USD em açaí e soja<br>
+                Câmbio no fechamento: R$ 5,00<br>
+                Receita esperada: R$ 50 milhões
+            </div>
+
+            <div class="situation">Receita real: R$ 44 milhões</div>
+
+            <div class="loss-row">
+                <div class="loss-block">
+                    <span class="loss-label">Dólar caiu para:</span>
+                    <div class="loss-number">R$ 4,40</div>
+                </div>
+                <div class="loss-block">
+                    <span class="loss-label">Perda:</span>
+                    <div class="loss-number">R$ 6 MILHÕES</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">Isso poderia ter sido evitado?</div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-4">
+<div class="slide-container">
+        <h1 class="title">O Cenário: AçaíExport Amazônia</h1>
+        
+        <div class="content">
+            <div class="context-box">
+                <h2 class="section-title">O Contexto</h2>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="data-label">Empresa:</span>
+                        Uma das maiores exportadoras de açaí de Belém/PA.
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">O Papel:</span>
+                        Você é o CFO (Diretor Financeiro).
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">O Desafio:</span>
+                        A empresa está crescendo, mas a <span class="highlight">volatilidade cambial</span> ameaça os lucros.
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="financial-box">
+                <h2 class="section-title">Os Números</h2>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="data-label">Contrato Assinado:</span>
+                        100.000 USD (recebimento em 30 dias)
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Câmbio Atual:</span>
+                        R$ 5,00 por dólar
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Receita Esperada:</span>
+                        R$ 500.000
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Custo de Produção:</span>
+                        R$ 425.000 (já comprometido em reais)
+                    </li>
+                </ul>
+                <div class="margin-target">
+                    Margem Alvo: 15% (R$ 75.000)
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-5">
+<div class="slide-container">
+        <h1 class="title">O Risco Cambial: Impacto na Margem</h1>
+        
+        <div class="content">
+            <div class="base-info">
+                <span>Exposição: 100.000 USD (Receita)</span>
+                <span>Custo Fixo: R$ 425.000</span>
+            </div>
+            
+            <div class="scenarios-container">
+                <!-- Pessimistic Scenario -->
+                <div class="scenario-box pessimistic">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Pessimista</div>
+                        <div class="exchange-rate">R$ 4,60</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 460.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 35.000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Current Scenario -->
+                <div class="scenario-box current">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Atual (Alvo)</div>
+                        <div class="exchange-rate">R$ 5,00</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 500.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 75.000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Optimistic Scenario -->
+                <div class="scenario-box">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Otimista</div>
+                        <div class="exchange-rate">R$ 5,40</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 540.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 115.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                Qual é a margem que você pode garantir ao acionista hoje?
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-6">
+<div class="slide-container">
+        <h1 class="title">O que é Hedge? O Seguro da Margem</h1>
+        <div class="content-grid">
+            <div class="concept-box">
+                <div class="concept-highlight"><i class="fas fa-shield-alt"></i>Hedge = Proteção</div>
+                <div class="concept-text">É uma estratégia financeira usada para <strong>travar um preço hoje</strong> e evitar perdas com a oscilação do mercado amanhã.</div>
+                <div class="rule-box">A Regra de Ouro:<br>Hedge não é para ganhar dinheiro.<br>Hedge é para NÃO PERDER.</div>
+                <a href="https://www.youtube.com/watch?v=qxR-46qdesc&t=91" class="video-box">
+                    <i class="fab fa-youtube"></i>
+                    <div class="video-text">VÍDEO RECOMENDADO<br>Entenda o conceito na prática</div>
+                </a>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-title">A Analogia do Seguro</div>
+                <div class="analogy-row"><i class="fas fa-car analogy-icon"></i><div class="analogy-text"><strong>Seguro de Carro:</strong> Você paga um prêmio para proteger o valor do seu veículo contra acidentes.</div></div>
+                <div class="analogy-row" style="justify-content:center"><i class="fas fa-arrow-down" style="font-size:32px;color:#CBD5E1"></i></div>
+                <div class="analogy-row"><i class="fas fa-file-invoice-dollar analogy-icon"></i><div class="analogy-text"><strong>Hedge Cambial:</strong> Você assume um custo (ou abre mão de ganhos extras) para proteger a margem de lucro da sua empresa.</div></div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-7">
+<div class="slide-container">
+        <h1 class="title">Três Ferramentas de Proteção</h1>
+        
+        <div class="comparison-grid">
+            <!-- Column 1: Sem Hedge -->
+            <div class="column">
+                <div class="col-header header-red">Sem Hedge</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-high-risk">Alto (Total)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">R$ 0</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Total</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Margem imprevisível</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 2: Futuro -->
+            <div class="column">
+                <div class="col-header header-blue">Contrato Futuro</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-low-risk">Baixo</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">Margem (~5%)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Baixa (Padrão B3)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Ajuste diário</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 3: Swap -->
+            <div class="column">
+                <div class="col-header header-blue">Swap Cambial</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-low-risk">Baixo</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">Taxa do Banco</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Alta (Customizado)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Sem ajuste diário</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-8">
+<div class="slide-container">
+        <h1 class="title">Futuro de Dólar: Como Funciona</h1>
+        
+        <div class="definition">
+            <strong>O que é?</strong> Um contrato padronizado negociado na B3 onde você "trava" o preço do dólar hoje para uma operação futura.
+        </div>
+        
+        <div class="content-grid">
+            <div class="characteristics">
+                <h2 class="section-title">Características Técnicas</h2>
+                <ul class="char-list">
+                    <li><div><strong>Tamanho:</strong> 100.000 USD por contrato</div></li>
+                    <li><div><strong>Cotação:</strong> Em reais por dólar</div></li>
+                    <li><div><strong>Vencimento:</strong> Meses padronizados (jan, fev, mar...)</div></li>
+                    <li><div><strong>Ajuste Diário:</strong> Acerto diário de ganhos e perdas</div></li>
+                    <li><div><strong>Margem Inicial:</strong> ~5% do valor do contrato (garantia)</div></li>
+                </ul>
+            </div>
+            
+            <div class="video-box">
+                <i class="fas fa-play-circle video-icon"></i>
+                <div class="video-text">
+                    VÍDEO RECOMENDADO
+                    <div class="video-subtext">Como funciona um contrato futuro na B3 (3 min)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-9">
+<div class="slide-container">
+        <h1 class="title">Swap Cambial: Flexibilidade de Proteção</h1>
+        
+        <div class="content-grid">
+            <div class="left-col">
+                <h2 class="concept-title">O que é um Swap?</h2>
+                <p class="concept-text">Um contrato onde duas partes "trocam" fluxos de caixa em datas futuras. Exemplo: trocar a variação do dólar por uma taxa fixa.</p>
+                
+                <ul class="bullet-list">
+                    <li><strong>Customização:</strong> Prazos e valores exatos.</li>
+                    <li><strong>Sem Ajuste Diário:</strong> Não pressiona o caixa.</li>
+                    <li><strong>Risco de Contraparte:</strong> Depende do banco.</li>
+                </ul>
+                
+                <a href="#" class="video-link">
+                    <i class="fab fa-youtube"></i>
+                    Vídeo: Entendendo o Swap (3 min)
+                </a>
+            </div>
+            
+            <div class="right-col">
+                <h2 class="concept-title">Mecânica do Swap</h2>
+                
+                <div class="diagram-container">
+                    <div class="diagram-row">
+                        <div class="entity">Sua<br>Empresa</div>
+                        <div class="exchange-arrows">
+                            <div class="arrow-line arrow-red">
+                                Paga Taxa Fixa (R$) ──────▶
+                            </div>
+                            <div class="arrow-line arrow-blue">
+                                ◀────── Recebe Variação (USD)
+                            </div>
+                        </div>
+                        <div class="entity">Banco</div>
+                    </div>
+                    
+                    <p class="concept-text" style="margin-top: 20px;">
+                        <strong>Resultado:</strong> A empresa garante a taxa de câmbio no vencimento, eliminando a incerteza, pagando apenas uma taxa de intermediação.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-10">
+<div class="slide-container">
+        <h1 class="title">RODADA 1: A Exposição ao Risco (Sem Hedge)</h1>
+        
+        <div class="content-grid">
+            <div class="news-box">
+                <div class="news-header">Breaking News</div>
+                <div class="news-headline">Instabilidade política faz dólar saltar para R$ 5,40</div>
+                <div class="news-body">
+                    Investidores estrangeiros retiram recursos do país. O Banco Central tenta intervir, mas o mercado segue pressionado. A volatilidade atinge níveis recordes nesta semana.
+                </div>
+            </div>
+            
+            <div class="task-box">
+                <h2 class="task-title">Sua Tarefa (5 min)</h2>
+                <div class="task-instructions">
+                    Vocês são a diretoria financeira. Calculem o impacto imediato no lucro da empresa com o novo cenário.
+                </div>
+                
+                <div class="calculation-area">
+                    <div class="calc-row">
+                        <span>Receita Real (100k USD x 5,40):</span>
+                        <span class="calc-value">R$ ?</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Custo Fixo:</span>
+                        <span>R$ 425.000</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Nova Margem de Lucro:</span>
+                        <span class="calc-value">R$ ?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-11">
+<div class="slide-container">
+        <h1 class="title">RODADA 2: Operando o Futuro (Com Hedge)</h1>
+        
+        <div class="boleta-container">
+            <div class="boleta-header">Boleta de Hedge - Futuro de Dólar</div>
+            
+            <div class="boleta-section">
+                <div class="section-title">1. Exposição Original</div>
+                <div class="form-row">
+                    <span class="form-label">Receita em USD:</span>
+                    <span>100.000</span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Câmbio Atual:</span>
+                    <span>R$ 5,00</span>
+                </div>
+            </div>
+            
+            <div class="boleta-section">
+                <div class="section-title">2. Decisão de Hedge</div>
+                <div class="form-row">
+                    <span class="form-label">Operação:</span>
+                    <div class="checkbox-group">
+                        <div class="checkbox"><span class="box"></span> COMPRAR</div>
+                        <div class="checkbox"><span class="box"></span> VENDER</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Quantidade de Contratos:</span>
+                    <span class="form-input"></span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Cotação do Futuro:</span>
+                    <span>R$ 5,05</span>
+                </div>
+            </div>
+            
+            <div class="boleta-section">
+                <div class="section-title">3. Análise de Cenários (Preencham!)</div>
+                <div class="form-row">
+                    <span class="form-label">Cenário A (Dólar R$ 4,60):</span>
+                    <span>Margem: R$ <span class="form-input"></span></span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Cenário B (Dólar R$ 5,40):</span>
+                    <span>Margem: R$ <span class="form-input"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-12">
+<div class="slide-container">
+        <h1 class="title">O Custo da Proteção: Ajuste Diário</h1>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Cotação Futuro</th>
+                        <th>Seu P&L (Diário)</th>
+                        <th>Saldo em Conta (Margem)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0 (Hoje)</td>
+                        <td>R$ 5,05</td>
+                        <td>-</td>
+                        <td>R$ 25.000 (Inicial)</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>R$ 5,10</td>
+                        <td class="loss">- R$ 5.000</td>
+                        <td class="loss">R$ 20.000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>R$ 5,08</td>
+                        <td class="gain">+ R$ 2.000</td>
+                        <td>R$ 22.000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>R$ 4,95</td>
+                        <td class="gain">+ R$ 13.000</td>
+                        <td class="gain">R$ 35.000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>R$ 5,02</td>
+                        <td class="loss">- R$ 7.000</td>
+                        <td>R$ 28.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="question-box">
+            O Desafio: Vocês têm caixa para cobrir as perdas diárias antes do vencimento?
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-13">
+<div class="slide-container">
+        <h1 class="title">RODADA 3: Alternativa Flexível (Com Swap)</h1>
+        
+        <div class="intro-box">
+            <strong>O Problema do Futuro:</strong> O ajuste diário pressiona o caixa da empresa.<br>
+            <strong>A Solução:</strong> Swap Cambial. Você troca a taxa flutuante por uma fixa com o banco, sem ajustes diários.
+        </div>
+        
+        <div class="comparison-table">
+            <div class="table-header">Aspecto</div>
+            <div class="table-header">Futuro (B3)</div>
+            <div class="table-header header-swap">Swap (Banco)</div>
+            
+            <div class="table-cell cell-label">Receita Travada</div>
+            <div class="table-cell cell-center">R$ 505.000</div>
+            <div class="table-cell cell-center">R$ 505.000</div>
+            
+            <div class="table-cell cell-label">Custo Direto (Taxa)</div>
+            <div class="table-cell cell-center">R$ 0</div>
+            <div class="table-cell cell-center">R$ 5.000</div>
+            
+            <div class="table-cell cell-label">Margem Inicial Exigida</div>
+            <div class="table-cell cell-center" style="color: #BE123C;">R$ 25.000</div>
+            <div class="table-cell cell-center" style="color: #4338CA;">R$ 0</div>
+            
+            <div class="table-cell cell-label">Ajuste Diário (Pressão de Caixa)</div>
+            <div class="table-cell cell-center" style="color: #BE123C;">SIM</div>
+            <div class="table-cell cell-center" style="color: #4338CA;">NÃO</div>
+            
+            <div class="table-cell cell-label">Risco de Crédito</div>
+            <div class="table-cell cell-center">Mínimo (Câmara)</div>
+            <div class="table-cell cell-center">Médio (Banco)</div>
+        </div>
+        
+        <div class="question-box">
+            Decisão do CFO: Se vocês têm caixa limitado, qual escolhem?
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-14">
+<div class="slide-container">
+        <h1 class="title">Testando Suas Decisões: Cenários Extremos</h1>
+        
+        <div class="intro">O que acontece com a sua empresa se o mercado enlouquecer?</div>
+        
+        <div class="scenarios-grid">
+            <!-- Scenario 1 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-red">O Desastre</div>
+                <div class="scenario-rate">R$ 4,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result" style="color: #BE123C; font-weight: 700;">Prejuízo de R$ 25.000</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result" style="color: #4338CA; font-weight: 700;">Margem garantida!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scenario 2 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-blue">A Euforia</div>
+                <div class="scenario-rate">R$ 6,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result" style="color: #4338CA; font-weight: 700;">Lucro extra de R$ 100.000</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result" style="color: #BE123C; font-weight: 700;">Perdeu a chance de ganhar mais</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scenario 3 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-dark">A Estabilidade</div>
+                <div class="scenario-rate">R$ 5,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result">Margem atingida</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result">Pagou o custo do hedge "à toa"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question-box">
+            Você prefere dormir tranquilo ou apostar na sorte?
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-15">
+<div class="slide-container">
+        <h1 class="title">
+            <i class="fas fa-stopwatch" style="color: #BE123C;"></i>
+            Cada Grupo Apresenta: 5 Minutos de Defesa
+        </h1>
+        
+        <div class="content-grid">
+            <div class="rules-box">
+                <div class="rules-title">Regras do Jogo</div>
+                
+                <div class="rule-item r1">
+                    <i class="fas fa-clock rule-icon"></i>
+                    <div><strong>5 Minutos Cravados:</strong> O tempo é o seu maior recurso.</div>
+                </div>
+                
+                <div class="rule-item r2">
+                    <i class="fas fa-users rule-icon"></i>
+                    <div><strong>Voz Ativa:</strong> Todos os membros da diretoria devem falar.</div>
+                </div>
+                
+                <div class="rule-item r3">
+                    <i class="fas fa-bullseye rule-icon"></i>
+                    <div><strong>Foco na Decisão:</strong> Menos fórmulas, mais estratégia de negócio.</div>
+                </div>
+            </div>
+            
+            <div class="questions-box">
+                <div class="questions-title">O Roteiro da Apresentação:</div>
+                
+                <div class="question-item q1">
+                    <span class="question-number">1.</span> Qual foi a estratégia escolhida (Sem Hedge, Futuro ou Swap)?
+                </div>
+                
+                <div class="question-item q2">
+                    <span class="question-number">2.</span> Por que essa estratégia é a melhor para a realidade da empresa?
+                </div>
+                
+                <div class="question-item q3">
+                    <span class="question-number">3.</span> Qual é o maior risco que vocês assumiram com essa decisão?
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-16">
+<div class="slide-container">
+        <h1 class="title">Quando Fazer Hedge: Critérios de Decisão</h1>
+        
+        <div class="intro">
+            <strong>Framework Corporativo:</strong> A decisão não é baseada em "achismos", mas em testes de sensibilidade sobre o impacto no EBITDA e no Custo da Dívida.
+        </div>
+        
+        <div class="framework-container">
+            <!-- Zone 1 -->
+            <div class="zone-row">
+                <div class="zone-name zone-green">Convivência</div>
+                <div class="zone-content">
+                    <div class="zone-metric">Impacto Cambial &lt; 2,5% do EBITDA</div>
+                    <div class="zone-action"><strong>Ação:</strong> Manter a exposição sem hedge cambial. O risco é absorvível.</div>
+                </div>
+            </div>
+            
+            <!-- Zone 2 -->
+            <div class="zone-row">
+                <div class="zone-name zone-yellow">Tolerância</div>
+                <div class="zone-content">
+                    <div class="zone-metric">Impacto Cambial ≥ 2,5% do EBITDA</div>
+                    <div class="zone-action"><strong>Ação:</strong> Avaliar e precificar instrumentos de hedge (Futuro, Swap, Opções).</div>
+                </div>
+            </div>
+            
+            <!-- Zone 3 -->
+            <div class="zone-row">
+                <div class="zone-name zone-red">Limite</div>
+                <div class="zone-content">
+                    <div class="zone-metric">Custo atinge o limite de uma nova captação</div>
+                    <div class="zone-action"><strong>Ação:</strong> Contratar hedge imediatamente ou quitar/substituir a dívida.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-17">
+<div class="slide-container">
+        <h1 class="title">Caso Real: Como a Petrobras Faz Hedge</h1>
+        <div class="content-grid">
+            <div class="box box-problem">
+                <div class="box-title">
+                    <i class="fas fa-exclamation-triangle icon-problem"></i>
+                    O Desafio
+                </div>
+                <ul class="bullet-list">
+                    <li class="bullet-item"><span class="highlight-text">Receitas em Dólar:</span> Preço do petróleo cotado em USD.</li>
+                    <li class="bullet-item"><span class="highlight-text">Dívida em Dólar:</span> Parte significativa do endividamento em moeda estrangeira.</li>
+                    <li class="bullet-item"><span class="highlight-text">Custos em Reais:</span> Salários, impostos e despesas locais em BRL.</li>
+                </ul>
+            </div>
+            <div class="box box-solution">
+                <div class="box-title">
+                    <i class="fas fa-check-circle icon-solution"></i>
+                    A Estratégia
+                </div>
+                <ul class="bullet-list">
+                    <li class="bullet-item"><span class="highlight-text">1. Hedge Natural:</span> Receitas em USD compensam dívidas em USD.</li>
+                    <li class="bullet-item"><span class="highlight-text">2. Derivativos:</span> Swaps e opções para proteger CAPEX e caixa.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-18">
+<div class="slide-container">
+        <h1 class="title">Projeto Prático: Estruture Seu Próprio Hedge</h1>
+        
+        <div class="mission-box">
+            A Missão: Aplicar os conceitos de hoje em uma empresa real da nossa região.
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-title">O Objeto</div>
+                <div class="step-desc">
+                    Escolham uma empresa real ou um caso verossímil (ex: Exportadora de Açaí, Importadora de Eletrônicos em Barcarena).
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-title">O Risco</div>
+                <div class="step-desc">
+                    Mapeiem a exposição cambial: onde ganha em dólar, onde gasta em reais e qual a margem alvo.
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-title">A Solução</div>
+                <div class="step-desc">
+                    Proponham a estratégia de proteção (Futuro, Swap ou Opções) e justifiquem a escolha pelo impacto no caixa.
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section class="slide-page" id="slide-19">
+<div class="slide-container">
+        <i class="fas fa-quote-left quote-icon"></i>
+        
+        <div class="quote-text">
+            "Existem dois tipos de riscos: Aqueles que não podemos nos dar o luxo de correr e aqueles que não podemos nos dar o luxo de não correr."
+        </div>
+        
+        <div class="quote-author">- Peter Drucker</div>
+        
+        <div class="takeaway-box">
+            <div class="takeaway-text">
+                O papel do gestor financeiro não é prever o futuro.<br>
+                É <span class="highlight">proteger a margem</span>.
+            </div>
+        </div>
+    </div>
+        </section>
+    </div>
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="nav-ui">
+        <button class="btn-nav" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Anterior</button>
+        <span id="slide-counter">1 / 19</span>
+        <button class="btn-nav" id="btn-next" onclick="navigate(1)">Próximo &#8594;</button>
+    </nav>
+
+    <script>
+        var currentSlide = 0;
+        var totalSlides = 19;
+        var presentation = document.getElementById('presentation');
+
+        function navigate(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            presentation.style.transform = 'translateX(-' + (currentSlide * 100) + 'vw)';
+            document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+            document.getElementById('btn-prev').disabled = currentSlide === 0;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault(); navigate(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault(); navigate(-1);
+            }
+        });
+
+        // Navegação por toque (swipe)
+        var touchStartX = 0;
+        document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', function(e) {
+            var diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+        });
+
+        // Exportar PDF
+        function printSlides() {
+            var msg = 'Para exportar como PDF:\n\n1. Na janela de impressão, selecione "Salvar como PDF".\n2. Orientação: Paisagem, Margens: Nenhuma.\n\nClique OK para continuar.';
+            if (confirm(msg)) { window.print(); }
+        }
+
+        // Escalar slides para caber na viewport (16:9 = 1280x720)
+        function scaleSlides() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var cw = 1280;
+            var ch = 720;
+            var scale = Math.min(vw / cw, vh / ch) * 0.97;
+            var pages = document.querySelectorAll('.slide-page');
+            pages.forEach(function(page) {
+                var container = page.querySelector('.slide-container');
+                if (!container) return;
+                container.style.width = cw + 'px';
+                container.style.height = ch + 'px';
+                container.style.transform = 'scale(' + scale + ')';
+                container.style.transformOrigin = 'center center';
+            });
+        }
+        window.addEventListener('resize', scaleSlides);
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(scaleSlides);
+        } else {
+            window.addEventListener('load', function() {
+                requestAnimationFrame(function() { requestAnimationFrame(scaleSlides); });
+            });
+        }
+    </script>
+</body>
+</html>
