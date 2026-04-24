@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .intro-box {
+            background-color: #ffffff;
+            border-left: 8px solid #BE123C;
+            padding: 12px 20px; /* reduzido */
+            margin-bottom: 20px; /* reduzido */
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            background-color: #ffffff;
+            border: 2px solid #0F172A; /* reduzido */
+        }
+        .table-header {
+            background-color: #0F172A;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            padding: 10px; /* reduzido */
+            text-align: center;
+            border: 2px solid #0F172A;
+        }
+        .header-swap {
+            background-color: #4338CA;
+            border-color: #4338CA;
+        }
+        .table-cell {
+            font-size: 26px;
+            color: #334155;
+            padding: 8px 12px; /* reduzido */
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+        }
+        .cell-center {
+            justify-content: center;
+            text-align: center;
+            font-weight: 700;
+        }
+        .cell-label {
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .highlight-row .table-cell {
+            background-color: #F8FAFC;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .question-box {
+            background-color: #4338CA;
+            color: #ffffff;
+            padding: 12px; /* reduzido */
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: 20px; /* ajustado */
+            margin-bottom: 10px; /* reduzido */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">RODADA 3: Alternativa Flexível (Com Swap)</h1>
+        
+        <div class="intro-box">
+            <strong>O Problema do Futuro:</strong> O ajuste diário pressiona o caixa da empresa.<br>
+            <strong>A Solução:</strong> Swap Cambial. Você troca a taxa flutuante por uma fixa com o banco, sem ajustes diários.
+        </div>
+        
+        <div class="comparison-table">
+            <div class="table-header">Aspecto</div>
+            <div class="table-header">Futuro (B3)</div>
+            <div class="table-header header-swap">Swap (Banco)</div>
+            
+            <div class="table-cell cell-label">Receita Travada</div>
+            <div class="table-cell cell-center">R$ 505.000</div>
+            <div class="table-cell cell-center">R$ 505.000</div>
+            
+            <div class="table-cell cell-label">Custo Direto (Taxa)</div>
+            <div class="table-cell cell-center">R$ 0</div>
+            <div class="table-cell cell-center">R$ 5.000</div>
+            
+            <div class="table-cell cell-label">Margem Inicial Exigida</div>
+            <div class="table-cell cell-center" style="color: #BE123C;">R$ 25.000</div>
+            <div class="table-cell cell-center" style="color: #4338CA;">R$ 0</div>
+            
+            <div class="table-cell cell-label">Ajuste Diário (Pressão de Caixa)</div>
+            <div class="table-cell cell-center" style="color: #BE123C;">SIM</div>
+            <div class="table-cell cell-center" style="color: #4338CA;">NÃO</div>
+            
+            <div class="table-cell cell-label">Risco de Crédito</div>
+            <div class="table-cell cell-center">Mínimo (Câmara)</div>
+            <div class="table-cell cell-center">Médio (Banco)</div>
+        </div>
+        
+        <div class="question-box">
+            Decisão do CFO: Se vocês têm caixa limitado, qual escolhem?
+        </div>
+    </div>
+</body>
+</html>

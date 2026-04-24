@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 15px;
+        }
+        .intro {
+            font-size: 32px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 20px; /* reduced */
+            text-align: center;
+        }
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px; /* reduced */
+            margin-bottom: 12px; /* reduced */
+        }
+        .scenario-card {
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+        }
+        .scenario-header {
+            padding: 12px; /* reduced */
+            text-align: center;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        .header-red { background-color: #BE123C; }
+        .header-blue { background-color: #4338CA; }
+        .header-dark { background-color: #0F172A; }
+        
+        .scenario-rate {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            padding: 10px 0; /* reduced */
+            border-bottom: 2px solid #E2E8F0;
+            color: #0F172A;
+        }
+        .scenario-body {
+            padding: 10px; /* reduced */
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced */
+        }
+        .impact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; /* reduced */
+        }
+        .impact-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+        }
+        .impact-result {
+            font-size: 26px;
+            color: #0F172A;
+            padding-left: 15px;
+            border-left: 4px solid #CBD5E1;
+        }
+        .question-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 12px; /* reduced */
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: auto;
+            margin-bottom: 0; /* removed extra bottom space */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Testando Suas Decisões: Cenários Extremos</h1>
+        
+        <div class="intro">O que acontece com a sua empresa se o mercado enlouquecer?</div>
+        
+        <div class="scenarios-grid">
+            <!-- Scenario 1 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-red">O Desastre</div>
+                <div class="scenario-rate">R$ 4,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result" style="color: #BE123C; font-weight: 700;">Prejuízo de R$ 25.000</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result" style="color: #4338CA; font-weight: 700;">Margem garantida!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scenario 2 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-blue">A Euforia</div>
+                <div class="scenario-rate">R$ 6,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result" style="color: #4338CA; font-weight: 700;">Lucro extra de R$ 100.000</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result" style="color: #BE123C; font-weight: 700;">Perdeu a chance de ganhar mais</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scenario 3 -->
+            <div class="scenario-card">
+                <div class="scenario-header header-dark">A Estabilidade</div>
+                <div class="scenario-rate">R$ 5,00</div>
+                <div class="scenario-body">
+                    <div class="impact-row">
+                        <span class="impact-label">Sem Hedge:</span>
+                        <span class="impact-result">Margem atingida</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Com Hedge:</span>
+                        <span class="impact-result">Pagou o custo do hedge "à toa"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question-box">
+            Você prefere dormir tranquilo ou apostar na sorte?
+        </div>
+    </div>
+</body>
+</html>

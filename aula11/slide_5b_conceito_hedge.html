@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#E2E8F0}
+        .slide-container{width:1280px;min-height:720px;background:#E2E8F0;display:flex;flex-direction:column;padding:60px 60px 0 60px;overflow:hidden}
+        .title{font-size:48px;font-weight:900;color:#0F172A;margin-bottom:30px;border-bottom:4px solid #4338CA;padding-bottom:15px}
+        .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+        .concept-box{display:flex;flex-direction:column;gap:12px}
+        .concept-highlight{font-size:42px;font-weight:900;color:#4338CA;display:flex;align-items:center;gap:16px}
+        .concept-text{font-size:28px;color:#334155;line-height:1.4;border-left:6px solid #0F172A;padding-left:16px}
+        .rule-box{background:#0F172A;color:#fff;padding:12px;font-size:24px;font-weight:700;text-align:center;margin-top:5px}
+        .video-box{background:#BE123C;color:#fff;padding:12px;display:flex;align-items:center;gap:15px;margin-top:5px;text-decoration:none;border:4px solid #BE123C}
+        .video-box i{font-size:36px}
+        .video-text{font-size:22px;font-weight:700;line-height:1.2}
+        .analogy-box{background:#fff;border:6px solid #4338CA;padding:18px;display:flex;flex-direction:column;gap:16px}
+        .analogy-title{font-size:32px;font-weight:900;color:#0F172A;text-align:center;text-transform:uppercase;margin-bottom:6px}
+        .analogy-row{display:flex;align-items:center;gap:12px;font-size:28px;color:#334155}
+        .analogy-icon{font-size:48px;color:#4338CA;width:60px;text-align:center}
+        .analogy-text{flex:1;line-height:1.4}
+        .analogy-text strong{color:#0F172A}
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">O que é Hedge? O Seguro da Margem</h1>
+        <div class="content-grid">
+            <div class="concept-box">
+                <div class="concept-highlight"><i class="fas fa-shield-alt"></i>Hedge = Proteção</div>
+                <div class="concept-text">É uma estratégia financeira usada para <strong>travar um preço hoje</strong> e evitar perdas com a oscilação do mercado amanhã.</div>
+                <div class="rule-box">A Regra de Ouro:<br>Hedge não é para ganhar dinheiro.<br>Hedge é para NÃO PERDER.</div>
+                <a href="https://www.youtube.com/watch?v=qxR-46qdesc&t=91" class="video-box">
+                    <i class="fab fa-youtube"></i>
+                    <div class="video-text">VÍDEO RECOMENDADO<br>Entenda o conceito na prática</div>
+                </a>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-title">A Analogia do Seguro</div>
+                <div class="analogy-row"><i class="fas fa-car analogy-icon"></i><div class="analogy-text"><strong>Seguro de Carro:</strong> Você paga um prêmio para proteger o valor do seu veículo contra acidentes.</div></div>
+                <div class="analogy-row" style="justify-content:center"><i class="fas fa-arrow-down" style="font-size:32px;color:#CBD5E1"></i></div>
+                <div class="analogy-row"><i class="fas fa-file-invoice-dollar analogy-icon"></i><div class="analogy-text"><strong>Hedge Cambial:</strong> Você assume um custo (ou abre mão de ganhos extras) para proteger a margem de lucro da sua empresa.</div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

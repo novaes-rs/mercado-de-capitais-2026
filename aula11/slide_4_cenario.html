@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .context-box {
+            background-color: #ffffff;
+            border-top: 8px solid #4338CA;
+            padding: 40px;
+        }
+        .financial-box {
+            background-color: #ffffff;
+            border-top: 8px solid #BE123C;
+            padding: 40px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 30px;
+        }
+        .data-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .data-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        .data-label {
+            font-weight: 700;
+            color: #0F172A;
+            display: block;
+        }
+        .highlight {
+            color: #BE123C;
+            font-weight: 700;
+        }
+        .margin-target {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #E2E8F0;
+            font-size: 32px;
+            font-weight: 900;
+            color: #4338CA;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">O Cenário: AçaíExport Amazônia</h1>
+        
+        <div class="content">
+            <div class="context-box">
+                <h2 class="section-title">O Contexto</h2>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="data-label">Empresa:</span>
+                        Uma das maiores exportadoras de açaí de Belém/PA.
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">O Papel:</span>
+                        Você é o CFO (Diretor Financeiro).
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">O Desafio:</span>
+                        A empresa está crescendo, mas a <span class="highlight">volatilidade cambial</span> ameaça os lucros.
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="financial-box">
+                <h2 class="section-title">Os Números</h2>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="data-label">Contrato Assinado:</span>
+                        100.000 USD (recebimento em 30 dias)
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Câmbio Atual:</span>
+                        R$ 5,00 por dólar
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Receita Esperada:</span>
+                        R$ 500.000
+                    </li>
+                    <li class="data-item">
+                        <span class="data-label">Custo de Produção:</span>
+                        R$ 425.000 (já comprometido em reais)
+                    </li>
+                </ul>
+                <div class="margin-target">
+                    Margem Alvo: 15% (R$ 75.000)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

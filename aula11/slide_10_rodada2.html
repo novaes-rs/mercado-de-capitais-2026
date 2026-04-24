@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 15px;
+        }
+        .boleta-container {
+            background-color: #ffffff;
+            border: 8px solid #0F172A;
+            padding: 12px; /* reduced from 30 to save vertical space */
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced from 20 */
+        }
+        .boleta-header {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 8px; /* reduced from 15 */
+            margin-bottom: 0; /* removed extra margin */
+            text-transform: uppercase;
+        }
+        .boleta-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* reduced from 15 */
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4338CA;
+            background-color: #F8FAFC;
+            padding: 6px 12px; /* reduced from 10px 15px */
+            border-left: 6px solid #4338CA;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 26px;
+            color: #334155;
+            padding: 0 15px;
+        }
+        .form-label {
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .form-input {
+            border-bottom: 2px solid #CBD5E1;
+            width: 200px;
+            display: inline-block;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 12px; /* slightly reduced */
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #0F172A;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">RODADA 2: Operando o Futuro (Com Hedge)</h1>
+        
+        <div class="boleta-container">
+            <div class="boleta-header">Boleta de Hedge - Futuro de Dólar</div>
+            
+            <div class="boleta-section">
+                <div class="section-title">1. Exposição Original</div>
+                <div class="form-row">
+                    <span class="form-label">Receita em USD:</span>
+                    <span>100.000</span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Câmbio Atual:</span>
+                    <span>R$ 5,00</span>
+                </div>
+            </div>
+            
+            <div class="boleta-section">
+                <div class="section-title">2. Decisão de Hedge</div>
+                <div class="form-row">
+                    <span class="form-label">Operação:</span>
+                    <div class="checkbox-group">
+                        <div class="checkbox"><span class="box"></span> COMPRAR</div>
+                        <div class="checkbox"><span class="box"></span> VENDER</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Quantidade de Contratos:</span>
+                    <span class="form-input"></span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Cotação do Futuro:</span>
+                    <span>R$ 5,05</span>
+                </div>
+            </div>
+            
+            <div class="boleta-section">
+                <div class="section-title">3. Análise de Cenários (Preencham!)</div>
+                <div class="form-row">
+                    <span class="form-label">Cenário A (Dólar R$ 4,60):</span>
+                    <span>Margem: R$ <span class="form-input"></span></span>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">Cenário B (Dólar R$ 5,40):</span>
+                    <span>Margem: R$ <span class="form-input"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            border: 4px solid #0F172A;
+            background-color: #ffffff;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            border-right: 4px solid #0F172A;
+        }
+        .column:last-child {
+            border-right: none;
+        }
+        .col-header {
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            border-bottom: 4px solid #0F172A;
+        }
+        .header-red {
+            background-color: #BE123C;
+        }
+        .header-blue {
+            background-color: #4338CA;
+        }
+        .col-content {
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .feature {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+        .feature-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .feature-value {
+            font-size: 28px;
+            font-weight: 500;
+            color: #0F172A;
+        }
+        .value-high-risk {
+            color: #BE123C;
+            font-weight: 900;
+        }
+        .value-low-risk {
+            color: #4338CA;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Três Ferramentas de Proteção</h1>
+        
+        <div class="comparison-grid">
+            <!-- Column 1: Sem Hedge -->
+            <div class="column">
+                <div class="col-header header-red">Sem Hedge</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-high-risk">Alto (Total)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">R$ 0</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Total</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Margem imprevisível</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 2: Futuro -->
+            <div class="column">
+                <div class="col-header header-blue">Contrato Futuro</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-low-risk">Baixo</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">Margem (~5%)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Baixa (Padrão B3)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Ajuste diário</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 3: Swap -->
+            <div class="column">
+                <div class="col-header header-blue">Swap Cambial</div>
+                <div class="col-content">
+                    <div class="feature">
+                        <span class="feature-label">Risco</span>
+                        <span class="feature-value value-low-risk">Baixo</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Custo Inicial</span>
+                        <span class="feature-value">Taxa do Banco</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Flexibilidade</span>
+                        <span class="feature-value">Alta (Customizado)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Característica</span>
+                        <span class="feature-value">Sem ajuste diário</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

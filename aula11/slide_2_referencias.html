@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 50px;
+            border-left: 8px solid #4338CA;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            border-bottom: 3px solid #E2E8F0;
+            padding-bottom: 15px;
+        }
+        .reference-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .reference-link {
+            color: #4338CA;
+            font-weight: 700;
+            word-break: break-all;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Referência Bibliográfica</h1>
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Fonte Oficial</div>
+                <div class="reference-item">
+                    <strong>Banco Central do Brasil (BCB)</strong><br>
+                    Estabilidade Financeira: Swap Cambial
+                    <span class="reference-link">https://www.bcb.gov.br/estabilidadefinanceira/swapcambial</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

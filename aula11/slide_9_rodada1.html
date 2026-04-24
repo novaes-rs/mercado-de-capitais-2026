@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .news-box {
+            background-color: #ffffff;
+            border: 6px solid #BE123C;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .news-header {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            background-color: #BE123C;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-align: center;
+            margin: -40px -40px 20px -40px;
+        }
+        .news-headline {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1.3;
+        }
+        .news-body {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .task-box {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .task-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .task-instructions {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.5;
+            background-color: #ffffff;
+            padding: 30px;
+            border-left: 8px solid #0F172A;
+        }
+        .calculation-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0F172A;
+            border-bottom: 2px dashed #CBD5E1;
+            padding-bottom: 10px;
+        }
+        .calc-value {
+            color: #BE123C;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">RODADA 1: A Exposição ao Risco (Sem Hedge)</h1>
+        
+        <div class="content-grid">
+            <div class="news-box">
+                <div class="news-header">Breaking News</div>
+                <div class="news-headline">Instabilidade política faz dólar saltar para R$ 5,40</div>
+                <div class="news-body">
+                    Investidores estrangeiros retiram recursos do país. O Banco Central tenta intervir, mas o mercado segue pressionado. A volatilidade atinge níveis recordes nesta semana.
+                </div>
+            </div>
+            
+            <div class="task-box">
+                <h2 class="task-title">Sua Tarefa (5 min)</h2>
+                <div class="task-instructions">
+                    Vocês são a diretoria financeira. Calculem o impacto imediato no lucro da empresa com o novo cenário.
+                </div>
+                
+                <div class="calculation-area">
+                    <div class="calc-row">
+                        <span>Receita Real (100k USD x 5,40):</span>
+                        <span class="calc-value">R$ ?</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Custo Fixo:</span>
+                        <span>R$ 425.000</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Nova Margem de Lucro:</span>
+                        <span class="calc-value">R$ ?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

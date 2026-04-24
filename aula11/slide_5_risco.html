@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            padding-top: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 30px;
+            padding: 0 80px;
+        }
+        .content {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .base-info {
+            display: flex;
+            justify-content: space-between;
+            background-color: #0F172A;
+            color: #ffffff;
+            padding: 20px 40px;
+            margin-bottom: 40px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .scenarios-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .scenario-box {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border-top: 8px solid #0F172A;
+        }
+        .scenario-box.pessimistic {
+            border-top-color: #BE123C;
+        }
+        .scenario-box.current {
+            border-top-color: #4338CA;
+        }
+        .scenario-header {
+            padding: 20px;
+            text-align: center;
+            background-color: #F8FAFC;
+            border-bottom: 2px solid #E2E8F0;
+        }
+        .scenario-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .exchange-rate {
+            font-size: 42px;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .pessimistic .exchange-rate { color: #BE123C; }
+        .current .exchange-rate { color: #4338CA; }
+        
+        .scenario-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 24px;
+            color: #334155;
+        }
+        .data-row.margin {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #CBD5E1;
+            font-weight: 700;
+            font-size: 28px;
+        }
+        .pessimistic .data-row.margin { color: #BE123C; }
+        .current .data-row.margin { color: #4338CA; }
+        
+        .question-box {
+            background-color: #4338CA;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: auto;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">O Risco Cambial: Impacto na Margem</h1>
+        
+        <div class="content">
+            <div class="base-info">
+                <span>Exposição: 100.000 USD (Receita)</span>
+                <span>Custo Fixo: R$ 425.000</span>
+            </div>
+            
+            <div class="scenarios-container">
+                <!-- Pessimistic Scenario -->
+                <div class="scenario-box pessimistic">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Pessimista</div>
+                        <div class="exchange-rate">R$ 4,60</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 460.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 35.000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Current Scenario -->
+                <div class="scenario-box current">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Atual (Alvo)</div>
+                        <div class="exchange-rate">R$ 5,00</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 500.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 75.000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Optimistic Scenario -->
+                <div class="scenario-box">
+                    <div class="scenario-header">
+                        <div class="scenario-title">Cenário Otimista</div>
+                        <div class="exchange-rate">R$ 5,40</div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="data-row">
+                            <span>Receita:</span>
+                            <span>R$ 540.000</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Custo:</span>
+                            <span>R$ 425.000</span>
+                        </div>
+                        <div class="data-row margin">
+                            <span>Margem:</span>
+                            <span>R$ 115.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                Qual é a margem que você pode garantir ao acionista hoje?
+            </div>
+        </div>
+    </div>
+</body>
+</html>

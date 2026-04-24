@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px; /* keep top padding */
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #0F172A;
+            padding-bottom: 15px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .box {
+            background-color: #ffffff;
+            padding: 20px; /* reduced from 40px */
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* reduced from 25px */
+        }
+        .box-problem { border-top: 8px solid #BE123C; }
+        .box-solution { border-top: 8px solid #4338CA; }
+        .box-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-problem { color: #BE123C; }
+        .icon-solution { color: #4338CA; }
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* reduced from 20px */
+        }
+        .bullet-item {
+            font-size: 28px;
+            color: #334155;
+            line-height: 1.4;
+            padding-left: 25px;
+            position: relative;
+        }
+        .bullet-item::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 20px;
+        }
+        .box-problem .bullet-item::before { color: #BE123C; }
+        .box-solution .bullet-item::before { color: #4338CA; }
+        .highlight-text { font-weight: 700; color: #0F172A; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Caso Real: Como a Petrobras Faz Hedge</h1>
+        <div class="content-grid">
+            <div class="box box-problem">
+                <div class="box-title">
+                    <i class="fas fa-exclamation-triangle icon-problem"></i>
+                    O Desafio
+                </div>
+                <ul class="bullet-list">
+                    <li class="bullet-item"><span class="highlight-text">Receitas em Dólar:</span> Preço do petróleo cotado em USD.</li>
+                    <li class="bullet-item"><span class="highlight-text">Dívida em Dólar:</span> Parte significativa do endividamento em moeda estrangeira.</li>
+                    <li class="bullet-item"><span class="highlight-text">Custos em Reais:</span> Salários, impostos e despesas locais em BRL.</li>
+                </ul>
+            </div>
+            <div class="box box-solution">
+                <div class="box-title">
+                    <i class="fas fa-check-circle icon-solution"></i>
+                    A Estratégia
+                </div>
+                <ul class="bullet-list">
+                    <li class="bullet-item"><span class="highlight-text">1. Hedge Natural:</span> Receitas em USD compensam dívidas em USD.</li>
+                    <li class="bullet-item"><span class="highlight-text">2. Derivativos:</span> Swaps e opções para proteger CAPEX e caixa.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

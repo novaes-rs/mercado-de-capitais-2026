@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px; /* keep as required */
+            background-color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px 0 80px; /* do not shrink upper padding of title */
+            overflow: hidden;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #0F172A;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px; /* slightly reduced gap to save height */
+        }
+        .rules-box {
+            background-color: #0F172A;
+            color: #ffffff;
+            /* Method 1 & 2: shrink inner padding and refresh layout into two columns */
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            border-bottom: 8px solid #BE123C;
+            align-items: start;
+        }
+        .rules-title {
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            grid-column: 1 / -1; /* full width */
+            margin-bottom: 0; /* removed extra margin to save space */
+            padding-bottom: 6px;
+        }
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px; /* reduced gap between icon and text */
+            font-size: 28px;
+            line-height: 1.4;
+        }
+        .rule-icon {
+            font-size: 40px;
+            color: #BE123C;
+            width: 50px;
+            text-align: center;
+        }
+        /* place rule items into a two-column layout */
+        .r1 { grid-column: 1; }
+        .r2 { grid-column: 2; }
+        .r3 { grid-column: 1; }
+
+        .questions-box {
+            background-color: #ffffff;
+            border: 4px solid #0F172A;
+            /* shrink padding and reorganize into two columns to reduce vertical space */
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+        .questions-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4338CA;
+            grid-column: 1 / -1;
+            margin-bottom: 0;
+        }
+        .question-item {
+            font-size: 32px;
+            color: #334155;
+            line-height: 1.5;
+            padding-left: 12px;
+            border-left: 6px solid #4338CA;
+        }
+        /* distribute questions into two columns to save height */
+        .q1 { grid-column: 1; }
+        .q2 { grid-column: 2; }
+        .q3 { grid-column: 1; }
+        .question-number {
+            font-weight: 900;
+            color: #0F172A;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">
+            <i class="fas fa-stopwatch" style="color: #BE123C;"></i>
+            Cada Grupo Apresenta: 5 Minutos de Defesa
+        </h1>
+        
+        <div class="content-grid">
+            <div class="rules-box">
+                <div class="rules-title">Regras do Jogo</div>
+                
+                <div class="rule-item r1">
+                    <i class="fas fa-clock rule-icon"></i>
+                    <div><strong>5 Minutos Cravados:</strong> O tempo é o seu maior recurso.</div>
+                </div>
+                
+                <div class="rule-item r2">
+                    <i class="fas fa-users rule-icon"></i>
+                    <div><strong>Voz Ativa:</strong> Todos os membros da diretoria devem falar.</div>
+                </div>
+                
+                <div class="rule-item r3">
+                    <i class="fas fa-bullseye rule-icon"></i>
+                    <div><strong>Foco na Decisão:</strong> Menos fórmulas, mais estratégia de negócio.</div>
+                </div>
+            </div>
+            
+            <div class="questions-box">
+                <div class="questions-title">O Roteiro da Apresentação:</div>
+                
+                <div class="question-item q1">
+                    <span class="question-number">1.</span> Qual foi a estratégia escolhida (Sem Hedge, Futuro ou Swap)?
+                </div>
+                
+                <div class="question-item q2">
+                    <span class="question-number">2.</span> Por que essa estratégia é a melhor para a realidade da empresa?
+                </div>
+                
+                <div class="question-item q3">
+                    <span class="question-number">3.</span> Qual é o maior risco que vocês assumiram com essa decisão?
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
