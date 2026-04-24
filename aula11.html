@@ -17,12 +17,14 @@ html, body {
     font-family: 'Inter', sans-serif;
     touch-action: none;
 }
+/* Variável CSS para altura real da viewport no iOS Safari */
+:root { --vh: 1vh; }
 
 /* ===== CAROUSEL TRACK ===== */
 #track {
     display: flex;
     width: 1900vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     will-change: transform;
     transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
@@ -30,7 +32,7 @@ html, body {
 /* ===== EACH SLIDE WRAPPER ===== */
 .slide-wrap {
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -2128,8 +2130,15 @@ document.addEventListener('touchend', function(e) {
     if (Math.abs(dx) > 40) go(dx > 0 ? 1 : -1);
 });
 
-// Scale: fit 1280x720 into viewport maintaining aspect ratio
+// Corrige o bug do iOS Safari onde 100vh inclui a barra de endereço
+function setVh() {
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+}
+
+// Scale: fit 1280x720 into viewport real (window.innerHeight é confiável no iOS)
 function scale() {
+    setVh();
     var vw = window.innerWidth;
     var vh = window.innerHeight;
     var s = Math.min(vw / 1280, vh / 720);
@@ -2139,7 +2148,7 @@ function scale() {
 }
 
 window.addEventListener('resize', scale);
-window.addEventListener('orientationchange', function() { setTimeout(scale, 200); });
+window.addEventListener('orientationchange', function() { setTimeout(scale, 300); });
 document.addEventListener('DOMContentLoaded', scale);
 window.addEventListener('load', scale);
 </script>
