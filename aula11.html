@@ -104,12 +104,31 @@ html, body {
     text-decoration: none;
     font-family: 'Inter', sans-serif;
     transition: background 0.2s;
+    cursor: pointer;
 }
 #btn-back:hover { background: #f59e0b; color: #000; }
 
+#btn-print {
+    position: fixed;
+    top: 14px; right: 14px;
+    z-index: 9999;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+#btn-print:hover { background: #4338CA; color: #fff; border-color: #4338CA; }
+
 /* ===== PRINT ===== */
 @media print {
-    #nav, #btn-back { display: none !important; }
+    #nav, #btn-back, #btn-print { display: none !important; }
     html, body { overflow: visible !important; background: #fff !important; }
     #track { display: block !important; width: 100% !important; transform: none !important; }
     .slide-wrap { width: 100% !important; height: auto !important; page-break-after: always; display: flex !important; }
@@ -1287,7 +1306,8 @@ html, body {
 </head>
 <body>
 
-<a href="../index.html" id="btn-back">&#8592; Voltar</a>
+<a href="/mercado-de-capitais-2026/" id="btn-back">&#8592; Voltar</a>
+<button id="btn-print" onclick="printSlides()">&#128438; Exportar PDF</button>
 
 <div id="track">
 <div class="slide-wrap" id="s1">
@@ -2112,6 +2132,12 @@ function go(d) {
     document.getElementById('counter').textContent = (cur+1) + ' / ' + total;
     document.getElementById('btn-prev').disabled = cur === 0;
     document.getElementById('btn-next').disabled = cur === total - 1;
+}
+
+// Exportar PDF
+function printSlides() {
+    var msg = 'Para exportar como PDF:\n\n1. Na janela de impressão, selecione "Salvar como PDF".\n2. Orientação: Paisagem, Margens: Nenhuma.\n\nClique OK para continuar.';
+    if (confirm(msg)) { window.print(); }
 }
 
 // Keyboard
