@@ -5,217 +5,209 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        body { font-family: 'Inter', sans-serif; }
         .slide-container {
             width: 1280px;
             height: 720px;
-            background-color: #F8FAFC;
-            border: 2px solid #0F172A;
+            background: #F8FAFC;
             display: flex;
             flex-direction: column;
-            padding: 36px 60px 28px;
+            padding: 32px 56px 24px;
             overflow: hidden;
         }
-        .title {
-            font-size: 40px;
-            font-weight: 900;
-            color: #0F172A;
-            border-bottom: 4px solid #4338CA;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-        }
-        .subtitle-tag {
-            display: inline-block;
-            background: #4338CA;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            padding: 4px 16px;
-            border-radius: 999px;
-            margin-bottom: 16px;
-        }
-        .flow-area {
-            flex: 1;
+        .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 0;
+            margin-bottom: 18px;
         }
-        .step {
+        .slide-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #1E3A5F;
+            padding-bottom: 8px;
+            flex: 1;
+        }
+        .badge-pill {
+            background: #BE123C;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 5px 18px;
+            border-radius: 999px;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+        /* 5 passos lado a lado */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr;
+            align-items: start;
+            gap: 0;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+        .step-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 18px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 160px;
+            height: 100%;
         }
+        .step-card.highlight { border-color: #1E3A5F; background: #1E3A5F; }
         .step-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+        .step-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .step-num.light { color: #64748b; }
+        .step-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0F172A;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .step-title.light { color: #fff; }
+        .step-desc {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.45;
+        }
+        .step-desc.light { color: #cbd5e1; }
+        .step-tag {
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .tag-red { background: #FEE2E2; color: #BE123C; }
+        .tag-blue { background: #DBEAFE; color: #1E40AF; }
+        .tag-green { background: #DCFCE7; color: #15803d; }
+        .tag-amber { background: #FEF3C7; color: #92400e; }
+        .tag-gold { background: #f59e0b; color: #000; }
+        .arrow-col {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            margin-bottom: 12px;
-            border: 3px solid #0F172A;
+            height: 100%;
+            padding-top: 50px;
         }
-        .step-num {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #94a3b8;
-            margin-bottom: 6px;
-        }
-        .step-title {
-            font-size: 17px;
+        .arrow-col span {
+            font-size: 24px;
+            color: #1E3A5F;
             font-weight: 900;
-            color: #0F172A;
-            text-align: center;
-            margin-bottom: 6px;
         }
-        .step-desc {
-            font-size: 13px;
-            color: #64748b;
-            text-align: center;
-            line-height: 1.4;
-        }
-        .step-value {
-            font-size: 20px;
-            font-weight: 900;
-            color: #4338CA;
-            text-align: center;
-            margin-top: 6px;
-        }
-        .arrow {
+        /* Bottom result bar */
+        .result-bar {
+            background: linear-gradient(90deg, #1E3A5F 0%, #4338CA 100%);
+            border-radius: 12px;
+            padding: 14px 32px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            width: 60px;
-            flex-shrink: 0;
+            justify-content: space-between;
         }
-        .arrow-line {
-            width: 50px;
-            height: 3px;
-            background: #0F172A;
-        }
-        .arrow-head {
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-left: 14px solid #0F172A;
-            margin-left: 50px;
-            margin-top: -8px;
-        }
-        .arrow-label {
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 8px;
-        }
-        .result-box {
-            background: #1E3A5F;
-            color: #fff;
-            padding: 16px 24px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .result-box .r-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
-        .result-box .r-value { font-size: 28px; font-weight: 900; color: #f59e0b; }
-        .result-box .r-desc { font-size: 13px; color: #cbd5e1; margin-top: 4px; }
-        .source-bar {
-            background: #E2E8F0;
-            padding: 8px 16px;
-            font-size: 12px;
-            color: #64748b;
-            font-style: italic;
-            margin-top: 12px;
-            text-align: center;
-        }
+        .rb-item { text-align: center; }
+        .rb-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; }
+        .rb-value { font-size: 22px; font-weight: 900; color: #f59e0b; }
+        .rb-sub { font-size: 12px; color: #cbd5e1; margin-top: 2px; }
+        .rb-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
+        .source { margin-top: 8px; font-size: 11px; color: #94a3b8; text-align: right; font-style: italic; }
     </style>
 </head>
 <body>
-    <div class="slide-container">
-        <h1 class="title">Fluxo da Operação de Hedge — Exportador</h1>
-        <span class="subtitle-tag">Proteção contra desvalorização do dólar</span>
-        <div class="flow-area">
-
-            <div class="step">
-                <div class="step-icon" style="background:#EFF6FF;">🌾</div>
-                <span class="step-num">Passo 1</span>
-                <span class="step-title">Contrato de Exportação</span>
-                <span class="step-desc">Empresa fecha venda de US$ 1 mi para recebimento em 60 dias</span>
-                <span class="step-value">US$ 1.000.000</span>
-            </div>
-
-            <div class="arrow">
-                <div style="display:flex;align-items:center;">
-                    <div class="arrow-line"></div>
-                    <div class="arrow-head"></div>
-                </div>
-                <span class="arrow-label">Risco:<br>USD cair</span>
-            </div>
-
-            <div class="step">
-                <div class="step-icon" style="background:#FFF1F2;">📉</div>
-                <span class="step-num">Passo 2</span>
-                <span class="step-title">Identificação do Risco</span>
-                <span class="step-desc">Câmbio atual R$ 5,80. Se cair para R$ 5,20, perde R$ 600 mil</span>
-                <span class="step-value" style="color:#BE123C;">- R$ 600 mil</span>
-            </div>
-
-            <div class="arrow">
-                <div style="display:flex;align-items:center;">
-                    <div class="arrow-line"></div>
-                    <div class="arrow-head"></div>
-                </div>
-                <span class="arrow-label">Decisão:<br>Proteger</span>
-            </div>
-
-            <div class="step">
-                <div class="step-icon" style="background:#EFF6FF;">🏦</div>
-                <span class="step-num">Passo 3</span>
-                <span class="step-title">Vende Futuro na B3</span>
-                <span class="step-desc">Vende 1.000 contratos DOL futuro a R$ 5,80 com venc. em 60 dias</span>
-                <span class="step-value" style="color:#4338CA;">Trava R$ 5,80</span>
-            </div>
-
-            <div class="arrow">
-                <div style="display:flex;align-items:center;">
-                    <div class="arrow-line"></div>
-                    <div class="arrow-head"></div>
-                </div>
-                <span class="arrow-label">Vencimento:<br>60 dias</span>
-            </div>
-
-            <div class="step">
-                <div class="step-icon" style="background:#F0FDF4;">💰</div>
-                <span class="step-num">Passo 4</span>
-                <span class="step-title">Liquidação</span>
-                <span class="step-desc">USD caiu para R$ 5,20. Ganho no futuro compensa perda no câmbio</span>
-                <span class="step-value" style="color:#16a34a;">Margem garantida</span>
-            </div>
-
-            <div class="arrow">
-                <div style="display:flex;align-items:center;">
-                    <div class="arrow-line"></div>
-                    <div class="arrow-head"></div>
-                </div>
-                <span class="arrow-label">Resultado:<br>Protegido</span>
-            </div>
-
-            <div class="step">
-                <div class="step-icon" style="background:#1E3A5F;">✅</div>
-                <div class="result-box">
-                    <span class="r-label">Resultado Final</span>
-                    <div class="r-value">R$ 5,80/USD</div>
-                    <div class="r-desc">Taxa travada — independente da volatilidade</div>
-                </div>
-            </div>
-        </div>
-        <div class="source-bar">Fonte: Banco Central do Brasil. Estudo Especial nº 41/2019 [1] | Prazo médio real: 57 dias (BCB, jan/2025) [2]</div>
+<div class="slide-container">
+    <div class="top-bar">
+        <h1 class="slide-title">Fluxo da Operação de Hedge — Exportador</h1>
+        <span class="badge-pill">Proteção contra desvalorização do dólar</span>
     </div>
+
+    <div class="flow-grid">
+        <!-- Passo 1 -->
+        <div class="step-card">
+            <div class="step-icon">🌾</div>
+            <div class="step-num">Passo 1</div>
+            <div class="step-title">Contrato de Exportação</div>
+            <div class="step-desc">Empresa fecha venda de US$ 1 mi para recebimento em 60 dias</div>
+            <div class="step-tag tag-blue">US$ 1.000.000</div>
+        </div>
+        <div class="arrow-col"><span>▶</span></div>
+        <!-- Passo 2 -->
+        <div class="step-card">
+            <div class="step-icon">📉</div>
+            <div class="step-num">Passo 2</div>
+            <div class="step-title">Identificação do Risco</div>
+            <div class="step-desc">Câmbio a R$ 5,80. Se cair para R$ 5,20, perde R$ 600 mil</div>
+            <div class="step-tag tag-red">Risco: − R$ 600 mil</div>
+        </div>
+        <div class="arrow-col"><span>▶</span></div>
+        <!-- Passo 3 -->
+        <div class="step-card">
+            <div class="step-icon">🏦</div>
+            <div class="step-num">Passo 3</div>
+            <div class="step-title">Vende Futuro na B3</div>
+            <div class="step-desc">1.000 contratos DOL futuro a R$ 5,80 — vencimento em 60 dias</div>
+            <div class="step-tag tag-blue">Trava R$ 5,80/USD</div>
+        </div>
+        <div class="arrow-col"><span>▶</span></div>
+        <!-- Passo 4 -->
+        <div class="step-card">
+            <div class="step-icon">💰</div>
+            <div class="step-num">Passo 4</div>
+            <div class="step-title">Liquidação</div>
+            <div class="step-desc">USD caiu para R$ 5,20. Ganho no futuro compensa a perda no câmbio</div>
+            <div class="step-tag tag-green">Margem garantida</div>
+        </div>
+        <div class="arrow-col"><span>▶</span></div>
+        <!-- Resultado -->
+        <div class="step-card highlight">
+            <div class="step-icon">✅</div>
+            <div class="step-num light">Resultado</div>
+            <div class="step-title light">Protegido</div>
+            <div class="step-desc light">Taxa travada independente da volatilidade cambial</div>
+            <div class="step-tag tag-gold">R$ 5,80/USD</div>
+        </div>
+    </div>
+
+    <!-- Barra de resultado -->
+    <div class="result-bar">
+        <div class="rb-item">
+            <div class="rb-label">Taxa Garantida</div>
+            <div class="rb-value">R$ 5,80 / USD</div>
+        </div>
+        <div class="rb-divider"></div>
+        <div class="rb-item">
+            <div class="rb-label">Instrumento</div>
+            <div style="font-size:18px; font-weight:800; color:#fff;">Contrato Futuro DOL — B3</div>
+        </div>
+        <div class="rb-divider"></div>
+        <div class="rb-item">
+            <div class="rb-label">Prazo Médio Real</div>
+            <div class="rb-value">57 dias</div>
+            <div class="rb-sub">Fonte: BCB, jan/2025 [2]</div>
+        </div>
+        <div class="rb-divider"></div>
+        <div class="rb-item">
+            <div class="rb-label">Risco Eliminado</div>
+            <div style="font-size:18px; font-weight:800; color:#4ade80;">R$ 600.000</div>
+        </div>
+    </div>
+
+    <div class="source">Fonte: Banco Central do Brasil. Estudo Especial nº 41/2019 [1] | BCB, Relatório de Estabilidade Financeira, nov. 2025 [2]</div>
+</div>
 </body>
 </html>
