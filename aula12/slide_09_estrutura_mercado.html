@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .diagram {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        /* Top row: 3 camadas */
+        .layer {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+        }
+        .layer-label {
+            width: 160px;
+            flex-shrink: 0;
+            background: #0F172A;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            padding: 10px;
+            letter-spacing: 0.04em;
+        }
+        .layer-label.blue { background: #1E3A5F; }
+        .layer-label.indigo { background: #4338CA; }
+        .layer-label.red { background: #BE123C; }
+        .layer-label.teal { background: #0891b2; }
+        .layer-nodes {
+            flex: 1;
+            display: flex;
+            gap: 12px;
+        }
+        .node {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .node-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #0F172A;
+        }
+        .node-desc {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        .node-value {
+            font-size: 18px;
+            font-weight: 900;
+            margin-top: 4px;
+        }
+        .arrow-down {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .arrow-down svg { color: #4338CA; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Estrutura do Mercado de Câmbio Brasileiro</h1>
+        <div class="diagram">
+
+            <!-- Camada 1: Regulação -->
+            <div class="layer">
+                <div class="layer-label blue">REGULAÇÃO</div>
+                <div class="layer-nodes">
+                    <div class="node">
+                        <span class="node-title">Banco Central do Brasil (BCB)</span>
+                        <span class="node-desc">Autoriza 187 instituições · Define regras · Publica Ptax · Intervém via Swaps</span>
+                        <span class="node-value" style="color:#1E3A5F;">Swap mai/2025: R$ 157 bilhões</span>
+                    </div>
+                    <div class="node">
+                        <span class="node-title">CMN — Conselho Monetário Nacional</span>
+                        <span class="node-desc">Regulamentação cambial · Limites de posição · Normas de hedge</span>
+                        <span class="node-value" style="color:#4338CA;">Resolução CMN 4.993/2022</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                Fluxo de normas e autorização
+            </div>
+
+            <!-- Camada 2: Mercado Primário -->
+            <div class="layer">
+                <div class="layer-label indigo">MERCADO PRIMÁRIO</div>
+                <div class="layer-nodes">
+                    <div class="node">
+                        <span class="node-title">Exportadores</span>
+                        <span class="node-desc">Vendem divisas · Recebem em USD · Convertem para BRL</span>
+                        <span class="node-value" style="color:#16a34a;">Vendedores de USD</span>
+                    </div>
+                    <div class="node">
+                        <span class="node-title">Importadores</span>
+                        <span class="node-desc">Compram divisas · Pagam em USD · Convertem de BRL</span>
+                        <span class="node-value" style="color:#BE123C;">Compradores de USD</span>
+                    </div>
+                    <div class="node">
+                        <span class="node-title">Fluxos Financeiros</span>
+                        <span class="node-desc">Investimentos estrangeiros · Remessas · Empréstimos externos</span>
+                        <span class="node-value" style="color:#4338CA;">Fluxo bidirecional</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                Formação de preço e transferência de risco
+            </div>
+
+            <!-- Camada 3: Mercado de Derivativos -->
+            <div class="layer">
+                <div class="layer-label red">DERIVATIVOS</div>
+                <div class="layer-nodes">
+                    <div class="node">
+                        <span class="node-title">B3 — Bolsa Organizada</span>
+                        <span class="node-desc">Contratos futuros DOL/WDO · Opções · Ajuste diário · Câmara de compensação</span>
+                        <span class="node-value" style="color:#BE123C;">US$ 7 bi/dia (médio)</span>
+                    </div>
+                    <div class="node">
+                        <span class="node-title">Mercado de Balcão (OTC)</span>
+                        <span class="node-desc">Swaps cambiais · NDFs · Opções exóticas · Customizados</span>
+                        <span class="node-value" style="color:#4338CA;">Maior flexibilidade</span>
+                    </div>
+                    <div class="node">
+                        <span class="node-title">Mercado Interbancário</span>
+                        <span class="node-desc">Operações entre bancos · Formação de spread · Liquidez do sistema</span>
+                        <span class="node-value" style="color:#0891b2;">Top 10 = 62,32% vol.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="source-bar">Fonte: BCB. Estudo Especial nº 41/2019 [1] | BCB, REF nov. 2025 [2] | BCB, Swap Cambial [6]</div>
+    </div>
+</body>
+</html>

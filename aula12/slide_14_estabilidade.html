@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #16a34a;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+        .content-row {
+            flex: 1;
+            display: flex;
+            gap: 24px;
+        }
+        .gauge-area {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gauge-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .indicators-grid {
+            flex: 1.6;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .ind-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border-top: 5px solid #16a34a;
+        }
+        .ind-card.blue { border-top-color: #4338CA; }
+        .ind-card.red { border-top-color: #BE123C; }
+        .ind-card.amber { border-top-color: #f59e0b; }
+        .ind-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+        .ind-value { font-size: 32px; font-weight: 900; color: #0F172A; line-height: 1; }
+        .ind-value.green { color: #16a34a; }
+        .ind-value.blue { color: #4338CA; }
+        .ind-value.red { color: #BE123C; }
+        .ind-sub { font-size: 13px; color: #64748b; }
+        .ind-bar { height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 4px; }
+        .ind-fill { height: 100%; border-radius: 999px; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Estabilidade Financeira do Sistema — Indicadores 2025</h1>
+        <div class="content-row">
+
+            <!-- Gauge de confiança -->
+            <div class="gauge-area">
+                <div class="gauge-title">Confiança no Sistema Financeiro Nacional</div>
+                <canvas id="gaugeChart" style="max-height:260px;max-width:260px;"></canvas>
+                <div style="text-align:center;margin-top:8px;">
+                    <div style="font-size:36px;font-weight:900;color:#16a34a;">80%</div>
+                    <div style="font-size:14px;color:#64748b;">das instituições com muita ou total confiança</div>
+                    <div style="font-size:12px;color:#94a3b8;font-style:italic;margin-top:4px;">Fonte: BCB, REF nov. 2025 [2]</div>
+                </div>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="indicators-grid">
+                <div class="ind-card">
+                    <span class="ind-label">Capitalização Bancária</span>
+                    <span class="ind-value green">Adequada</span>
+                    <span class="ind-sub">Índice de Basileia acima do mínimo regulatório</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:88%;background:#16a34a;"></div></div>
+                </div>
+                <div class="ind-card blue">
+                    <span class="ind-label">Liquidez do Sistema</span>
+                    <span class="ind-value blue">Confortável</span>
+                    <span class="ind-sub">LCR e NSFR acima dos limites mínimos</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:82%;background:#4338CA;"></div></div>
+                </div>
+                <div class="ind-card amber">
+                    <span class="ind-label">Provisões para Perdas</span>
+                    <span class="ind-value" style="color:#f59e0b;">Adequadas</span>
+                    <span class="ind-sub">Cobertura superior às perdas esperadas</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:75%;background:#f59e0b;"></div></div>
+                </div>
+                <div class="ind-card">
+                    <span class="ind-label">Teste de Estresse</span>
+                    <span class="ind-value green">Aprovado</span>
+                    <span class="ind-sub">Sistema resistente a cenários adversos</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:90%;background:#16a34a;"></div></div>
+                </div>
+                <div class="ind-card red">
+                    <span class="ind-label">Risco Cambial Sistêmico</span>
+                    <span class="ind-value red">Controlado</span>
+                    <span class="ind-sub">Hedge reduz transmissão de choques</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:70%;background:#BE123C;"></div></div>
+                </div>
+                <div class="ind-card blue">
+                    <span class="ind-label">Confiança Institucional</span>
+                    <span class="ind-value blue">80%</span>
+                    <span class="ind-sub">Muita ou total confiança no SFN</span>
+                    <div class="ind-bar"><div class="ind-fill" style="width:80%;background:#4338CA;"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="source-bar">Fonte: BCB. Relatório de Estabilidade Financeira, Volume 24, nº 2, nov. 2025 [2]</div>
+    </div>
+    <script>
+        const ctx = document.getElementById('gaugeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Muita/Total Confiança', 'Confiança Moderada', 'Baixa Confiança'],
+                datasets: [{
+                    data: [80, 15, 5],
+                    backgroundColor: ['#16a34a', '#f59e0b', '#BE123C'],
+                    borderColor: ['#fff', '#fff', '#fff'],
+                    borderWidth: 3,
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 12, family: 'Inter', weight: '700' }, color: '#334155', padding: 10 }
+                    },
+                    tooltip: {
+                        callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

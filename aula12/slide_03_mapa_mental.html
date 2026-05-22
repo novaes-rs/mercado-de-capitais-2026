@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px 30px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 42px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .map-area {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+        /* Central node */
+        .node-center rect { fill: #1E3A5F; rx: 12; }
+        .node-center text { fill: #fff; font-weight: 900; font-size: 22px; }
+        /* Branch nodes */
+        .node-blue rect { fill: #4338CA; }
+        .node-blue text { fill: #fff; font-weight: 700; font-size: 17px; }
+        .node-red rect { fill: #BE123C; }
+        .node-red text { fill: #fff; font-weight: 700; font-size: 17px; }
+        .node-dark rect { fill: #0F172A; }
+        .node-dark text { fill: #fff; font-weight: 700; font-size: 17px; }
+        .node-teal rect { fill: #0891b2; }
+        .node-teal text { fill: #fff; font-weight: 700; font-size: 17px; }
+        /* Leaf nodes */
+        .leaf rect { fill: #fff; stroke: #CBD5E1; stroke-width: 2; }
+        .leaf text { fill: #334155; font-size: 14px; font-weight: 500; }
+        /* Lines */
+        .line-blue { stroke: #4338CA; stroke-width: 2.5; fill: none; }
+        .line-red { stroke: #BE123C; stroke-width: 2.5; fill: none; }
+        .line-dark { stroke: #0F172A; stroke-width: 2.5; fill: none; }
+        .line-teal { stroke: #0891b2; stroke-width: 2.5; fill: none; }
+        .line-leaf { stroke: #CBD5E1; stroke-width: 1.5; fill: none; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Ecossistema do Hedge Cambial no Brasil</h1>
+        <div class="map-area">
+            <svg viewBox="0 0 1160 560" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- LINES FROM CENTER TO BRANCHES -->
+                <!-- To Instrumentos (left) -->
+                <line x1="580" y1="280" x2="290" y2="160" class="line-blue"/>
+                <!-- To Participantes (top-right) -->
+                <line x1="580" y1="280" x2="870" y2="160" class="line-red"/>
+                <!-- To Exportadores (bottom-left) -->
+                <line x1="580" y1="280" x2="290" y2="400" class="line-dark"/>
+                <!-- To Importadores (bottom-right) -->
+                <line x1="580" y1="280" x2="870" y2="400" class="line-teal"/>
+
+                <!-- CENTER NODE -->
+                <g class="node-center">
+                    <rect x="470" y="230" width="220" height="100" rx="14" fill="#1E3A5F"/>
+                    <text x="580" y="272" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="900" font-size="22">HEDGE</text>
+                    <text x="580" y="300" text-anchor="middle" fill="#f59e0b" font-family="Inter" font-weight="700" font-size="18">CAMBIAL</text>
+                    <text x="580" y="322" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="14">Brasil 2024–2025</text>
+                </g>
+
+                <!-- BRANCH 1: INSTRUMENTOS (top-left) -->
+                <g class="node-blue">
+                    <rect x="180" y="120" width="220" height="80" rx="10" fill="#4338CA"/>
+                    <text x="290" y="153" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="17">Instrumentos</text>
+                    <text x="290" y="178" text-anchor="middle" fill="#c7d2fe" font-family="Inter" font-size="14">4 modalidades</text>
+                </g>
+                <!-- Leaves: Instrumentos -->
+                <line x1="180" y1="160" x2="80" y2="80" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="55" width="160" height="50" rx="8" fill="#EFF6FF" stroke="#4338CA" stroke-width="1.5"/>
+                    <text x="80" y="76" text-anchor="middle" fill="#1E40AF" font-family="Inter" font-size="14" font-weight="700">Contrato Futuro</text>
+                    <text x="80" y="96" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">B3 — alta liquidez</text>
+                </g>
+                <line x1="180" y1="160" x2="80" y2="155" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="130" width="160" height="50" rx="8" fill="#EFF6FF" stroke="#4338CA" stroke-width="1.5"/>
+                    <text x="80" y="151" text-anchor="middle" fill="#1E40AF" font-family="Inter" font-size="14" font-weight="700">Swap Cambial</text>
+                    <text x="80" y="171" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Balcão — customizado</text>
+                </g>
+                <line x1="180" y1="160" x2="80" y2="230" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="205" width="160" height="50" rx="8" fill="#EFF6FF" stroke="#4338CA" stroke-width="1.5"/>
+                    <text x="80" y="226" text-anchor="middle" fill="#1E40AF" font-family="Inter" font-size="14" font-weight="700">Contrato a Termo</text>
+                    <text x="80" y="246" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">NDF — prazo fixo</text>
+                </g>
+                <line x1="180" y1="160" x2="80" y2="305" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="280" width="160" height="50" rx="8" fill="#EFF6FF" stroke="#4338CA" stroke-width="1.5"/>
+                    <text x="80" y="301" text-anchor="middle" fill="#1E40AF" font-family="Inter" font-size="14" font-weight="700">Opções Cambiais</text>
+                    <text x="80" y="321" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Flexibilidade total</text>
+                </g>
+
+                <!-- BRANCH 2: PARTICIPANTES (top-right) -->
+                <g class="node-red">
+                    <rect x="760" y="120" width="220" height="80" rx="10" fill="#BE123C"/>
+                    <text x="870" y="153" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="17">Participantes</text>
+                    <text x="870" y="178" text-anchor="middle" fill="#fecdd3" font-family="Inter" font-size="14">187 instituições (BCB)</text>
+                </g>
+                <!-- Leaves: Participantes -->
+                <line x1="980" y1="160" x2="1080" y2="80" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="55" width="160" height="50" rx="8" fill="#FFF1F2" stroke="#BE123C" stroke-width="1.5"/>
+                    <text x="1080" y="76" text-anchor="middle" fill="#9F1239" font-family="Inter" font-size="14" font-weight="700">Bancos</text>
+                    <text x="1080" y="96" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">62% do volume</text>
+                </g>
+                <line x1="980" y1="160" x2="1080" y2="155" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="130" width="160" height="50" rx="8" fill="#FFF1F2" stroke="#BE123C" stroke-width="1.5"/>
+                    <text x="1080" y="151" text-anchor="middle" fill="#9F1239" font-family="Inter" font-size="14" font-weight="700">Exportadores</text>
+                    <text x="1080" y="171" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Venda de dólar futuro</text>
+                </g>
+                <line x1="980" y1="160" x2="1080" y2="230" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="205" width="160" height="50" rx="8" fill="#FFF1F2" stroke="#BE123C" stroke-width="1.5"/>
+                    <text x="1080" y="226" text-anchor="middle" fill="#9F1239" font-family="Inter" font-size="14" font-weight="700">Importadores</text>
+                    <text x="1080" y="246" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Compra de dólar futuro</text>
+                </g>
+                <line x1="980" y1="160" x2="1080" y2="305" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="280" width="160" height="50" rx="8" fill="#FFF1F2" stroke="#BE123C" stroke-width="1.5"/>
+                    <text x="1080" y="301" text-anchor="middle" fill="#9F1239" font-family="Inter" font-size="14" font-weight="700">Banco Central</text>
+                    <text x="1080" y="321" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Regulador e market maker</text>
+                </g>
+
+                <!-- BRANCH 3: EXPORTADORES (bottom-left) -->
+                <g class="node-dark">
+                    <rect x="180" y="360" width="220" height="80" rx="10" fill="#0F172A"/>
+                    <text x="290" y="393" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="17">Exportadores</text>
+                    <text x="290" y="418" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="14">Proteção contra queda do USD</text>
+                </g>
+                <line x1="180" y1="400" x2="80" y2="430" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="405" width="160" height="50" rx="8" fill="#F0FDF4" stroke="#16a34a" stroke-width="1.5"/>
+                    <text x="80" y="426" text-anchor="middle" fill="#15803d" font-family="Inter" font-size="14" font-weight="700">Vende USD Futuro</text>
+                    <text x="80" y="446" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Trava receita em BRL</text>
+                </g>
+                <line x1="180" y1="400" x2="80" y2="505" class="line-leaf"/>
+                <g class="leaf"><rect x="0" y="480" width="160" height="50" rx="8" fill="#F0FDF4" stroke="#16a34a" stroke-width="1.5"/>
+                    <text x="80" y="501" text-anchor="middle" fill="#15803d" font-family="Inter" font-size="14" font-weight="700">Prazo médio: 57 dias</text>
+                    <text x="80" y="521" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Fonte: BCB, jan/2025</text>
+                </g>
+
+                <!-- BRANCH 4: IMPORTADORES (bottom-right) -->
+                <g class="node-teal">
+                    <rect x="760" y="360" width="220" height="80" rx="10" fill="#0891b2"/>
+                    <text x="870" y="393" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="17">Importadores</text>
+                    <text x="870" y="418" text-anchor="middle" fill="#cffafe" font-family="Inter" font-size="14">Proteção contra alta do USD</text>
+                </g>
+                <line x1="980" y1="400" x2="1080" y2="430" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="405" width="160" height="50" rx="8" fill="#ECFEFF" stroke="#0891b2" stroke-width="1.5"/>
+                    <text x="1080" y="426" text-anchor="middle" fill="#0e7490" font-family="Inter" font-size="14" font-weight="700">Compra USD Futuro</text>
+                    <text x="1080" y="446" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Trava custo em BRL</text>
+                </g>
+                <line x1="980" y1="400" x2="1080" y2="505" class="line-leaf"/>
+                <g class="leaf"><rect x="1000" y="480" width="160" height="50" rx="8" fill="#ECFEFF" stroke="#0891b2" stroke-width="1.5"/>
+                    <text x="1080" y="501" text-anchor="middle" fill="#0e7490" font-family="Inter" font-size="14" font-weight="700">NDF / Swap</text>
+                    <text x="1080" y="521" text-anchor="middle" fill="#334155" font-family="Inter" font-size="12">Balcão — mais flexível</text>
+                </g>
+
+            </svg>
+        </div>
+    </div>
+</body>
+</html>

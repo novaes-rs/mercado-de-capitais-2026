@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 80px 40px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 44px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #1E3A5F;
+            padding-bottom: 14px;
+            margin-bottom: 32px;
+        }
+        .refs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            flex: 1;
+        }
+        .ref-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            border-left: 6px solid #4338CA;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .ref-card.red { border-left-color: #BE123C; }
+        .ref-num {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #94a3b8;
+        }
+        .ref-author {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .ref-title {
+            font-size: 18px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        .ref-detail {
+            font-size: 16px;
+            color: #64748b;
+            font-style: italic;
+        }
+        .abnt-note {
+            margin-top: 16px;
+            background: #1E3A5F;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 10px 20px;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Referências Bibliográficas</h1>
+        <div class="refs-grid">
+            <div class="ref-card">
+                <span class="ref-num">[1] Fonte Oficial</span>
+                <span class="ref-author">BANCO CENTRAL DO BRASIL</span>
+                <span class="ref-title">O mercado de câmbio brasileiro e o desenvolvimento do mercado de derivativos cambiais.</span>
+                <span class="ref-detail">Estudo Especial nº 41/2019. Relatório de Economia Bancária.</span>
+            </div>
+            <div class="ref-card red">
+                <span class="ref-num">[2] Fonte Oficial</span>
+                <span class="ref-author">BANCO CENTRAL DO BRASIL</span>
+                <span class="ref-title">Relatório de Estabilidade Financeira.</span>
+                <span class="ref-detail">Volume 24, nº 2. Brasília: BCB, novembro 2025.</span>
+            </div>
+            <div class="ref-card">
+                <span class="ref-num">[3] Mercado</span>
+                <span class="ref-author">B3 – BRASIL, BOLSA, BALCÃO</span>
+                <span class="ref-title">Indicadores Financeiros do Mercado de Derivativos.</span>
+                <span class="ref-detail">Disponível em: b3.com.br. Acesso em: maio 2026.</span>
+            </div>
+            <div class="ref-card red">
+                <span class="ref-num">[4] Imprensa</span>
+                <span class="ref-author">CNN BRASIL</span>
+                <span class="ref-title">Busca por proteção: dólar volátil impulsiona operações de hedge cambial.</span>
+                <span class="ref-detail">CNN Brasil Economia, 6 abr. 2025.</span>
+            </div>
+            <div class="ref-card">
+                <span class="ref-num">[5] Setor</span>
+                <span class="ref-author">OURIBANK</span>
+                <span class="ref-title">Hedge cambial como porta de entrada: o plano do Ouribank para conquistar empresas médias.</span>
+                <span class="ref-detail">Brazil Economy, 15 abr. 2025.</span>
+            </div>
+            <div class="ref-card red">
+                <span class="ref-num">[6] Regulação</span>
+                <span class="ref-author">BANCO CENTRAL DO BRASIL</span>
+                <span class="ref-title">Swap Cambial: Estabilidade Financeira.</span>
+                <span class="ref-detail">Disponível em: bcb.gov.br/estabilidadefinanceira/swapcambial. Acesso em: maio 2026.</span>
+            </div>
+        </div>
+        <div class="abnt-note">Citações conforme ABNT NBR 10520:2023 — todas as fontes são públicas e verificáveis</div>
+    </div>
+</body>
+</html>

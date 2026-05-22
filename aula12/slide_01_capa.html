@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #1E3A5F 0%, #4338CA 50%, #BE123C 100%);
+        }
+        .bg-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: #1E3A5F;
+        }
+        .content {
+            text-align: center;
+            padding: 0 80px;
+            width: 100%;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #1E3A5F;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 8px 28px;
+            border-radius: 999px;
+            margin-bottom: 32px;
+        }
+        .title {
+            font-size: 64px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .title span { color: #BE123C; }
+        .subtitle {
+            font-size: 30px;
+            font-weight: 500;
+            color: #4338CA;
+            margin-bottom: 48px;
+        }
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: #BE123C;
+            margin: 0 auto 40px;
+        }
+        .metadata {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            font-size: 22px;
+            color: #334155;
+        }
+        .metadata-item strong {
+            color: #0F172A;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-accent"></div>
+        <div class="bg-bottom"></div>
+        <div class="content">
+            <div class="badge">Aula 12 · Mercado de Capitais e Derivativos</div>
+            <h1 class="title">Hedge <span>Cambial</span> no Brasil</h1>
+            <h2 class="subtitle">Operações de Proteção: SP, Contratos Futuros e Swaps</h2>
+            <div class="divider"></div>
+            <div class="metadata">
+                <div class="metadata-item"><strong>Profa.</strong> Renata Novaes</div>
+                <div class="metadata-item"><strong>Período:</strong> Análise 2024–2025</div>
+                <div class="metadata-item"><strong>Fontes:</strong> BCB · B3 · ANBIMA</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

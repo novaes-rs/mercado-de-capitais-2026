@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #4338CA;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+        .content-row {
+            flex: 1;
+            display: flex;
+            gap: 28px;
+        }
+        .radar-box {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .radar-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .comparison-table {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            overflow: hidden;
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            background: #0F172A;
+        }
+        .th {
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            text-align: center;
+        }
+        .th.exp { background: #4338CA; }
+        .th.imp { background: #BE123C; }
+        .table-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            border-bottom: 2px solid #E2E8F0;
+        }
+        .table-row:last-child { border-bottom: none; }
+        .table-row:nth-child(even) { background: #F8FAFC; }
+        .td {
+            padding: 12px 16px;
+            font-size: 15px;
+            color: #334155;
+            text-align: center;
+            border-right: 2px solid #E2E8F0;
+        }
+        .td:last-child { border-right: none; }
+        .td.attr { font-weight: 700; color: #0F172A; text-align: left; }
+        .td.exp-val { color: #4338CA; font-weight: 700; }
+        .td.imp-val { color: #BE123C; font-weight: 700; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Exportação vs. Importação — Análise Comparativa do Hedge</h1>
+        <div class="content-row">
+            <div class="radar-box">
+                <div class="radar-title">Perfil de Risco e Proteção</div>
+                <canvas id="radarChart" style="max-height:380px;max-width:380px;"></canvas>
+            </div>
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div class="th">Atributo</div>
+                    <div class="th exp">Exportador</div>
+                    <div class="th imp">Importador</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Risco principal</div>
+                    <div class="td exp-val">USD cair (BRL valorizar)</div>
+                    <div class="td imp-val">USD subir (BRL desvalorizar)</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Operação de hedge</div>
+                    <div class="td exp-val">Vende USD futuro</div>
+                    <div class="td imp-val">Compra USD futuro</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Instrumento preferido</div>
+                    <div class="td exp-val">Futuro B3 / Swap</div>
+                    <div class="td imp-val">NDF / Swap / Futuro</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Prazo médio (BCB)</div>
+                    <div class="td exp-val">57 dias</div>
+                    <div class="td imp-val">30–90 dias</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Impacto sem hedge</div>
+                    <div class="td exp-val">Redução de receita</div>
+                    <div class="td imp-val">Aumento de custo</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Resultado com hedge</div>
+                    <div class="td exp-val">Receita garantida</div>
+                    <div class="td imp-val">Custo previsível</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Crescimento 2025</div>
+                    <div class="td exp-val">+352% (jan–fev)</div>
+                    <div class="td imp-val">+50% (anual)</div>
+                </div>
+                <div class="table-row">
+                    <div class="td attr">Objetivo final</div>
+                    <div class="td exp-val">Preservar margem</div>
+                    <div class="td imp-val">Controlar custo</div>
+                </div>
+            </div>
+        </div>
+        <div class="source-bar">Fonte: BCB. Estudo Especial nº 41/2019 [1] | BCB, REF nov. 2025 [2] | Ouribank, abr. 2025 [5]</div>
+    </div>
+    <script>
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Volume\nde Hedge', 'Urgência\n2025', 'Uso de\nFuturo B3', 'Uso de\nSwap', 'Uso de\nNDF', 'Prazo\nMédio'],
+                datasets: [
+                    {
+                        label: 'Exportador',
+                        data: [85, 90, 90, 70, 40, 65],
+                        borderColor: '#4338CA',
+                        backgroundColor: 'rgba(67,56,202,0.15)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#4338CA',
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'Importador',
+                        data: [70, 75, 65, 75, 80, 55],
+                        borderColor: '#BE123C',
+                        backgroundColor: 'rgba(190,18,60,0.12)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#BE123C',
+                        pointRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 14, family: 'Inter', weight: '700' }, color: '#334155', padding: 16 }
+                    }
+                },
+                scales: {
+                    r: {
+                        min: 0, max: 100,
+                        grid: { color: '#E2E8F0' },
+                        angleLines: { color: '#CBD5E1' },
+                        pointLabels: { font: { size: 13, family: 'Inter', weight: '700' }, color: '#334155' },
+                        ticks: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #1E3A5F;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .content-row {
+            flex: 1;
+            display: flex;
+            gap: 24px;
+        }
+        /* Coluna de aprendizados */
+        .learnings {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .learning-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 14px 16px;
+            border-left: 5px solid #1E3A5F;
+        }
+        .learning-item.blue { border-left-color: #4338CA; }
+        .learning-item.red { border-left-color: #BE123C; }
+        .learning-item.teal { border-left-color: #0891b2; }
+        .learning-item.green { border-left-color: #16a34a; }
+        .learning-num {
+            font-size: 28px;
+            font-weight: 900;
+            color: #E2E8F0;
+            min-width: 40px;
+            line-height: 1;
+        }
+        .learning-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .learning-title { font-size: 17px; font-weight: 900; color: #0F172A; }
+        .learning-desc { font-size: 13px; color: #64748b; line-height: 1.4; }
+        /* Coluna de dados-chave */
+        .key-data {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .data-highlight {
+            background: #1E3A5F;
+            color: #fff;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .data-highlight.blue { background: #4338CA; }
+        .data-highlight.red { background: #BE123C; }
+        .data-highlight.dark { background: #0F172A; }
+        .dh-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
+        .dh-value { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; }
+        .dh-sub { font-size: 13px; opacity: 0.8; }
+        .closing-box {
+            background: linear-gradient(135deg, #1E3A5F 0%, #4338CA 100%);
+            color: #fff;
+            padding: 18px 24px;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .closing-text { font-size: 18px; font-weight: 700; line-height: 1.5; }
+        .closing-sub { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Síntese da Aula — Aprendizados Fundamentais</h1>
+        <div class="content-row">
+
+            <div class="learnings">
+                <div class="learning-item">
+                    <span class="learning-num">01</span>
+                    <div class="learning-text">
+                        <span class="learning-title">Hedge é gestão de risco, não especulação</span>
+                        <span class="learning-desc">Protege receitas e custos contra volatilidade cambial — fundamental para empresas com exposição ao câmbio</span>
+                    </div>
+                </div>
+                <div class="learning-item blue">
+                    <span class="learning-num">02</span>
+                    <div class="learning-text">
+                        <span class="learning-title">4 instrumentos com perfis distintos</span>
+                        <span class="learning-desc">Futuro (liquidez), Swap (flexibilidade), NDF (prazo fixo), Opções (direito sem obrigação)</span>
+                    </div>
+                </div>
+                <div class="learning-item red">
+                    <span class="learning-num">03</span>
+                    <div class="learning-text">
+                        <span class="learning-title">Exportador vende / Importador compra USD futuro</span>
+                        <span class="learning-desc">Lógica oposta: exportador teme queda do dólar; importador teme alta do dólar</span>
+                    </div>
+                </div>
+                <div class="learning-item teal">
+                    <span class="learning-num">04</span>
+                    <div class="learning-text">
+                        <span class="learning-title">Mercado cresceu 352% em 2025</span>
+                        <span class="learning-desc">Volatilidade macroeconômica impulsionou demanda por proteção de forma histórica</span>
+                    </div>
+                </div>
+                <div class="learning-item green">
+                    <span class="learning-num">05</span>
+                    <div class="learning-text">
+                        <span class="learning-title">BCB é market maker e regulador</span>
+                        <span class="learning-desc">Usa swap cambial para estabilizar o mercado sem gastar reservas internacionais</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-data">
+                <div class="data-highlight">
+                    <span class="dh-label">Crescimento Jan–Fev 2025</span>
+                    <span class="dh-value">+352%</span>
+                    <span class="dh-sub">vs. mesmo período 2024</span>
+                </div>
+                <div class="data-highlight blue">
+                    <span class="dh-label">Top 10 Bancos — Concentração</span>
+                    <span class="dh-value">62,32%</span>
+                    <span class="dh-sub">do volume interbancário</span>
+                </div>
+                <div class="data-highlight red">
+                    <span class="dh-label">Volume Jan–Fev 2025</span>
+                    <span class="dh-value">R$ 9,5 bi</span>
+                    <span class="dh-sub">vs. R$ 10,7 bi em todo 2024</span>
+                </div>
+                <div class="data-highlight dark">
+                    <span class="dh-label">Prazo médio das operações</span>
+                    <span class="dh-value">57 dias</span>
+                    <span class="dh-sub">Fonte: BCB, jan/2025</span>
+                </div>
+                <div class="closing-box">
+                    <div class="closing-text">"O hedge cambial não elimina o risco — ele o transfere para quem está disposto a assumi-lo."</div>
+                    <div class="closing-sub">Princípio fundamental dos mercados de derivativos</div>
+                </div>
+            </div>
+        </div>
+        <div class="source-bar">Fontes: BCB [1][2][6] · B3 [3] · CNN Brasil [4] · Ouribank [5] — Todas as citações conforme ABNT NBR 10520:2023</div>
+    </div>
+</body>
+</html>

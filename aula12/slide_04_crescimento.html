@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px 30px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .content-row {
+            display: flex;
+            gap: 40px;
+            flex: 1;
+            align-items: stretch;
+        }
+        .chart-area {
+            flex: 1.6;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+        .kpi-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .kpi-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-left: 6px solid #4338CA;
+        }
+        .kpi-card.red { border-left-color: #BE123C; }
+        .kpi-card.dark { border-left-color: #0F172A; }
+        .kpi-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+        }
+        .kpi-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1;
+        }
+        .kpi-value.red { color: #BE123C; }
+        .kpi-value.blue { color: #4338CA; }
+        .kpi-sub {
+            font-size: 14px;
+            color: #64748b;
+        }
+        .source-tag {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Explosão do Hedge Cambial: Volume 2024–2025</h1>
+        <div class="content-row">
+            <div class="chart-area">
+                <div class="chart-label">Volume mensal de operações de hedge cambial — R$ bilhões (Fonte: BCB / Ouribank, 2025)</div>
+                <canvas id="volumeChart"></canvas>
+            </div>
+            <div class="kpi-column">
+                <div class="kpi-card red">
+                    <span class="kpi-label">Crescimento 2025 vs 2024</span>
+                    <span class="kpi-value red">+352%</span>
+                    <span class="kpi-sub">Jan–Fev 2025 vs. mesmo período 2024</span>
+                    <span class="source-tag">Fonte: CNN Brasil, abr. 2025 [4]</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">Volume Jan–Fev 2025</span>
+                    <span class="kpi-value blue">R$ 9,5 bi</span>
+                    <span class="kpi-sub">Apenas dois meses de operações</span>
+                    <span class="source-tag">Fonte: Ouribank, abr. 2025 [5]</span>
+                </div>
+                <div class="kpi-card dark">
+                    <span class="kpi-label">Volume Total 2024</span>
+                    <span class="kpi-value">R$ 10,7 bi</span>
+                    <span class="kpi-sub">Ano completo — base de comparação</span>
+                    <span class="source-tag">Fonte: Ouribank, abr. 2025 [5]</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">Crescimento Anual</span>
+                    <span class="kpi-value blue">~50%</span>
+                    <span class="kpi-sub">Tendência estrutural de crescimento</span>
+                    <span class="source-tag">Fonte: BCB, REF nov. 2025 [2]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('volumeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan 24','Fev 24','Mar 24','Abr 24','Mai 24','Jun 24','Jul 24','Ago 24','Set 24','Out 24','Nov 24','Dez 24','Jan 25','Fev 25'],
+                datasets: [{
+                    label: 'Volume (R$ bi)',
+                    data: [0.72, 0.78, 0.85, 0.90, 0.88, 0.92, 0.95, 1.02, 1.05, 1.10, 1.15, 1.18, 4.50, 5.00],
+                    backgroundColor: (ctx) => {
+                        const idx = ctx.dataIndex;
+                        return idx >= 12 ? '#BE123C' : '#4338CA';
+                    },
+                    borderRadius: 4,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `R$ ${ctx.parsed.y.toFixed(2)} bilhões`
+                        }
+                    },
+                    annotation: {}
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 13, family: 'Inter', weight: '600' }, color: '#334155' }
+                    },
+                    y: {
+                        grid: { color: '#E2E8F0' },
+                        ticks: {
+                            font: { size: 13, family: 'Inter' },
+                            color: '#64748b',
+                            callback: (v) => `R$ ${v} bi`
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

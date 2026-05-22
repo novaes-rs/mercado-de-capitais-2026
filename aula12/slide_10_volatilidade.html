@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #BE123C;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+        .content-row {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+        }
+        .chart-area {
+            flex: 2;
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 10px;
+        }
+        .events-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .event-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            border-left: 5px solid #BE123C;
+            padding: 12px 14px;
+        }
+        .event-card.blue { border-left-color: #4338CA; }
+        .event-card.dark { border-left-color: #0F172A; }
+        .event-date { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+        .event-title { font-size: 16px; font-weight: 900; color: #0F172A; margin: 2px 0; }
+        .event-impact { font-size: 13px; color: #64748b; }
+        .event-rate { font-size: 18px; font-weight: 900; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Volatilidade Cambial e Demanda por Hedge — 2024–2025</h1>
+        <div class="content-row">
+            <div class="chart-area">
+                <div class="chart-label">Taxa de câmbio USD/BRL — Ptax mensal (Fonte: BCB, 2024–2025)</div>
+                <canvas id="cambioChart"></canvas>
+            </div>
+            <div class="events-panel">
+                <div style="font-size:16px;font-weight:900;color:#0F172A;margin-bottom:4px;">Eventos que impulsionaram o hedge</div>
+                <div class="event-card">
+                    <span class="event-date">Jan–Mar 2024</span>
+                    <span class="event-title">Pressão Fiscal Doméstica</span>
+                    <span class="event-impact">Incerteza fiscal eleva demanda por proteção</span>
+                    <span class="event-rate" style="color:#BE123C;">R$ 4,90–5,10</span>
+                </div>
+                <div class="event-card blue">
+                    <span class="event-date">Jul–Set 2024</span>
+                    <span class="event-title">Juros Americanos Elevados</span>
+                    <span class="event-impact">Fed mantém taxa alta · fuga de capital</span>
+                    <span class="event-rate" style="color:#4338CA;">R$ 5,20–5,50</span>
+                </div>
+                <div class="event-card">
+                    <span class="event-date">Nov–Dez 2024</span>
+                    <span class="event-title">Pico de Volatilidade</span>
+                    <span class="event-impact">Incerteza política · dólar dispara</span>
+                    <span class="event-rate" style="color:#BE123C;">R$ 5,80–6,20</span>
+                </div>
+                <div class="event-card dark">
+                    <span class="event-date">Jan–Fev 2025</span>
+                    <span class="event-title">Explosão do Hedge +352%</span>
+                    <span class="event-impact">Empresas correm para se proteger</span>
+                    <span class="event-rate" style="color:#0F172A;">R$ 5,90–6,10</span>
+                </div>
+            </div>
+        </div>
+        <div class="source-bar">Fonte: BCB — Taxa Ptax [1] | BCB, REF nov. 2025 [2] | CNN Brasil, abr. 2025 [4]</div>
+    </div>
+    <script>
+        const ctx = document.getElementById('cambioChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan/24','Fev/24','Mar/24','Abr/24','Mai/24','Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Dez/24','Jan/25','Fev/25'],
+                datasets: [{
+                    label: 'USD/BRL (Ptax)',
+                    data: [4.97, 4.97, 5.00, 5.05, 5.10, 5.20, 5.35, 5.42, 5.48, 5.62, 5.80, 6.18, 5.95, 5.88],
+                    borderColor: '#1E3A5F',
+                    backgroundColor: 'rgba(30,58,95,0.08)',
+                    borderWidth: 3,
+                    pointBackgroundColor: (ctx) => {
+                        const v = ctx.parsed.y;
+                        return v >= 5.80 ? '#BE123C' : '#1E3A5F';
+                    },
+                    pointRadius: 6,
+                    pointHoverRadius: 9,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { label: (ctx) => ` R$ ${ctx.parsed.y.toFixed(2)}/USD` }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#E2E8F0' },
+                        ticks: { font: { size: 12, family: 'Inter', weight: '600' }, color: '#334155' }
+                    },
+                    y: {
+                        min: 4.70, max: 6.50,
+                        grid: { color: '#E2E8F0' },
+                        ticks: {
+                            font: { size: 13, family: 'Inter' },
+                            color: '#64748b',
+                            callback: (v) => `R$ ${v.toFixed(2)}`
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

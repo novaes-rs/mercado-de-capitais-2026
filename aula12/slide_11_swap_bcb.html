@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #E2E8F0; }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F8FAFC;
+            border: 2px solid #0F172A;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 60px 24px;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0F172A;
+            border-bottom: 4px solid #1E3A5F;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .content-row {
+            flex: 1;
+            display: flex;
+            gap: 28px;
+        }
+        /* Diagrama do swap */
+        .swap-diagram {
+            flex: 1.4;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .swap-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .actor-box {
+            width: 200px;
+            background: #1E3A5F;
+            color: #fff;
+            padding: 18px 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .actor-box.market { background: #4338CA; }
+        .actor-box.bcb { background: #BE123C; }
+        .actor-name { font-size: 18px; font-weight: 900; }
+        .actor-sub { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+        .flow-middle {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 16px;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .flow-line {
+            flex: 1;
+            height: 3px;
+        }
+        .flow-label {
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .arrowhead-right {
+            width: 0; height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .arrowhead-left {
+            width: 0; height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        /* Stats panel */
+        .stats-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .stat-card {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            padding: 16px 18px;
+            border-left: 6px solid #1E3A5F;
+        }
+        .stat-card.red { border-left-color: #BE123C; }
+        .stat-card.blue { border-left-color: #4338CA; }
+        .stat-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+        .stat-value { font-size: 28px; font-weight: 900; color: #0F172A; line-height: 1.1; }
+        .stat-value.red { color: #BE123C; }
+        .stat-value.blue { color: #4338CA; }
+        .stat-sub { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .mechanism-box {
+            background: #0F172A;
+            color: #fff;
+            padding: 16px 20px;
+            margin-top: 4px;
+        }
+        .mech-title { font-size: 16px; font-weight: 900; color: #f59e0b; margin-bottom: 8px; }
+        .mech-item { font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+        .source-bar { background: #E2E8F0; padding: 8px 16px; font-size: 12px; color: #64748b; font-style: italic; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Swap Cambial do Banco Central — Como Funciona</h1>
+        <div class="content-row">
+            <div class="swap-diagram">
+                <!-- Row 1: BCB → Mercado (vende proteção) -->
+                <div style="font-size:15px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;">Mecanismo do Swap Cambial Tradicional</div>
+                <div class="swap-row">
+                    <div class="actor-box bcb">
+                        <div class="actor-name">BCB</div>
+                        <div class="actor-sub">Banco Central</div>
+                    </div>
+                    <div class="flow-middle">
+                        <!-- BCB paga variação cambial -->
+                        <div class="flow-arrow">
+                            <div class="flow-line" style="background:#BE123C;"></div>
+                            <div class="arrowhead-right" style="border-left:14px solid #BE123C;"></div>
+                            <div class="flow-label" style="background:#FFF1F2;color:#BE123C;border:2px solid #BE123C;">Paga: Variação Cambial (USD)</div>
+                        </div>
+                        <!-- Mercado paga CDI -->
+                        <div class="flow-arrow" style="flex-direction:row-reverse;">
+                            <div class="flow-line" style="background:#4338CA;"></div>
+                            <div class="arrowhead-left" style="border-right:14px solid #4338CA;"></div>
+                            <div class="flow-label" style="background:#EFF6FF;color:#4338CA;border:2px solid #4338CA;">Paga: CDI (taxa de juros)</div>
+                        </div>
+                    </div>
+                    <div class="actor-box market">
+                        <div class="actor-name">Mercado</div>
+                        <div class="actor-sub">Bancos e Empresas</div>
+                    </div>
+                </div>
+
+                <!-- Resultado -->
+                <div style="display:flex;gap:14px;margin-top:8px;">
+                    <div style="flex:1;background:#FFF1F2;border:2px solid #BE123C;padding:14px;text-align:center;">
+                        <div style="font-size:13px;font-weight:700;color:#BE123C;text-transform:uppercase;">BCB Perde se...</div>
+                        <div style="font-size:18px;font-weight:900;color:#0F172A;margin-top:4px;">Dólar sobe muito</div>
+                        <div style="font-size:13px;color:#64748b;">Mas estabiliza o mercado</div>
+                    </div>
+                    <div style="flex:1;background:#EFF6FF;border:2px solid #4338CA;padding:14px;text-align:center;">
+                        <div style="font-size:13px;font-weight:700;color:#4338CA;text-transform:uppercase;">BCB Ganha se...</div>
+                        <div style="font-size:18px;font-weight:900;color:#0F172A;margin-top:4px;">Dólar cai ou estabiliza</div>
+                        <div style="font-size:13px;color:#64748b;">Reservas preservadas</div>
+                    </div>
+                    <div style="flex:1;background:#F0FDF4;border:2px solid #16a34a;padding:14px;text-align:center;">
+                        <div style="font-size:13px;font-weight:700;color:#16a34a;text-transform:uppercase;">Mercado Ganha sempre</div>
+                        <div style="font-size:18px;font-weight:900;color:#0F172A;margin-top:4px;">Proteção garantida</div>
+                        <div style="font-size:13px;color:#64748b;">Reduz volatilidade</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-card red">
+                    <span class="stat-label">Swap com China (mai/2025)</span>
+                    <span class="stat-value red">R$ 157 bi</span>
+                    <span class="stat-sub">Banco Popular da China · Liquidez emergencial</span>
+                </div>
+                <div class="stat-card blue">
+                    <span class="stat-label">Objetivo Principal</span>
+                    <span class="stat-value blue">Estabilizar</span>
+                    <span class="stat-sub">Reduzir volatilidade excessiva do câmbio</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Diferença do Swap Privado</span>
+                    <span class="stat-value">Sem entrega</span>
+                    <span class="stat-sub">Liquidação financeira — não há troca de moeda física</span>
+                </div>
+                <div class="mechanism-box">
+                    <div class="mech-title">Por que o BCB usa Swap e não vende reservas?</div>
+                    <div class="mech-item">✦ Preserva as reservas internacionais do país</div>
+                    <div class="mech-item">✦ Sinaliza presença sem gastar divisas</div>
+                    <div class="mech-item">✦ Efeito psicológico no mercado é imediato</div>
+                </div>
+            </div>
+        </div>
+        <div class="source-bar">Fonte: BCB. Swap Cambial — Estabilidade Financeira [6] | BCB, REF nov. 2025 [2] | BCB, Estudo Especial nº 41/2019 [1]</div>
+    </div>
+</body>
+</html>
