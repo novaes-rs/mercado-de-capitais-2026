@@ -879,53 +879,70 @@ html, body {
   <div class="s-head">
     <h2 class="t-title">Democratização do Hedge Cambial — Expansão para PMEs</h2>
   </div>
-  <div class="s-body">
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0.7vh;">
-      <div class="t-label" style="margin-bottom:0.3vh;">Pirâmide de Acesso ao Hedge Cambial</div>
-      <div style="display:flex;align-items:center;gap:0.8vw;">
-        <div style="background:#1E3A5F;color:#fff;border-radius:0.4vw;height:clamp(22px,3.2vh,32px);display:flex;align-items:center;padding:0 1vw;font-size:clamp(0.55rem,0.95vw,0.78rem);font-weight:800;width:100%;">Grandes Corporações</div>
-        <div style="min-width:50%;white-space:nowrap;"><span class="t-body" style="font-weight:800;color:#1E3A5F;">Grandes Empresas</span> <span class="t-body">· Mesa própria · </span><span class="t-body" style="font-weight:900;color:#1E3A5F;">100% acesso histórico</span></div>
+  <div class="s-body" style="gap:1.2vw;">
+
+    <!-- COLUNA 1: Pirâmide CSS pura -->
+    <div style="width:30%;display:flex;flex-direction:column;gap:0.6vh;">
+      <div class="t-label" style="text-align:center;margin-bottom:0.4vh;">PIRÂMIDE DE ACESSO AO HEDGE CAMBIAL</div>
+      <!-- Nível 1 — Grandes Corporações -->
+      <div style="background:#1E3A5F;color:#fff;border-radius:0.4vw;padding:0.5vh 0.8vw;text-align:center;">
+        <div style="font-size:clamp(0.6rem,1vw,0.85rem);font-weight:900;">Grandes Corporações</div>
+        <div style="font-size:clamp(0.5rem,0.85vw,0.7rem);opacity:0.85;">Mesa própria · 100% de acesso</div>
       </div>
-      <div style="display:flex;align-items:center;gap:0.8vw;">
-        <div style="background:#4338CA;color:#fff;border-radius:0.4vw;height:clamp(22px,3.2vh,32px);display:flex;align-items:center;padding:0 1vw;font-size:clamp(0.55rem,0.95vw,0.78rem);font-weight:800;width:82%;">Médias Empresas</div>
-        <div style="min-width:50%;white-space:nowrap;"><span class="t-body" style="font-weight:800;color:#4338CA;">Médias Empresas</span> <span class="t-body">· Bancos especializados · </span><span class="t-body" style="font-weight:900;color:#4338CA;">+50% crescimento 2025</span></div>
+      <!-- Nível 2 — Médias Empresas -->
+      <div style="background:#4338CA;color:#fff;border-radius:0.4vw;padding:0.5vh 0.8vw;text-align:center;">
+        <div style="font-size:clamp(0.6rem,1vw,0.85rem);font-weight:900;">Médias Empresas</div>
+        <div style="font-size:clamp(0.5rem,0.85vw,0.7rem);opacity:0.85;">Bancos especializados · <strong>+50% em 2025</strong></div>
       </div>
-      <div style="display:flex;align-items:center;gap:0.8vw;">
-        <div style="background:#0891b2;color:#fff;border-radius:0.4vw;height:clamp(22px,3.2vh,32px);display:flex;align-items:center;padding:0 1vw;font-size:clamp(0.55rem,0.95vw,0.78rem);font-weight:800;width:64%;">PMEs</div>
-        <div style="min-width:50%;white-space:nowrap;"><span class="t-body" style="font-weight:800;color:#0891b2;">Pequenas e Médias</span> <span class="t-body">· Ouribank e fintechs · </span><span class="t-body" style="font-weight:900;color:#0891b2;">Expansão acelerada</span></div>
+      <!-- Nível 3 — PMEs -->
+      <div style="background:#0891b2;color:#fff;border-radius:0.4vw;padding:0.5vh 0.8vw;text-align:center;">
+        <div style="font-size:clamp(0.6rem,1vw,0.85rem);font-weight:900;">PMEs</div>
+        <div style="font-size:clamp(0.5rem,0.85vw,0.7rem);opacity:0.85;">Ouribank e fintechs · <strong>Expansão acelerada</strong></div>
       </div>
-      <div style="display:flex;align-items:center;gap:0.8vw;">
-        <div style="background:#BE123C;color:#fff;border-radius:0.4vw;height:clamp(22px,3.2vh,32px);display:flex;align-items:center;padding:0 1vw;font-size:clamp(0.55rem,0.95vw,0.78rem);font-weight:800;width:46%;">Microempresas</div>
-        <div style="min-width:50%;white-space:nowrap;"><span class="t-body" style="font-weight:800;color:#BE123C;">Micro</span> <span class="t-body">· Sem acesso amplo ainda · </span><span class="t-body" style="font-weight:900;color:#BE123C;">Próxima fronteira</span></div>
+      <!-- Nível 4 — Microempresas -->
+      <div style="background:#BE123C;color:#fff;border-radius:0.4vw;padding:0.5vh 0.8vw;text-align:center;">
+        <div style="font-size:clamp(0.6rem,1vw,0.85rem);font-weight:900;">Microempresas</div>
+        <div style="font-size:clamp(0.5rem,0.85vw,0.7rem);opacity:0.85;">Sem acesso amplo · <strong>Próxima fronteira</strong></div>
+      </div>
+      <!-- KPI ticket -->
+      <div class="card card-amber kpi" style="margin-top:0.4vh;">
+        <div class="t-label">Ticket Mínimo PME</div>
+        <div class="t-val" style="color:#f59e0b;">R$ 500 mil</div>
+        <div class="t-body">Mínimo operacional Ouribank</div>
       </div>
     </div>
-    <div style="flex:1.4;background:#fff;border-radius:0.7vw;border:1px solid #E2E8F0;padding:0.8vh 1vw;display:flex;flex-direction:column;">
-      <div class="t-label" style="margin-bottom:0.4vh;">Crescimento do Volume por Segmento — 2024 vs 2025 (%)</div>
-      <div class="cw"><canvas id="segChart"></canvas></div>
+
+    <!-- COLUNA 2: Gráfico de barras -->
+    <div style="flex:1;background:#fff;border-radius:0.7vw;border:1px solid #E2E8F0;padding:1vh 1vw;display:flex;flex-direction:column;">
+      <div class="t-label" style="margin-bottom:0.4vh;">CRESCIMENTO DO VOLUME POR SEGMENTO — 2024 VS 2025 (%)</div>
+      <div class="cw" style="flex:1;"><canvas id="segChart"></canvas></div>
     </div>
-    <div style="width:19%;display:flex;flex-direction:column;gap:0.7vh;justify-content:center;">
-      <div class="t-label" style="margin-bottom:0.2vh;">Tendências 2025–2026</div>
-      <div class="card card-navy kpi">
-        <div class="t-label">Ouribank</div>
-        <div class="t-val" style="color:#1E3A5F;font-size:clamp(1rem,2vw,1.6rem);">+50%</div>
-        <div class="t-body">Foco em médias</div>
+
+    <!-- COLUNA 3: KPIs de tendências -->
+    <div style="width:22%;display:flex;flex-direction:column;gap:0.6vh;">
+      <div class="t-label" style="margin-bottom:0.2vh;">TENDÊNCIAS 2025–2026</div>
+      <div class="card" style="border-left:3px solid #1E3A5F;padding:0.6vh 0.8vw;background:#fff;border-radius:0.4vw;border-top:1px solid #E2E8F0;border-right:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;">
+        <div class="t-label" style="color:#1E3A5F;">OURIBANK</div>
+        <div style="font-size:clamp(0.9rem,1.6vw,1.3rem);font-weight:900;color:#1E3A5F;">+50%</div>
+        <div class="t-body">Foco em médias empresas</div>
       </div>
-      <div class="card card-green kpi">
-        <div class="t-label">Digital</div>
-        <div class="t-val" style="color:#16a34a;font-size:clamp(1rem,2vw,1.6rem);">+Digital</div>
-        <div class="t-body">App e API</div>
+      <div class="card" style="border-left:3px solid #4338CA;padding:0.6vh 0.8vw;background:#fff;border-radius:0.4vw;border-top:1px solid #E2E8F0;border-right:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;">
+        <div class="t-label" style="color:#4338CA;">DIGITAL</div>
+        <div style="font-size:clamp(0.9rem,1.6vw,1.3rem);font-weight:900;color:#4338CA;">+Digital</div>
+        <div class="t-body">App e API · Acesso remoto</div>
       </div>
-      <div class="card card-amber kpi">
-        <div class="t-label">Ticket PME</div>
-        <div class="t-val" style="color:#f59e0b;font-size:clamp(0.8rem,1.5vw,1.2rem);">R$ 500 mi</div>
+      <div class="card" style="border-left:3px solid #f59e0b;padding:0.6vh 0.8vw;background:#fff;border-radius:0.4vw;border-top:1px solid #E2E8F0;border-right:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;">
+        <div class="t-label" style="color:#b45309;">TICKET MÉDIO PME</div>
+        <div style="font-size:clamp(0.9rem,1.6vw,1.3rem);font-weight:900;color:#f59e0b;">R$ 500 mi</div>
         <div class="t-body">Mínimo operacional</div>
       </div>
-      <div class="card card-red kpi">
-        <div class="t-label">Projeção 2025</div>
-        <div class="t-val" style="color:#BE123C;font-size:clamp(1rem,2vw,1.6rem);">4× 2024</div>
-        <div class="t-body">Quadruplicar</div>
+      <div class="card" style="border-left:3px solid #BE123C;padding:0.6vh 0.8vw;background:#fff;border-radius:0.4vw;border-top:1px solid #E2E8F0;border-right:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;">
+        <div class="t-label" style="color:#BE123C;">PROJEÇÃO 2025</div>
+        <div style="font-size:clamp(0.9rem,1.6vw,1.3rem);font-weight:900;color:#BE123C;">4× 2024</div>
+        <div class="t-body">Quadruplicar o volume</div>
       </div>
     </div>
+
   </div>
   <div class="s-foot"><span class="t-src">Fonte: Ouribank, abr. 2025 [5] | CNN Brasil, abr. 2025 [4] | BCB, REF nov. 2025 [2]</span></div>
 </div>
