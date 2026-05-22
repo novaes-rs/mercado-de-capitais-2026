@@ -657,29 +657,29 @@ html, body {
   </div>
   <div class="s-body">
     <div style="flex:1;background:#fff;border-radius:0.7vw;border:1px solid #E2E8F0;padding:0.8vh 1vw;display:flex;flex-direction:column;">
-      <div class="t-label" style="margin-bottom:0.4vh;">Taxa de câmbio USD/BRL — Ptax (R$/US$) — Jan 2024 a Fev 2025</div>
+      <div class="t-label" style="margin-bottom:0.4vh;">Taxa de câmbio USD/BRL — Ptax (R$/US$) — Jan 2024 a Fev 2025 · Fonte: Receita Federal / BCB [2]</div>
       <div class="cw"><canvas id="cambioChart"></canvas></div>
     </div>
     <div style="width:22%;display:flex;flex-direction:column;gap:0.7vh;justify-content:center;">
       <div class="card card-navy kpi">
         <div class="t-label">Jan 2024</div>
-        <div class="t-val">R$ 4,97</div>
+        <div class="t-val">R$ 4,94</div>
         <div class="t-body">Início do período</div>
       </div>
       <div class="card card-red kpi">
         <div class="t-label">Pico Dez 2024</div>
-        <div class="t-val" style="color:#BE123C;">R$ 6,19</div>
-        <div class="t-body">Máxima histórica recente</div>
+        <div class="t-val" style="color:#BE123C;">R$ 5,79</div>
+        <div class="t-body">Máxima do ano 2024</div>
       </div>
       <div class="card card-amber kpi">
         <div class="t-label">Variação 2024</div>
-        <div class="t-val" style="color:#f59e0b;">+27%</div>
-        <div class="t-body">Valorização do dólar</div>
+        <div class="t-val" style="color:#f59e0b;">+17%</div>
+        <div class="t-body">Valorização do dólar no ano</div>
       </div>
       <div class="card card-cyan kpi">
-        <div class="t-label">Fev 2025</div>
-        <div class="t-val" style="color:#0891b2;">R$ 5,85</div>
-        <div class="t-body">Recuo após pico</div>
+        <div class="t-label">Jan–Fev 2025</div>
+        <div class="t-val" style="color:#0891b2;">R$ 6,04</div>
+        <div class="t-body">Alta histórica recente</div>
       </div>
     </div>
   </div>
@@ -1079,7 +1079,7 @@ new Chart(document.getElementById('cambioChart'), {
     labels:['Jan 24','Fev 24','Mar 24','Abr 24','Mai 24','Jun 24','Jul 24','Ago 24','Set 24','Out 24','Nov 24','Dez 24','Jan 25','Fev 25'],
     datasets:[{
       label:'USD/BRL (Ptax)',
-      data:[4.97,4.97,4.99,5.10,5.15,5.25,5.40,5.45,5.44,5.70,5.85,6.19,5.95,5.85],
+      data:[4.9397,4.8765,4.9710,4.9937,5.1746,5.1423,5.3630,5.4563,5.4651,5.5717,5.6378,5.7885,6.0400,6.0377],
       borderColor:C.navy,backgroundColor:'rgba(30,58,95,0.08)',
       borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.navy,tension:0.3,fill:true
     }]
