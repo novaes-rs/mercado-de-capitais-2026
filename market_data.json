@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-11T19:24:29.108529-03:00",
-  "last_update": "11/07/2026 19:24:29",
+  "timestamp": "2026-07-12T19:25:46.050282-03:00",
+  "last_update": "12/07/2026 19:25:46",
   "data": {
     "dollar": {
       "value": 5.1082,
@@ -14,7 +14,7 @@
     },
     "ipca": {
       "value": 3.81,
-      "date": "11/07/2026",
+      "date": "12/07/2026",
       "change": 0.0
     },
     "ibovespa": {
@@ -23,8 +23,8 @@
       "currency": "BRL"
     },
     "bitcoin": {
-      "value": 328929,
-      "change": 0.32,
+      "value": 326255,
+      "change": -0.88,
       "currency": "BRL"
     },
     "euro": {
