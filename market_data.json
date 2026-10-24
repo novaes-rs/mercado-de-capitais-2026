@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23T20:56:57.393172-03:00",
-  "last_update": "23/10/2026 20:56:57",
+  "timestamp": "2026-10-24T20:33:39.094414-03:00",
+  "last_update": "24/10/2026 20:33:39",
   "data": {
     "dollar": {
       "value": 5.0371,
@@ -23,8 +23,8 @@
       "currency": "BRL"
     },
     "bitcoin": {
-      "value": 403827,
-      "change": -1.71,
+      "value": 401326,
+      "change": -0.32,
       "currency": "BRL"
     },
     "euro": {
