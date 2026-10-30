@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-10-28T22:09:22.628544-03:00",
-  "last_update": "28/10/2026 22:09:22",
+  "timestamp": "2026-10-29T22:16:57.203151-03:00",
+  "last_update": "29/10/2026 22:16:57",
   "data": {
     "dollar": {
-      "value": 5.2,
-      "date": "28/10/2026",
-      "change": 0.0
+      "value": 5.3738,
+      "date": "29/10/2026",
+      "change": 0.61
     },
     "selic": {
       "value": 13.75,
@@ -18,19 +18,19 @@
       "change": 0.36
     },
     "ibovespa": {
-      "value": 171006,
-      "change": -2.68,
+      "value": 169186,
+      "change": -1.06,
       "currency": "BRL"
     },
     "bitcoin": {
-      "value": 432564,
-      "change": 0.33,
+      "value": 415322,
+      "change": -4.0,
       "currency": "BRL"
     },
     "euro": {
-      "value": 5.9515,
-      "date": "28/10/2026",
-      "change": 0.11
+      "value": 6.0,
+      "date": "29/10/2026",
+      "change": 0.81
     }
   }
 }
